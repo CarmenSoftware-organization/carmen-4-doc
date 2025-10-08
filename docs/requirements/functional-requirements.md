@@ -15,6 +15,18 @@ This document defines the functional requirements for the Carmen.NET ERP system,
 
 **System Scope**: Multi-tenant financial ERP with 11 core modules serving small to medium businesses in Thailand.
 
+## System Implementation Screenshots
+
+### Licensed Modules
+![GL Module](/screenshots/gl/01-gl-menu.png)
+*General Ledger: JV, Chart of Accounts (1,030 accounts), Procedure, Reports (10 reports)*
+
+![AR Module](/screenshots/ar/01-ar-menu.png)
+*Accounts Receivable: Profile (186 customers), Invoice (51 invoices), Receipt (67 receipts), Reports (16 reports)*
+
+![Asset Module](/screenshots/asset/01-asset-menu.png)
+*Asset Management: Vendor (531 vendors), Asset Register (457 assets), Disposal (5 disposed), Reports (11 reports)*
+
 ---
 
 ## Table of Contents
@@ -23,16 +35,33 @@ This document defines the functional requirements for the Carmen.NET ERP system,
 2. [Accounts Receivable (AR)](#accounts-receivable-ar)
 3. [General Ledger (GL)](#general-ledger-gl)
 4. [Asset Management](#asset-management)
-5. [Income Module](#income-module)
-6. [Tax Management](#tax-management)
-7. [Bank Management](#bank-management)
-8. [Master Data Management](#master-data-management)
+5. [Tax Management](#tax-management)
+6. [Bank Management](#bank-management)
+7. [Master Data Management](#master-data-management)
 
 ---
 
 ## Accounts Payable (AP)
 
 **Module Purpose**: Manage vendor relationships, expense invoices, and payments.
+
+![AP Module Menu](/screenshots/ap/ap-01-ap-menu.png)
+*AP module navigation menu with 5 submenu items: Vendor, Invoice, Payment, Procedure, and Report*
+
+![AP Vendor List](/screenshots/ap/ap-02-vendor-list.png)
+*AP Vendor master list showing 8 vendors with vendor codes, names (Thai/English), TAX IDs, contact names, categories, emails, and active status*
+
+![AP Invoice List](/screenshots/ap/ap-03-invoice-list.png)
+*AP Invoice list displaying 54 invoices (15 shown) with sequence numbers, input dates, vendors, invoice numbers and dates, descriptions (Thai/English), currencies (THB/USD), amounts, unpaid amounts, source, and workflow status*
+
+![AP Payment List](/screenshots/ap/ap-04-payment-list.png)
+*AP Payment list showing 26 payments (15 displayed) with sequence numbers, payment dates, vendors, payment types (CHQ, BBL), cheque numbers and dates, descriptions, currencies (THB/USD), exchange rates, totals, and effective status*
+
+![AP Procedure Screen](/screenshots/ap/ap-05-procedure.png)
+*AP Procedure screen with automated postings including Posting from Receiving, Cheque Reconciliation (default clearing date 08/10/2025), Input Tax Reconciliation, Withholding Tax Reconciliation, and Close Period (Last Closed: 31/03/2023, Current: 30/04/2023)*
+
+![AP Reports List](/screenshots/ap/ap-06-reports-list.png)
+*Complete AP Reports menu displaying all 18 report types including Aging Detail/Summary, Cheque Reconciliation, Invoice/Payment Checklists, Expense Analysis, Vendor reports, and Withholding Tax reports*
 
 ### FR-AP-001: Vendor Management
 
@@ -618,7 +647,7 @@ GET    /api/gl/period/{id}/close-status
 
 **Module Purpose**: Track fixed assets, depreciation, location changes, and disposal processes.
 
-**Full Documentation**: See [Asset Management and Income Module Functional Requirements](asset-income-requirements.md) for complete details.
+**Full Documentation**: See [Asset Management Functional Requirements](asset-income-requirements.md) for complete details.
 
 ### Overview
 
@@ -658,53 +687,6 @@ The Asset Management module provides comprehensive fixed asset tracking includin
 - Track location history
 
 **Total API Endpoints**: 41
-**Status**: ✅ 100% Implemented and Validated
-
----
-
-## Income Module
-
-**Module Purpose**: Manage income recognition, revenue codes, and hotel/hospitality-specific income tracking (PMS integration).
-
-**Full Documentation**: See [Asset Management and Income Module Functional Requirements](asset-income-requirements.md) for complete details.
-
-### Overview
-
-The Income Module provides hospitality-focused revenue management including:
-- Income invoice creation and management
-- Revenue code classification
-- HMS/PMS integration for hotel revenue
-- Payment type and code management
-- Period close and GL posting
-
-### Key Features (Summary)
-
-**FR-INCOME-001: Income Invoice Management**
-- Create and manage income invoices
-- Support for multiple revenue codes per invoice
-- Auto-generated invoice numbers
-- Invoice status tracking (Draft, Posted, Void)
-- VAT and discount calculations
-
-**FR-INCOME-002: Revenue Code Management**
-- Maintain revenue codes with GL account mapping
-- Department-specific revenue codes
-- Active/inactive status management
-
-**FR-INCOME-003: Income Master Data**
-- Income categories
-- Income sources (HMS, PMS, Manual, API)
-- Payment codes with bank account mapping
-- Payment types (Cash, Card, Transfer, Check)
-- Product/service catalog with pricing
-
-**FR-INCOME-004: Income Period Close**
-- Period close procedures
-- HMS/PMS revenue posting
-- GL journal generation
-- Revenue recognition
-
-**Total API Endpoints**: 44
 **Status**: ✅ 100% Implemented and Validated
 
 ---
