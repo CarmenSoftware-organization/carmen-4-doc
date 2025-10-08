@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carmen.NET Functional Requirements - Carmen.NET Documentation</title>
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -160,7 +160,7 @@
 </head>
 <body>
     <div class="doc-container">
-        <a href="/public/index.html" class="back-link">
+        <a href="/" class="back-link">
             <i class="fas fa-arrow-left"></i>
             Back to Documentation
         </a>
@@ -177,6 +177,11 @@
 <h2>Overview</h2>
 <p>This document defines the functional requirements for the Carmen.NET ERP system, organized by module. Each requirement includes user stories, acceptance criteria, business rules, and API endpoints.</p>
 <p><strong>System Scope</strong>: Multi-tenant financial ERP with 11 core modules serving small to medium businesses in Thailand.</p>
+<h2>System Implementation Screenshots</h2>
+<h3>Licensed Modules</h3>
+<p><img src="/screenshots/gl/01-gl-menu.png" alt="GL Module"><br><em>General Ledger: JV, Chart of Accounts (1,030 accounts), Procedure, Reports (10 reports)</em></p>
+<p><img src="/screenshots/ar/01-ar-menu.png" alt="AR Module"><br><em>Accounts Receivable: Profile (186 customers), Invoice (51 invoices), Receipt (67 receipts), Reports (16 reports)</em></p>
+<p><img src="/screenshots/asset/01-asset-menu.png" alt="Asset Module"><br><em>Asset Management: Vendor (531 vendors), Asset Register (457 assets), Disposal (5 disposed), Reports (11 reports)</em></p>
 <hr>
 <h2>Table of Contents</h2>
 <ol>
@@ -184,14 +189,16 @@
 <li><a href="#accounts-receivable-ar">Accounts Receivable (AR)</a></li>
 <li><a href="#general-ledger-gl">General Ledger (GL)</a></li>
 <li><a href="#asset-management">Asset Management</a></li>
-<li><a href="#income-module">Income Module</a></li>
-<li><a href="#tax-management">Tax Management</a></li>
-<li><a href="#bank-management">Bank Management</a></li>
-<li><a href="#master-data-management">Master Data Management</a></li>
 </ol>
 <hr>
-<h2>Accounts Payable (AP)</h2>
+<h2 id="accounts-payable-ap">Accounts Payable (AP)</h2>
 <p><strong>Module Purpose</strong>: Manage vendor relationships, expense invoices, and payments.</p>
+<p><img src="/screenshots/ap/ap-01-ap-menu.png" alt="AP Module Menu"><br><em>AP module navigation menu with 5 submenu items: Vendor, Invoice, Payment, Procedure, and Report</em></p>
+<p><img src="/screenshots/ap/ap-02-vendor-list.png" alt="AP Vendor List"><br><em>AP Vendor master list showing 8 vendors with vendor codes, names (Thai/English), TAX IDs, contact names, categories, emails, and active status</em></p>
+<p><img src="/screenshots/ap/ap-03-invoice-list.png" alt="AP Invoice List"><br><em>AP Invoice list displaying 54 invoices (15 shown) with sequence numbers, input dates, vendors, invoice numbers and dates, descriptions (Thai/English), currencies (THB/USD), amounts, unpaid amounts, source, and workflow status</em></p>
+<p><img src="/screenshots/ap/ap-04-payment-list.png" alt="AP Payment List"><br><em>AP Payment list showing 26 payments (15 displayed) with sequence numbers, payment dates, vendors, payment types (CHQ, BBL), cheque numbers and dates, descriptions, currencies (THB/USD), exchange rates, totals, and effective status</em></p>
+<p><img src="/screenshots/ap/ap-05-procedure.png" alt="AP Procedure Screen"><br><em>AP Procedure screen with automated postings including Posting from Receiving, Cheque Reconciliation (default clearing date 08/10/2025), Input Tax Reconciliation, Withholding Tax Reconciliation, and Close Period (Last Closed: 31/03/2023, Current: 30/04/2023)</em></p>
+<p><img src="/screenshots/ap/ap-06-reports-list.png" alt="AP Reports List"><br><em>Complete AP Reports menu displaying all 18 report types including Aging Detail/Summary, Cheque Reconciliation, Invoice/Payment Checklists, Expense Analysis, Vendor reports, and Withholding Tax reports</em></p>
 <h3>FR-AP-001: Vendor Management</h3>
 <p><strong>User Story</strong>: As an AP Clerk, I want to maintain vendor master data so that I can process invoices and payments.</p>
 <p><strong>Functional Requirements</strong>:</p>
@@ -436,7 +443,7 @@ POST   /api/ap/payment/{id}/approve
 POST   /api/ap/payment/{id}/post
 POST   /api/ap/payment/{id}/void
 GET    /api/ap/payment/due-invoices</code></pre><hr>
-<h2>Accounts Receivable (AR)</h2>
+<h2 id="accounts-receivable-ar">Accounts Receivable (AR)</h2>
 <p><strong>Module Purpose</strong>: Manage customer relationships, contracts, invoicing, receipts, and credit control.</p>
 <h3>FR-AR-001: Customer Management</h3>
 <p><strong>User Story</strong>: As an AR Clerk, I want to maintain customer master data so that I can process sales and receipts.</p>
@@ -633,7 +640,7 @@ And INV-002 outstanding balance is $3,000</code></pre><p><strong>Business Rules<
 <li>BR-AR-035: Posted receipts cannot be deleted (only reversed)</li>
 </ul>
 <hr>
-<h2>General Ledger (GL)</h2>
+<h2 id="general-ledger-gl">General Ledger (GL)</h2>
 <p><strong>Module Purpose</strong>: Central financial hub for all accounting transactions, chart of accounts, period management, and financial reporting.</p>
 <h3>FR-GL-001: Chart of Accounts</h3>
 <p><strong>User Story</strong>: As a GL Manager, I want to maintain the chart of accounts so that all financial transactions are properly classified.</p>
@@ -800,9 +807,9 @@ GET    /api/gl/period/current
 POST   /api/gl/period/{id}/close
 POST   /api/gl/period/{id}/reopen
 GET    /api/gl/period/{id}/close-status</code></pre><hr>
-<h2>Asset Management</h2>
+<h2 id="asset-management">Asset Management</h2>
 <p><strong>Module Purpose</strong>: Track fixed assets, depreciation, location changes, and disposal processes.</p>
-<p><strong>Full Documentation</strong>: See <a href="asset-income-requirements.md">Asset Management and Income Module Functional Requirements</a> for complete details.</p>
+<p><strong>Full Documentation</strong>: See <a href="asset-income-requirements.md">Asset Management Functional Requirements</a> for complete details.</p>
 <h3>Overview</h3>
 <p>The Asset Management module provides comprehensive fixed asset tracking including:</p>
 <ul>
@@ -844,50 +851,6 @@ GET    /api/gl/period/{id}/close-status</code></pre><hr>
 <li>Track location history</li>
 </ul>
 <p><strong>Total API Endpoints</strong>: 41<br><strong>Status</strong>: ✅ 100% Implemented and Validated</p>
-<hr>
-<h2>Income Module</h2>
-<p><strong>Module Purpose</strong>: Manage income recognition, revenue codes, and hotel/hospitality-specific income tracking (PMS integration).</p>
-<p><strong>Full Documentation</strong>: See <a href="asset-income-requirements.md">Asset Management and Income Module Functional Requirements</a> for complete details.</p>
-<h3>Overview</h3>
-<p>The Income Module provides hospitality-focused revenue management including:</p>
-<ul>
-<li>Income invoice creation and management</li>
-<li>Revenue code classification</li>
-<li>HMS/PMS integration for hotel revenue</li>
-<li>Payment type and code management</li>
-<li>Period close and GL posting</li>
-</ul>
-<h3>Key Features (Summary)</h3>
-<p><strong>FR-INCOME-001: Income Invoice Management</strong></p>
-<ul>
-<li>Create and manage income invoices</li>
-<li>Support for multiple revenue codes per invoice</li>
-<li>Auto-generated invoice numbers</li>
-<li>Invoice status tracking (Draft, Posted, Void)</li>
-<li>VAT and discount calculations</li>
-</ul>
-<p><strong>FR-INCOME-002: Revenue Code Management</strong></p>
-<ul>
-<li>Maintain revenue codes with GL account mapping</li>
-<li>Department-specific revenue codes</li>
-<li>Active/inactive status management</li>
-</ul>
-<p><strong>FR-INCOME-003: Income Master Data</strong></p>
-<ul>
-<li>Income categories</li>
-<li>Income sources (HMS, PMS, Manual, API)</li>
-<li>Payment codes with bank account mapping</li>
-<li>Payment types (Cash, Card, Transfer, Check)</li>
-<li>Product/service catalog with pricing</li>
-</ul>
-<p><strong>FR-INCOME-004: Income Period Close</strong></p>
-<ul>
-<li>Period close procedures</li>
-<li>HMS/PMS revenue posting</li>
-<li>GL journal generation</li>
-<li>Revenue recognition</li>
-</ul>
-<p><strong>Total API Endpoints</strong>: 44<br><strong>Status</strong>: ✅ 100% Implemented and Validated</p>
 <hr>
 <h2>System-Wide Requirements</h2>
 <h3>FR-SYS-001: Multi-Tenant Support</h3>

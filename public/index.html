@@ -69,7 +69,7 @@
                         <div class="stat-label">API Endpoints</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">11</div>
+                        <div class="stat-value">10</div>
                         <div class="stat-label">Modules</div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                             <ul class="sidebar-menu">
                                 <li><a href="docs/requirements/functional-requirements.html">Functional Requirements</a></li>
                                 <li><a href="docs/requirements/requirements-validation-report.html">Requirements Validation</a></li>
-                                <li><a href="docs/requirements/asset-income-requirements.html">Asset & Income Requirements</a></li>
+                                <li><a href="docs/requirements/asset-income-requirements.html">Asset Requirements</a></li>
                                 <li><a href="docs/requirements/permission-matrix.html">Permission Matrix</a></li>
                                 <li><a href="docs/requirements/data-dictionary.html">Data Dictionary</a></li>
                             </ul>
@@ -270,38 +270,34 @@
 
                         <h3>System Modules</h3>
                         <div class="module-grid">
-                            <div class="module-card">
+                            <a href="docs/requirements/functional-requirements.html#accounts-payable-ap" class="module-card">
                                 <h4><i class="fas fa-file-invoice-dollar"></i> Accounts Payable (AP)</h4>
                                 <p>Vendor management, purchase orders, receiving, invoices, payments, and WHT</p>
-                            </div>
-                            <div class="module-card">
+                            </a>
+                            <a href="docs/requirements/functional-requirements.html#accounts-receivable-ar" class="module-card">
                                 <h4><i class="fas fa-receipt"></i> Accounts Receivable (AR)</h4>
                                 <p>Customer management, contracts, billing, receipts, and credit notes</p>
-                            </div>
-                            <div class="module-card">
+                            </a>
+                            <a href="docs/requirements/functional-requirements.html#general-ledger-gl" class="module-card">
                                 <h4><i class="fas fa-book"></i> General Ledger (GL)</h4>
                                 <p>Chart of accounts, journal entries, period close, and financial reporting</p>
-                            </div>
-                            <div class="module-card">
+                            </a>
+                            <a href="docs/requirements/functional-requirements.html#asset-management" class="module-card">
                                 <h4><i class="fas fa-building"></i> Asset Management</h4>
                                 <p>Asset registration, depreciation, disposal, and lifecycle tracking</p>
-                            </div>
-                            <div class="module-card">
-                                <h4><i class="fas fa-dollar-sign"></i> Income</h4>
-                                <p>Income tracking, revenue recognition, and income invoicing</p>
-                            </div>
-                            <div class="module-card">
+                            </a>
+                            <a href="docs/requirements/functional-requirements.html#tax-management" class="module-card">
                                 <h4><i class="fas fa-percentage"></i> Tax</h4>
                                 <p>VAT (7%), WHT (3-15%), tax calculations, and Thai tax compliance</p>
-                            </div>
-                            <div class="module-card">
+                            </a>
+                            <a href="docs/requirements/functional-requirements.html#bank-management" class="module-card">
                                 <h4><i class="fas fa-university"></i> Bank</h4>
                                 <p>Bank accounts, transactions, reconciliation, and statements</p>
-                            </div>
-                            <div class="module-card">
+                            </a>
+                            <a href="docs/requirements/functional-requirements.html#master-data-management" class="module-card">
                                 <h4><i class="fas fa-database"></i> Master Data</h4>
                                 <p>Customers, vendors, products, employees, and reference data</p>
-                            </div>
+                            </a>
                         </div>
                     </section>
 
@@ -348,6 +344,172 @@
                                     <li><a href="docs/requirements/permission-matrix.html">Permission Matrix (114 permissions)</a></li>
                                     <li><a href="docs/requirements/data-dictionary.html">Data Dictionary</a></li>
                                 </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="documentation" class="content-section">
+                        <h2>Documentation</h2>
+                        <p class="lead">Browse comprehensive documentation organized by category.</p>
+
+                        <div class="card-grid">
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <h3 class="card-title">Architecture</h3>
+                                <p class="card-description">System architecture, design patterns, and technology stack</p>
+                                <ul>
+                                    <li><a href="docs/architecture/system-architecture.html">System Architecture</a></li>
+                                    <li><a href="docs/architecture/technology-stack.html">Technology Stack</a></li>
+                                    <li><a href="docs/architecture/architecture-decision-records.html">Architecture Decisions (15 ADRs)</a></li>
+                                    <li><a href="docs/architecture/security-architecture.html">Security Architecture</a></li>
+                                    <li><a href="docs/architecture/integration-architecture.html">Integration Architecture</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <h3 class="card-title">Requirements</h3>
+                                <p class="card-description">Functional requirements and business rules</p>
+                                <ul>
+                                    <li><a href="docs/requirements/functional-requirements.html">Functional Requirements (1,500+ rules)</a></li>
+                                    <li><a href="docs/requirements/permission-matrix.html">Permission Matrix (114 permissions)</a></li>
+                                    <li><a href="docs/requirements/data-dictionary.html">Data Dictionary (80+ entities)</a></li>
+                                    <li><a href="docs/requirements/asset-income-requirements.html">Asset Requirements</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-random"></i>
+                                </div>
+                                <h3 class="card-title">Workflows</h3>
+                                <p class="card-description">Business process flows and workflows</p>
+                                <ul>
+                                    <li><a href="docs/workflows/business-process-flows.html">Business Process Flows</a></li>
+                                    <li><a href="docs/workflows/ap-invoice-workflow.html">AP Invoice Workflow</a></li>
+                                    <li><a href="docs/workflows/ar-invoice-workflow.html">AR Invoice Workflow</a></li>
+                                    <li><a href="docs/workflows/approval-workflows.html">Approval Workflows</a></li>
+                                    <li><a href="docs/workflows/tax-calculation-rules.html">Tax Calculation Rules</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h3 class="card-title">Database</h3>
+                                <p class="card-description">Database schemas and ERD diagrams</p>
+                                <ul>
+                                    <li><a href="docs/development/database-schema-guide.html">Database Schema Guide</a></li>
+                                    <li><a href="docs/database/erd-master-overview.html">Master ERD Overview</a></li>
+                                    <li><a href="docs/database/erd-ap-module.html">AP Module ERD</a></li>
+                                    <li><a href="docs/database/erd-ar-module.html">AR Module ERD</a></li>
+                                    <li><a href="docs/database/erd-gl-module.html">GL Module ERD</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-paint-brush"></i>
+                                </div>
+                                <h3 class="card-title">UI/UX</h3>
+                                <p class="card-description">User interface components and screen flows</p>
+                                <ul>
+                                    <li><a href="docs/ui-ux/ui-component-inventory.html">UI Component Inventory (40+ components)</a></li>
+                                    <li><a href="docs/ui-ux/screen-flow-diagrams.html">Screen Flow Diagrams (15+ flows)</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3 class="card-title">Validation & QA</h3>
+                                <p class="card-description">Quality assurance and validation reports</p>
+                                <ul>
+                                    <li><a href="docs/validation-report.html">Validation Report (100% pass)</a></li>
+                                    <li><a href="docs/traceability-matrix.html">Traceability Matrix</a></li>
+                                    <li><a href="docs/diagram-quality-report.html">Diagram Quality Report</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="api" class="content-section">
+                        <h2>API Reference</h2>
+                        <p class="lead">Complete API documentation with 351+ endpoints across 11 modules.</p>
+
+                        <div class="card-grid">
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h3 class="card-title">API Documentation</h3>
+                                <p class="card-description">Complete API reference and guides</p>
+                                <ul>
+                                    <li><a href="docs/api/api-reference.html">API Reference (351 endpoints)</a></li>
+                                    <li><a href="docs/api/authentication-guide.html">Authentication Guide (JWT)</a></li>
+                                    <li><a href="docs/api/integration-guide.html">Integration Guide</a></li>
+                                    <li><a href="docs/api/error-handling-guide.html">Error Handling Guide</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <h3 class="card-title">Modules</h3>
+                                <p class="card-description">API endpoints by module</p>
+                                <ul>
+                                    <li><strong>AP Module:</strong> 45 endpoints</li>
+                                    <li><strong>AR Module:</strong> 52 endpoints</li>
+                                    <li><strong>GL Module:</strong> 28 endpoints</li>
+                                    <li><strong>Asset Module:</strong> 35 endpoints</li>
+                                    <li><strong>+6 more modules</strong></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3 class="card-title">Developer Resources</h3>
+                                <p class="card-description">Tools and examples for developers</p>
+                                <ul>
+                                    <li><a href="docs/development/developer-onboarding-guide.html">Developer Onboarding</a></li>
+                                    <li><a href="docs/development/code-structure-guide.html">Code Structure</a></li>
+                                    <li><a href="docs/development/design-patterns-guide.html">Design Patterns</a></li>
+                                    <li><a href="docs/development/testing-guide.html">Testing Guide</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-terminal"></i>
+                                </div>
+                                <h3 class="card-title">Quick Examples</h3>
+                                <p class="card-description">Common API usage patterns</p>
+                                <ul>
+                                    <li><strong>Authentication:</strong> POST /api/auth/login</li>
+                                    <li><strong>AP Invoice:</strong> POST /api/ap/invoice</li>
+                                    <li><strong>AR Invoice:</strong> POST /api/ar/invoice</li>
+                                    <li><strong>GL Journal:</strong> POST /api/gl/journalvoucher</li>
+                                    <li>See full reference for all endpoints</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="info-box" style="margin-top: 32px;">
+                            <div class="info-box-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="info-box-content">
+                                <h4>API Documentation Features</h4>
+                                <p><strong>351 documented endpoints</strong> covering all 11 modules with request/response examples, authentication requirements, permission levels, and error codes. All endpoints validated against source code for 100% accuracy.</p>
                             </div>
                         </div>
                     </section>
