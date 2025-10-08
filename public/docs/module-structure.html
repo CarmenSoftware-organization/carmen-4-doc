@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Module & Sub-Module Structure - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Module & Sub-Module Structure</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Module &amp; Sub-Module Structure</h1>
+<h2>Summary Statistics</h2>
+<ul>
+<li><strong>Total Controllers</strong>: 101</li>
+<li><strong>Total Model Files</strong>: 600+</li>
+<li><strong>View Models</strong>: 120</li>
+<li><strong>Parameter Models</strong>: 104</li>
+<li><strong>Interface Definitions</strong>: 325</li>
+<li><strong>Enumerations</strong>: 49</li>
+<li><strong>Major Modules</strong>: 11</li>
+<li><strong>Sub-Modules</strong>: 78+</li>
+</ul>
+<hr>
+<h2>Module Hierarchy</h2>
+<h3>1. <strong>ACCOUNTS PAYABLE (AP) MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 200-209<br><strong>Total Sub-Modules</strong>: 8</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>1.1 AP Invoice Management</strong> (Order: 201)</p>
+<ul>
+<li>Controller: <code>ApInvoiceController</code></li>
+<li>Models: <code>ApInvoice</code>, <code>ApInvoiceD</code>, <code>ApInvWht</code>, <code>ApInvWhtItem</code></li>
+<li>Views: <code>ViewApInvoice</code>, <code>ViewApBank</code></li>
+<li>Enums: <code>EnumApInvoiceStatus</code>, <code>EnumApTaxStatus</code></li>
+<li>Features:<ul>
+<li>Invoice creation and management</li>
+<li>Invoice detail line items</li>
+<li>Multi-currency support</li>
+<li>Tax handling integration</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.2 AP Payment Processing</strong> (Order: 202)</p>
+<ul>
+<li>Controller: <code>ApPaymentController</code></li>
+<li>Models: <code>ApPaymentD</code>, <code>ApPayWht</code>, <code>ApPayWhtItem</code></li>
+<li>Enums: <code>EnumApPaymentStatus</code>, <code>EnumApPaymentPostingBy</code></li>
+<li>Features:<ul>
+<li>Payment voucher creation</li>
+<li>Withholding tax on payments</li>
+<li>Payment detail tracking</li>
+<li>Multiple payment methods</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.3 AP Payment Type</strong> (Order: 203)</p>
+<ul>
+<li>Controller: <code>ApPaymentTypeController</code></li>
+<li>Features:<ul>
+<li>Payment method configuration</li>
+<li>Payment type categorization</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.4 AP Withholding Tax (WHT)</strong> (Order: 202)</p>
+<ul>
+<li>Controller: <code>ApWhtController</code></li>
+<li>Models: <code>ApInvWht</code>, <code>ApInvWhtItem</code>, <code>ApPayWht</code>, <code>ApPayWhtItem</code></li>
+<li>Enums: <code>EnumWhtSource</code>, <code>EnumShowWithholdingTaxAt</code></li>
+<li>Features:<ul>
+<li>WHT calculation</li>
+<li>Tax certificate generation</li>
+<li>Tax credit tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.5 AP WHT Conditions</strong> (Order: 106)</p>
+<ul>
+<li>Controller: <code>ApWhtConditionController</code></li>
+<li>Views: <code>ViewApWhtCondition</code></li>
+<li>Features:<ul>
+<li>Tax condition rules</li>
+<li>Automated tax rate determination</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.6 AP WHT Types</strong> (Order: 202)</p>
+<ul>
+<li>Controller: <code>ApWhtTypeController</code></li>
+<li>Features:<ul>
+<li>WHT type configuration</li>
+<li>Tax type categorization</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.7 AP WHT Reconciliation</strong> (Order: 202)</p>
+<ul>
+<li>Controller: <code>ApWhtReconController</code></li>
+<li>Features:<ul>
+<li>WHT reconciliation</li>
+<li>Tax filing support</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.8 AP Procedures</strong> (Order: 205)</p>
+<ul>
+<li>Controller: <code>ApProcedureController</code></li>
+<li>Features:<ul>
+<li>AP workflow management</li>
+<li>Approval procedures</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Settings</strong>:</p>
+<ul>
+<li>Controller: <code>SettingApController</code> (Order: 1001)</li>
+<li>Models: <code>ParamSettingAp</code></li>
+</ul>
+<p><strong>Related Workflow</strong>:</p>
+<ul>
+<li><code>EnumWorkflowModule</code>: AP_VENDOR, AP_INVOICE, AP_PAYMENT</li>
+</ul>
+<hr>
+<h3>2. <strong>ACCOUNTS RECEIVABLE (AR) MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 100-105<br><strong>Total Sub-Modules</strong>: 10</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>2.1 AR Contract Management</strong> (Order: 100)</p>
+<ul>
+<li>Controller: <code>ArContractController</code></li>
+<li>Models: <code>ArContractD</code></li>
+<li>Enums: <code>EnumArContractStatus</code></li>
+<li>Features:<ul>
+<li>Contract creation and tracking</li>
+<li>Contract detail management</li>
+<li>Contract status workflow</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.2 AR Invoice</strong> (Order: 101)</p>
+<ul>
+<li>Controller: <code>ArInvoiceController</code></li>
+<li>Models: <code>ArInvoiceH</code>, <code>ArInvoiceD</code></li>
+<li>Views: <code>ViewArInvoiceUnpaid</code></li>
+<li>Enums: <code>EnumArInvoiceStatus</code>, <code>EnumArInvTaxType</code></li>
+<li>Features:<ul>
+<li>Customer invoice generation</li>
+<li>Invoice detail lines</li>
+<li>Invoice aging tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.3 AR Profile</strong> (Order: 102)</p>
+<ul>
+<li>Controller: <code>ArProfileController</code></li>
+<li>Models: <code>ArProfile</code></li>
+<li>Features:<ul>
+<li>Customer profile management</li>
+<li>Billing configuration</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.4 AR Receipt</strong> (Order: 103)</p>
+<ul>
+<li>Controller: <code>ArReceiptController</code></li>
+<li>Models: <code>ArReceiptD</code></li>
+<li>Views: <code>ViewArReceipt</code></li>
+<li>Enums: <code>EnumArReceiptStatus</code></li>
+<li>Features:<ul>
+<li>Payment receipt processing</li>
+<li>Receipt allocation</li>
+<li>Receipt detail tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.5 AR Type</strong> (Order: 104)</p>
+<ul>
+<li>Controller: <code>ArTypeController</code></li>
+<li>Models: <code>ArType</code></li>
+<li>Features:<ul>
+<li>AR document type classification</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.6 AR Project</strong> (Order: 104)</p>
+<ul>
+<li>Controller: <code>ArProjectController</code></li>
+<li>Features:<ul>
+<li>Project-based billing</li>
+<li>Project tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.7 AR Owner</strong> (Order: 105)</p>
+<ul>
+<li>Controller: <code>ArOwnerController</code></li>
+<li>Features:<ul>
+<li>Property owner management (for rental/property management)</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.8 AR Title</strong> (Order: 105)</p>
+<ul>
+<li>Controller: <code>ArTitleController</code></li>
+<li>Features:<ul>
+<li>Title/deed management</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.9 AR Folio</strong> (Order: N/A)</p>
+<ul>
+<li>Controller: <code>ArFolioController</code></li>
+<li>Models: <code>ArFolio</code></li>
+<li>Enums: <code>EnumArFolioStatus</code></li>
+<li>Features:<ul>
+<li>Folio/ledger management</li>
+<li>Account folio tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.10 AR Payment Type</strong> (Order: 203)</p>
+<ul>
+<li>Controller: <code>ArPaymentTypeController</code></li>
+<li>Features:<ul>
+<li>Receipt payment method configuration</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.11 AR Procedures</strong> (Order: N/A)</p>
+<ul>
+<li>Controller: <code>ArProcedureController</code></li>
+<li>Features:<ul>
+<li>AR workflow management</li>
+<li>Approval procedures</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Settings</strong>:</p>
+<ul>
+<li>Controller: <code>SettingArController</code> (Order: 1001)</li>
+<li>Models: <code>ParamSettingAr</code></li>
+</ul>
+<p><strong>Related Workflow</strong>:</p>
+<ul>
+<li><code>EnumWorkflowModule</code>: AR_INVOICE, AR_RECEIPT</li>
+</ul>
+<hr>
+<h3>3. <strong>GENERAL LEDGER (GL) MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 500-503<br><strong>Total Sub-Modules</strong>: 8</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>3.1 GL Journal Voucher (JV)</strong> (Order: 500)</p>
+<ul>
+<li>Controller: <code>GlJvController</code></li>
+<li>Models: <code>GlJvH</code>, <code>GlJvD</code></li>
+<li>Features:<ul>
+<li>Manual journal entry creation</li>
+<li>JV posting and approval</li>
+<li>Multi-dimensional posting</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.2 GL Allocation Journal</strong> (Order: 501)</p>
+<ul>
+<li>Controller: <code>GlAllocationJvController</code></li>
+<li>Models: <code>GlAJvH</code>, <code>GlAllocationJvD</code></li>
+<li>Features:<ul>
+<li>Automated allocation entries</li>
+<li>Cost allocation</li>
+<li>Recurring allocations</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.3 GL Period Management</strong> (Order: 501)</p>
+<ul>
+<li>Controller: <code>GlPeriodController</code></li>
+<li>Enums: <code>EnumGlPeriodStatus</code></li>
+<li>Features:<ul>
+<li>Fiscal period setup</li>
+<li>Period opening/closing</li>
+<li>Year-end processing</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.4 GL Prefix Configuration</strong> (Order: 502)</p>
+<ul>
+<li>Controller: <code>GlPrefixController</code></li>
+<li>Models: <code>IGlPrefix</code></li>
+<li>Features:<ul>
+<li>Document numbering setup</li>
+<li>Prefix configuration</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.5 GL JV from Financial Report (JvFr)</strong> (Order: 502)</p>
+<ul>
+<li>Controller: <code>GlJvFrController</code></li>
+<li>Models: <code>GlFrD</code></li>
+<li>Views: <code>ViewGlFr</code>, <code>ViewGlFrH</code></li>
+<li>Features:<ul>
+<li>JV generation from financial reports</li>
+<li>Automated entry creation</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.6 GL Amortization</strong> (Order: 503)</p>
+<ul>
+<li>Controller: <code>GlAmortizeController</code></li>
+<li>Models: <code>GlAmorizeHis</code></li>
+<li>Enums: <code>EnumTypeOfAmortize</code></li>
+<li>Features:<ul>
+<li>Prepaid expense amortization</li>
+<li>Deferred revenue recognition</li>
+<li>Automated amortization schedules</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.7 GL Procedures</strong> (Order: 501)</p>
+<ul>
+<li>Controller: <code>GlProcedureController</code></li>
+<li>Features:<ul>
+<li>GL workflow management</li>
+<li>Posting procedures</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.8 Account Code (Chart of Accounts)</strong> (Order: 12)</p>
+<ul>
+<li>Controller: <code>AccountCodeController</code></li>
+<li>Views: <code>ViewCostAccountCode</code></li>
+<li>Enums:<ul>
+<li><code>EnumAccountNature</code></li>
+<li><code>EnumAccountType</code></li>
+<li><code>EnumGlStandardType</code></li>
+<li><code>EnumGlCrOrDr</code></li>
+<li><code>EnumGlStatus</code></li>
+</ul>
+</li>
+<li>Features:<ul>
+<li>Chart of accounts maintenance</li>
+<li>Account hierarchy</li>
+<li>Account classification</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Settings</strong>:</p>
+<ul>
+<li>Controller: <code>SettingGlController</code> (Order: 1003)</li>
+</ul>
+<p><strong>Related Enums</strong>:</p>
+<ul>
+<li><code>EnumApplicationModule</code>: GL</li>
+<li><code>EnumPostingSeparator</code></li>
+</ul>
+<hr>
+<h3>4. <strong>ASSET MANAGEMENT MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 401-406<br><strong>Total Sub-Modules</strong>: 7</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>4.1 Asset Category</strong> (Order: 401)</p>
+<ul>
+<li>Controller: <code>AssetCategoryController</code></li>
+<li>Models: <code>ParamAstCategory</code></li>
+<li>Views: <code>ViewAstCategory</code></li>
+<li>Features:<ul>
+<li>Asset type classification</li>
+<li>Category-specific depreciation rules</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.2 Asset Department</strong> (Order: 402)</p>
+<ul>
+<li>Controller: <code>AssetDepartmentController</code></li>
+<li>Models: <code>ParamAstDepHis</code></li>
+<li>Features:<ul>
+<li>Department asset allocation</li>
+<li>Inter-department transfers</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.3 Asset Disposal</strong> (Order: 403)</p>
+<ul>
+<li>Controller: <code>AssetDisposalController</code></li>
+<li>Enums:<ul>
+<li><code>EnumDisposalType</code></li>
+<li><code>EnumDisposalAtDate</code></li>
+</ul>
+</li>
+<li>Features:<ul>
+<li>Asset sale/disposal processing</li>
+<li>Gain/loss calculation</li>
+<li>Disposal documentation</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.4 Asset History</strong> (Order: 404)</p>
+<ul>
+<li>Controller: <code>AssetHistoryController</code></li>
+<li>Enums: <code>EnumAssetDeleteHisAt</code></li>
+<li>Features:<ul>
+<li>Asset transaction history</li>
+<li>Audit trail</li>
+<li>Historical reporting</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.5 Asset Location</strong> (Order: 405)</p>
+<ul>
+<li>Controller: <code>AssetLocationController</code></li>
+<li>Features:<ul>
+<li>Physical location tracking</li>
+<li>Location transfers</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.6 Asset Procedures</strong> (Order: 405)</p>
+<ul>
+<li>Controller: <code>AssetProcedureController</code></li>
+<li>Features:<ul>
+<li>Asset workflow management</li>
+<li>Approval procedures</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.7 Asset Register</strong> (Order: 406)</p>
+<ul>
+<li>Controller: <code>AssetRegisterController</code></li>
+<li>Models: <code>AssetDepreModel</code></li>
+<li>Enums:<ul>
+<li><code>EnumAssetAutoIdFormat</code></li>
+<li><code>EnumPreAssetStatus</code></li>
+</ul>
+</li>
+<li>Features:<ul>
+<li>Fixed asset registration</li>
+<li>Depreciation calculation</li>
+<li>Asset master data</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Sub-Module</strong>:</p>
+<p><strong>4.8 Pre-Asset Management</strong></p>
+<ul>
+<li>Controller: <code>PreAssetController</code></li>
+<li>Enums: <code>EnumPreAssetStatus</code></li>
+<li>Features:<ul>
+<li>Asset acquisition tracking</li>
+<li>Pre-capitalization items</li>
+<li>Asset-in-progress</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Settings</strong>:</p>
+<ul>
+<li>Controller: <code>SettingAssetController</code> (Order: 1002)</li>
+</ul>
+<p><strong>Related Utilities</strong>:</p>
+<ul>
+<li><code>AssetCalculation</code>: Depreciation formulas</li>
+</ul>
+<p><strong>Related Enums</strong>:</p>
+<ul>
+<li><code>EnumApplicationModule</code>: ASSET</li>
+</ul>
+<hr>
+<h3>5. <strong>INCOME/REVENUE MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 600-611<br><strong>Total Sub-Modules</strong>: 7</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>5.1 Income Source</strong> (Order: 600)</p>
+<ul>
+<li>Controller: <code>IncomeSourceController</code></li>
+<li>Features:<ul>
+<li>Revenue source categorization</li>
+<li>Income stream tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.2 Income Revenue</strong> (Order: 601)</p>
+<ul>
+<li>Controller: <code>IncomeRevenueController</code></li>
+<li>Features:<ul>
+<li>Revenue recognition</li>
+<li>Income posting</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.3 Income Category</strong> (Order: 602)</p>
+<ul>
+<li>Controller: <code>IncomeCategoryController</code></li>
+<li>Views: <code>ViewIncSubCat</code></li>
+<li>Features:<ul>
+<li>Income categorization</li>
+<li>Sub-category management</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.4 Income Product</strong> (Order: 603)</p>
+<ul>
+<li>Controller: <code>IncomeProductController</code></li>
+<li>Features:<ul>
+<li>Product/service catalog</li>
+<li>Revenue item master</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.5 Income Payment Type</strong> (Order: 603)</p>
+<ul>
+<li>Controller: <code>IncomePayTypeController</code></li>
+<li>Features:<ul>
+<li>Payment method configuration</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.6 Income Payment Code</strong> (Order: 604)</p>
+<ul>
+<li>Controller: <code>IncomePayCodeController</code></li>
+<li>Features:<ul>
+<li>Payment code setup</li>
+<li>Revenue coding</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.7 Income Procedures</strong> (Order: 610)</p>
+<ul>
+<li>Controller: <code>IncomeProcedureController</code></li>
+<li>Features:<ul>
+<li>Income workflow management</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.8 Income Invoice</strong> (Order: 611)</p>
+<ul>
+<li>Controller: <code>IncomeInvoiceController</code></li>
+<li>Enums: <code>EnumIncomeStatus</code></li>
+<li>Features:<ul>
+<li>Income invoice generation</li>
+<li>Revenue billing</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Settings</strong>:</p>
+<ul>
+<li>Controller: <code>SettingIncomeController</code> (Order: 1004)</li>
+</ul>
+<hr>
+<h3>6. <strong>TAX &amp; RECONCILIATION MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 14, 106, 202, 700<br><strong>Total Sub-Modules</strong>: 5</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>6.1 Tax Profile</strong> (Order: 202)</p>
+<ul>
+<li>Controller: <code>TaxProfileController</code></li>
+<li>Models: <code>TaxProfile</code></li>
+<li>Enums: <code>EnumTaxType</code></li>
+<li>Features:<ul>
+<li>Tax rate configuration</li>
+<li>Tax authority setup</li>
+<li>Tax calculation rules</li>
+</ul>
+</li>
+</ul>
+<p><strong>6.2 VAT Reconciliation</strong> (Order: 14)</p>
+<ul>
+<li>Controller: <code>VatReconcileController</code></li>
+<li>Enums: <code>EnumVatSource</code></li>
+<li>Features:<ul>
+<li>VAT input/output reconciliation</li>
+<li>Tax reporting</li>
+<li>Filing preparation</li>
+</ul>
+</li>
+</ul>
+<p><strong>6.3 Edit VAT Reconciliation</strong> (Order: 14)</p>
+<ul>
+<li>Controller: <code>EditVatReconcileController</code></li>
+<li>Features:<ul>
+<li>VAT adjustment entries</li>
+<li>Reconciliation corrections</li>
+</ul>
+</li>
+</ul>
+<p><strong>6.4 Tax Reconciliation</strong> (Order: 14)</p>
+<ul>
+<li>Controller: <code>TaxReconcileController</code></li>
+<li>Features:<ul>
+<li>General tax reconciliation</li>
+<li>Tax liability tracking</li>
+</ul>
+</li>
+</ul>
+<p><strong>6.5 Cheque Reconciliation</strong> (Order: 700)</p>
+<ul>
+<li>Controller: <code>ChequeReconcileController</code></li>
+<li>Features:<ul>
+<li>Bank reconciliation</li>
+<li>Cheque clearing tracking</li>
+<li>Outstanding items</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>7. <strong>FINANCIAL REPORTING MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 9, 100<br><strong>Total Sub-Modules</strong>: 3</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>7.1 Financial Reports</strong> (Order: 100)</p>
+<ul>
+<li>Controller: <code>FinancialController</code></li>
+<li>Models: <code>FinReportAcc</code></li>
+<li>Features:<ul>
+<li>Balance sheet</li>
+<li>Income statement</li>
+<li>Cash flow</li>
+<li>Trial balance</li>
+</ul>
+</li>
+</ul>
+<p><strong>7.2 Report Generator</strong> (Order: 9)</p>
+<ul>
+<li>Controller: <code>ReportController</code></li>
+<li>Features:<ul>
+<li>Custom report generation</li>
+<li>Report templates</li>
+<li>Export capabilities</li>
+</ul>
+</li>
+</ul>
+<p><strong>7.3 Budget Management</strong> (Order: 11)</p>
+<ul>
+<li>Controller: <code>BudgetController</code></li>
+<li>Features:<ul>
+<li>Budget preparation</li>
+<li>Budget vs. actual analysis</li>
+<li>Variance reporting</li>
+</ul>
+</li>
+</ul>
+<p><strong>Related Settings</strong>:</p>
+<ul>
+<li>Controller: <code>SettingBudgetXlsController</code> (Order: 1006)</li>
+</ul>
+<hr>
+<h3>8. <strong>VENDOR &amp; CUSTOMER MASTER MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 14<br><strong>Total Sub-Modules</strong>: 3</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>8.1 Vendor Master</strong> (Order: 14)</p>
+<ul>
+<li>Controller: <code>VendorController</code></li>
+<li>Enums: <code>EnumApVendorStatus</code></li>
+<li>Features:<ul>
+<li>Vendor registration</li>
+<li>Vendor profile management</li>
+<li>Credit terms setup</li>
+</ul>
+</li>
+</ul>
+<p><strong>8.2 Vendor Category</strong> (Order: 14)</p>
+<ul>
+<li>Controller: <code>VendorCategoryController</code></li>
+<li>Views: <code>ViewParamVendorCate</code></li>
+<li>Features:<ul>
+<li>Vendor classification</li>
+<li>Category-specific terms</li>
+</ul>
+</li>
+</ul>
+<p><strong>8.3 Payment Type</strong> (Order: 203)</p>
+<ul>
+<li>Controller: <code>PaymentTypeController</code></li>
+<li>Features:<ul>
+<li>Shared payment method configuration</li>
+<li>Used by AP, AR, Income modules</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>9. <strong>SYSTEM ADMINISTRATION MODULE</strong></h3>
+<p><strong>Controller Order Range</strong>: 0-15, 1000-2000<br><strong>Total Sub-Modules</strong>: 20+</p>
+<h4>Core Sub-Modules:</h4>
+<p><strong>9.1 Authentication &amp; Authorization</strong></p>
+<ul>
+<li><strong>Login</strong> (Order: 0): <code>LoginController</code></li>
+<li><strong>Token</strong> (Order: 4): <code>TokenController</code></li>
+<li><strong>User</strong> (Order: 6): <code>UserController</code><ul>
+<li>Views: <code>ViewUserNoPassword</code></li>
+</ul>
+</li>
+<li><strong>Permission</strong> (Order: 6): <code>PermissionController</code><ul>
+<li>Models: <code>IPermission</code>, <code>ParamPermissionInfo</code></li>
+<li>Features: Role-based access control</li>
+</ul>
+</li>
+</ul>
+<p><strong>9.2 Multi-Tenant Management</strong></p>
+<ul>
+<li><strong>Tenant</strong> (Order: 5): <code>tenantController</code><ul>
+<li>Models: <code>ParamTenant</code>, <code>ITenantUser</code></li>
+<li>Views: <code>ViewTenantUser</code></li>
+</ul>
+</li>
+<li><strong>User Tenant</strong> (Order: 6): <code>UserTenantController</code><ul>
+<li>Features: User-tenant assignment</li>
+</ul>
+</li>
+</ul>
+<p><strong>9.3 Company &amp; Organization</strong></p>
+<ul>
+<li><strong>Company</strong> (Order: 7): <code>CompanyController</code></li>
+<li><strong>Headquarter</strong> (Order: 5): <code>HeadquarterController</code></li>
+<li><strong>Department</strong> (Order: 11): <code>DepartmentController</code><ul>
+<li>Models: <code>ParamDepartment</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.4 Master Data Management</strong></p>
+<ul>
+<li><strong>Country</strong> (Order: 104): <code>CountryController</code></li>
+<li><strong>Currency</strong> (Order: 10): <code>CurrencyController</code></li>
+<li><strong>Currency Exchange</strong> (Order: 10): <code>CurrencyExchangeController</code><ul>
+<li>Enums: <code>EnumExchageRateType</code></li>
+</ul>
+</li>
+<li><strong>Unit</strong> (Order: 13): <code>UnitController</code><ul>
+<li>Models: <code>IUnitCode</code></li>
+</ul>
+</li>
+<li><strong>Lookup</strong> (Order: 1009): <code>LookupController</code><ul>
+<li>Enums: <code>EnumLookup</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.5 Configuration &amp; Settings</strong></p>
+<ul>
+<li><strong>Setting All</strong> (Order: 1000): <code>SettingAllController</code><ul>
+<li>Models: <code>ISettingAll</code>, <code>ViewSettingSystem</code></li>
+</ul>
+</li>
+<li><strong>Setting System</strong> (Order: 1005): <code>SettingSystemController</code></li>
+<li><strong>Setting Policy</strong> (Order: 1006): <code>SettingPolicyController</code><ul>
+<li>Models: <code>ParamSettingPolicy</code></li>
+</ul>
+</li>
+<li><strong>Setup</strong> (Order: 1): <code>SetupController</code><ul>
+<li>Models: <code>IPreconfig</code></li>
+</ul>
+</li>
+<li><strong>Config Widget</strong> (Order: 9): <code>ConfigWidgetController</code><ul>
+<li>Models: <code>ParamWidget</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.6 Data Management</strong></p>
+<ul>
+<li><strong>Database</strong> (Order: 2): <code>DatabaseController</code><ul>
+<li>Models: <code>ParamMyConnectionBlankDb</code></li>
+<li>Enums: <code>EnumConnectionProvider</code></li>
+</ul>
+</li>
+<li><strong>Data Dictionary</strong> (Order: 11): <code>DataDicController</code><ul>
+<li>Enums: <code>EnumDataDicType</code>, <code>EnumFieldType</code></li>
+</ul>
+</li>
+<li><strong>Stored Procedures</strong> (Order: 2): <code>StoredProcController</code><ul>
+<li>Views: <code>ViewStoredProc</code></li>
+</ul>
+</li>
+<li><strong>Call Stored Proc</strong> (Order: 2): <code>CallStoreProcController</code></li>
+</ul>
+<p><strong>9.7 System Utilities</strong></p>
+<ul>
+<li><strong>Enum</strong> (Order: 15): <code>EnumController</code></li>
+<li><strong>Migrate</strong> (Order: 2): <code>MigrateController</code></li>
+<li><strong>Mail</strong> (Order: 1): <code>MailController</code><ul>
+<li>Enums: <code>EnumMailProfile</code></li>
+</ul>
+</li>
+<li><strong>System Info</strong> (Order: 2000): <code>SystemInfoController</code></li>
+<li><strong>Version</strong> (Order: 1): <code>VersionController</code></li>
+<li><strong>Updater</strong> (Order: N/A): <code>UpdaterController</code></li>
+</ul>
+<p><strong>9.8 Workflow &amp; Process Management</strong></p>
+<ul>
+<li><strong>Workflow</strong> (Order: 2): <code>WorkflowController</code><ul>
+<li>Enums:<ul>
+<li><code>EnumWorkflowModule</code></li>
+<li><code>EnumWorkflowApproveCode</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Process Log</strong> (Order: 1020): <code>ProcessLogController</code><ul>
+<li>Enums: <code>EnumLogAction</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.9 Comments &amp; Attachments</strong></p>
+<ul>
+<li><strong>Comment</strong> (Order: 11): <code>CommentController</code><ul>
+<li>Models: <code>ParamArComment</code>, <code>ArCommentItem</code>, <code>ArFileAttachItem</code></li>
+<li>Views: <code>ViewComment</code></li>
+<li>Enums: <code>EnumCommentModule</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.10 Dimension Management</strong></p>
+<ul>
+<li><strong>Dimension</strong> (Order: 13): <code>DimensionController</code><ul>
+<li>Models: <code>DimensionList</code></li>
+<li>Enums:<ul>
+<li><code>EnumDimensionType</code></li>
+<li><code>EnumDimensionModule</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>9.11 Dashboards &amp; Analytics</strong></p>
+<ul>
+<li><strong>Dashboards</strong> (Order: 8): <code>DashboardsController</code></li>
+<li><strong>Global Parameters</strong> (Order: 8): <code>GblParamsController</code></li>
+</ul>
+<p><strong>9.12 Banking Integration</strong></p>
+<ul>
+<li><strong>Global File from Bank</strong> (Order: 104): <code>GblFileFromBankController</code><ul>
+<li>Models: <code>ParamGblFileFromBank</code></li>
+<li>Views: <code>ViewGblFileFromBank</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.13 Licensing</strong></p>
+<ul>
+<li><strong>License</strong> (Order: 1005): <code>LicenseController</code><ul>
+<li>Enums: <code>EnumLicenseType</code></li>
+</ul>
+</li>
+<li><strong>License Interface</strong> (Order: 1006): <code>LicenseInterfaceController</code></li>
+</ul>
+<p><strong>9.14 Home &amp; Navigation</strong></p>
+<ul>
+<li><strong>Home</strong> (Order: N/A): <code>HomeController</code><ul>
+<li>Enums: <code>EnumNavigate</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>9.15 Plugins &amp; Extensions</strong></p>
+<ul>
+<li><strong>Plugins</strong> (Order: 10000): <code>PluginsController</code></li>
+</ul>
+<hr>
+<h3>10. <strong>INTEGRATION &amp; INTERFACE MODULE</strong></h3>
+<p><strong>Total Sub-Modules</strong>: 4</p>
+<h4>Interface Models &amp; Configuration:</h4>
+<p><strong>10.1 Interface Base</strong></p>
+<ul>
+<li>Models: <code>IInterfaceBase</code></li>
+<li>Enums:<ul>
+<li><code>EnumInterfaceType</code></li>
+<li><code>EnumInterfaceDocType</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>10.2 Interface Type: File</strong></p>
+<ul>
+<li>Models: <code>IInterfaceSettingTypeFile</code></li>
+<li>Features:<ul>
+<li>File-based import/export</li>
+<li>CSV/Excel integration</li>
+</ul>
+</li>
+</ul>
+<p><strong>10.3 Interface Type: Database</strong></p>
+<ul>
+<li>Models: <code>IInterfaceSettingTypeDatabase</code></li>
+<li>Features:<ul>
+<li>Database-to-database sync</li>
+<li>Direct table mapping</li>
+</ul>
+</li>
+</ul>
+<p><strong>10.4 Interface Type: Data Bank</strong></p>
+<ul>
+<li>Models: <code>IInterfaceSettingTypeDataBank</code></li>
+<li>Features:<ul>
+<li>Banking system integration</li>
+<li>Payment file generation</li>
+</ul>
+</li>
+</ul>
+<p><strong>10.5 Interface Type: Web API</strong></p>
+<ul>
+<li>Models: <code>IInterfaceSettingTypeWebApi</code></li>
+<li>Features:<ul>
+<li>REST API integration</li>
+<li>External system connectivity</li>
+</ul>
+</li>
+</ul>
+<p><strong>10.6 Interface Mapping</strong></p>
+<ul>
+<li>Models:<ul>
+<li><code>IInterfaceMapping</code></li>
+<li><code>IAccCodeFromTo</code></li>
+<li><code>IInterfaceSettingDeptCodeAndAccCode</code></li>
+<li><code>ExcelParam</code></li>
+</ul>
+</li>
+<li>Features:<ul>
+<li>Field mapping configuration</li>
+<li>Account code conversion</li>
+<li>Department code mapping</li>
+</ul>
+</li>
+</ul>
+<p><strong>Interface List Models</strong>:</p>
+<ul>
+<li><code>InterfaceItem</code></li>
+<li><code>InterfaceItemList</code></li>
+<li><code>InterfaceItemPermission</code></li>
+<li><code>InterfaceItemPermissionList</code></li>
+</ul>
+<hr>
+<h3>11. <strong>SPECIALIZED SUPPORT MODULES</strong></h3>
+<h4>11.1 Area-Based Controllers</h4>
+<p><strong>Management Area</strong>:</p>
+<ul>
+<li><strong>Config Controller</strong> (Management): Configuration management interface</li>
+</ul>
+<p><strong>Support Area</strong>:</p>
+<ul>
+<li><strong>Config Controller</strong> (Support): Support configuration tools</li>
+</ul>
+<hr>
+<h2>Cross-Module Features</h2>
+<h3>Shared Enumerations</h3>
+<p><strong>Action &amp; Mode</strong>:</p>
+<ul>
+<li><code>EnumActionMode</code>: Add, Edit, Delete, View</li>
+<li><code>EnumAddOrDelete</code>: Addition or deletion flags</li>
+<li><code>EnumAndOr</code>: Logical operators</li>
+</ul>
+<p><strong>Aging &amp; Periods</strong>:</p>
+<ul>
+<li><code>EnumApAgingPeriodDateBy</code>: Aging calculation methods</li>
+</ul>
+<h3>Parameter Models (Param*)</h3>
+<p><strong>Purpose</strong>: DTOs for API requests and business logic</p>
+<ul>
+<li>104 parameter model files</li>
+<li>Naming pattern: <code>Param[EntityName]</code></li>
+<li>Examples:<ul>
+<li><code>ParamApInvoice</code></li>
+<li><code>ParamArContract</code></li>
+<li><code>ParamGlJvD</code></li>
+<li><code>ParamSettingPolicy</code></li>
+<li><code>ParamWidget</code></li>
+</ul>
+</li>
+</ul>
+<h3>View Models (View*)</h3>
+<p><strong>Purpose</strong>: Optimized read models for UI and reporting</p>
+<ul>
+<li>120 view model files</li>
+<li>Naming pattern: <code>View[EntityName]</code></li>
+<li>Examples:<ul>
+<li><code>ViewApInvoice</code></li>
+<li><code>ViewArReceipt</code></li>
+<li><code>ViewCostAccountCode</code></li>
+<li><code>ViewGlFr</code></li>
+</ul>
+</li>
+</ul>
+<h3>Interface Definitions (I*)</h3>
+<p><strong>Purpose</strong>: Contracts for dependency injection and abstraction</p>
+<ul>
+<li>325 interface files</li>
+<li>Naming patterns:<ul>
+<li><code>I[EntityName]</code>: Business entity contracts</li>
+<li><code>IParam[EntityName]</code>: Parameter contracts</li>
+<li><code>IView[EntityName]</code>: View model contracts</li>
+</ul>
+</li>
+<li>Examples:<ul>
+<li><code>IApInvoice</code></li>
+<li><code>IParamApInvoice</code></li>
+<li><code>IViewComment</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Module Dependencies</h2>
+<h3>Vertical Dependencies</h3>
+<pre><code class="language-text">Controllers (API Layer)
+    ↓
+Functions (Business Logic)
+    ↓
+Models (Data Layer)
+    ↓
+Database</code></pre><h3>Horizontal Dependencies</h3>
+<pre><code class="language-text">AP ←→ GL (Posting integration)
+AR ←→ GL (Posting integration)
+Asset ←→ GL (Depreciation posting)
+Income ←→ GL (Revenue posting)
+All Modules → Tax Module
+All Modules → Dimension Module
+All Modules → Workflow Module</code></pre><h3>Shared Services</h3>
+<ul>
+<li>Authentication &amp; Authorization</li>
+<li>Multi-tenant management</li>
+<li>Dimension allocation</li>
+<li>Comment &amp; attachment</li>
+<li>Workflow &amp; approval</li>
+<li>Currency &amp; exchange rates</li>
+<li>Document numbering (Prefix)</li>
+</ul>
+<hr>
+<h2>Summary by Category</h2>
+<h3>Transaction Processing Modules (5)</h3>
+<ol>
+<li><strong>AP</strong>: 8 sub-modules</li>
+<li><strong>AR</strong>: 10 sub-modules</li>
+<li><strong>GL</strong>: 8 sub-modules</li>
+<li><strong>Asset</strong>: 7 sub-modules</li>
+<li><strong>Income</strong>: 7 sub-modules</li>
+</ol>
+<h3>Support Modules (3)</h3>
+<ol start="6">
+<li><strong>Tax &amp; Reconciliation</strong>: 5 sub-modules</li>
+<li><strong>Financial Reporting</strong>: 3 sub-modules</li>
+<li><strong>Vendor &amp; Customer</strong>: 3 sub-modules</li>
+</ol>
+<h3>Infrastructure Modules (3)</h3>
+<ol start="9">
+<li><strong>System Administration</strong>: 20+ sub-modules</li>
+<li><strong>Integration &amp; Interface</strong>: 4+ sub-modules</li>
+<li><strong>Specialized Support</strong>: 2 areas</li>
+</ol>
+<hr>
+<h2>Total Count Verification</h2>
+<h3>Controllers</h3>
+<ul>
+<li>Main Controllers: 101</li>
+<li>Area Controllers: 2</li>
+<li><strong>Total</strong>: 101 unique controller classes</li>
+</ul>
+<h3>Models</h3>
+<ul>
+<li>Core Models: ~170</li>
+<li>View Models: 120</li>
+<li>Parameter Models: 104</li>
+<li>Interface Definitions: 325</li>
+<li><strong>Total</strong>: 600+ model files</li>
+</ul>
+<h3>Enumerations</h3>
+<ul>
+<li>Application Module Enums: 4 (AP, AR, GL, ASSET)</li>
+<li>Workflow Module Enums: 5 (AP_VENDOR, AP_INVOICE, AP_PAYMENT, AR_INVOICE, AR_RECEIPT)</li>
+<li>Supporting Enums: 49 total enum types</li>
+</ul>
+<h3>Sub-Modules</h3>
+<ul>
+<li><strong>Minimum Count</strong>: 78+ distinct sub-modules</li>
+<li><strong>With variations</strong>: 85+ functional areas</li>
+</ul>
+<hr>
+<h2>Module Order Groupings (by SwaggerControllerOrder)</h2>
+<h3>Authentication (0-6)</h3>
+<ul>
+<li>Login (0), Setup (1), Token (4), Tenant (5), Headquarter (5), User (6), Permission (6), UserTenant (6), Company (7)</li>
+</ul>
+<h3>Core Master Data (8-15)</h3>
+<ul>
+<li>GblParams (8), Dashboards (8), ConfigWidget (9), Report (9), Currency (10), CurrencyExchange (10), Budget (11), Comment (11), DataDic (11), Department (11), AccountCode (12), Unit (13), Dimension (13), Vendor (14), VendorCategory (14), VatReconcile (14), TaxReconcile (14), EditVatReconcile (14), Enum (15)</li>
+</ul>
+<h3>AR Module (100-105)</h3>
+<ul>
+<li>ArContract (100), Financial (100), ArInvoice (101), ArProfile (102), ArReceipt (103), Country (104), ArType (104), ArProject (104), GblFileFromBank (104), ArOwner (105), ArTitle (105), ApWhtCondition (106)</li>
+</ul>
+<h3>AP Module (201-205)</h3>
+<ul>
+<li>ApInvoice (201), ApPayment (202), ApWht (202), ApWhtRecon (202), ApWhtType (202), TaxProfile (202), ApPaymentType (203), ArPaymentType (203), PaymentType (203), ApProcedure (205)</li>
+</ul>
+<h3>GL Module (500-503)</h3>
+<ul>
+<li>GlJv (500), GlAllocationJv (501), GlPeriod (501), GlProcedure (501), GlJvFr (502), GlPrefix (502), GlAmortize (503)</li>
+</ul>
+<h3>Asset Module (401-406)</h3>
+<ul>
+<li>AssetCategory (401), AssetDepartment (402), AssetDisposal (403), AssetHistory (404), AssetLocation (405), AssetProcedure (405), AssetRegister (406)</li>
+</ul>
+<h3>Income Module (600-611)</h3>
+<ul>
+<li>IncomeSource (600), IncomeRevenue (601), IncomeCategory (602), IncomePayType (603), IncomeProduct (603), IncomePayCode (604), IncomeProcedure (610), IncomeInvoice (611)</li>
+</ul>
+<h3>Cheque/Banking (700)</h3>
+<ul>
+<li>ChequeReconcile (700)</li>
+</ul>
+<h3>System Settings (1000-1020)</h3>
+<ul>
+<li>SettingAll (1000), SettingAp (1001), SettingAr (1001), SettingAsset (1002), SettingGl (1003), SettingIncome (1004), SettingSystem (1005), License (1005), LicenseInterface (1006), SettingBudgetXls (1006), SettingPolicy (1006), Lookup (1009), ProcessLog (1020)</li>
+</ul>
+<h3>System Info (2000)</h3>
+<ul>
+<li>SystemInfo (2000)</li>
+</ul>
+<h3>Extensions (10000)</h3>
+<ul>
+<li>Plugins (10000)</li>
+</ul>
+<hr>
+<h2>Naming Conventions</h2>
+<h3>Controllers</h3>
+<ul>
+<li>Pattern: <code>[Entity]Controller.cs</code></li>
+<li>Base: <code>BaseApiController</code></li>
+<li>Route: <code>api/[entity]/[action]</code></li>
+</ul>
+<h3>Models</h3>
+<ul>
+<li>Core entities: <code>[EntityName].cs</code> (e.g., <code>ApInvoice</code>)</li>
+<li>Detail/child: <code>[EntityName]D.cs</code> (e.g., <code>ApInvoiceD</code>)</li>
+<li>Header: <code>[EntityName]H.cs</code> (e.g., <code>ArInvoiceH</code>)</li>
+<li>View models: <code>View[EntityName].cs</code></li>
+<li>Parameters: <code>Param[EntityName].cs</code></li>
+<li>Interfaces: <code>I[EntityName].cs</code></li>
+</ul>
+<h3>Enumerations</h3>
+<ul>
+<li>Pattern: <code>Enum[Category][Attribute].cs</code></li>
+<li>Examples: <code>EnumApInvoiceStatus</code>, <code>EnumTaxType</code></li>
+</ul>
+<hr>
+<h2>Architecture Notes</h2>
+<h3>Module Organization Philosophy</h3>
+<ol>
+<li><strong>Functional Segregation</strong>: Modules organized by business function (AP, AR, GL, etc.)</li>
+<li><strong>Layered Architecture</strong>: Clear separation between API, business logic, and data</li>
+<li><strong>Shared Services</strong>: Cross-cutting concerns handled by infrastructure modules</li>
+<li><strong>Multi-Tenant Design</strong>: Tenant isolation at all layers</li>
+<li><strong>Workflow Integration</strong>: Approval workflows integrated across transaction modules</li>
+</ol>
+<h3>API Design Patterns</h3>
+<ol>
+<li><strong>RESTful</strong>: Standard HTTP verbs and resource-based routing</li>
+<li><strong>Async/Await</strong>: All I/O operations use async patterns</li>
+<li><strong>Swagger Documentation</strong>: Complete API documentation with examples</li>
+<li><strong>Authorization</strong>: Permission-based access control on all endpoints</li>
+<li><strong>Tenant Isolation</strong>: Tenant context in all API calls</li>
+</ol>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

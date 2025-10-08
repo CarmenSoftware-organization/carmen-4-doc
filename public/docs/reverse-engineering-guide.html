@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Reverse Engineering Documentation Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Reverse Engineering Documentation Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Reverse Engineering Documentation Guide</h1>
+<h2>Overview</h2>
+<p>This guide outlines best practices for documenting the Carmen.NET ERP system for different stakeholder groups during reverse engineering efforts.</p>
+<hr>
+<h2>Documentation Strategy by Audience</h2>
+<h3>1. <strong>Stakeholders (Business Executives &amp; Decision Makers)</strong></h3>
+<p><strong>Purpose</strong>: Strategic understanding, ROI justification, risk assessment</p>
+<h4>Required Documents:</h4>
+<p><strong>1.1 Executive Summary</strong> (<code>executive-summary.md</code>)</p>
+<ul>
+<li><strong>System Purpose</strong>: What the system does (1-2 paragraphs)</li>
+<li><strong>Business Value</strong>: Key capabilities and benefits</li>
+<li><strong>Module Overview</strong>: High-level module list with business functions</li>
+<li><strong>Technology Stack</strong>: Platform overview (non-technical)</li>
+<li><strong>Key Metrics</strong>:<ul>
+<li>Number of modules</li>
+<li>Transaction types supported</li>
+<li>User roles/permissions</li>
+<li>Integration capabilities</li>
+</ul>
+</li>
+<li><strong>Risk Assessment</strong>: Technical debt, dependencies, maintenance needs</li>
+<li><strong>Modernization Roadmap</strong>: High-level upgrade path</li>
+</ul>
+<p><strong>Format</strong>:</p>
+<ul>
+<li>Visual diagrams (module relationships)</li>
+<li>Bullet points and tables</li>
+<li>Non-technical language</li>
+<li><strong>Length</strong>: 3-5 pages</li>
+</ul>
+<p><strong>Example Structure</strong>:</p>
+<pre><code class="language-markdown">## Executive Summary
+Carmen.NET is a multi-tenant financial ERP managing:
+- 11 core business modules
+- 78+ functional areas
+- 600+ business entities
+- Multi-currency, multi-company operations
+
+## Business Capabilities
+✓ Accounts Payable/Receivable
+✓ General Ledger &amp; Financial Reporting
+✓ Fixed Asset Management
+✓ Tax Compliance (VAT/WHT)
+✓ Multi-tenant SaaS Architecture
+
+## Strategic Considerations
+- Built on .NET Framework (legacy platform)
+- 101 API endpoints (well-structured)
+- Role-based security (enterprise-ready)
+- Recommended: Modernization to .NET 8+</code></pre><hr>
+<p><strong>1.2 Business Process Flows</strong> (<code>business-processes.md</code>)</p>
+<ul>
+<li><strong>Purpose</strong>: Show how business operations flow through the system</li>
+<li><strong>Content</strong>:<ul>
+<li>AP Invoice-to-Payment workflow</li>
+<li>AR Invoice-to-Cash workflow</li>
+<li>Asset lifecycle management</li>
+<li>Period-end closing process</li>
+<li>Tax filing workflows</li>
+</ul>
+</li>
+<li><strong>Format</strong>: Flowcharts, swim-lane diagrams</li>
+<li><strong>Tools</strong>: Mermaid diagrams, Visio, Lucidchart</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="mermaid">graph LR
+    A[Vendor Invoice] --> B[AP Invoice Entry]
+    B --> C[Approval Workflow]
+    C --> D[GL Posting]
+    D --> E[Payment Processing]
+    E --> F[WHT Calculation]
+    F --> G[Payment Voucher]</div><hr>
+<p><strong>1.3 ROI &amp; Cost-Benefit Analysis</strong> (<code>roi-analysis.md</code>)</p>
+<ul>
+<li><strong>Current State</strong>: Maintenance costs, technical debt</li>
+<li><strong>Future State</strong>: Modernization benefits</li>
+<li><strong>Migration Effort</strong>: Time and resource estimates</li>
+<li><strong>Risk Mitigation</strong>: Phased approach recommendations</li>
+</ul>
+<hr>
+<h3>2. <strong>Solution Architects (SA)</strong></h3>
+<p><strong>Purpose</strong>: System architecture, integration patterns, technical decisions</p>
+<h4>Required Documents:</h4>
+<p><strong>2.1 System Architecture Document</strong> (<code>architecture/system-architecture.md</code>)</p>
+<ul>
+<li><strong>High-Level Architecture</strong>:<ul>
+<li>3-tier architecture diagram</li>
+<li>API layer (ASP.NET Web API)</li>
+<li>Business logic layer (Functions)</li>
+<li>Data access layer (EF/ADO.NET)</li>
+<li>Database schema overview</li>
+</ul>
+</li>
+<li><strong>Technology Stack</strong>:<ul>
+<li>.NET Framework version</li>
+<li>Database (SQL Server/Oracle/MySQL)</li>
+<li>Authentication (OAuth/JWT tokens)</li>
+<li>Swagger/NSwag for API docs</li>
+</ul>
+</li>
+<li><strong>Deployment Architecture</strong>:<ul>
+<li>Web server requirements</li>
+<li>Database server specs</li>
+<li>Load balancing strategy</li>
+<li>Multi-tenant isolation mechanism</li>
+</ul>
+</li>
+<li><strong>Integration Architecture</strong>:<ul>
+<li>File-based integration</li>
+<li>Database integration</li>
+<li>Web API integration</li>
+<li>Banking interfaces</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## Architecture Overview
+
+### Layered Architecture
+
+```mermaid
+graph TD
+    API[&quot;Carmen.WebApi - API Layer&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;• Controllers 101 endpoints&lt;br/&gt;• Authentication &amp; Authorization&quot;]
+
+    Business[&quot;Business Logic Layer&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;• Functions FncApInvoice, etc.&lt;br/&gt;• Workflow Engine&lt;br/&gt;• Permission Manager&quot;]
+
+    DataAccess[&quot;Data Access Layer&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;• DbFactory&lt;br/&gt;• Query Builder&lt;br/&gt;• Model Mapping&quot;]
+
+    Database[(&quot;Database Layer&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;• Multi-tenant databases&lt;br/&gt;• Stored procedures&quot;)]
+
+    API --&gt; Business
+    Business --&gt; DataAccess
+    DataAccess --&gt; Database
+
+    style API fill:#e8f5e9,stroke:#4caf50,color:#000000
+    style Business fill:#fff3e0,stroke:#ff9800,color:#000000
+    style DataAccess fill:#e3f2fd,stroke:#2196f3,color:#000000
+    style Database fill:#f3e5f5,stroke:#9c27b0,color:#000000</code></pre><pre><code class="language-text">
+### Key Architectural Patterns
+- **Multi-tenancy**: Tenant isolation via connection string switching
+- **Repository Pattern**: DbFactory abstraction
+- **DTO Pattern**: Param* models for requests, View* for responses
+- **Interface Segregation**: 325 interface definitions</code></pre><hr>
+<p><strong>2.2 Data Architecture Document</strong> (<code>architecture/data-architecture.md</code>)</p>
+<ul>
+<li><strong>Entity Relationship Diagrams</strong> (ERD):<ul>
+<li>Core modules: AP, AR, GL, Asset</li>
+<li>Master data relationships</li>
+<li>Transaction data flows</li>
+</ul>
+</li>
+<li><strong>Database Schema</strong>:<ul>
+<li>Table structures (inferred from models)</li>
+<li>Primary/foreign key relationships</li>
+<li>Index recommendations</li>
+</ul>
+</li>
+<li><strong>Data Model Patterns</strong>:<ul>
+<li>Header-Detail pattern (InvH/InvD)</li>
+<li>Audit trail pattern</li>
+<li>Dimension allocation pattern</li>
+</ul>
+</li>
+<li><strong>Data Volume Estimates</strong>:<ul>
+<li>Transaction table sizes</li>
+<li>Archive/purge strategies</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## AP Module ERD
+
+```mermaid
+erDiagram
+    VENDOR ||--o{ AP_INVOICE : has
+    AP_INVOICE ||--|| AP_INV_WHT : includes
+    AP_INVOICE ||--|{ AP_INVOICE_D : contains
+    AP_INV_WHT ||--|{ AP_INV_WHT_ITEM : contains
+    AP_INVOICE ||--o{ AP_PAYMENT : generates
+    AP_PAYMENT ||--|{ AP_PAYMENT_D : contains
+    AP_PAYMENT ||--|| AP_PAY_WHT : includes</code></pre><pre><code class="language-text">
+---
+
+**2.3 Integration Architecture** (`architecture/integration-architecture.md`)
+- **Integration Patterns**:
+  - REST API specifications
+  - File import/export formats (CSV, Excel)
+  - Database-to-database sync
+  - Banking file formats
+- **API Contract Documentation**:
+  - Endpoint catalog
+  - Request/response schemas
+  - Authentication flows
+  - Rate limiting/throttling
+- **External System Interfaces**:
+  - Payment gateways
+  - Bank reconciliation systems
+  - Tax authority portals
+  - Third-party accounting systems
+
+---
+
+**2.4 Security Architecture** (`architecture/security-architecture.md`)
+- **Authentication Mechanisms**:
+  - Login flow analysis
+  - Token-based authentication (JWT)
+  - Session management
+- **Authorization Model**:
+  - Role-based access control (RBAC)
+  - Permission matrix by module
+  - Data-level security (tenant isolation)
+- **Security Controls**:
+  - Input validation patterns
+  - SQL injection prevention
+  - XSS protection
+  - Encryption (Carmen.Crypto usage)
+- **Compliance Requirements**:
+  - Audit logging (`EnumLogAction`)
+  - Data retention policies
+  - GDPR/privacy considerations
+
+---
+
+**2.5 Non-Functional Requirements** (`architecture/nfr-requirements.md`)
+- **Performance Requirements**:
+  - Response time targets
+  - Concurrent user capacity
+  - Database query optimization needs
+- **Scalability Requirements**:
+  - Horizontal vs vertical scaling
+  - Multi-tenant scaling strategy
+- **Availability &amp; Reliability**:
+  - Uptime SLAs
+  - Disaster recovery
+  - Backup strategies
+- **Maintainability**:
+  - Code quality metrics
+  - Technical debt assessment
+  - Refactoring priorities
+
+---
+
+### 3. **Business Analysts (BA)**
+
+**Purpose**: Business rules, workflows, functional specifications
+
+#### Required Documents:
+
+**3.1 Functional Requirements Document** (`requirements/functional-requirements.md`)
+- **Module-by-Module Breakdown**:
+  - AP Module: Invoice processing, payment workflows, WHT calculation
+  - AR Module: Billing, receipts, collections
+  - GL Module: Journal entries, period management, allocations
+  - Asset Module: Registration, depreciation, disposal
+  - Income Module: Revenue recognition
+- **Business Rules**:
+  - Tax calculation rules
+  - Approval workflows
+  - Validation rules
+  - Period-end closing rules
+- **User Stories** (reverse-engineered):
+  - &quot;As an AP clerk, I can enter vendor invoices with WHT...&quot;
+  - &quot;As a finance manager, I can approve invoices over $10,000...&quot;
+
+**Example**:
+```markdown
+## AP Invoice Processing
+
+### Business Rules
+1. **Invoice Entry**
+   - Must have valid vendor code
+   - Invoice date cannot be future-dated
+   - Must select tax type (VAT/Non-VAT)
+   - Multi-currency invoices require exchange rate
+
+2. **WHT Calculation**
+   - Auto-calculate based on WHT condition rules
+   - WHT type determines tax rate
+   - Generate WHT certificate reference
+
+3. **Approval Workflow**
+   - Amount &lt; $5,000: Auto-approve
+   - Amount $5,000-$50,000: Department manager approval
+   - Amount &gt; $50,000: Finance director approval
+
+4. **GL Posting**
+   - Post to expense account (Dr)
+   - Post to vendor payable (Cr)
+   - Post WHT payable (Cr)
+   - Dimension allocation required for cost centers</code></pre><hr>
+<p><strong>3.2 Workflow Documentation</strong> (<code>workflows/</code>)</p>
+<ul>
+<li><strong>Process Flows</strong>:<ul>
+<li><code>workflows/ap-invoice-workflow.md</code></li>
+<li><code>workflows/ar-billing-workflow.md</code></li>
+<li><code>workflows/period-close-workflow.md</code></li>
+<li><code>workflows/asset-disposal-workflow.md</code></li>
+</ul>
+</li>
+<li><strong>Approval Matrices</strong>:<ul>
+<li>Who can approve what</li>
+<li>Escalation rules</li>
+<li>Delegation rules</li>
+</ul>
+</li>
+<li><strong>State Transitions</strong>:<ul>
+<li>Status flow diagrams</li>
+<li>Valid status transitions</li>
+<li>Reversal/cancellation logic</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## AP Invoice Status Workflow
+
+```mermaid
+stateDiagram-v2
+    [*] --&gt; Draft
+    Draft --&gt; PendingApproval: Submit
+    PendingApproval --&gt; Approved: Approve
+    PendingApproval --&gt; Rejected: Reject
+    Rejected --&gt; Draft: Revise
+    Approved --&gt; Posted: Post to GL
+    Posted --&gt; Paid: Payment Made
+    Posted --&gt; Cancelled: Cancel
+    Cancelled --&gt; [*]</code></pre><h3>Status Transitions</h3>
+<table>
+<thead>
+<tr>
+<th>From Status</th>
+<th>To Status</th>
+<th>Trigger</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Draft</td>
+<td>PendingApproval</td>
+<td>User submits</td>
+<td>AP.Invoice.Submit</td>
+</tr>
+<tr>
+<td>PendingApproval</td>
+<td>Approved</td>
+<td>Manager approves</td>
+<td>AP.Invoice.Approve</td>
+</tr>
+<tr>
+<td>Approved</td>
+<td>Posted</td>
+<td>System posts</td>
+<td>AP.Invoice.Post</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">
+---
+
+**3.3 Business Rules Catalog** (`business-rules/`)
+- **Validation Rules**:
+  - Field-level validations
+  - Cross-field validations
+  - Business logic constraints
+- **Calculation Rules**:
+  - Tax calculations
+  - Depreciation formulas
+  - Exchange rate application
+  - Allocation formulas
+- **Configuration Rules**:
+  - Period status rules
+  - Document numbering rules
+  - Multi-company rules
+
+---
+
+**3.4 User Role &amp; Permission Matrix** (`requirements/permission-matrix.md`)
+- **Role Definitions**:
+  - AP Clerk, AP Manager, Finance Director
+  - AR Clerk, Collections Manager
+  - Accountant, Senior Accountant, Controller
+- **Permission Mapping**:
+  - Module access rights
+  - CRUD permissions by role
+  - Special function permissions (approve, post, close period)
+- **Data Access Rules**:
+  - Department-level access
+  - Company-level access
+  - Tenant-level access
+
+**Example**:
+```markdown
+## Permission Matrix
+
+| Role | Module | View | Create | Edit | Delete | Approve | Post |
+|------|--------|------|--------|------|--------|---------|------|
+| AP Clerk | AP.Invoice | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |
+| AP Manager | AP.Invoice | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
+| Accountant | AP.Invoice | ✓ | ✗ | ✗ | ✗ | ✗ | ✓ |
+| Finance Director | AP.Invoice | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |</code></pre><hr>
+<p><strong>3.5 Data Dictionary</strong> (<code>requirements/data-dictionary.md</code>)</p>
+<ul>
+<li><strong>Field Definitions</strong>:<ul>
+<li>Field name, type, length</li>
+<li>Business meaning</li>
+<li>Valid values/ranges</li>
+<li>Required vs optional</li>
+</ul>
+</li>
+<li><strong>Code Tables</strong>:<ul>
+<li>Lookup values</li>
+<li>Enumeration mappings</li>
+<li>Status codes</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## AP Invoice Fields
+
+| Field | Type | Length | Required | Description |
+|-------|------|--------|----------|-------------|
+| VnCode | string | 20 | Yes | Vendor code (FK to Vendor master) |
+| InvhDate | DateTime | - | Yes | Invoice transaction date |
+| InvhInvNo | string | 50 | Yes | Vendor invoice number |
+| InvhDueDate | DateTime | - | Yes | Payment due date |
+| InvhCredit | int | - | Yes | Credit term days (0-365) |
+| CurCode | string | 3 | Yes | Currency code (ISO 4217) |
+| CurRate | decimal | 18,6 | Yes | Exchange rate (base currency = 1) |
+| InvhTaxT1 | EnumTaxType | - | Yes | Tax type: VAT, NonVAT, Exempt |</code></pre><hr>
+<h3>4. <strong>Senior Developers</strong></h3>
+<p><strong>Purpose</strong>: Code structure, patterns, technical implementation, APIs</p>
+<h4>Required Documents:</h4>
+<p><strong>4.1 Code Structure Guide</strong> (<code>development/code-structure.md</code>)</p>
+<ul>
+<li><strong>Project Organization</strong>:<ul>
+<li>Solution structure (11 projects)</li>
+<li>Folder hierarchy</li>
+<li>Naming conventions</li>
+<li>File organization patterns</li>
+</ul>
+</li>
+<li><strong>Dependency Map</strong>:<ul>
+<li>Project references</li>
+<li>NuGet packages</li>
+<li>External libraries</li>
+</ul>
+</li>
+<li><strong>Build &amp; Deployment</strong>:<ul>
+<li>Build configuration</li>
+<li>Environment-specific settings</li>
+<li>Deployment checklist</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## Solution Structure
+
+### Projects
+1. **Carmen.Models** - Data models and entities
+2. **Carmen.Enum** - Business enumerations
+3. **Carmen.Utils** - Utility libraries
+4. **Carmen.Query** - Query builder and helpers
+5. **Carmen.WebApi** - REST API controllers
+6. **Carmen.Crypto** - Encryption services
+7. **Carmen.LicenseApi** - License validation
+8. **Carmen.Api.Client** - Generated API client
+9. **Carmen.Models.Interface** - Interface definitions
+10. **Carmen.Models.InterfaceList** - Interface list models
+11. **Carmen.Models.Version** - Versioning support
+
+### Key Dependencies
+- Newtonsoft.Json - JSON serialization
+- Swashbuckle - Swagger/OpenAPI
+- NSwag - API client generation
+- Entity Framework (inferred)
+
+### Naming Conventions
+- Controllers: `[Entity]Controller.cs`
+- Models: `[Entity].cs`
+- Detail models: `[Entity]D.cs`
+- View models: `View[Entity].cs`
+- Parameters: `Param[Entity].cs`
+- Interfaces: `I[Entity].cs`</code></pre><hr>
+<p><strong>4.2 API Reference Documentation</strong> (<code>api/api-reference.md</code>)</p>
+<ul>
+<li><strong>Endpoint Catalog</strong>:<ul>
+<li>Group by module (AP, AR, GL, etc.)</li>
+<li>HTTP methods</li>
+<li>Route patterns</li>
+<li>Request/response schemas</li>
+</ul>
+</li>
+<li><strong>Authentication</strong>:<ul>
+<li>How to obtain tokens</li>
+<li>Token refresh flow</li>
+<li>Permission requirements</li>
+</ul>
+</li>
+<li><strong>Error Handling</strong>:<ul>
+<li>Error response format</li>
+<li>HTTP status codes</li>
+<li>Error code catalog</li>
+</ul>
+</li>
+<li><strong>Rate Limiting &amp; Throttling</strong>:<ul>
+<li>Request limits</li>
+<li>Retry strategies</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## AP Invoice API
+
+### Search Invoices
+```http
+POST /api/apInvoice/search
+Authorization: Bearer {token}
+Content-Type: application/json</code></pre><p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;page&quot;: 1,
+  &quot;pageSize&quot;: 20,
+  &quot;filters&quot;: [
+    {
+      &quot;field&quot;: &quot;VnCode&quot;,
+      &quot;operator&quot;: &quot;eq&quot;,
+      &quot;value&quot;: &quot;VN001&quot;
+    }
+  ],
+  &quot;orderBy&quot;: &quot;InvhDate desc&quot;
+}</code></pre><p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [...],
+  &quot;total&quot;: 150,
+  &quot;page&quot;: 1,
+  &quot;pageSize&quot;: 20
+}</code></pre><p><strong>Permissions</strong>: <code>AP.Invoice.View</code></p>
+<pre><code class="language-text">
+---
+
+**4.3 Design Patterns &amp; Best Practices** (`development/design-patterns.md`)
+- **Identified Patterns**:
+  - Repository pattern (DbFactory)
+  - DTO pattern (Param*/View* models)
+  - Factory pattern (DbFactory)
+  - Strategy pattern (ConnectionProvider)
+- **Code Conventions**:
+  - Async/await usage
+  - Exception handling patterns
+  - Logging patterns
+  - Transaction management
+- **Anti-Patterns Found**:
+  - Code smells
+  - Technical debt areas
+  - Refactoring opportunities
+
+**Example**:
+```markdown
+## Common Patterns
+
+### Controller Pattern
+All controllers follow this structure:
+1. Log request
+2. Apply tenant context
+3. Check permissions
+4. Execute business logic
+5. Return standardized response
+
+### DTO Pattern
+- **Request**: Use `Param*` models
+- **Response**: Use `View*` models
+- **Internal**: Use domain models
+
+### Error Handling
+```csharp
+try {
+    // Business logic
+    return this.JsonResultOk(result);
+} catch (Exception e) {
+    LogHttpResult.Error(e);
+    return this.JsonResultInternalError(e);
+}</code></pre><h3>Async Pattern</h3>
+<p>All I/O operations use <code>async</code>/<code>await</code>:</p>
+<pre><code class="language-csharp">public async Task&lt;IHttpActionResult&gt; GetList(...)
+{
+    var result = await FncApInvoice.GetListAsync(...);
+    return this.JsonResultOk(result);
+}</code></pre><pre><code class="language-text">
+---
+
+**4.4 Database Schema Documentation** (`database/schema-documentation.md`)
+- **Table Structures**:
+  - Inferred from model classes
+  - Field types and constraints
+  - Relationships (FK mappings)
+- **Stored Procedures**:
+  - Procedure catalog
+  - Parameters and usage
+  - Business logic embedded in DB
+- **Views**:
+  - Database views
+  - View purposes
+- **Indexing Strategy**:
+  - Recommended indexes
+  - Query optimization notes
+
+**Example**:
+```markdown
+## AP_INVOICE Table
+
+### Structure (inferred from ApInvoice model)
+```sql
+CREATE TABLE AP_INVOICE (
+    VnCode NVARCHAR(20) NOT NULL,
+    InvhDate DATETIME NOT NULL,
+    InvhDesc NVARCHAR(500),
+    InvhSource NVARCHAR(50),
+    InvhInvNo NVARCHAR(50) NOT NULL,
+    InvhInvDate DATETIME,
+    InvhDueDate DATETIME,
+    InvhCredit INT,
+    InvhRef NVARCHAR(100),
+    CurCode NVARCHAR(3) NOT NULL,
+    CurRate DECIMAL(18,6) NOT NULL,
+    InvhTaxT1 INT NOT NULL, -- EnumTaxType
+    -- Additional fields...
+    CONSTRAINT FK_AP_INVOICE_Vendor FOREIGN KEY (VnCode)
+        REFERENCES VENDOR(VnCode)
+)</code></pre><h3>Relationships</h3>
+<ul>
+<li><strong>Parent</strong>: VENDOR (1:M)</li>
+<li><strong>Children</strong>:<ul>
+<li>AP_INVOICE_D (detail lines)</li>
+<li>AP_INV_WHT (withholding tax)</li>
+</ul>
+</li>
+</ul>
+<h3>Indexes Recommended</h3>
+<ul>
+<li>IX_AP_INVOICE_VnCode</li>
+<li>IX_AP_INVOICE_InvhDate</li>
+<li>IX_AP_INVOICE_InvhInvNo</li>
+</ul>
+<pre><code class="language-text">
+---
+
+**4.5 Testing Guide** (`development/testing-guide.md`)
+- **Test Structure**:
+  - Existing test projects
+  - Test coverage areas
+  - Missing test coverage
+- **Testing Patterns**:
+  - Unit test examples
+  - Integration test setup
+  - API testing approach
+- **Test Data**:
+  - Test data setup
+  - Mock data patterns
+  - Database seeding
+
+---
+
+**4.6 Troubleshooting Guide** (`development/troubleshooting.md`)
+- **Common Issues**:
+  - Multi-tenant context issues
+  - Permission errors
+  - Database connection problems
+- **Debug Techniques**:
+  - Logging locations
+  - Debug flags
+  - Trace analysis
+- **Performance Issues**:
+  - Known bottlenecks
+  - Query optimization
+  - Caching strategies
+
+---
+
+### 5. **UI/UX Designers**
+
+**Purpose**: User interface patterns, screen flows, user experience
+
+#### Required Documents:
+
+**5.1 UI Component Inventory** (`design/ui-components.md`)
+- **Screen Catalog**:
+  - List of all screens/views
+  - Screen purpose
+  - User roles who access
+- **UI Patterns**:
+  - List/grid views
+  - Forms (create/edit)
+  - Modal dialogs
+  - Navigation patterns
+- **Component Library**:
+  - Buttons, inputs, dropdowns
+  - Data grids/tables
+  - Charts and visualizations
+  - Widgets (dashboard)
+
+**Example**:
+```markdown
+## AP Invoice Screen
+
+### Screen Type: Master-Detail Form
+
+#### Components
+- **Header Section**:
+  - Vendor lookup (dropdown with search)
+  - Invoice date picker
+  - Invoice number (text input)
+  - Currency selector
+  - Exchange rate (calculated field)
+
+- **Detail Grid**:
+  - Editable grid for line items
+  - Columns: Account, Description, Amount, Tax
+  - Add/remove row buttons
+  - Sub-total calculations
+
+- **WHT Section**:
+  - WHT type selector
+  - Auto-calculated WHT amount
+  - WHT certificate number
+
+- **Actions**:
+  - Save draft
+  - Submit for approval
+  - Cancel
+  - Print preview</code></pre><hr>
+<p><strong>5.2 Screen Flow Diagrams</strong> (<code>design/screen-flows.md</code>)</p>
+<ul>
+<li><strong>User Journeys</strong>:<ul>
+<li>AP clerk invoice entry journey</li>
+<li>Manager approval flow</li>
+<li>Accountant posting flow</li>
+</ul>
+</li>
+<li><strong>Navigation Maps</strong>:<ul>
+<li>Menu structure</li>
+<li>Breadcrumb trails</li>
+<li>Screen transitions</li>
+</ul>
+</li>
+<li><strong>Modal &amp; Dialog Flows</strong>:<ul>
+<li>Lookup dialogs</li>
+<li>Confirmation dialogs</li>
+<li>Error messages</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown">## AP Invoice Entry Flow
+
+```mermaid
+graph TD
+    A[Dashboard] --&gt; B[AP Menu]
+    B --&gt; C[Invoice List]
+    C --&gt; D[New Invoice]
+    D --&gt; E[Enter Header]
+    E --&gt; F[Add Line Items]
+    F --&gt; G[Review WHT]
+    G --&gt; H{Valid?}
+    H --&gt;|No| F
+    H --&gt;|Yes| I[Save Draft]
+    I --&gt; J{Submit?}
+    J --&gt;|No| C
+    J --&gt;|Yes| K[Submit for Approval]
+    K --&gt; L[Approval Queue]</code></pre><pre><code class="language-text">
+---
+
+**5.3 Design System Documentation** (`design/design-system.md`)
+- **Visual Design**:
+  - Color palette (extracted from CSS/themes)
+  - Typography
+  - Spacing and layout grids
+  - Icons and imagery
+- **Interaction Patterns**:
+  - Button states (hover, active, disabled)
+  - Form validation feedback
+  - Loading states
+  - Success/error messages
+- **Responsive Behavior**:
+  - Breakpoints
+  - Mobile adaptations
+  - Tablet considerations
+
+---
+
+**5.4 Accessibility Documentation** (`design/accessibility.md`)
+- **WCAG Compliance**:
+  - Current accessibility level
+  - Accessibility issues found
+  - Remediation recommendations
+- **Keyboard Navigation**:
+  - Tab order
+  - Keyboard shortcuts
+  - Focus management
+- **Screen Reader Support**:
+  - ARIA labels
+  - Alt text for images
+  - Semantic HTML usage
+
+---
+
+**5.5 User Personas** (`design/user-personas.md`)
+- **Role-Based Personas**:
+  - AP Clerk: High-volume data entry, speed critical
+  - Finance Manager: Approval focus, dashboard insights
+  - Accountant: Accuracy focus, detailed reporting
+- **Usage Patterns**:
+  - Typical tasks per role
+  - Frequency of use
+  - Pain points (reverse-engineered from UI)
+
+---
+
+## Documentation Tooling Recommendations
+
+### Diagramming Tools
+- **Mermaid**: Inline diagrams in Markdown (flowcharts, ERD, sequence)
+- **PlantUML**: UML diagrams (class, component, deployment)
+- **Draw.io/Diagrams.net**: General purpose diagramming
+- **Lucidchart**: Collaborative cloud-based diagrams
+
+### API Documentation
+- **Swagger UI**: Interactive API exploration (already in project)
+- **Postman**: API testing and documentation
+- **ReDoc**: Alternative Swagger renderer
+
+### Code Documentation
+- **DocFX**: .NET documentation generator
+- **Doxygen**: Multi-language code documentation
+- **Sandcastle**: .NET API reference docs
+
+### Knowledge Base
+- **Confluence**: Enterprise wiki
+- **GitBook**: Developer-friendly documentation
+- **MkDocs**: Static site from Markdown
+- **Docusaurus**: Documentation website framework
+
+---
+
+## Documentation Process
+
+### Phase 1: Discovery (Weeks 1-2)
+1. **Inventory**: Catalog all controllers, models, enums
+2. **Dependency Analysis**: Map project dependencies
+3. **Database Reverse Engineering**: Generate ERD from models
+4. **API Catalog**: Extract all endpoints from controllers
+
+### Phase 2: Analysis (Weeks 3-4)
+5. **Business Rule Extraction**: Analyze controller logic for rules
+6. **Workflow Mapping**: Trace status transitions and approvals
+7. **Security Analysis**: Document permission checks
+8. **Integration Points**: Identify external interfaces
+
+### Phase 3: Documentation (Weeks 5-8)
+9. **Write Audience-Specific Docs**: Per templates above
+10. **Create Diagrams**: Architecture, ERD, workflows
+11. **Generate API Docs**: Enhance Swagger with examples
+12. **Code Comments**: Add inline documentation
+
+### Phase 4: Validation (Weeks 9-10)
+13. **Stakeholder Review**: Validate business process docs
+14. **Technical Review**: SA and dev team validation
+15. **User Testing**: Validate UI flows with actual users
+16. **Gap Analysis**: Identify undocumented areas
+
+### Phase 5: Maintenance
+17. **Version Control**: Keep docs in Git with code
+18. **CI/CD Integration**: Auto-generate API docs
+19. **Change Log**: Document system evolution
+20. **Regular Updates**: Schedule quarterly reviews
+
+---
+
+## Documentation Templates
+
+### Template Structure</code></pre><p>docs/<br>├── executive/<br>│   ├── executive-summary.md<br>│   ├── business-processes.md<br>│   └── roi-analysis.md<br>├── architecture/<br>│   ├── system-architecture.md<br>│   ├── data-architecture.md<br>│   ├── integration-architecture.md<br>│   ├── security-architecture.md<br>│   └── nfr-requirements.md<br>├── requirements/<br>│   ├── functional-requirements.md<br>│   ├── permission-matrix.md<br>│   └── data-dictionary.md<br>├── workflows/<br>│   ├── ap-invoice-workflow.md<br>│   ├── ar-billing-workflow.md<br>│   └── period-close-workflow.md<br>├── business-rules/<br>│   ├── validation-rules.md<br>│   ├── calculation-rules.md<br>│   └── configuration-rules.md<br>├── api/<br>│   ├── api-reference.md<br>│   ├── authentication-guide.md<br>│   └── integration-guide.md<br>├── development/<br>│   ├── code-structure.md<br>│   ├── design-patterns.md<br>│   ├── testing-guide.md<br>│   └── troubleshooting.md<br>├── database/<br>│   ├── schema-documentation.md<br>│   ├── stored-procedures.md<br>│   └── data-migration.md<br>├── design/<br>│   ├── ui-components.md<br>│   ├── screen-flows.md<br>│   ├── design-system.md<br>│   ├── accessibility.md<br>│   └── user-personas.md<br>└── operations/<br>    ├── deployment-guide.md<br>    ├── monitoring-guide.md<br>    └── disaster-recovery.md</p>
+<pre><code class="language-text">
+---
+
+## Best Practices Summary
+
+### For All Documentation:
+
+1. **Version Control**: All docs in Git alongside code
+2. **Markdown Format**: Easy to diff, review, and maintain
+3. **Living Documents**: Update with code changes
+4. **Searchable**: Use consistent terminology and tags
+5. **Visual**: Use diagrams liberally (worth 1000 words)
+6. **Examples**: Provide real code/data examples
+7. **Cross-References**: Link related documents
+8. **Change Log**: Track document evolution
+9. **Review Cycle**: Regular validation with stakeholders
+10. **Accessibility**: Ensure docs are accessible to all
+
+### Documentation Anti-Patterns to Avoid:
+
+❌ **Avoid**:
+- Massive single-document dumps
+- Out-of-sync code and docs
+- Tribal knowledge (undocumented)
+- Technical jargon for business docs
+- Business speak for technical docs
+- Stale screenshots
+- Broken links
+- No examples or context
+
+✅ **Do**:
+- Modular, audience-specific documents
+- Automated doc generation where possible
+- Clear ownership and maintenance
+- Plain language for each audience
+- Current, validated content
+- Interactive diagrams
+- Working examples
+- Regular updates
+
+---
+
+## Success Metrics
+
+### Documentation Quality Metrics:
+- **Coverage**: % of code with documentation
+- **Freshness**: Days since last update
+- **Accuracy**: Validation pass rate
+- **Usability**: Time to find information
+- **Completeness**: Checklist completion rate
+
+### Stakeholder Satisfaction:
+- **Executives**: Can make strategic decisions
+- **Architects**: Can design new features
+- **BAs**: Can write new requirements
+- **Developers**: Can modify/extend code
+- **Designers**: Can create consistent UI
+
+---
+
+## Recommended Tools for Carmen.NET
+
+### Reverse Engineering Tools:
+1. **Visual Studio**: Code navigation and dependency graphs
+2. **ReSharper**: Code analysis and architecture diagrams
+3. **NDepend**: Code metrics and dependency analysis
+4. **Entity Framework Power Tools**: Database schema reverse engineering
+5. **Swagger Inspector**: API testing and documentation
+6. **SQL Server Management Studio**: Database documentation
+7. **Mermaid Live Editor**: Quick diagram creation
+8. **Postman**: API collection and documentation
+
+### Auto-Documentation:
+- **DocFX**: Generate API reference from XML comments
+- **Swagger/NSwag**: Already in use - enhance with examples
+- **SchemaGenerator**: Database schema docs
+- **PlantUML**: Architecture diagrams from text
+
+---
+
+## Next Steps for Carmen.NET
+
+### Immediate Actions (Week 1):
+1. ✅ **Complete**: System overview (done)
+2. ✅ **Complete**: Module structure (done)
+3. ⏳ **Todo**: Executive summary for stakeholders
+4. ⏳ **Todo**: Architecture diagrams (system, data, integration)
+5. ⏳ **Todo**: API reference enhancement
+
+### Short-term (Weeks 2-4):
+6. Business process flows (top 10 workflows)
+7. Permission matrix extraction
+8. Database ERD generation
+9. Code structure guide
+10. Developer onboarding guide
+
+### Medium-term (Weeks 5-8):
+11. Complete functional requirements per module
+12. Security architecture documentation
+13. UI component inventory
+14. Testing guide and coverage analysis
+15. Deployment and operations guide
+
+### Long-term (Ongoing):
+16. Maintain living documentation
+17. Automated doc generation in CI/CD
+18. Knowledge transfer sessions
+19. Documentation review cycles
+20. Continuous improvement
+
+---
+
+## Conclusion
+
+Effective reverse engineering documentation requires:
+- **Multi-audience approach**: Different docs for different roles
+- **Layered detail**: High-level to deep technical
+- **Visual communication**: Diagrams over walls of text
+- **Practical examples**: Real code and data samples
+- **Maintenance plan**: Keep docs current with code
+
+This guide provides the framework - customize based on your specific needs and priorities.</code></pre>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

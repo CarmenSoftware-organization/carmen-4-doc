@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Error Handling Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>API Error Handling Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>API Error Handling Guide</h1>
+<h2>Overview</h2>
+<p>Carmen.NET API uses standardized error responses across all endpoints, providing consistent error codes, detailed messages, and troubleshooting guidance.</p>
+<h2>Error Response Format</h2>
+<h3>Standard Error Response</h3>
+<p>All error responses follow this consistent structure:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;ERROR_CODE&quot;,
+  &quot;message&quot;: &quot;Human-readable error description&quot;,
+  &quot;details&quot;: &quot;Additional error details or validation messages&quot;,
+  &quot;field&quot;: &quot;fieldName&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;unique-request-trace-id&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/create&quot;
+}</code></pre><h3>Field Descriptions</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Always Present</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>success</strong></td>
+<td>boolean</td>
+<td>Always <code>false</code> for errors</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>code</strong></td>
+<td>string</td>
+<td>Machine-readable error code</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>message</strong></td>
+<td>string</td>
+<td>Human-readable error message</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>details</strong></td>
+<td>string/object</td>
+<td>Additional error information</td>
+<td>❌ Optional</td>
+</tr>
+<tr>
+<td><strong>field</strong></td>
+<td>string</td>
+<td>Field name causing validation error</td>
+<td>❌ Optional</td>
+</tr>
+<tr>
+<td><strong>timestamp</strong></td>
+<td>string (ISO 8601)</td>
+<td>When error occurred</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>traceId</strong></td>
+<td>string</td>
+<td>Request trace ID for debugging</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>path</strong></td>
+<td>string</td>
+<td>API endpoint path</td>
+<td>✅ Yes</td>
+</tr>
+</tbody></table>
+<h2>HTTP Status Codes</h2>
+<h3>Success Codes (2xx)</h3>
+<table>
+<thead>
+<tr>
+<th>Status Code</th>
+<th>Description</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>200 OK</strong></td>
+<td>Request successful</td>
+<td>GET, PUT, DELETE operations</td>
+</tr>
+<tr>
+<td><strong>201 Created</strong></td>
+<td>Resource created successfully</td>
+<td>POST operations creating new resources</td>
+</tr>
+<tr>
+<td><strong>204 No Content</strong></td>
+<td>Successful with no response body</td>
+<td>DELETE operations</td>
+</tr>
+</tbody></table>
+<h3>Client Error Codes (4xx)</h3>
+<table>
+<thead>
+<tr>
+<th>Status Code</th>
+<th>Description</th>
+<th>Common Causes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>400 Bad Request</strong></td>
+<td>Invalid request format or data</td>
+<td>Validation errors, malformed JSON, missing required fields</td>
+</tr>
+<tr>
+<td><strong>401 Unauthorized</strong></td>
+<td>Authentication required or failed</td>
+<td>Missing/invalid token, expired token</td>
+</tr>
+<tr>
+<td><strong>403 Forbidden</strong></td>
+<td>User lacks required permission</td>
+<td>Insufficient permissions, tenant mismatch</td>
+</tr>
+<tr>
+<td><strong>404 Not Found</strong></td>
+<td>Resource does not exist</td>
+<td>Invalid ID, deleted resource</td>
+</tr>
+<tr>
+<td><strong>409 Conflict</strong></td>
+<td>Request conflicts with current state</td>
+<td>Duplicate entry, concurrent modification</td>
+</tr>
+<tr>
+<td><strong>422 Unprocessable Entity</strong></td>
+<td>Validation error</td>
+<td>Business rule violation</td>
+</tr>
+<tr>
+<td><strong>429 Too Many Requests</strong></td>
+<td>Rate limit exceeded</td>
+<td>Too many requests in time window</td>
+</tr>
+</tbody></table>
+<h3>Server Error Codes (5xx)</h3>
+<table>
+<thead>
+<tr>
+<th>Status Code</th>
+<th>Description</th>
+<th>Common Causes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>500 Internal Server Error</strong></td>
+<td>Unexpected server error</td>
+<td>Unhandled exception, database error</td>
+</tr>
+<tr>
+<td><strong>503 Service Unavailable</strong></td>
+<td>Service temporarily unavailable</td>
+<td>Maintenance, overload</td>
+</tr>
+</tbody></table>
+<h2>Error Code Catalog</h2>
+<h3>Authentication &amp; Authorization Errors (AUTH-xxx)</h3>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>HTTP Status</th>
+<th>Message</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AUTH-001</strong></td>
+<td>401</td>
+<td>Invalid credentials</td>
+<td>Wrong username/password</td>
+<td>Verify credentials</td>
+</tr>
+<tr>
+<td><strong>AUTH-002</strong></td>
+<td>401</td>
+<td>Token expired</td>
+<td>JWT token expired</td>
+<td>Refresh token or re-login</td>
+</tr>
+<tr>
+<td><strong>AUTH-003</strong></td>
+<td>401</td>
+<td>Invalid token</td>
+<td>Malformed or tampered token</td>
+<td>Obtain new token</td>
+</tr>
+<tr>
+<td><strong>AUTH-004</strong></td>
+<td>401</td>
+<td>Token missing</td>
+<td>No Authorization header</td>
+<td>Include Bearer token</td>
+</tr>
+<tr>
+<td><strong>AUTH-005</strong></td>
+<td>403</td>
+<td>Insufficient permissions</td>
+<td>User lacks required permission</td>
+<td>Request permission from admin</td>
+</tr>
+<tr>
+<td><strong>AUTH-006</strong></td>
+<td>403</td>
+<td>Tenant mismatch</td>
+<td>Resource belongs to different tenant</td>
+<td>Switch tenant or verify access</td>
+</tr>
+<tr>
+<td><strong>AUTH-007</strong></td>
+<td>401</td>
+<td>Account locked</td>
+<td>Too many failed login attempts</td>
+<td>Contact administrator</td>
+</tr>
+<tr>
+<td><strong>AUTH-008</strong></td>
+<td>401</td>
+<td>Account disabled</td>
+<td>User account is disabled</td>
+<td>Contact administrator</td>
+</tr>
+<tr>
+<td><strong>AUTH-009</strong></td>
+<td>401</td>
+<td>Invalid refresh token</td>
+<td>Refresh token expired or invalid</td>
+<td>Re-login required</td>
+</tr>
+</tbody></table>
+<p><strong>Example Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;AUTH-005&quot;,
+  &quot;message&quot;: &quot;Insufficient permissions to perform this action&quot;,
+  &quot;details&quot;: &quot;Required permission: AP.Invoice.Approve&quot;,
+  &quot;requiredPermission&quot;: &quot;AP.Invoice.Approve&quot;,
+  &quot;userPermissions&quot;: [&quot;AP.Invoice.View&quot;, &quot;AP.Invoice.Create&quot;],
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/approve/12345&quot;
+}</code></pre><h3>Validation Errors (VAL-xxx)</h3>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>HTTP Status</th>
+<th>Message</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>VAL-001</strong></td>
+<td>400</td>
+<td>Required field missing</td>
+<td>Required field not provided</td>
+<td>Provide required field</td>
+</tr>
+<tr>
+<td><strong>VAL-002</strong></td>
+<td>422</td>
+<td>Invalid field value</td>
+<td>Field value doesn&#39;t meet criteria</td>
+<td>Correct field value</td>
+</tr>
+<tr>
+<td><strong>VAL-003</strong></td>
+<td>422</td>
+<td>Invalid date range</td>
+<td>Date range invalid</td>
+<td>Correct date range</td>
+</tr>
+<tr>
+<td><strong>VAL-004</strong></td>
+<td>422</td>
+<td>Amount exceeds limit</td>
+<td>Amount exceeds maximum</td>
+<td>Reduce amount or request approval</td>
+</tr>
+<tr>
+<td><strong>VAL-005</strong></td>
+<td>422</td>
+<td>Duplicate entry</td>
+<td>Record already exists</td>
+<td>Use different identifier</td>
+</tr>
+<tr>
+<td><strong>VAL-006</strong></td>
+<td>422</td>
+<td>Invalid format</td>
+<td>Field format incorrect</td>
+<td>Use correct format (e.g., email, phone)</td>
+</tr>
+<tr>
+<td><strong>VAL-007</strong></td>
+<td>422</td>
+<td>Value out of range</td>
+<td>Numeric value out of acceptable range</td>
+<td>Provide value within range</td>
+</tr>
+<tr>
+<td><strong>VAL-008</strong></td>
+<td>422</td>
+<td>Invalid reference</td>
+<td>Referenced entity doesn&#39;t exist</td>
+<td>Verify referenced ID</td>
+</tr>
+</tbody></table>
+<p><strong>Example Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;VAL-001&quot;,
+  &quot;message&quot;: &quot;Validation failed: Required fields are missing&quot;,
+  &quot;details&quot;: {
+    &quot;errors&quot;: [
+      {
+        &quot;field&quot;: &quot;invoiceNumber&quot;,
+        &quot;message&quot;: &quot;Invoice number is required&quot;,
+        &quot;code&quot;: &quot;REQUIRED&quot;
+      },
+      {
+        &quot;field&quot;: &quot;invoiceDate&quot;,
+        &quot;message&quot;: &quot;Invoice date is required&quot;,
+        &quot;code&quot;: &quot;REQUIRED&quot;
+      },
+      {
+        &quot;field&quot;: &quot;vendorCode&quot;,
+        &quot;message&quot;: &quot;Vendor code is required&quot;,
+        &quot;code&quot;: &quot;REQUIRED&quot;
+      }
+    ]
+  },
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/create&quot;
+}</code></pre><h3>Business Rule Errors (BUS-xxx)</h3>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>HTTP Status</th>
+<th>Message</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>BUS-001</strong></td>
+<td>422</td>
+<td>Period closed</td>
+<td>GL period is closed</td>
+<td>Change date or reopen period</td>
+</tr>
+<tr>
+<td><strong>BUS-002</strong></td>
+<td>422</td>
+<td>Insufficient balance</td>
+<td>Insufficient funds or budget</td>
+<td>Increase budget or reduce amount</td>
+</tr>
+<tr>
+<td><strong>BUS-003</strong></td>
+<td>422</td>
+<td>Credit limit exceeded</td>
+<td>Customer credit limit exceeded</td>
+<td>Increase limit or split transaction</td>
+</tr>
+<tr>
+<td><strong>BUS-004</strong></td>
+<td>422</td>
+<td>Invoice already paid</td>
+<td>Invoice status doesn&#39;t allow action</td>
+<td>Verify invoice status</td>
+</tr>
+<tr>
+<td><strong>BUS-005</strong></td>
+<td>422</td>
+<td>Duplicate invoice number</td>
+<td>Invoice number already exists</td>
+<td>Use different invoice number</td>
+</tr>
+<tr>
+<td><strong>BUS-006</strong></td>
+<td>422</td>
+<td>Approval required</td>
+<td>Transaction requires approval</td>
+<td>Submit for approval first</td>
+</tr>
+<tr>
+<td><strong>BUS-007</strong></td>
+<td>422</td>
+<td>Invalid status transition</td>
+<td>Status change not allowed</td>
+<td>Verify workflow rules</td>
+</tr>
+<tr>
+<td><strong>BUS-008</strong></td>
+<td>422</td>
+<td>Outstanding items exist</td>
+<td>Cannot proceed with outstanding items</td>
+<td>Resolve outstanding items first</td>
+</tr>
+<tr>
+<td><strong>BUS-009</strong></td>
+<td>422</td>
+<td>Vendor inactive</td>
+<td>Vendor is not active</td>
+<td>Activate vendor or select different vendor</td>
+</tr>
+<tr>
+<td><strong>BUS-010</strong></td>
+<td>422</td>
+<td>Asset not found</td>
+<td>Asset doesn&#39;t exist or disposed</td>
+<td>Verify asset code</td>
+</tr>
+</tbody></table>
+<p><strong>Example Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;BUS-001&quot;,
+  &quot;message&quot;: &quot;Cannot post transaction: GL period is closed&quot;,
+  &quot;details&quot;: &quot;Period 2025-09 is closed. Please change transaction date to current period or request period reopening.&quot;,
+  &quot;periodCode&quot;: &quot;2025-09&quot;,
+  &quot;periodStatus&quot;: &quot;Closed&quot;,
+  &quot;closedDate&quot;: &quot;2025-10-05T18:00:00Z&quot;,
+  &quot;currentPeriod&quot;: &quot;2025-10&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/post/12345&quot;
+}</code></pre><h3>Resource Errors (RES-xxx)</h3>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>HTTP Status</th>
+<th>Message</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RES-001</strong></td>
+<td>404</td>
+<td>Resource not found</td>
+<td>ID doesn&#39;t exist</td>
+<td>Verify ID is correct</td>
+</tr>
+<tr>
+<td><strong>RES-002</strong></td>
+<td>404</td>
+<td>Endpoint not found</td>
+<td>Invalid URL path</td>
+<td>Check API documentation</td>
+</tr>
+<tr>
+<td><strong>RES-003</strong></td>
+<td>409</td>
+<td>Resource already exists</td>
+<td>Duplicate creation attempt</td>
+<td>Update existing resource</td>
+</tr>
+<tr>
+<td><strong>RES-004</strong></td>
+<td>409</td>
+<td>Concurrent modification</td>
+<td>Resource modified by another user</td>
+<td>Refresh and retry</td>
+</tr>
+<tr>
+<td><strong>RES-005</strong></td>
+<td>410</td>
+<td>Resource deleted</td>
+<td>Resource was soft/hard deleted</td>
+<td>Cannot be recovered</td>
+</tr>
+</tbody></table>
+<p><strong>Example Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;RES-001&quot;,
+  &quot;message&quot;: &quot;Invoice not found&quot;,
+  &quot;details&quot;: &quot;Invoice with ID 99999 does not exist or you don&#039;t have permission to access it&quot;,
+  &quot;requestedId&quot;: &quot;99999&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/99999&quot;
+}</code></pre><h3>Rate Limiting Errors (RATE-xxx)</h3>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>HTTP Status</th>
+<th>Message</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RATE-001</strong></td>
+<td>429</td>
+<td>Rate limit exceeded</td>
+<td>Too many requests</td>
+<td>Wait before retrying</td>
+</tr>
+<tr>
+<td><strong>RATE-002</strong></td>
+<td>429</td>
+<td>Quota exceeded</td>
+<td>Daily/monthly quota exceeded</td>
+<td>Wait for quota reset</td>
+</tr>
+</tbody></table>
+<p><strong>Example Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;RATE-001&quot;,
+  &quot;message&quot;: &quot;Rate limit exceeded. Please try again later.&quot;,
+  &quot;details&quot;: &quot;You have exceeded the rate limit of 100 requests per minute&quot;,
+  &quot;rateLimit&quot;: {
+    &quot;limit&quot;: 100,
+    &quot;remaining&quot;: 0,
+    &quot;resetTime&quot;: &quot;2025-10-06T10:31:00Z&quot;
+  },
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/list&quot;
+}</code></pre><h3>Server Errors (SRV-xxx)</h3>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>HTTP Status</th>
+<th>Message</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SRV-001</strong></td>
+<td>500</td>
+<td>Internal server error</td>
+<td>Unhandled exception</td>
+<td>Contact support with traceId</td>
+</tr>
+<tr>
+<td><strong>SRV-002</strong></td>
+<td>503</td>
+<td>Service unavailable</td>
+<td>System maintenance</td>
+<td>Retry after maintenance window</td>
+</tr>
+<tr>
+<td><strong>SRV-003</strong></td>
+<td>500</td>
+<td>Database error</td>
+<td>Database connection or query error</td>
+<td>Contact support</td>
+</tr>
+<tr>
+<td><strong>SRV-004</strong></td>
+<td>500</td>
+<td>External service error</td>
+<td>Third-party service failure</td>
+<td>Retry or contact support</td>
+</tr>
+</tbody></table>
+<p><strong>Example Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;SRV-001&quot;,
+  &quot;message&quot;: &quot;An unexpected error occurred. Please contact support.&quot;,
+  &quot;details&quot;: &quot;Error ID: abc-123-def-456&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;path&quot;: &quot;/api/ap/invoice/create&quot;
+}</code></pre><h2>Error Handling Best Practices</h2>
+<h3>Client-Side Error Handling</h3>
+<pre><code class="language-typescript">async function createInvoice(invoiceData: Invoice): Promise&lt;Invoice&gt; {
+    try {
+        const response = await fetch(&#039;/api/ap/invoice/create&#039;, {
+            method: &#039;POST&#039;,
+            headers: {
+                &#039;Content-Type&#039;: &#039;application/json&#039;,
+                &#039;Authorization&#039;: `Bearer ${token}`
+            },
+            body: JSON.stringify(invoiceData)
+        });
+
+        // Check HTTP status
+        if (!response.ok) {
+            const error = await response.json();
+
+            // Handle different error codes
+            switch (error.code) {
+                case &#039;AUTH-002&#039;: // Token expired
+                    await refreshToken();
+                    return createInvoice(invoiceData); // Retry
+
+                case &#039;AUTH-005&#039;: // Insufficient permissions
+                    throw new PermissionError(error.message, error.requiredPermission);
+
+                case &#039;VAL-001&#039;: // Validation error
+                    throw new ValidationError(error.details.errors);
+
+                case &#039;BUS-001&#039;: // Period closed
+                    throw new BusinessRuleError(error.message, error.details);
+
+                case &#039;RES-004&#039;: // Concurrent modification
+                    const retry = confirm(&#039;Data has changed. Refresh and retry?&#039;);
+                    if (retry) {
+                        // Reload data and retry
+                        const latestData = await getInvoice(invoiceData.id);
+                        return createInvoice({ ...latestData, ...invoiceData });
+                    }
+                    throw new ConcurrentModificationError(error.message);
+
+                case &#039;RATE-001&#039;: // Rate limit
+                    const resetTime = new Date(error.rateLimit.resetTime);
+                    const waitMs = resetTime.getTime() - Date.now();
+                    await new Promise(resolve =&gt; setTimeout(resolve, waitMs));
+                    return createInvoice(invoiceData); // Retry after wait
+
+                default:
+                    throw new ApiError(error.code, error.message);
+            }
+        }
+
+        return await response.json();
+
+    } catch (error) {
+        if (error instanceof NetworkError) {
+            // Network connectivity issue
+            console.error(&#039;Network error:&#039;, error);
+            throw new Error(&#039;Network connection failed. Please check your internet connection.&#039;);
+        }
+
+        throw error;
+    }
+}</code></pre><h3>Retry Logic</h3>
+<pre><code class="language-typescript">async function retryWithBackoff&lt;T&gt;(
+    fn: () =&gt; Promise&lt;T&gt;,
+    maxRetries: number = 3,
+    initialDelay: number = 1000
+): Promise&lt;T&gt; {
+    let lastError: Error;
+
+    for (let attempt = 0; attempt &lt; maxRetries; attempt++) {
+        try {
+            return await fn();
+        } catch (error) {
+            lastError = error;
+
+            // Don&#039;t retry on client errors (4xx) except 429
+            if (error.statusCode &gt;= 400 &amp;&amp; error.statusCode &lt; 500 &amp;&amp; error.statusCode !== 429) {
+                throw error;
+            }
+
+            // Exponential backoff
+            const delay = initialDelay * Math.pow(2, attempt);
+            console.log(`Retry attempt ${attempt + 1} after ${delay}ms`);
+            await new Promise(resolve =&gt; setTimeout(resolve, delay));
+        }
+    }
+
+    throw lastError;
+}
+
+// Usage
+const invoice = await retryWithBackoff(() =&gt; createInvoice(invoiceData));</code></pre><h3>Validation Error Display</h3>
+<pre><code class="language-typescript">interface ValidationError {
+    field: string;
+    message: string;
+    code: string;
+}
+
+function displayValidationErrors(errors: ValidationError[]) {
+    errors.forEach(error =&gt; {
+        // Find form field
+        const field = document.querySelector(`[name=&quot;${error.field}&quot;]`);
+
+        if (field) {
+            // Add error class
+            field.classList.add(&#039;error&#039;);
+
+            // Display error message
+            const errorElement = document.createElement(&#039;span&#039;);
+            errorElement.className = &#039;error-message&#039;;
+            errorElement.textContent = error.message;
+            field.parentElement.appendChild(errorElement);
+        }
+    });
+}</code></pre><h2>Debugging Errors</h2>
+<h3>Using Trace ID</h3>
+<p>Every error response includes a unique <code>traceId</code> that can be used to track the request in server logs.</p>
+<p><strong>Support Request Template</strong>:</p>
+<pre><code class="language-text">Issue: Unable to create AP Invoice
+Error Code: BUS-001
+Trace ID: abc-123-def-456
+Timestamp: 2025-10-06T10:30:00Z
+User: john.doe@company.com
+Tenant: TENANT001
+
+Description: When attempting to create an invoice for October 5th,
+I receive a &quot;Period closed&quot; error. The period close date was October 5th
+at 6PM, but I&#039;m trying to create an invoice dated October 5th at 2PM.
+
+Expected: Invoice should be created as the invoice date is before period close.
+Actual: Received error &quot;Period closed&quot;.</code></pre><h3>Enable Debug Mode</h3>
+<p>For development/testing environments:</p>
+<pre><code class="language-http">POST /api/ap/invoice/create HTTP/1.1
+X-Debug: true</code></pre><p>Response includes additional debugging information:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;BUS-001&quot;,
+  &quot;message&quot;: &quot;Period closed&quot;,
+  &quot;debug&quot;: {
+    &quot;stackTrace&quot;: &quot;...&quot;,
+    &quot;sqlQuery&quot;: &quot;...&quot;,
+    &quot;executionTime&quot;: &quot;125ms&quot;,
+    &quot;memoryUsage&quot;: &quot;45MB&quot;
+  }
+}</code></pre><h2>Common Error Scenarios</h2>
+<h3>Scenario 1: Creating Invoice in Closed Period</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-json">POST /api/ap/invoice/create
+{
+  &quot;invoiceDate&quot;: &quot;2025-09-30&quot;,
+  &quot;vendorCode&quot;: &quot;V001&quot;,
+  &quot;amount&quot;: 1000
+}</code></pre><p><strong>Error Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;BUS-001&quot;,
+  &quot;message&quot;: &quot;Cannot create invoice: GL period 2025-09 is closed&quot;,
+  &quot;details&quot;: &quot;Change invoice date to current period (2025-10) or request period reopening from your Controller&quot;,
+  &quot;periodCode&quot;: &quot;2025-09&quot;,
+  &quot;periodStatus&quot;: &quot;Closed&quot;,
+  &quot;currentPeriod&quot;: &quot;2025-10&quot;
+}</code></pre><p><strong>Resolution</strong>: Change <code>invoiceDate</code> to &quot;2025-10-01&quot; or later</p>
+<h3>Scenario 2: Duplicate Invoice Number</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-json">POST /api/ap/invoice/create
+{
+  &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+  &quot;vendorCode&quot;: &quot;V001&quot;
+}</code></pre><p><strong>Error Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;BUS-005&quot;,
+  &quot;message&quot;: &quot;Duplicate invoice number&quot;,
+  &quot;details&quot;: &quot;Invoice number INV-2025-001 already exists for vendor V001&quot;,
+  &quot;existingInvoiceId&quot;: &quot;12345&quot;,
+  &quot;field&quot;: &quot;invoiceNumber&quot;
+}</code></pre><p><strong>Resolution</strong>: Use a different invoice number or verify the existing invoice</p>
+<h3>Scenario 3: Insufficient Permissions</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-http">POST /api/ap/invoice/approve/12345</code></pre><p><strong>Error Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;AUTH-005&quot;,
+  &quot;message&quot;: &quot;Insufficient permissions&quot;,
+  &quot;details&quot;: &quot;You need &#039;AP.Invoice.Approve&#039; permission to approve invoices&quot;,
+  &quot;requiredPermission&quot;: &quot;AP.Invoice.Approve&quot;,
+  &quot;userPermissions&quot;: [&quot;AP.Invoice.View&quot;, &quot;AP.Invoice.Create&quot;]
+}</code></pre><p><strong>Resolution</strong>: Request approval permission from administrator</p>
+<h2>Error Monitoring</h2>
+<h3>Logging Errors</h3>
+<p>Log all API errors for monitoring and analysis:</p>
+<pre><code class="language-typescript">function logApiError(error: ApiError) {
+    const logEntry = {
+        timestamp: new Date().toISOString(),
+        errorCode: error.code,
+        message: error.message,
+        traceId: error.traceId,
+        path: error.path,
+        user: getCurrentUser(),
+        tenant: getCurrentTenant()
+    };
+
+    // Send to logging service
+    logger.error(&#039;API Error&#039;, logEntry);
+
+    // Send to analytics
+    analytics.track(&#039;api_error&#039;, logEntry);
+}</code></pre><h3>Error Rate Monitoring</h3>
+<p>Monitor error rates to identify issues:</p>
+<ul>
+<li>Authentication errors spike → Possible token expiry issue</li>
+<li>Validation errors spike → UI validation issue</li>
+<li>Business rule errors → Training or process issue</li>
+<li>500 errors → Server-side bug requiring investigation</li>
+</ul>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 4 - API &amp; Integration Documentation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Functional Requirements - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Functional Requirements</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Functional Requirements</h1>
+<p><strong>Document Version</strong>: 2.0 (Corrected)<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 5 - Business Analyst Documentation (Verified Against Source Code)<br><strong>Target Audience</strong>: Business Analysts, Product Owners, QA Team</p>
+<blockquote>
+<p><strong>IMPORTANT NOTICE</strong>: This document has been corrected to reflect the actual implementation in the source code. The AP module does NOT implement Purchase Order Management, Goods Receiving, or Three-Way Matching functionality. These features were removed from this version to accurately represent the current system capabilities.</p>
+</blockquote>
+<hr>
+<h2>Overview</h2>
+<p>This document defines the functional requirements for the Carmen.NET ERP system, organized by module. Each requirement includes user stories, acceptance criteria, business rules, and API endpoints.</p>
+<p><strong>System Scope</strong>: Multi-tenant financial ERP with 11 core modules serving small to medium businesses in Thailand.</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#accounts-payable-ap">Accounts Payable (AP)</a></li>
+<li><a href="#accounts-receivable-ar">Accounts Receivable (AR)</a></li>
+<li><a href="#general-ledger-gl">General Ledger (GL)</a></li>
+<li><a href="#asset-management">Asset Management</a></li>
+<li><a href="#income-module">Income Module</a></li>
+<li><a href="#tax-management">Tax Management</a></li>
+<li><a href="#bank-management">Bank Management</a></li>
+<li><a href="#master-data-management">Master Data Management</a></li>
+</ol>
+<hr>
+<h2>Accounts Payable (AP)</h2>
+<p><strong>Module Purpose</strong>: Manage vendor relationships, expense invoices, and payments.</p>
+<h3>FR-AP-001: Vendor Management</h3>
+<p><strong>User Story</strong>: As an AP Clerk, I want to maintain vendor master data so that I can process invoices and payments.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Vendor</strong> (FR-AP-001.1)</p>
+<ul>
+<li>System shall allow creating new vendors with required fields</li>
+<li>System shall auto-generate vendor code if not provided</li>
+<li>System shall validate unique vendor code within tenant</li>
+<li>System shall support multiple contact persons per vendor</li>
+<li>System shall record vendor credit terms (NET 30, NET 60, etc.)</li>
+</ul>
+</li>
+<li><p><strong>Update Vendor</strong> (FR-AP-001.2)</p>
+<ul>
+<li>System shall allow updating vendor information</li>
+<li>System shall validate vendor code uniqueness on update</li>
+<li>System shall maintain audit history of all changes</li>
+</ul>
+</li>
+<li><p><strong>Vendor Status</strong> (FR-AP-001.3)</p>
+<ul>
+<li>System shall support vendor statuses: Active, Inactive, Blocked</li>
+<li>System shall prevent transactions with Inactive/Blocked vendors</li>
+<li>System shall require approval for vendor reactivation</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am an AP Clerk with &quot;AP.Vendor.Create&quot; permission
+When I submit a new vendor with all required fields
+Then the vendor is created successfully
+And the vendor code is auto-generated if not provided
+And the vendor status is set to &quot;Pending Approval&quot;</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AP-001: Vendor code must be unique within tenant</li>
+<li>BR-AP-002: Vendor name is required (max 200 characters)</li>
+<li>BR-AP-003: Tax ID is required for Thai vendors</li>
+<li>BR-AP-004: Payment terms default to NET 30 if not specified</li>
+<li>BR-AP-005: Blocked vendors cannot have new transactions</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/ap/vendor/create
+GET    /api/ap/vendor/list
+GET    /api/ap/vendor/{id}
+PUT    /api/ap/vendor/{id}/update
+DELETE /api/ap/ap/vendor/{id}
+POST   /api/ap/vendor/{id}/approve
+POST   /api/ap/vendor/{id}/block</code></pre><p><strong>Data Model</strong>:</p>
+<pre><code class="language-typescript">interface Vendor {
+  id: number;
+  tenantCode: string;
+  vendorCode: string;
+  vendorName: string;
+  taxId: string;
+  address: string;
+  contactPerson: string;
+  phone: string;
+  email: string;
+  paymentTerms: string;  // NET15, NET30, NET60, NET90
+  creditLimit: number;
+  status: &#039;Active&#039; | &#039;Inactive&#039; | &#039;Blocked&#039;;
+}</code></pre><hr>
+<h3>FR-AP-004: Invoice Processing</h3>
+<p><strong>User Story</strong>: As an AP Clerk, I want to process vendor expense invoices so that payments are accurate and authorized.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Invoice Entry</strong> (FR-AP-004.1)</p>
+<ul>
+<li>System shall allow manual invoice entry</li>
+<li>System shall allow invoice import from Excel/CSV</li>
+<li>System shall auto-generate invoice number if not provided</li>
+<li>System shall calculate tax amounts (VAT, WHT) automatically</li>
+<li>System shall support direct expense invoices (non-PO based)</li>
+<li>System shall validate vendor is Active before allowing invoice creation</li>
+</ul>
+</li>
+<li><p><strong>Tax Calculations</strong> (FR-AP-004.2)</p>
+<ul>
+<li>System shall calculate VAT at 7% (Thailand standard rate)</li>
+<li>System shall support withholding tax (WHT) calculation:<ul>
+<li>3% for services</li>
+<li>5% for professional fees</li>
+<li>10% for dividends</li>
+<li>15% for interest</li>
+</ul>
+</li>
+<li>System shall calculate net amount: Invoice Amount + VAT - WHT</li>
+<li>System shall validate tax calculations before saving</li>
+</ul>
+</li>
+<li><p><strong>Invoice Approval Workflow</strong> (FR-AP-004.3)</p>
+<ul>
+<li>System shall route invoice based on amount:<ul>
+<li>$0-$1,000: Optional approval</li>
+<li>$1,001-$10,000: Supervisor approval</li>
+<li>$10,001-$50,000: Manager approval</li>
+<li>$50,001-$250,000: Controller approval</li>
+<li>$250,001+: Finance Director + CEO approval</li>
+</ul>
+</li>
+<li>System shall enforce approval before posting</li>
+<li>System shall allow rejection with comments</li>
+<li>System shall notify approvers via email</li>
+</ul>
+</li>
+<li><p><strong>Invoice Status</strong> (FR-AP-004.4)</p>
+<ul>
+<li>System shall support statuses:<ul>
+<li>Draft: Initial entry</li>
+<li>Pending Approval: Awaiting approval</li>
+<li>Approved: Approved for payment</li>
+<li>Rejected: Rejected with reason</li>
+<li>Posted: Posted to GL</li>
+<li>Partially Paid: Some payment made</li>
+<li>Fully Paid: Completely paid</li>
+<li>Cancelled: Cancelled invoice</li>
+</ul>
+</li>
+<li>System shall prevent status changes that violate workflow rules</li>
+<li>System shall update status automatically when payments applied</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am an AP Clerk with &quot;AP.Invoice.Create&quot; permission
+When I create a direct expense invoice for $15,000 with 7% VAT and 3% WHT
+Then the system calculates VAT = $1,050
+And calculates WHT = $450
+And calculates net amount = $15,600 ($15,000 + $1,050 - $450)
+And the invoice is created with status &quot;Draft&quot;
+When I submit for approval
+Then the invoice routes to AP Manager (amount $10K-$50K)
+And when AP Manager approves
+Then the status changes to &quot;Approved&quot;</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AP-030: Invoice number must be unique per vendor within tenant</li>
+<li>BR-AP-031: Invoice date cannot be in the future</li>
+<li>BR-AP-032: Due date must be ≥ invoice date</li>
+<li>BR-AP-033: Invoice amount must equal sum of line amounts + tax - WHT</li>
+<li>BR-AP-034: VAT rate is 7% (Thailand standard)</li>
+<li>BR-AP-035: WHT rates: 3% (services), 5% (professional), 10% (dividends), 15% (interest)</li>
+<li>BR-AP-036: Posted invoices cannot be modified</li>
+<li>BR-AP-037: Only approved invoices can be posted to GL</li>
+<li>BR-AP-038: Vendor must be Active to create invoices</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/ap/invoice/create
+POST   /api/ap/invoice/import
+GET    /api/ap/invoice/list
+GET    /api/ap/invoice/{id}
+PUT    /api/ap/invoice/{id}/update
+POST   /api/ap/invoice/{id}/submit
+POST   /api/ap/invoice/{id}/approve
+POST   /api/ap/invoice/{id}/reject
+POST   /api/ap/invoice/{id}/post
+POST   /api/ap/invoice/{id}/cancel</code></pre><p><strong>Data Model</strong>:</p>
+<pre><code class="language-typescript">interface APInvoice {
+  id: number;
+  tenantCode: string;
+  invoiceNumber: string;
+  invoiceDate: Date;
+  dueDate: Date;
+  vendorId: number;
+  vendorCode: string;
+  vendorName: string;
+  description: string;
+  subtotal: number;
+  vatAmount: number;
+  vatRate: number;  // Default: 7%
+  whtAmount: number;
+  whtRate: number;  // 3%, 5%, 10%, 15%
+  totalAmount: number;
+  status: &#039;Draft&#039; | &#039;Pending Approval&#039; | &#039;Approved&#039; | &#039;Rejected&#039; | &#039;Posted&#039; | &#039;Partially Paid&#039; | &#039;Fully Paid&#039; | &#039;Cancelled&#039;;
+  createdBy: string;
+  approvedBy: string;
+  approvedDate: Date;
+}</code></pre><hr>
+<h3>FR-AP-005: Payment Processing</h3>
+<p><strong>User Story</strong>: As an AP Clerk, I want to process vendor payments so that invoices are paid on time and cash flow is managed.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Payment Creation</strong> (FR-AP-005.1)</p>
+<ul>
+<li>System shall allow selecting invoices for payment</li>
+<li>System shall filter invoices by due date, vendor, amount</li>
+<li>System shall calculate payment amount (invoice - WHT)</li>
+<li>System shall support payment methods:<ul>
+<li>Check: Physical check</li>
+<li>Wire: Bank wire transfer</li>
+<li>ACH: Electronic transfer</li>
+</ul>
+</li>
+<li>System shall auto-generate payment number (PAY-YYYY-NNNN)</li>
+</ul>
+</li>
+<li><p><strong>Payment Approval</strong> (FR-AP-005.2)</p>
+<ul>
+<li>System shall route payment for approval based on amount:<ul>
+<li>$0-$5,000: Supervisor approval</li>
+<li>$5,001-$25,000: Manager approval</li>
+<li>$25,001-$100,000: Controller approval</li>
+<li>$100,001+: Finance Director approval</li>
+</ul>
+</li>
+<li>System shall require dual approval for &gt;$100K</li>
+</ul>
+</li>
+<li><p><strong>Payment Posting</strong> (FR-AP-005.3)</p>
+<ul>
+<li>System shall post payment to GL when approved:<ul>
+<li>DR: Accounts Payable</li>
+<li>CR: Cash/Bank</li>
+</ul>
+</li>
+<li>System shall update invoice status to Partially/Fully Paid</li>
+<li>System shall create WHT certificate if applicable</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I have approved invoices totaling $30,000
+When I create a payment for these invoices
+Then the payment is created with status &quot;Draft&quot;
+And the payment amount is calculated as invoice amount - WHT
+When I submit for approval
+Then the payment routes to Controller (amount $25K-$100K)</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AP-040: Payment can only be made for Approved or Posted invoices</li>
+<li>BR-AP-041: Payment date must be ≥ invoice date</li>
+<li>BR-AP-042: Payment amount cannot exceed outstanding invoice amount</li>
+<li>BR-AP-043: WHT is deducted from payment amount</li>
+<li>BR-AP-044: Posted payments cannot be deleted (only reversed)</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/ap/payment/create
+GET    /api/ap/payment/list
+GET    /api/ap/payment/{id}
+PUT    /api/ap/payment/{id}/update
+POST   /api/ap/payment/{id}/submit
+POST   /api/ap/payment/{id}/approve
+POST   /api/ap/payment/{id}/post
+POST   /api/ap/payment/{id}/void
+GET    /api/ap/payment/due-invoices</code></pre><hr>
+<h2>Accounts Receivable (AR)</h2>
+<p><strong>Module Purpose</strong>: Manage customer relationships, contracts, invoicing, receipts, and credit control.</p>
+<h3>FR-AR-001: Customer Management</h3>
+<p><strong>User Story</strong>: As an AR Clerk, I want to maintain customer master data so that I can process sales and receipts.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Customer</strong> (FR-AR-001.1)</p>
+<ul>
+<li>System shall allow creating customers with required fields</li>
+<li>System shall auto-generate customer code if not provided</li>
+<li>System shall support multiple billing/shipping addresses</li>
+<li>System shall set credit limit and payment terms</li>
+<li>System shall require credit approval for new customers</li>
+</ul>
+</li>
+<li><p><strong>Credit Management</strong> (FR-AR-001.2)</p>
+<ul>
+<li>System shall track customer credit limit</li>
+<li>System shall track outstanding receivables</li>
+<li>System shall calculate available credit (limit - outstanding)</li>
+<li>System shall block orders exceeding credit limit</li>
+<li>System shall alert when credit utilization &gt;80%</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am an AR Clerk with &quot;AR.Customer.Create&quot; permission
+When I create a customer with credit limit $50,000
+Then the customer is created with status &quot;Pending Approval&quot;
+And the available credit is $50,000</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AR-001: Customer code must be unique within tenant</li>
+<li>BR-AR-002: Credit limit must be approved by AR Manager</li>
+<li>BR-AR-003: New invoices blocked if customer exceeds credit limit</li>
+<li>BR-AR-004: Payment terms default to NET 30</li>
+</ul>
+<hr>
+<h3>FR-AR-002: Contract Management</h3>
+<p><strong>User Story</strong>: As an AR Clerk, I want to create recurring billing contracts so that customers are invoiced automatically.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Contract</strong> (FR-AR-002.1)</p>
+<ul>
+<li>System shall allow creating contracts with:<ul>
+<li>Contract number (auto-generated)</li>
+<li>Customer</li>
+<li>Start and end dates</li>
+<li>Billing frequency (Monthly, Quarterly, Annually)</li>
+<li>Amount per period</li>
+<li>Auto-renewal option</li>
+</ul>
+</li>
+<li>System shall validate contract dates</li>
+</ul>
+</li>
+<li><p><strong>Contract Activation</strong> (FR-AR-002.2)</p>
+<ul>
+<li>System shall require approval before activation</li>
+<li>System shall validate customer credit limit</li>
+<li>System shall schedule invoice generation dates</li>
+</ul>
+</li>
+<li><p><strong>Auto-Invoice Generation</strong> (FR-AR-002.3)</p>
+<ul>
+<li>System shall generate invoices automatically per schedule</li>
+<li>System shall create draft invoice 5 days before due date</li>
+<li>System shall notify AR Clerk of generated invoices</li>
+<li>System shall handle pro-rata calculations for partial periods</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I have an active monthly contract for $10,000
+When the billing date arrives
+Then the system auto-generates an invoice
+And the invoice status is &quot;Draft&quot;
+And AR Clerk is notified via email</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AR-010: Contract number must be unique within tenant</li>
+<li>BR-AR-011: End date must be &gt; start date</li>
+<li>BR-AR-012: Contract cannot be activated if customer credit exceeded</li>
+<li>BR-AR-013: Auto-generated invoices inherit contract terms</li>
+</ul>
+<hr>
+<h3>FR-AR-003: Invoice Generation</h3>
+<p><strong>User Story</strong>: As an AR Clerk, I want to generate customer invoices so that revenue is recognized and customers are billed.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Invoice Creation</strong> (FR-AR-003.1)</p>
+<ul>
+<li>System shall allow creating invoices:<ul>
+<li>From contract (auto-generated)</li>
+<li>From sales order</li>
+<li>Manual entry</li>
+</ul>
+</li>
+<li>System shall auto-generate invoice number (AR-YYYY-NNNN)</li>
+<li>System shall calculate VAT (7%) automatically</li>
+<li>System shall validate customer credit limit before saving</li>
+</ul>
+</li>
+<li><p><strong>Invoice Approval</strong> (FR-AR-003.2)</p>
+<ul>
+<li>System shall route invoices for approval:<ul>
+<li>$0-$5,000: Optional approval</li>
+<li>$5,001-$25,000: Supervisor approval</li>
+<li>$25,001-$100,000: Manager approval</li>
+<li>$100,001+: Controller approval</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Invoice Posting</strong> (FR-AR-003.3)</p>
+<ul>
+<li>System shall post invoice to GL when approved:<ul>
+<li>DR: Accounts Receivable</li>
+<li>CR: Revenue</li>
+<li>CR: VAT Payable (if applicable)</li>
+</ul>
+</li>
+<li>System shall update customer outstanding balance</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am an AR Clerk with &quot;AR.Invoice.Create&quot; permission
+When I create an invoice for $20,000
+Then the invoice is created with 7% VAT = $1,400
+And total invoice amount is $21,400
+And the invoice status is &quot;Draft&quot;</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AR-020: Invoice number must be unique within tenant</li>
+<li>BR-AR-021: Invoice date cannot be in the future</li>
+<li>BR-AR-022: Due date = invoice date + payment terms</li>
+<li>BR-AR-023: VAT rate is 7% (Thailand standard)</li>
+<li>BR-AR-024: Posted invoices cannot be modified</li>
+<li>BR-AR-025: Credit check performed before posting</li>
+</ul>
+<hr>
+<h3>FR-AR-004: Receipt Processing</h3>
+<p><strong>User Story</strong>: As an AR Clerk, I want to record customer payments so that outstanding receivables are updated and cash is tracked.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Receipt Entry</strong> (FR-AR-004.1)</p>
+<ul>
+<li>System shall allow recording receipts</li>
+<li>System shall auto-generate receipt number (REC-YYYY-NNNN)</li>
+<li>System shall support payment methods:<ul>
+<li>Cash</li>
+<li>Check</li>
+<li>Bank Transfer</li>
+<li>Credit Card</li>
+</ul>
+</li>
+<li>System shall allow bank deposit recording</li>
+</ul>
+</li>
+<li><p><strong>Invoice Application</strong> (FR-AR-004.2)</p>
+<ul>
+<li>System shall apply receipts to outstanding invoices</li>
+<li>System shall support:<ul>
+<li>Full payment: Entire invoice paid</li>
+<li>Partial payment: Partial invoice paid</li>
+<li>Overpayment: Payment &gt; invoice (creates credit balance)</li>
+</ul>
+</li>
+<li>System shall apply FIFO (oldest invoice first) by default</li>
+<li>System shall allow manual invoice selection</li>
+</ul>
+</li>
+<li><p><strong>Receipt Posting</strong> (FR-AR-004.3)</p>
+<ul>
+<li>System shall post receipt to GL:<ul>
+<li>DR: Cash/Bank</li>
+<li>CR: Accounts Receivable</li>
+</ul>
+</li>
+<li>System shall update invoice status to Partially/Fully Paid</li>
+<li>System shall update customer outstanding balance</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I have outstanding invoices: $10,000 (INV-001) and $5,000 (INV-002)
+When I record a receipt for $12,000
+Then the system applies $10,000 to INV-001 (fully paid)
+And applies $2,000 to INV-002 (partially paid)
+And INV-002 outstanding balance is $3,000</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-AR-030: Receipt date must be ≥ invoice date</li>
+<li>BR-AR-031: Receipt amount must be &gt; 0</li>
+<li>BR-AR-032: Default application is FIFO (oldest first)</li>
+<li>BR-AR-033: Overpayment creates customer credit balance</li>
+<li>BR-AR-034: Check bounce reverses receipt and invoice payment</li>
+<li>BR-AR-035: Posted receipts cannot be deleted (only reversed)</li>
+</ul>
+<hr>
+<h2>General Ledger (GL)</h2>
+<p><strong>Module Purpose</strong>: Central financial hub for all accounting transactions, chart of accounts, period management, and financial reporting.</p>
+<h3>FR-GL-001: Chart of Accounts</h3>
+<p><strong>User Story</strong>: As a GL Manager, I want to maintain the chart of accounts so that all financial transactions are properly classified.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Account Structure</strong> (FR-GL-001.1)</p>
+<ul>
+<li>System shall use 10-digit account code: AAAA-BB-CC-DD<ul>
+<li>AAAA: Main account (4 digits)</li>
+<li>BB: Sub-account (2 digits)</li>
+<li>CC: Department (2 digits)</li>
+<li>DD: Project (2 digits)</li>
+</ul>
+</li>
+<li>System shall support account hierarchy:<ul>
+<li>Level 1: Account Type (Asset, Liability, Equity, Revenue, Expense)</li>
+<li>Level 2: Main Account (1000-9999)</li>
+<li>Level 3: Sub-account (01-99)</li>
+<li>Level 4: Dimensions (Dept, Project)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Account Properties</strong> (FR-GL-001.2)</p>
+<ul>
+<li>System shall define account properties:<ul>
+<li>Account code (unique identifier)</li>
+<li>Account name</li>
+<li>Account type (Asset, Liability, Equity, Revenue, Expense)</li>
+<li>Normal balance (Debit or Credit)</li>
+<li>Allow posting (Yes/No)</li>
+<li>Active status (Active/Inactive)</li>
+</ul>
+</li>
+<li>System shall prevent posting to inactive accounts</li>
+<li>System shall prevent posting to summary accounts</li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-GL-001: Account code must be unique within tenant</li>
+<li>BR-GL-002: Account type determines normal balance (Asset/Expense=DR, Liability/Equity/Revenue=CR)</li>
+<li>BR-GL-003: Summary accounts (parent) cannot accept postings</li>
+<li>BR-GL-004: Inactive accounts cannot accept new transactions</li>
+</ul>
+<hr>
+<h3>FR-GL-002: Journal Voucher (JV)</h3>
+<p><strong>User Story</strong>: As a GL Accountant, I want to create journal entries so that financial transactions are recorded in the general ledger.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>JV Entry</strong> (FR-GL-002.1)</p>
+<ul>
+<li>System shall allow creating journal vouchers</li>
+<li>System shall auto-generate JV number (JV-YYYY-NNNN)</li>
+<li>System shall require:<ul>
+<li>JV date</li>
+<li>Description</li>
+<li>At least 2 lines (debit and credit)</li>
+</ul>
+</li>
+<li>System shall validate:<ul>
+<li>Total debits = total credits (balanced entry)</li>
+<li>All accounts allow posting</li>
+<li>Period is open</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>JV Approval</strong> (FR-GL-002.2)</p>
+<ul>
+<li>System shall route JV for approval based on amount:<ul>
+<li>$0-$10,000: Supervisor approval</li>
+<li>$10,001-$50,000: Manager approval</li>
+<li>$50,001+: Controller approval</li>
+</ul>
+</li>
+<li>System shall allow rejection with comments</li>
+</ul>
+</li>
+<li><p><strong>JV Posting</strong> (FR-GL-002.3)</p>
+<ul>
+<li>System shall post approved JV to GL accounts</li>
+<li>System shall update account balances</li>
+<li>System shall prevent posting to closed periods</li>
+<li>System shall create audit trail</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am a GL Accountant with &quot;GL.JV.Create&quot; permission
+When I create a JV with DR: 5100 $1,000 and CR: 1100 $1,000
+Then the JV is balanced
+And the status is &quot;Draft&quot;
+When I submit for approval
+Then the status changes to &quot;Pending Approval&quot;</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-GL-010: JV must be balanced (total DR = total CR)</li>
+<li>BR-GL-011: JV date must be within open period</li>
+<li>BR-GL-012: Posted JVs cannot be modified (only reversed)</li>
+<li>BR-GL-013: Reversal JV must reference original JV</li>
+</ul>
+<hr>
+<h3>FR-GL-003: Period Management</h3>
+<p><strong>User Story</strong>: As a Controller, I want to manage accounting periods so that month-end close is controlled and financial reporting is accurate.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Period Definition</strong> (FR-GL-003.1)</p>
+<ul>
+<li>System shall define fiscal periods:<ul>
+<li>Fiscal year (e.g., 2025)</li>
+<li>Period number (1-12 for monthly)</li>
+<li>Period name (e.g., &quot;January 2025&quot;)</li>
+<li>Start and end dates</li>
+</ul>
+</li>
+<li>System shall support monthly and quarterly periods</li>
+</ul>
+</li>
+<li><p><strong>Period Status</strong> (FR-GL-003.2)</p>
+<ul>
+<li>System shall support period statuses:<ul>
+<li>Open: Transactions allowed</li>
+<li>Closing: Month-end close in progress</li>
+<li>Closed: No new transactions allowed</li>
+<li>Reopened: Temporarily reopened for adjustments</li>
+</ul>
+</li>
+<li>System shall prevent posting to Closed periods (except with override)</li>
+</ul>
+</li>
+<li><p><strong>Period Close Process</strong> (FR-GL-003.3)</p>
+<ul>
+<li>System shall execute period close workflow:<ol>
+<li>Validate all modules ready (AP, AR posted)</li>
+<li>Run depreciation (Asset module)</li>
+<li>Post allocation JVs</li>
+<li>Generate financial statements</li>
+<li>Close period</li>
+</ol>
+</li>
+<li>System shall create audit report of period close</li>
+<li>System shall allow reopen with approval</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given the current period is January 2025 (status: Open)
+When I initiate period close
+Then the system validates all transactions posted
+And runs month-end processing
+And changes period status to &quot;Closed&quot;
+And February 2025 period opens automatically</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-GL-020: Periods must be closed in sequential order</li>
+<li>BR-GL-021: Cannot close current period if prior period is open</li>
+<li>BR-GL-022: Period close requires Controller approval</li>
+<li>BR-GL-023: Reopen requires Finance Director approval</li>
+<li>BR-GL-024: Maximum 1 prior period can be reopened at a time</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">GET    /api/gl/period/list
+GET    /api/gl/period/current
+POST   /api/gl/period/{id}/close
+POST   /api/gl/period/{id}/reopen
+GET    /api/gl/period/{id}/close-status</code></pre><hr>
+<h2>Asset Management</h2>
+<p><strong>Module Purpose</strong>: Track fixed assets, depreciation, location changes, and disposal processes.</p>
+<p><strong>Full Documentation</strong>: See <a href="asset-income-requirements.md">Asset Management and Income Module Functional Requirements</a> for complete details.</p>
+<h3>Overview</h3>
+<p>The Asset Management module provides comprehensive fixed asset tracking including:</p>
+<ul>
+<li>Asset registration and lifecycle management</li>
+<li>Automatic depreciation calculations (Straight-Line and Declining Balance methods)</li>
+<li>Asset disposal tracking with gain/loss calculations</li>
+<li>Location and department tracking</li>
+<li>Master data management (categories, departments, locations)</li>
+</ul>
+<h3>Key Features (Summary)</h3>
+<p><strong>FR-ASSET-001: Asset Registration</strong></p>
+<ul>
+<li>Create, update, and track fixed assets</li>
+<li>Support for asset categories, departments, and locations</li>
+<li>Automatic asset code generation</li>
+<li>Copy existing assets</li>
+<li>Change asset locations</li>
+</ul>
+<p><strong>FR-ASSET-002: Asset Depreciation</strong></p>
+<ul>
+<li>Monthly depreciation calculations</li>
+<li>Support for multiple depreciation methods</li>
+<li>Depreciation history tracking</li>
+<li>Period close procedures</li>
+<li>Automatic GL posting</li>
+</ul>
+<p><strong>FR-ASSET-003: Asset Disposal</strong></p>
+<ul>
+<li>Record asset disposals (sale, scrap, trade-in, donation, lost)</li>
+<li>Calculate gain/loss on disposal</li>
+<li>Generate disposal journals</li>
+<li>Approval workflows for high-value disposals</li>
+</ul>
+<p><strong>FR-ASSET-004: Asset Master Data</strong></p>
+<ul>
+<li>Manage asset categories with GL account mapping</li>
+<li>Manage departments with cost center assignment</li>
+<li>Manage physical locations</li>
+<li>Track location history</li>
+</ul>
+<p><strong>Total API Endpoints</strong>: 41<br><strong>Status</strong>: ✅ 100% Implemented and Validated</p>
+<hr>
+<h2>Income Module</h2>
+<p><strong>Module Purpose</strong>: Manage income recognition, revenue codes, and hotel/hospitality-specific income tracking (PMS integration).</p>
+<p><strong>Full Documentation</strong>: See <a href="asset-income-requirements.md">Asset Management and Income Module Functional Requirements</a> for complete details.</p>
+<h3>Overview</h3>
+<p>The Income Module provides hospitality-focused revenue management including:</p>
+<ul>
+<li>Income invoice creation and management</li>
+<li>Revenue code classification</li>
+<li>HMS/PMS integration for hotel revenue</li>
+<li>Payment type and code management</li>
+<li>Period close and GL posting</li>
+</ul>
+<h3>Key Features (Summary)</h3>
+<p><strong>FR-INCOME-001: Income Invoice Management</strong></p>
+<ul>
+<li>Create and manage income invoices</li>
+<li>Support for multiple revenue codes per invoice</li>
+<li>Auto-generated invoice numbers</li>
+<li>Invoice status tracking (Draft, Posted, Void)</li>
+<li>VAT and discount calculations</li>
+</ul>
+<p><strong>FR-INCOME-002: Revenue Code Management</strong></p>
+<ul>
+<li>Maintain revenue codes with GL account mapping</li>
+<li>Department-specific revenue codes</li>
+<li>Active/inactive status management</li>
+</ul>
+<p><strong>FR-INCOME-003: Income Master Data</strong></p>
+<ul>
+<li>Income categories</li>
+<li>Income sources (HMS, PMS, Manual, API)</li>
+<li>Payment codes with bank account mapping</li>
+<li>Payment types (Cash, Card, Transfer, Check)</li>
+<li>Product/service catalog with pricing</li>
+</ul>
+<p><strong>FR-INCOME-004: Income Period Close</strong></p>
+<ul>
+<li>Period close procedures</li>
+<li>HMS/PMS revenue posting</li>
+<li>GL journal generation</li>
+<li>Revenue recognition</li>
+</ul>
+<p><strong>Total API Endpoints</strong>: 44<br><strong>Status</strong>: ✅ 100% Implemented and Validated</p>
+<hr>
+<h2>System-Wide Requirements</h2>
+<h3>FR-SYS-001: Multi-Tenant Support</h3>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Tenant Isolation</strong> (FR-SYS-001.1)</p>
+<ul>
+<li>System shall isolate data by tenant using TenantCode</li>
+<li>System shall apply tenant filter to all queries automatically</li>
+<li>System shall prevent cross-tenant data access</li>
+<li>System shall include TenantCode in all database records</li>
+</ul>
+</li>
+<li><p><strong>Tenant Configuration</strong> (FR-SYS-001.2)</p>
+<ul>
+<li>System shall support tenant-specific configuration:<ul>
+<li>Company name and logo</li>
+<li>Fiscal year settings</li>
+<li>Tax rates (VAT, WHT)</li>
+<li>Approval workflows</li>
+<li>Number formats (invoice, PO, etc.)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-SYS-001: All transactions must have TenantCode</li>
+<li>BR-SYS-002: Users can only access their tenant&#39;s data</li>
+<li>BR-SYS-003: System admin can manage multiple tenants</li>
+</ul>
+<hr>
+<h3>FR-SYS-002: Authentication &amp; Authorization</h3>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>User Authentication</strong> (FR-SYS-002.1)</p>
+<ul>
+<li>System shall authenticate users with email + password + tenant code</li>
+<li>System shall issue JWT token with 15-minute expiration</li>
+<li>System shall support token refresh (7-day refresh token)</li>
+<li>System shall enforce password complexity:<ul>
+<li>Minimum 8 characters</li>
+<li>At least 1 uppercase, 1 lowercase, 1 digit</li>
+<li>At least 1 special character</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Authorization</strong> (FR-SYS-002.2)</p>
+<ul>
+<li>System shall check permissions before every operation</li>
+<li>System shall use format: Module.Entity.Action (e.g., AP.Invoice.Approve)</li>
+<li>System shall return 401 Unauthorized if token missing/invalid</li>
+<li>System shall return 403 Forbidden if permission denied</li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-SYS-010: Failed login attempts &gt; 5 = account lockout (30 min)</li>
+<li>BR-SYS-011: Password must be changed every 90 days</li>
+<li>BR-SYS-012: Cannot reuse last 5 passwords</li>
+</ul>
+<hr>
+<h3>FR-SYS-003: Audit Trail</h3>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Transaction Audit</strong> (FR-SYS-003.1)</p>
+<ul>
+<li>System shall log all create/update/delete operations</li>
+<li>System shall record:<ul>
+<li>User ID</li>
+<li>Timestamp</li>
+<li>Action (Create/Update/Delete)</li>
+<li>Before/After values (for updates)</li>
+<li>IP address</li>
+</ul>
+</li>
+<li>System shall store audit logs for 7 years</li>
+</ul>
+</li>
+<li><p><strong>Financial Transaction Audit</strong> (FR-SYS-003.2)</p>
+<ul>
+<li>System shall maintain complete audit trail for:<ul>
+<li>All GL postings</li>
+<li>Invoice approvals</li>
+<li>Payment approvals</li>
+<li>Period close</li>
+</ul>
+</li>
+<li>System shall prevent audit log modification/deletion</li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-SYS-020: All financial transactions require audit trail</li>
+<li>BR-SYS-021: Audit logs cannot be deleted (retention: 7 years)</li>
+<li>BR-SYS-022: Audit reports available to auditors (read-only)</li>
+</ul>
+<hr>
+<h2>Non-Functional Requirements</h2>
+<h3>NFR-001: Performance</h3>
+<ol>
+<li>API response time: P95 &lt; 500ms for all endpoints</li>
+<li>Page load time: &lt; 2 seconds for list views</li>
+<li>Report generation: &lt; 5 seconds for standard reports</li>
+<li>Concurrent users: Support 100 concurrent users per tenant</li>
+</ol>
+<h3>NFR-002: Scalability</h3>
+<ol>
+<li>Horizontal scaling: Support 100+ tenants on single instance</li>
+<li>Database: Handle 10M+ transactions per tenant</li>
+<li>File import: Support files up to 100MB, 100K rows</li>
+</ol>
+<h3>NFR-003: Reliability</h3>
+<ol>
+<li>Uptime: 99.9% availability (8.7 hours downtime/year)</li>
+<li>Error rate: &lt; 0.1% for all transactions</li>
+<li>Data backup: Daily automated backups with 30-day retention</li>
+<li>Disaster recovery: RTO &lt; 4 hours, RPO &lt; 15 minutes</li>
+</ol>
+<h3>NFR-004: Security</h3>
+<ol>
+<li>Encryption: TLS 1.2+ for all API traffic</li>
+<li>Authentication: JWT with 15-minute token expiration</li>
+<li>Password: Bcrypt hashing with 12 rounds</li>
+<li>SQL Injection: Parameterized queries only (no dynamic SQL)</li>
+</ol>
+<h3>NFR-005: Usability</h3>
+<ol>
+<li>Mobile-responsive: Support mobile browsers</li>
+<li>Browser support: Chrome, Firefox, Safari, Edge (latest 2 versions)</li>
+<li>Language: English primary, Thai secondary</li>
+<li>Accessibility: WCAG 2.1 AA compliance</li>
+</ol>
+<hr>
+<h2>Traceability Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Requirement ID</th>
+<th>Module</th>
+<th>Priority</th>
+<th>API Endpoints</th>
+<th>Test Cases</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FR-AP-001</td>
+<td>AP</td>
+<td>Critical</td>
+<td>/api/ap/vendor/*</td>
+<td>TC-AP-001 to TC-AP-005</td>
+</tr>
+<tr>
+<td>FR-AP-004</td>
+<td>AP</td>
+<td>Critical</td>
+<td>/api/ap/invoice/*</td>
+<td>TC-AP-020 to TC-AP-030</td>
+</tr>
+<tr>
+<td>FR-AP-005</td>
+<td>AP</td>
+<td>Critical</td>
+<td>/api/ap/payment/*</td>
+<td>TC-AP-040 to TC-AP-045</td>
+</tr>
+<tr>
+<td>FR-AR-001</td>
+<td>AR</td>
+<td>Critical</td>
+<td>/api/ar/customer/*</td>
+<td>TC-AR-001 to TC-AR-005</td>
+</tr>
+<tr>
+<td>FR-AR-003</td>
+<td>AR</td>
+<td>Critical</td>
+<td>/api/ar/invoice/*</td>
+<td>TC-AR-020 to TC-AR-030</td>
+</tr>
+<tr>
+<td>FR-AR-004</td>
+<td>AR</td>
+<td>Critical</td>
+<td>/api/ar/receipt/*</td>
+<td>TC-AR-040 to TC-AR-045</td>
+</tr>
+<tr>
+<td>FR-GL-001</td>
+<td>GL</td>
+<td>Critical</td>
+<td>/api/gl/account/*</td>
+<td>TC-GL-001 to TC-GL-005</td>
+</tr>
+<tr>
+<td>FR-GL-002</td>
+<td>GL</td>
+<td>Critical</td>
+<td>/api/gl/jv/*</td>
+<td>TC-GL-010 to TC-GL-020</td>
+</tr>
+<tr>
+<td>FR-GL-003</td>
+<td>GL</td>
+<td>Critical</td>
+<td>/api/gl/period/*</td>
+<td>TC-GL-030 to TC-GL-040</td>
+</tr>
+<tr>
+<td>FR-ASSET-001</td>
+<td>Asset</td>
+<td>High</td>
+<td>/api/assetRegister/*</td>
+<td>TC-ASSET-001 to TC-ASSET-010</td>
+</tr>
+<tr>
+<td>FR-ASSET-002</td>
+<td>Asset</td>
+<td>High</td>
+<td>/api/assetProcedure/<em>, /api/assetHistory/</em></td>
+<td>TC-ASSET-020 to TC-ASSET-030</td>
+</tr>
+<tr>
+<td>FR-ASSET-003</td>
+<td>Asset</td>
+<td>High</td>
+<td>/api/assetDisposal/*</td>
+<td>TC-ASSET-040 to TC-ASSET-050</td>
+</tr>
+<tr>
+<td>FR-ASSET-004</td>
+<td>Asset</td>
+<td>Medium</td>
+<td>/api/assetCategory/<em>, /api/assetDepartment/</em>, /api/assetLocation/*</td>
+<td>TC-ASSET-060 to TC-ASSET-070</td>
+</tr>
+<tr>
+<td>FR-INCOME-001</td>
+<td>Income</td>
+<td>High</td>
+<td>/api/incomeInvoice/*</td>
+<td>TC-INCOME-001 to TC-INCOME-010</td>
+</tr>
+<tr>
+<td>FR-INCOME-002</td>
+<td>Income</td>
+<td>High</td>
+<td>/api/incomeRevenue/*</td>
+<td>TC-INCOME-020 to TC-INCOME-030</td>
+</tr>
+<tr>
+<td>FR-INCOME-003</td>
+<td>Income</td>
+<td>Medium</td>
+<td>/api/incomeCategory/<em>, /api/incomeSource/</em>, /api/incomePayCode/<em>, /api/incomePayType/</em>, /api/incomeProduct/*</td>
+<td>TC-INCOME-040 to TC-INCOME-050</td>
+</tr>
+<tr>
+<td>FR-INCOME-004</td>
+<td>Income</td>
+<td>High</td>
+<td>/api/incomeProcedure/*</td>
+<td>TC-INCOME-060 to TC-INCOME-070</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Glossary</h2>
+<p><strong>AP</strong>: Accounts Payable<br><strong>AR</strong>: Accounts Receivable<br><strong>GL</strong>: General Ledger<br><strong>JV</strong>: Journal Voucher<br><strong>WHT</strong>: Withholding Tax<br><strong>VAT</strong>: Value Added Tax<br><strong>O2C</strong>: Order-to-Cash<br><strong>R2R</strong>: Record-to-Report<br><strong>FIFO</strong>: First In, First Out<br><strong>DR</strong>: Debit<br><strong>CR</strong>: Credit<br><strong>NBV</strong>: Net Book Value<br><strong>HMS</strong>: Hotel Management System<br><strong>PMS</strong>: Property Management System</p>
+<hr>
+<p><strong>Document Owner</strong>: Business Analyst Team<br><strong>Review Cycle</strong>: Quarterly<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Next Review</strong>: 2026-01-06<br><strong>Related Documents</strong>:</p>
+<ul>
+<li>API Reference: <code>/docs/api/api-reference.md</code></li>
+<li>Permission Matrix: <code>/docs/requirements/permission-matrix.md</code></li>
+<li>Data Dictionary: <code>/docs/requirements/data-dictionary.md</code></li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

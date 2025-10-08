@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Process Flows - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Business Process Flows</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Business Process Flows</h1>
+<blockquote>
+<p><strong>Note</strong>: This document has been corrected based on source code verification. Carmen.NET implements a direct invoice-to-pay workflow without Purchase Orders (PO) or Goods Receiving (GR). The system does not support three-way matching.</p>
+</blockquote>
+<h2>Overview</h2>
+<p>This document describes the end-to-end business processes in Carmen.NET, covering the complete lifecycle from initial transaction through financial reporting.</p>
+<h2>Procure-to-Pay (P2P) Process</h2>
+<h3>Overview</h3>
+<p>Vendor invoice-to-payment process with two invoice entry methods:</p>
+<ol>
+<li><strong>Manual Entry</strong>: Direct AP invoice entry by users (no PO/GR required)</li>
+<li><strong>Automated Entry</strong>: Third-party inventory system integration (Receiving → Invoice)</li>
+</ol>
+<div class="mermaid">flowchart TD
+    Start([Start: Vendor Invoice Received]) --> ReceiveInvoice[Receive Vendor Invoice]
+
+    ReceiveInvoice --> EnterInvoice[Enter AP Invoice]
+    EnterInvoice --> ValidateInvoice{Invoice Valid?}
+
+    ValidateInvoice -->|No| RejectInvoice[Reject Invoice]
+    ValidateInvoice -->|Yes| InvoiceApproval{Invoice<br/>Approved?}
+
+    InvoiceApproval -->|No| RejectInvoice
+    InvoiceApproval -->|Yes| PostInvoice[Post Invoice to GL]
+
+    PostInvoice --> SchedulePayment{Payment<br/>Due?}
+    SchedulePayment -->|Not Yet| WaitPayment[Wait for Due Date]
+    WaitPayment --> SchedulePayment
+
+    SchedulePayment -->|Yes| CreatePayment[Create AP Payment]
+    CreatePayment --> PaymentApproval{Payment<br/>Approved?}
+
+    PaymentApproval -->|No| RejectPayment[Reject Payment]
+    PaymentApproval -->|Yes| PostPayment[Post Payment to GL]
+
+    PostPayment --> DisburseFunds[Disburse Funds:<br/>Check/Wire/ACH]
+    DisburseFunds --> BankReconcile[Bank Reconciliation]
+
+    BankReconcile --> EndP2P([End: Payment Complete])
+
+    RejectInvoice --> EndP2P
+    RejectPayment --> EndP2P</div><h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Vendor Invoice Entry</strong></td>
+<td>AP Module</td>
+<td>Invoice → Validation</td>
+</tr>
+<tr>
+<td><strong>AP Invoice</strong></td>
+<td>AP Module</td>
+<td>Invoice → GL Posting</td>
+</tr>
+<tr>
+<td><strong>AP Payment</strong></td>
+<td>AP Module</td>
+<td>Payment → Bank Account</td>
+</tr>
+<tr>
+<td><strong>Bank Reconciliation</strong></td>
+<td>Cash Management</td>
+<td>Bank Statement → GL</td>
+</tr>
+</tbody></table>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Invoice Validation</strong>: Verify vendor, amount, and account coding</li>
+<li><strong>Approval Limits</strong>: Invoice and payment approval based on amount thresholds</li>
+<li><strong>Duplicate Detection</strong>: Prevent duplicate invoice entry (vendor + invoice number)</li>
+<li><strong>Payment Terms</strong>: Enforce payment terms and discount periods</li>
+<li><strong>Segregation of Duties</strong>: Different users for creation, approval, payment</li>
+</ul>
+<h2>P2P Integration: Third-Party Receiving-to-Invoice</h2>
+<h3>Overview</h3>
+<p>Automated AP invoice creation from third-party inventory management systems (BlueLedgers, CarmenV3).</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Goods Received]) --> ExtReceiving[External System:<br/>BlueLedgers/CarmenV3<br/>Records Goods Receipt]
+
+    ExtReceiving --> SessionToken[Carmen API:<br/>Create Session Token]
+    SessionToken --> CheckSettings[Validate Interface Settings]
+
+    CheckSettings --> CheckPeriod{Inventory<br/>Period Closed?}
+    CheckPeriod -->|Yes| RejectClosed[Reject: Period Closed]
+    CheckPeriod -->|No| PrepareData[Prepare Receiving Data:<br/>Date Range, Vendor, Items]
+
+    PrepareData --> APICall[POST /api/interfaceBlueLedgers/<br/>postReceiving]
+    APICall --> ValidateReceiving{Receiving Data<br/>Valid?}
+
+    ValidateReceiving -->|No| RejectData[Reject Invalid Data]
+    ValidateReceiving -->|Yes| CheckDuplicate{Already<br/>Posted?}
+
+    CheckDuplicate -->|Yes| SkipDuplicate[Skip Duplicate]
+    CheckDuplicate -->|No| CheckWorkflow{Workflow<br/>Enabled?}
+
+    CheckWorkflow -->|No| CreateInvoice[Auto-Create AP Invoice:<br/>Source = Invt]
+    CheckWorkflow -->|Yes| CreateDraft[Create Draft AP Invoice]
+
+    CreateDraft --> WorkflowApproval{Workflow<br/>Approved?}
+    WorkflowApproval -->|No| RejectInvoice[Reject Invoice]
+    WorkflowApproval -->|Yes| CreateInvoice
+
+    CreateInvoice --> PostToGL[Post Invoice to GL:<br/>DR: Inventory/Expense<br/>CR: AP]
+
+    PostToGL --> AssetCheck{Asset<br/>Purchase?}
+    AssetCheck -->|Yes| PostToAsset[POST /api/interfaceBlueLedgers/<br/>postReceivingToAsset]
+    AssetCheck -->|No| UpdateInventory
+
+    PostToAsset --> CreatePreAsset[Create Pre-Asset Record]
+    CreatePreAsset --> UpdateInventory[Update Inventory Balances]
+
+    UpdateInventory --> SchedulePayment{Payment<br/>Due?}
+    SchedulePayment -->|Not Yet| WaitPayment[Wait for Due Date]
+    WaitPayment --> SchedulePayment
+
+    SchedulePayment -->|Yes| CreatePayment[Create AP Payment]
+    CreatePayment --> PaymentApproval{Payment<br/>Approved?}
+
+    PaymentApproval -->|No| RejectPayment[Reject Payment]
+    PaymentApproval -->|Yes| PostPayment[Post Payment to GL]
+
+    PostPayment --> DisburseFunds[Disburse Funds]
+    DisburseFunds --> BankReconcile[Bank Reconciliation]
+
+    BankReconcile --> EndP2P([End: Payment Complete])
+
+    RejectClosed --> EndP2P
+    RejectData --> EndP2P
+    SkipDuplicate --> EndP2P
+    RejectInvoice --> EndP2P
+    RejectPayment --> EndP2P</div><h3>Integration Details</h3>
+<p><strong>Supported Third-Party Systems</strong>:</p>
+<ul>
+<li><strong>BlueLedgers</strong>: Inventory management system</li>
+<li><strong>CarmenV3</strong>: Legacy Carmen system integration</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST /api/interfaceBlueLedgers/postReceiving
+POST /api/interfaceBlueLedgers/postReceivingToAsset
+POST /api/interfaceBlueLedgers/setting
+GET  /api/interfaceBlueLedgers/getSessionToken</code></pre><p><strong>Data Flow</strong>:</p>
+<pre><code class="language-text">External Inventory System (BlueLedgers)
+  ↓ (Goods Receipt Data: Date Range, Vendor, Items)
+Carmen Interface API (Session Token Auth)
+  ↓ (Validation: Period Check, Duplicate Check)
+AP Invoice Auto-Creation (Source: Invt)
+  ↓ (Workflow Approval if enabled)
+GL Posting (DR: Inventory/Expense, CR: AP)
+  ↓ (Optional: Asset Creation)
+AP Payment Processing</code></pre><h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Goods Receipt</strong></td>
+<td>BlueLedgers/CarmenV3</td>
+<td>Receiving Data → Carmen API</td>
+</tr>
+<tr>
+<td><strong>Session Authentication</strong></td>
+<td>Carmen Interface API</td>
+<td>Token-based authentication</td>
+</tr>
+<tr>
+<td><strong>Period Validation</strong></td>
+<td>Carmen Inventory</td>
+<td>Check closed inventory periods</td>
+</tr>
+<tr>
+<td><strong>Invoice Creation</strong></td>
+<td>Carmen AP Module</td>
+<td>Auto-create from receiving data</td>
+</tr>
+<tr>
+<td><strong>Workflow Processing</strong></td>
+<td>Carmen Workflow Engine</td>
+<td>Optional approval workflow</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>Carmen GL Module</td>
+<td>Inventory/Expense → AP</td>
+</tr>
+<tr>
+<td><strong>Asset Creation</strong></td>
+<td>Carmen Asset Module</td>
+<td>Pre-asset from receiving</td>
+</tr>
+</tbody></table>
+<h3>Integration Parameters</h3>
+<p><strong>ParamPostReceiving</strong>:</p>
+<pre><code class="language-json">{
+  &quot;fromDate&quot;: &quot;2025-01-01&quot;,
+  &quot;toDate&quot;: &quot;2025-01-31&quot;,
+  &quot;forceUpdate&quot;: false
+}</code></pre><p><strong>Settings Configuration</strong>:</p>
+<ul>
+<li><code>CheckPeriodInventoryCloseBeforePost</code>: Validate inventory period status</li>
+<li><code>SessionToken</code>: API authentication token</li>
+<li><code>WorkflowEnabled</code>: Enable/disable approval workflow</li>
+</ul>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Session Authentication</strong>: Token-based API security</li>
+<li><strong>Period Check</strong>: Prevent posting to closed inventory periods</li>
+<li><strong>Duplicate Prevention</strong>: Check if receiving already posted (date range + source)</li>
+<li><strong>Workflow Integration</strong>: Optional approval for auto-created invoices</li>
+<li><strong>Data Validation</strong>: Verify vendor exists, items valid, amounts correct</li>
+<li><strong>Source Tracking</strong>: Mark invoices with source = &quot;Invt&quot; for audit trail</li>
+<li><strong>Asset Integration</strong>: Automatically create pre-assets for asset purchases</li>
+<li><strong>Force Update</strong>: Override option for reprocessing (use with caution)</li>
+</ul>
+<h3>Use Cases</h3>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Workflow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Regular Goods Receipt</strong></td>
+<td>BlueLedgers receiving → Auto-create AP invoice → Approve → Post to GL</td>
+</tr>
+<tr>
+<td><strong>Asset Purchase</strong></td>
+<td>BlueLedgers receiving → Auto-create AP invoice → Create pre-asset → Post to GL</td>
+</tr>
+<tr>
+<td><strong>With Approval</strong></td>
+<td>Receiving → Draft invoice → Workflow approval → Post to GL</td>
+</tr>
+<tr>
+<td><strong>Without Approval</strong></td>
+<td>Receiving → Auto-create and post invoice → Payment processing</td>
+</tr>
+<tr>
+<td><strong>Period Closed</strong></td>
+<td>Receiving → Period validation fails → Reject posting</td>
+</tr>
+<tr>
+<td><strong>Duplicate Receipt</strong></td>
+<td>Receiving → Duplicate check → Skip processing</td>
+</tr>
+</tbody></table>
+<h2>PMS-to-Cash Revenue Cycle (Hospitality Industry)</h2>
+<blockquote>
+<p><strong>Note</strong>: Carmen.NET is designed for the hospitality industry and integrates with Property Management Systems (PMS). There is NO traditional Order-to-Cash process with sales quotations or sales orders. Revenue originates from PMS systems.</p>
+</blockquote>
+<h3>Overview</h3>
+<p>Hospitality revenue cycle integrating PMS folio data through AR billing to cash collection.</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Guest/Customer Service]) --> PMSFolio[PMS Records Charges:<br/>Room, F&B, Services]
+
+    PMSFolio --> PMSInterface[PMS Interface Export:<br/>Daily Folio Data]
+    PMSInterface --> DataBank[Store in Interface DataBank]
+
+    DataBank --> ValidateData{Data<br/>Valid?}
+    ValidateData -->|No| RejectData[Reject Invalid Data]
+    ValidateData -->|Yes| MapAccount[Map PMS Accounts to<br/>Carmen GL Accounts]
+
+    MapAccount --> CheckDuplicate{Duplicate<br/>Folio?}
+    CheckDuplicate -->|Yes| SkipDuplicate[Skip Duplicate Entry]
+    CheckDuplicate -->|No| CreateFolio[Create AR Folio Entry]
+
+    CreateFolio --> PostToAR[Post Folio to AR Module]
+    PostToAR --> ARContract{AR Contract<br/>Exists?}
+
+    ARContract -->|No| CreateContract[Create AR Contract:<br/>Customer Agreement]
+    ARContract -->|Yes| UpdateContract
+    CreateContract --> UpdateContract[Update Contract Balance]
+
+    UpdateContract --> GenerateInvoice[Generate AR Invoice]
+    GenerateInvoice --> InvoiceApproval{Invoice<br/>Approved?}
+
+    InvoiceApproval -->|No| RejectInvoice[Reject Invoice]
+    InvoiceApproval -->|Yes| PostInvoice[Post Invoice to GL:<br/>DR: AR, CR: Revenue]
+
+    PostInvoice --> SendInvoice[Send Invoice to Customer]
+    SendInvoice --> ReceivePayment{Payment<br/>Received?}
+
+    ReceivePayment -->|No| CheckOverdue{Invoice<br/>Overdue?}
+    CheckOverdue -->|No| WaitPayment[Wait for Payment]
+    WaitPayment --> ReceivePayment
+    CheckOverdue -->|Yes| Collection[Collection Follow-Up]
+    Collection --> ReceivePayment
+
+    ReceivePayment -->|Yes| CreateReceipt[Create AR Receipt]
+    CreateReceipt --> ApplyReceipt[Apply Receipt to Invoices]
+
+    ApplyReceipt --> PostReceipt[Post Receipt to GL:<br/>DR: Cash, CR: AR]
+    PostReceipt --> BankDeposit[Deposit to Bank]
+    BankDeposit --> BankReconcile[Bank Reconciliation]
+
+    BankReconcile --> EndRevenue([End: Cash Collected])
+    RejectData --> EndRevenue
+    SkipDuplicate --> EndRevenue
+    RejectInvoice --> EndRevenue</div><h3>PMS Integration Details</h3>
+<p><strong>Supported PMS Systems</strong>:</p>
+<ul>
+<li>Shiji (Opera)</li>
+<li>HotelLogix</li>
+<li>HotelTime</li>
+<li>Generic PMS (via file/API interface)</li>
+</ul>
+<p><strong>Integration Methods</strong>:</p>
+<ol>
+<li><strong>File-Based</strong>: CSV/JSON files exported from PMS</li>
+<li><strong>API Integration</strong>: Real-time API calls from PMS</li>
+<li><strong>DataBank Storage</strong>: Staging area for PMS data validation</li>
+</ol>
+<p><strong>PMS Data Flow</strong>:</p>
+<pre><code class="language-text">PMS System
+  ↓ (Export: Daily/Real-time)
+Interface DataBank (Staging)
+  ↓ (Validation &amp; Mapping)
+AR Folio Entries
+  ↓ (Aggregation)
+AR Invoice
+  ↓ (Collection)
+AR Receipt
+  ↓ (Posting)
+GL Revenue &amp; Cash Accounts</code></pre><h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PMS Export</strong></td>
+<td>External PMS</td>
+<td>Folio Charges → Interface DataBank</td>
+</tr>
+<tr>
+<td><strong>Account Mapping</strong></td>
+<td>Interface Module</td>
+<td>PMS Accounts → Carmen GL Accounts</td>
+</tr>
+<tr>
+<td><strong>AR Folio</strong></td>
+<td>AR Module</td>
+<td>Folio Data → AR Transactions</td>
+</tr>
+<tr>
+<td><strong>AR Contract</strong></td>
+<td>AR Module</td>
+<td>Customer → Billing Agreement</td>
+</tr>
+<tr>
+<td><strong>AR Invoice</strong></td>
+<td>AR Module</td>
+<td>Folio Charges → Customer Invoice</td>
+</tr>
+<tr>
+<td><strong>AR Receipt</strong></td>
+<td>AR Module</td>
+<td>Payment → Bank Deposit</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>GL Module</td>
+<td>Revenue &amp; Cash Recognition</td>
+</tr>
+</tbody></table>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Duplicate Detection</strong>: Prevent duplicate folio import (FolioNo + FolioDate)</li>
+<li><strong>Account Mapping</strong>: Validate PMS account mapping to Carmen GL accounts</li>
+<li><strong>Data Validation</strong>: Verify customer exists, amounts are valid, dates are correct</li>
+<li><strong>Revenue Recognition</strong>: Proper revenue recognition based on folio date</li>
+<li><strong>Collection Management</strong>: Track aging and overdue amounts</li>
+<li><strong>Segregation of Duties</strong>: Separate users for folio import, invoice approval, receipt posting</li>
+<li><strong>Reconciliation</strong>: Daily reconciliation of PMS revenue to Carmen revenue</li>
+</ul>
+<h2>Record-to-Report (R2R) Process</h2>
+<h3>Overview</h3>
+<p>Month-end close and financial reporting process.</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Month-End]) --> CutoffDate[Establish Transaction Cutoff Date]
+    CutoffDate --> PostTransactions[Post All Transactions]
+
+    PostTransactions --> ReconcileSubledgers[Reconcile Sub-Ledgers to GL]
+    ReconcileSubledgers --> CheckAP{AP Reconciled?}
+    CheckAP -->|No| FixAP[Fix AP Variances]
+    FixAP --> ReconcileSubledgers
+
+    CheckAP -->|Yes| CheckAR{AR Reconciled?}
+    CheckAR -->|No| FixAR[Fix AR Variances]
+    FixAR --> ReconcileSubledgers
+
+    CheckAR -->|Yes| CheckAsset{Asset Reconciled?}
+    CheckAsset -->|No| FixAsset[Fix Asset Variances]
+    FixAsset --> ReconcileSubledgers
+
+    CheckAsset -->|Yes| BankRec[Bank Reconciliation]
+    BankRec --> CheckBank{All Banks<br/>Reconciled?}
+    CheckBank -->|No| FixBank[Fix Bank Variances]
+    FixBank --> BankRec
+
+    CheckBank -->|Yes| Accruals[Record Accruals and Deferrals]
+    Accruals --> InterCompany[Inter-Company Reconciliation]
+
+    InterCompany --> CheckIC{IC Balanced?}
+    CheckIC -->|No| FixIC[Fix IC Variances]
+    FixIC --> InterCompany
+
+    CheckIC -->|Yes| AdjustingEntries[Post Adjusting Journal Entries]
+    AdjustingEntries --> ReviewVariance[Review Budget Variance]
+
+    ReviewVariance --> CheckVariance{Material<br/>Variance?}
+    CheckVariance -->|Yes| ExplainVariance[Prepare Variance Explanations]
+    CheckVariance -->|No| TrialBalance
+    ExplainVariance --> TrialBalance[Generate Trial Balance]
+
+    TrialBalance --> CheckBalance{TB Balanced?}
+    CheckBalance -->|No| FixTB[Fix Unbalanced Accounts]
+    FixTB --> TrialBalance
+
+    CheckBalance -->|Yes| GenerateFS[Generate Financial Statements]
+    GenerateFS --> ReviewFS[Management Review of FS]
+
+    ReviewFS --> FSApproved{FS Approved?}
+    FSApproved -->|No| Adjustments[Make Adjustments]
+    Adjustments --> TrialBalance
+
+    FSApproved -->|Yes| ClosePeriod[Close GL Period]
+    ClosePeriod --> CarryForward[Carry Forward Balances]
+
+    CarryForward --> ArchiveData[Archive Period Data]
+    ArchiveData --> DistributeReports[Distribute Reports to Stakeholders]
+
+    DistributeReports --> ExternalReporting{External Reporting<br/>Required?}
+
+    ExternalReporting -->|Yes| TaxFilings[Prepare Tax Filings]
+    TaxFilings --> RegulatoryReports[Prepare Regulatory Reports]
+    RegulatoryReports --> AuditPrep[Prepare Audit Documentation]
+    AuditPrep --> EndR2R([End: Reporting Complete])
+
+    ExternalReporting -->|No| EndR2R</div><h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Sub-Ledger Reconciliation</strong></td>
+<td>All Modules</td>
+<td>Module Totals → GL Control Accounts</td>
+</tr>
+<tr>
+<td><strong>Bank Reconciliation</strong></td>
+<td>Cash Management</td>
+<td>Bank Statement → GL Bank Account</td>
+</tr>
+<tr>
+<td><strong>Accruals</strong></td>
+<td>GL Module</td>
+<td>Accrual Entries → P&amp;L Accounts</td>
+</tr>
+<tr>
+<td><strong>Financial Statements</strong></td>
+<td>GL Reporting</td>
+<td>GL Balances → FS Reports</td>
+</tr>
+<tr>
+<td><strong>Period Close</strong></td>
+<td>GL Module</td>
+<td>Lock Period → Carry Forward</td>
+</tr>
+</tbody></table>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Transaction Cutoff</strong>: All transactions dated in period must be posted</li>
+<li><strong>Sub-Ledger Reconciliation</strong>: All module balances must equal GL control accounts</li>
+<li><strong>Bank Reconciliation</strong>: All bank accounts must be reconciled</li>
+<li><strong>Trial Balance</strong>: Total debits must equal total credits</li>
+<li><strong>Review and Approval</strong>: Management must review and approve financial statements</li>
+<li><strong>Audit Trail</strong>: Complete audit trail of all closing entries and adjustments</li>
+</ul>
+<h2>Asset Lifecycle Process</h2>
+<h3>Overview</h3>
+<p>Complete asset management process from acquisition through disposal.</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Asset Need Identified]) --> BusinessCase[Prepare Business Case]
+    BusinessCase --> BudgetApproval{Budget<br/>Approved?}
+
+    BudgetApproval -->|No| RejectAsset[Reject Asset Request]
+    BudgetApproval -->|Yes| CapexApproval{Capex<br/>Approved?}
+
+    CapexApproval -->|No| RejectAsset
+    CapexApproval -->|Yes| ProcureAsset[Procure Asset:<br/>Purchase/Lease]
+
+    ProcureAsset --> ReceiveAsset[Receive and Inspect Asset]
+    ReceiveAsset --> CreateAssetRecord[Create Asset Register Entry]
+
+    CreateAssetRecord --> AssignDetails[Assign Category, Location,<br/>Custodian, Depreciation]
+    AssignDetails --> CalculateDepreciation[Calculate Depreciation Schedule]
+
+    CalculateDepreciation --> PostAcquisition[Post Acquisition to GL]
+    PostAcquisition --> PhysicalTag[Apply Physical Asset Tag]
+
+    PhysicalTag --> InService[Place Asset in Service]
+    InService --> MonthlyDepreciation[Monthly Depreciation Process]
+
+    MonthlyDepreciation --> PostDepreciation[Post Depreciation to GL]
+    PostDepreciation --> AssetMaintenance[Asset Maintenance]
+
+    AssetMaintenance --> PhysicalVerification[Annual Physical Verification]
+    PhysicalVerification --> Revaluation{Revaluation<br/>Required?}
+
+    Revaluation -->|Yes| ImpairmentTest[Impairment Testing]
+    ImpairmentTest --> PostRevaluation[Post Revaluation to GL]
+    PostRevaluation --> ContinueUse
+
+    Revaluation -->|No| ContinueUse{Continue<br/>Using Asset?}
+
+    ContinueUse -->|Yes| MonthlyDepreciation
+    ContinueUse -->|No| InitiateDisposal[Initiate Disposal Process]
+
+    InitiateDisposal --> DisposalMethod{Disposal<br/>Method?}
+
+    DisposalMethod -->|Sale| SaleProcess[Sale Process]
+    DisposalMethod -->|Scrap| ScrapProcess[Scrap Process]
+    DisposalMethod -->|Trade-In| TradeInProcess[Trade-In Process]
+    DisposalMethod -->|Donation| DonationProcess[Donation Process]
+    DisposalMethod -->|Write-Off| WriteOffProcess[Write-Off Process]
+
+    SaleProcess --> DisposalApproval
+    ScrapProcess --> DisposalApproval
+    TradeInProcess --> DisposalApproval
+    DonationProcess --> DisposalApproval
+    WriteOffProcess --> DisposalApproval
+
+    DisposalApproval{Disposal<br/>Approved?} -->|No| RejectDisposal[Reject Disposal]
+    DisposalApproval -->|Yes| PhysicalDisposal[Execute Physical Disposal]
+
+    PhysicalDisposal --> CalculateGainLoss[Calculate Gain/Loss on Disposal]
+    CalculateGainLoss --> PostDisposal[Post Disposal to GL]
+
+    PostDisposal --> UpdateRegister[Update Asset Register:<br/>Status = Disposed]
+    UpdateRegister --> ArchiveAsset[Archive Asset Records]
+
+    ArchiveAsset --> EndAsset([End: Asset Lifecycle Complete])
+    RejectAsset --> EndAsset
+    RejectDisposal --> EndAsset</div><h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Asset Acquisition</strong></td>
+<td>AP Module</td>
+<td>AP Invoice → Asset Register</td>
+</tr>
+<tr>
+<td><strong>Depreciation</strong></td>
+<td>Asset Module</td>
+<td>Depreciation Schedule → GL</td>
+</tr>
+<tr>
+<td><strong>Disposal</strong></td>
+<td>Asset Module</td>
+<td>Disposal Entry → GL</td>
+</tr>
+<tr>
+<td><strong>Physical Verification</strong></td>
+<td>Asset Module</td>
+<td>Physical Count → Asset Register</td>
+</tr>
+</tbody></table>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Authorization</strong>: Capital expenditure approval before purchase</li>
+<li><strong>Asset Tagging</strong>: All assets must have physical tags</li>
+<li><strong>Custodian Assignment</strong>: All assets assigned to responsible custodian</li>
+<li><strong>Depreciation Calculation</strong>: Automatic depreciation based on category rules</li>
+<li><strong>Physical Verification</strong>: Annual physical count and reconciliation</li>
+<li><strong>Disposal Approval</strong>: Management approval for all disposals</li>
+<li><strong>Gain/Loss Calculation</strong>: Accurate calculation of disposal gain/loss</li>
+</ul>
+<h2>Income Module Revenue Recognition (PMS Integration)</h2>
+<blockquote>
+<p><strong>Note</strong>: Income Module in Carmen.NET is designed to handle revenue from PMS systems for hospitality businesses. It tracks income sources, revenue recognition, and generates income invoices that integrate with AR.</p>
+</blockquote>
+<h3>Overview</h3>
+<p>Income module receives data from PMS and manages revenue recognition for various income streams (room revenue, F&amp;B, services, facilities).</p>
+<div class="mermaid">flowchart TD
+    Start([Start: PMS Income Data]) --> PMSExport[PMS Exports Income Data:<br/>Room, F&B, Services, Other]
+
+    PMSExport --> InterfaceImport[Interface Import to<br/>Income Module]
+    InterfaceImport --> ValidateIncome{Income Data<br/>Valid?}
+
+    ValidateIncome -->|No| RejectIncome[Reject Invalid Income Data]
+    ValidateIncome -->|Yes| IdentifySource[Identify Income Source:<br/>Room/F&B/Service/Facility]
+
+    IdentifySource --> MapRevenue[Map to Revenue Categories:<br/>Revenue Account, Cost Center]
+    MapRevenue --> CheckRecognition{Revenue<br/>Recognition<br/>Required?}
+
+    CheckRecognition -->|No| DirectRevenue[Recognize Revenue Immediately:<br/>Point-in-Time]
+    CheckRecognition -->|Yes| SelectMethod{Recognition<br/>Method?}
+
+    SelectMethod -->|Deferred| DeferredRevenue[Deferred Revenue:<br/>Advance Deposits, Prepayments]
+    SelectMethod -->|Accrued| AccruedRevenue[Accrued Revenue:<br/>Service Not Yet Billed]
+    SelectMethod -->|Straight-Line| StraightLine[Straight-Line:<br/>Rental, Membership]
+
+    DeferredRevenue --> CreateSchedule
+    AccruedRevenue --> CreateSchedule
+    StraightLine --> CreateSchedule
+    DirectRevenue --> CreateIncomeInvoice
+
+    CreateSchedule[Create Revenue Recognition<br/>Schedule] --> MonthlyRecognition[Monthly Revenue<br/>Recognition Process]
+
+    MonthlyRecognition --> RecognizeAmount[Calculate Amount to Recognize:<br/>Based on Schedule]
+    RecognizeAmount --> PostRecognition[Post Recognition Entry:<br/>DR: Deferred/Accrued,<br/>CR: Revenue]
+
+    PostRecognition --> CreateIncomeInvoice[Create Income Invoice]
+    CreateIncomeInvoice --> PostInvoice[Post Invoice to GL:<br/>DR: AR, CR: Income Revenue]
+
+    PostInvoice --> SendInvoice[Send Income Invoice]
+    SendInvoice --> ARIntegration[Integration with AR Module]
+
+    ARIntegration --> ReceivePayment{Payment<br/>Received?}
+    ReceivePayment -->|No| WaitPayment[Wait for Payment/<br/>Collection Process]
+    WaitPayment --> ReceivePayment
+
+    ReceivePayment -->|Yes| PostReceipt[Post AR Receipt:<br/>DR: Cash, CR: AR]
+    PostReceipt --> CheckComplete{Recognition<br/>Complete?}
+
+    CheckComplete -->|No| MonthlyRecognition
+    CheckComplete -->|Yes| CloseIncome[Mark Income Source Complete]
+
+    CloseIncome --> Reconciliation[Reconcile PMS Revenue to<br/>Carmen Revenue]
+    Reconciliation --> EndIncome([End: Income Complete])
+
+    RejectIncome --> EndIncome</div><h3>PMS Income Data Flow</h3>
+<p><strong>Income Data from PMS</strong>:</p>
+<pre><code class="language-text">PMS System (Shiji/HotelLogix/HotelTime)
+  ↓ (Daily Export)
+Income Categories:
+  - Room Revenue (Guest Stays)
+  - F&amp;B Revenue (Restaurant, Bar, Room Service)
+  - Service Revenue (Spa, Laundry, Business Center)
+  - Facility Revenue (Meeting Rooms, Events)
+  - Other Revenue (Parking, Minibar, etc.)
+  ↓
+Interface DataBank (Staging)
+  ↓ (Validation &amp; Mapping)
+Income Module
+  ↓ (Revenue Recognition)
+Income Invoice
+  ↓ (AR Integration)
+AR Module → GL Revenue Accounts</code></pre><h3>Revenue Recognition Methods</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Use Case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Point-in-Time</strong></td>
+<td>Service delivered immediately</td>
+<td>Daily room charges, F&amp;B sales</td>
+</tr>
+<tr>
+<td><strong>Deferred</strong></td>
+<td>Payment received in advance</td>
+<td>Advance deposits, package bookings</td>
+</tr>
+<tr>
+<td><strong>Accrued</strong></td>
+<td>Service delivered, not yet billed</td>
+<td>Monthly service charges</td>
+</tr>
+<tr>
+<td><strong>Straight-Line</strong></td>
+<td>Over time period</td>
+<td>Monthly membership fees</td>
+</tr>
+</tbody></table>
+<h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PMS Export</strong></td>
+<td>External PMS</td>
+<td>Income Data → Interface DataBank</td>
+</tr>
+<tr>
+<td><strong>Income Recognition</strong></td>
+<td>Income Module</td>
+<td>Income Data → Revenue Schedule</td>
+</tr>
+<tr>
+<td><strong>Income Invoice</strong></td>
+<td>Income Module</td>
+<td>Recognized Revenue → AR Invoice</td>
+</tr>
+<tr>
+<td><strong>AR Integration</strong></td>
+<td>AR Module</td>
+<td>Income Invoice → AR Balance</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>GL Module</td>
+<td>Revenue Recognition → Income Accounts</td>
+</tr>
+<tr>
+<td><strong>Payment Collection</strong></td>
+<td>AR Module</td>
+<td>AR Receipt → Cash</td>
+</tr>
+</tbody></table>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>PMS Data Validation</strong>: Verify income data completeness and accuracy</li>
+<li><strong>Revenue Recognition Policy</strong>: Compliance with accounting standards (IFRS 15/ASC 606)</li>
+<li><strong>Account Mapping</strong>: Correct mapping of PMS income categories to GL revenue accounts</li>
+<li><strong>Deferred Revenue Tracking</strong>: Accurate tracking of advance deposits and deferred amounts</li>
+<li><strong>Accrued Revenue</strong>: Proper accrual of revenue for services delivered but not billed</li>
+<li><strong>Reconciliation</strong>: Daily reconciliation of PMS income to Carmen revenue</li>
+<li><strong>Segregation of Duties</strong>: Separate users for income import, recognition, and invoice approval</li>
+</ul>
+<hr>
+<h2>GL Monthly Procedures</h2>
+<h3>Overview</h3>
+<p>Recurring GL procedures executed monthly for standard journal entries, amortization, and data integrity verification.</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Month Start/Mid-Month]) --> CheckDate{Procedure<br/>Type?}
+
+    CheckDate -->|Standard JV| ApplyStandard[Apply Standard Journal Vouchers]
+    CheckDate -->|Amortization| ApplyAmortize[Apply Amortization Journal Vouchers]
+    CheckDate -->|Data Verification| VerifyData[Verify Data Integrity]
+
+    ApplyStandard --> GetStandardJV[Retrieve Standard JV Templates]
+    GetStandardJV --> GenerateStandardEntries[Generate Journal Entries<br/>Based on Templates]
+
+    GenerateStandardEntries --> PostStandardJV[Post Standard JV to GL:<br/>Per Template Schedule]
+    PostStandardJV --> EndStandard([End: Standard JV Complete])
+
+    ApplyAmortize --> GetAmortizeSchedule[Retrieve Amortization Schedules]
+    GetAmortizeSchedule --> CalculateAmortize[Calculate Current Period<br/>Amortization Amount]
+
+    CalculateAmortize --> GenerateAmortizeEntries[Generate Amortization Entries:<br/>DR: Expense, CR: Prepaid/Deferred]
+    GenerateAmortizeEntries --> PostAmortizeJV[Post Amortization JV to GL]
+
+    PostAmortizeJV --> UpdateSchedule[Update Amortization Schedule:<br/>Remaining Balance]
+    UpdateSchedule --> EndAmortize([End: Amortization Complete])
+
+    VerifyData --> CheckAccounts[Check Chart of Accounts Integrity]
+    CheckAccounts --> CheckBalances[Verify Account Balances]
+
+    CheckBalances --> CheckTransactions[Verify Transaction Integrity]
+    CheckTransactions --> CheckPeriods[Verify Period Status]
+
+    CheckPeriods --> CheckReferential[Check Referential Integrity]
+    CheckReferential --> GenerateReport[Generate Data Verification Report]
+
+    GenerateReport --> IssuesFound{Issues<br/>Found?}
+    IssuesFound -->|Yes| AlertUsers[Alert Users:<br/>Data Integrity Issues]
+    IssuesFound -->|No| DataOK[Confirm Data Integrity OK]
+
+    AlertUsers --> EndVerify([End: Verification Complete])
+    DataOK --> EndVerify</div><h3>Standard Journal Vouchers</h3>
+<p><strong>Purpose</strong>: Automate recurring monthly journal entries (rent, depreciation, accruals)</p>
+<p><strong>Process</strong>:</p>
+<ol>
+<li><strong>Template Setup</strong>: Define standard JV templates with account codes, amounts, and schedules</li>
+<li><strong>Monthly Execution</strong>: Run <code>POST /api/glProcedure/applyStandardJv</code> with target date</li>
+<li><strong>Journal Generation</strong>: System generates journal vouchers based on active templates</li>
+<li><strong>Auto-Posting</strong>: Journals automatically posted to GL based on template settings</li>
+</ol>
+<p><strong>Use Cases</strong>:</p>
+<ul>
+<li>Monthly rent expense</li>
+<li>Insurance amortization</li>
+<li>Salary accruals</li>
+<li>Depreciation (if not using Asset module)</li>
+<li>Inter-company allocations</li>
+</ul>
+<p><strong>API Endpoint</strong>: <code>POST /api/glProcedure/applyStandardJv</code></p>
+<h3>Amortization Journal Vouchers</h3>
+<p><strong>Purpose</strong>: Automate prepaid expense and deferred revenue amortization</p>
+<p><strong>Process</strong>:</p>
+<ol>
+<li><strong>Amortization Setup</strong>: Define amortization schedules for prepaid/deferred items</li>
+<li><strong>Monthly Execution</strong>: Run <code>POST /api/glProcedure/applyAmortizeJv</code> with target date</li>
+<li><strong>Amount Calculation</strong>: System calculates current period amortization amount</li>
+<li><strong>Journal Generation</strong>: Generate amortization entries (DR: Expense, CR: Prepaid/Deferred)</li>
+<li><strong>Schedule Update</strong>: Update remaining balance in amortization schedule</li>
+</ol>
+<p><strong>Use Cases</strong>:</p>
+<ul>
+<li>Prepaid insurance amortization</li>
+<li>Prepaid rent amortization</li>
+<li>Software license amortization</li>
+<li>Deferred revenue recognition</li>
+<li>Long-term contract amortization</li>
+</ul>
+<p><strong>API Endpoint</strong>: <code>POST /api/glProcedure/applyAmortizeJv</code></p>
+<h3>Data Integrity Verification</h3>
+<p><strong>Purpose</strong>: Verify GL data integrity and identify potential issues</p>
+<p><strong>Process</strong>:</p>
+<ol>
+<li><strong>Run Verification</strong>: Execute <code>POST /api/glProcedure/verifyData</code></li>
+<li><strong>Integrity Checks</strong>:<ul>
+<li>Chart of accounts structure</li>
+<li>Account balance consistency</li>
+<li>Transaction referential integrity</li>
+<li>Period status validation</li>
+<li>Sub-ledger to GL reconciliation</li>
+</ul>
+</li>
+<li><strong>Issue Detection</strong>: Identify data integrity problems</li>
+<li><strong>Reporting</strong>: Generate detailed verification report</li>
+</ol>
+<p><strong>Checks Performed</strong>:</p>
+<ul>
+<li>Orphaned transactions (missing account references)</li>
+<li>Unbalanced journal entries</li>
+<li>Invalid account codes</li>
+<li>Period date mismatches</li>
+<li>Sub-ledger to GL variances</li>
+<li>Duplicate transaction detection</li>
+</ul>
+<p><strong>API Endpoint</strong>: <code>POST /api/glProcedure/verifyData</code></p>
+<hr>
+<h2>Detailed Period Close Procedures</h2>
+<h3>Overview</h3>
+<p>Comprehensive period close process coordinating all modules (AP, AR, Asset, Income, GL) with specific API procedures.</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Period End]) --> CutoffDate[Establish Transaction Cutoff Date]
+    CutoffDate --> PostAll[Post All Module Transactions]
+
+    PostAll --> APClose[AP Period Close:<br/>POST /api/apProcedure/closePeriod]
+    APClose --> ARClose[AR Period Close:<br/>POST /api/arProcedure/closePeriod]
+
+    ARClose --> AssetClose[Asset Period Close:<br/>POST /api/assetProcedure/closePeriod]
+    AssetClose --> IncomeClose[Income Period Close:<br/>POST /api/incomeProcedure/closePeriod]
+
+    IncomeClose --> PostAP[Post AP to GL:<br/>POST /api/glProcedure/postAp]
+    PostAP --> PostAR[Post AR to GL:<br/>POST /api/glProcedure/postAr]
+
+    PostAR --> PostAsset[Post Asset Transactions to GL:<br/>POST /api/glProcedure/postAsset]
+    PostAsset --> CheckInvalid[Check Invalid Postings:<br/>POST /api/glProcedure/checkPostInvalid]
+
+    CheckInvalid --> InvalidFound{Invalid<br/>Postings?}
+    InvalidFound -->|Yes| FixInvalid[Fix Invalid Transactions]
+    FixInvalid --> CheckInvalid
+
+    InvalidFound -->|No| RecalcBalances[Recalculate GL Balances:<br/>POST /api/glProcedure/reCalPeriod]
+    RecalcBalances --> CreateHistory[Create GL History:<br/>POST /api/glProcedure/createGlHis]
+
+    CreateHistory --> ApplyStandardJV[Apply Standard JV:<br/>POST /api/glProcedure/applyStandardJv]
+    ApplyStandardJV --> ApplyAmortize[Apply Amortization JV:<br/>POST /api/glProcedure/applyAmortizeJv]
+
+    ApplyAmortize --> TrialBalance[Generate Trial Balance]
+    TrialBalance --> CheckBalance{TB<br/>Balanced?}
+
+    CheckBalance -->|No| FixTB[Fix Unbalanced Accounts]
+    FixTB --> RecalcBalances
+
+    CheckBalance -->|Yes| GLClose[GL Period Close:<br/>POST /api/glProcedure/closePeriod]
+    GLClose --> GenerateFS[Generate Financial Statements]
+
+    GenerateFS --> ReviewFS[Management Review]
+    ReviewFS --> Approved{FS<br/>Approved?}
+
+    Approved -->|No| Adjustments[Make Adjustments]
+    Adjustments --> RecalcBalances
+
+    Approved -->|Yes| LockPeriod[Lock Period:<br/>Prevent Further Changes]
+    LockPeriod --> EndClose([End: Period Closed])</div><h3>Module-Specific Period Close</h3>
+<p><strong>AP Period Close</strong> (<code>POST /api/apProcedure/closePeriod</code>)</p>
+<ul>
+<li>Close all open AP invoices for the period</li>
+<li>Validate all invoices are posted</li>
+<li>Prevent new invoices dated in closed period</li>
+<li>Generate AP aging report</li>
+<li><strong>Required Parameter</strong>: <code>closeDate</code> (DateTime)</li>
+</ul>
+<p><strong>AR Period Close</strong> (<code>POST /api/arProcedure/closePeriod</code>)</p>
+<ul>
+<li>Close all open AR invoices for the period</li>
+<li>Validate all receipts are posted</li>
+<li>Prevent new invoices/receipts dated in closed period</li>
+<li>Generate AR aging report</li>
+<li><strong>Required Parameter</strong>: <code>closeDate</code> (DateTime)</li>
+</ul>
+<p><strong>Asset Period Close</strong> (<code>POST /api/assetProcedure/closePeriod</code>)</p>
+<ul>
+<li>Calculate and post monthly depreciation</li>
+<li>Process all asset acquisitions and disposals</li>
+<li>Update asset register balances</li>
+<li>Generate asset depreciation report</li>
+<li><strong>Required Parameter</strong>: Determined by system period</li>
+</ul>
+<p><strong>Income Period Close</strong> (<code>POST /api/incomeProcedure/closePeriod</code>)</p>
+<ul>
+<li>Process all HMS/PMS revenue for the period</li>
+<li>Post income invoices to AR</li>
+<li>Validate revenue recognition schedules</li>
+<li>Generate income summary report</li>
+<li><strong>Required Parameter</strong>: Determined by system period</li>
+</ul>
+<p><strong>HMS Revenue Posting</strong> (<code>POST /api/incomeProcedure/postHmsRevenue</code>)</p>
+<ul>
+<li>Post HMS/PMS revenue to income module</li>
+<li>Create income invoices from PMS data</li>
+<li>Integrate with AR module</li>
+<li>Used for real-time or batch HMS revenue posting</li>
+</ul>
+<h3>GL Posting Procedures</h3>
+<p><strong>Post AP to GL</strong> (<code>POST /api/glProcedure/postAp</code>)</p>
+<ul>
+<li>Post AP invoices and payments to GL</li>
+<li>Create GL journal entries for AP transactions</li>
+<li>Update GL control accounts</li>
+<li><strong>Required Parameters</strong>: <code>fromDate</code>, <code>toDate</code> (DateTime)</li>
+</ul>
+<p><strong>Post AR to GL</strong> (<code>POST /api/glProcedure/postAr</code>)</p>
+<ul>
+<li>Post AR invoices and receipts to GL</li>
+<li>Create GL journal entries for AR transactions</li>
+<li>Update GL control accounts</li>
+<li><strong>Required Parameters</strong>: <code>fromDate</code>, <code>toDate</code> (DateTime)</li>
+</ul>
+<p><strong>Post Asset to GL</strong> (<code>POST /api/glProcedure/postAsset</code>)</p>
+<ul>
+<li>Post asset acquisitions, depreciation, and disposals to GL</li>
+<li>Combines depreciation and disposal posting</li>
+<li>Update GL fixed asset accounts</li>
+<li><strong>Required Parameters</strong>: <code>fromDate</code>, <code>toDate</code> (DateTime)</li>
+<li><strong>Optional Parameter</strong>: <code>forceUpdate</code> (bool) - Force reposting</li>
+</ul>
+<p><strong>Post Asset Depreciation</strong> (<code>POST /api/glProcedure/postAssetDepre</code>)</p>
+<ul>
+<li>Post depreciation expense to GL</li>
+<li><strong>Required Parameters</strong>: <code>fromDate</code>, <code>toDate</code> (DateTime)</li>
+</ul>
+<p><strong>Post Asset Disposal</strong> (<code>POST /api/glProcedure/postAssetDisposal</code>)</p>
+<ul>
+<li>Post asset disposal gain/loss to GL</li>
+<li><strong>Required Parameters</strong>: <code>fromDate</code>, <code>toDate</code> (DateTime)</li>
+</ul>
+<h3>GL Validation and Recalculation</h3>
+<p><strong>Check Invalid Postings</strong> (<code>POST /api/glProcedure/checkPostInvalid</code>)</p>
+<ul>
+<li>Validate transactions before posting</li>
+<li>Check for unbalanced entries</li>
+<li>Verify account codes exist</li>
+<li>Validate period status</li>
+<li><strong>Required Parameter</strong>: List of transactions to validate</li>
+</ul>
+<p><strong>Recalculate GL Balances</strong> (<code>POST /api/glProcedure/reCalPeriod</code>)</p>
+<ul>
+<li>Recalculate account balances from transactions</li>
+<li>Fix balance discrepancies</li>
+<li>Update period balances</li>
+<li><strong>Required Parameter</strong>: <code>toDate</code> (DateTime)</li>
+<li><strong>Wait Mode</strong>: Synchronous, waits for completion</li>
+</ul>
+<p><strong>Recalculate No Wait</strong> (<code>POST /api/glProcedure/reCalPeriodNoWait</code>)</p>
+<ul>
+<li>Same as reCalPeriod but asynchronous</li>
+<li>Returns immediately, processes in background</li>
+<li>Use for large-scale recalculations</li>
+</ul>
+<p><strong>Create GL History</strong> (<code>POST /api/glProcedure/createGlHis</code>)</p>
+<ul>
+<li>Create GL account history for reporting</li>
+<li>Generate opening balances for new period</li>
+<li>Archive period transactions</li>
+<li><strong>Required Parameter</strong>: <code>fromDate</code> (DateTime)</li>
+</ul>
+<h3>GL Period Close</h3>
+<p><strong>Close GL Period</strong> (<code>POST /api/glProcedure/closePeriod</code>)</p>
+<ul>
+<li>Final step in period close process</li>
+<li>Lock period to prevent further changes</li>
+<li>Generate closing balances</li>
+<li>Create opening balances for next period</li>
+<li>Perform final validations</li>
+</ul>
+<p><strong>Required Pre-conditions</strong>:</p>
+<ul>
+<li>All module period closes complete</li>
+<li>All transactions posted to GL</li>
+<li>Trial balance balanced</li>
+<li>All reconciliations complete</li>
+<li>Management approval received</li>
+</ul>
+<h3>Integration with Asset Module</h3>
+<p><strong>Post Asset from AP</strong> (<code>POST /api/assetProcedure/postAp</code>)</p>
+<ul>
+<li>Create asset register entries from AP invoices</li>
+<li>Used when assets are purchased via AP</li>
+<li>Automatically transfers asset acquisitions from AP to Asset module</li>
+<li>Updates both AP and Asset registers</li>
+</ul>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Period Lock</strong>: Prevent transactions in closed periods</li>
+<li><strong>Sequential Close</strong>: Modules must close in correct order</li>
+<li><strong>Balance Verification</strong>: All postings must balance (DR = CR)</li>
+<li><strong>Referential Integrity</strong>: All account codes must exist</li>
+<li><strong>Authorization</strong>: Period close requires proper permissions</li>
+<li><strong>Audit Trail</strong>: Complete log of all period close activities</li>
+<li><strong>Rollback Prevention</strong>: Closed periods cannot be reopened without special authorization</li>
+</ul>
+<hr>
+<h2>Bank Reconciliation Process</h2>
+<h3>Overview</h3>
+<p>Automated bank statement import and reconciliation process matching bank transactions with GL cash accounts.</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Bank Statement Received]) --> FileSource{Bank File<br/>Source?}
+
+    FileSource -->|Manual Upload| UploadFile[Upload Bank Statement File]
+    FileSource -->|Automated| AutoFetch[Auto-Fetch from Bank API]
+
+    UploadFile --> ImportFile[Import Bank File:<br/>POST /api/gblfilefrombank]
+    AutoFetch --> ImportFile
+
+    ImportFile --> ParseFile[Parse Bank Statement:<br/>CSV, Excel, Fixed-Width, API]
+    ParseFile --> ValidateFile{File Format<br/>Valid?}
+
+    ValidateFile -->|No| RejectFile[Reject Invalid File Format]
+    ValidateFile -->|Yes| ExtractTrans[Extract Bank Transactions:<br/>Date, Amount, Reference, Description]
+
+    ExtractTrans --> MapAccount[Map to GL Cash Account]
+    MapAccount --> CheckDuplicate{Duplicate<br/>Transactions?}
+
+    CheckDuplicate -->|Yes| SkipDuplicate[Skip Duplicate Entries]
+    CheckDuplicate -->|No| LoadStaging[Load to Staging Table:<br/>GblFileFromBank]
+
+    LoadStaging --> ReviewTrans[Review Bank Transactions]
+    ReviewTrans --> MatchTrans{Match to GL<br/>Transactions?}
+
+    MatchTrans -->|Auto-Match| AutoReconcile[Auto-Match:<br/>Amount + Date + Reference]
+    MatchTrans -->|Manual Match| ManualReconcile[Manual Match:<br/>User Selection]
+    MatchTrans -->|No Match| CreateEntry[Create Reconciliation Entry]
+
+    AutoReconcile --> UpdateStatus[Update Match Status:<br/>Matched, Unmatched, Pending]
+    ManualReconcile --> UpdateStatus
+    CreateEntry --> UpdateStatus
+
+    UpdateStatus --> CheckComplete{All Transactions<br/>Matched?}
+
+    CheckComplete -->|No| UnmatchedItems[Review Unmatched Items]
+    UnmatchedItems --> InvestigateReason{Reason for<br/>Unmatch?}
+
+    InvestigateReason -->|Timing Difference| TemporaryDiff[Mark as Temporary Difference]
+    InvestigateReason -->|Missing Entry| CreateJV[Create Journal Voucher]
+    InvestigateReason -->|Bank Error| ContactBank[Contact Bank for Correction]
+
+    TemporaryDiff --> CheckComplete
+    CreateJV --> CheckComplete
+    ContactBank --> CheckComplete
+
+    CheckComplete -->|Yes| FinalReview[Final Reconciliation Review]
+    FinalReview --> ApproveRec{Reconciliation<br/>Approved?}
+
+    ApproveRec -->|No| RejectRec[Reject and Revise]
+    ApproveRec -->|Yes| GenerateReport[Generate Reconciliation Report]
+
+    GenerateReport --> PostAdjustments[Post Adjusting Entries to GL]
+    PostAdjustments --> MarkComplete[Mark Bank Statement Reconciled]
+
+    MarkComplete --> ArchiveFile[Archive Bank Statement File]
+    ArchiveFile --> EndReconcile([End: Reconciliation Complete])
+
+    RejectFile --> EndReconcile
+    SkipDuplicate --> EndReconcile
+    RejectRec --> ReviewTrans</div><h3>Bank File Import Process</h3>
+<p><strong>Purpose</strong>: Import bank statement files from various sources and formats</p>
+<p><strong>Process</strong>:</p>
+<ol>
+<li><strong>File Upload</strong>: Upload bank statement file via <code>POST /api/gblfilefrombank</code></li>
+<li><strong>Format Detection</strong>: System detects file format (CSV, Excel, Fixed-Width, TXT, API JSON)</li>
+<li><strong>Parsing</strong>: Parse bank transactions from file</li>
+<li><strong>Validation</strong>: Validate transaction data (date, amount, reference, description)</li>
+<li><strong>Staging</strong>: Load transactions to GblFileFromBank staging table</li>
+<li><strong>Matching</strong>: Match bank transactions to GL cash transactions</li>
+</ol>
+<p><strong>Supported Bank File Formats</strong>:</p>
+<ul>
+<li>CSV (Comma-Separated Values)</li>
+<li>Excel (XLS, XLSX)</li>
+<li>Fixed-Width Text Files</li>
+<li>Tab-Delimited Files</li>
+<li>JSON (API imports)</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/gblfilefrombank/search
+GET    /api/gblfilefrombank
+GET    /api/gblfilefrombank/{id}
+POST   /api/gblfilefrombank
+PUT    /api/gblfilefrombank/{id}
+DELETE /api/gblfilefrombank/{id}</code></pre><h3>Bank Reconciliation Matching</h3>
+<p><strong>Auto-Matching Rules</strong>:</p>
+<ol>
+<li><strong>Exact Match</strong>: Amount + Date + Reference all match</li>
+<li><strong>Amount + Date</strong>: Amount and date match (reference may differ)</li>
+<li><strong>Amount + Reference</strong>: Amount and reference match (date within 3 days)</li>
+<li><strong>Fuzzy Match</strong>: Similar amounts within tolerance (±1%) and dates within 7 days</li>
+</ol>
+<p><strong>Manual Matching</strong>:</p>
+<ul>
+<li>User manually selects bank transaction and GL transaction to match</li>
+<li>System validates match and updates both records</li>
+<li>Audit trail maintained for manual matches</li>
+</ul>
+<p><strong>Reconciliation Items</strong>:</p>
+<ul>
+<li><strong>Outstanding Deposits</strong>: Deposits in transit not yet cleared by bank</li>
+<li><strong>Outstanding Checks</strong>: Checks issued but not yet cleared</li>
+<li><strong>Bank Charges</strong>: Bank fees, service charges, interest charges</li>
+<li><strong>Bank Credits</strong>: Interest income, collections, direct deposits</li>
+<li><strong>Errors</strong>: Bank errors or GL entry errors requiring correction</li>
+</ul>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Duplicate Detection</strong>: Prevent duplicate bank file imports</li>
+<li><strong>File Format Validation</strong>: Verify file format before processing</li>
+<li><strong>Transaction Validation</strong>: Validate date, amount, reference fields</li>
+<li><strong>Auto-Match Rules</strong>: Configurable matching tolerance and rules</li>
+<li><strong>Approval Workflow</strong>: Reconciliation requires approval before finalization</li>
+<li><strong>Audit Trail</strong>: Complete log of all matching and reconciliation activities</li>
+<li><strong>Period Lock</strong>: Prevent reconciliation of closed periods</li>
+</ul>
+<h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Bank File Import</strong></td>
+<td>GblFileFromBank</td>
+<td>Bank Statement → Staging Table</td>
+</tr>
+<tr>
+<td><strong>Transaction Matching</strong></td>
+<td>GL Module</td>
+<td>Bank Transactions → GL Cash Transactions</td>
+</tr>
+<tr>
+<td><strong>Adjusting Entries</strong></td>
+<td>GL Module</td>
+<td>Reconciliation Differences → Journal Entries</td>
+</tr>
+<tr>
+<td><strong>Reporting</strong></td>
+<td>GL Reporting</td>
+<td>Reconciliation Status → Bank Rec Report</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Tax Management Process</h2>
+<h3>Overview</h3>
+<p>Comprehensive tax management process covering tax profile setup, tax calculation, and tax reconciliation/reporting for VAT and Withholding Tax (WHT).</p>
+<div class="mermaid">flowchart TD
+    Start([Start: Tax Management]) --> TaxType{Tax<br/>Type?}
+
+    TaxType -->|Tax Profile Setup| ProfileSetup[Tax Profile Setup]
+    TaxType -->|Tax Calculation| TaxCalc[Tax Calculation]
+    TaxType -->|Tax Reconciliation| TaxRecon[Tax Reconciliation]
+
+    ProfileSetup --> CreateProfile[Create Tax Profile:<br/>POST /api/taxProfile]
+    CreateProfile --> DefineTax[Define Tax Parameters:<br/>Tax Type, Rate, GL Accounts]
+
+    DefineTax --> TaxProfileType{Tax<br/>Profile?}
+    TaxProfileType -->|VAT| VATProfile[VAT Profile:<br/>Output VAT, Input VAT]
+    TaxProfileType -->|WHT| WHTProfile[WHT Profile:<br/>WHT Rates by Type]
+    TaxProfileType -->|Other| OtherTax[Other Tax:<br/>Custom Tax Types]
+
+    VATProfile --> SaveProfile
+    WHTProfile --> SaveProfile
+    OtherTax --> SaveProfile[Save Tax Profile]
+
+    SaveProfile --> EndProfile([Profile Complete])
+
+    TaxCalc --> TransactionTax[Transaction Tax Calculation]
+    TransactionTax --> ApplyRules[Apply Tax Rules:<br/>Based on Tax Profile]
+
+    ApplyRules --> CalcVAT{Calculate<br/>VAT?}
+    CalcVAT -->|Yes| OutputVAT[Output VAT:<br/>Sales VAT equals Amount times Rate]
+    CalcVAT -->|Input| InputVAT[Input VAT:<br/>Purchase VAT equals Amount times Rate]
+
+    OutputVAT --> CalcWHT
+    InputVAT --> CalcWHT{Calculate<br/>WHT?}
+
+    CalcWHT -->|Yes| ApplyWHT[WHT Calculation:<br/>Amount times WHT Rate]
+    CalcWHT -->|No| PostTax
+
+    ApplyWHT --> WHTType{WHT<br/>Type?}
+    WHTType -->|Personal| PersonalWHT[Personal WHT:<br/>1 to 5 percent by income type]
+    WHTType -->|Corporate| CorporateWHT[Corporate WHT:<br/>1 to 3 percent by service type]
+    WHTType -->|Specific| SpecificWHT[Specific WHT:<br/>10 to 15 percent special rates]
+
+    PersonalWHT --> PostTax
+    CorporateWHT --> PostTax
+    SpecificWHT --> PostTax[Post Tax to GL:<br/>Tax Payable/Receivable Accounts]
+
+    PostTax --> EndCalc([Tax Calculated])
+
+    TaxRecon --> PeriodSelect[Select Reconciliation Period:<br/>fromDate to toDate]
+    PeriodSelect --> ExtractTax[Extract Tax Transactions:<br/>GET TaxReconcile by date range]
+
+    ExtractTax --> GroupTax[Group by Tax Type and Prefix]
+    GroupTax --> VATRecon{VAT<br/>Reconciliation?}
+
+    VATRecon -->|Yes| OutputVATRecon[Output VAT Reconciliation:<br/>Sales VAT Summary]
+    VATRecon -->|Input| InputVATRecon[Input VAT Reconciliation:<br/>Purchase VAT Summary]
+
+    OutputVATRecon --> NetVAT[Calculate Net VAT:<br/>Output VAT minus Input VAT]
+    InputVATRecon --> NetVAT
+
+    NetVAT --> VATPayable{VAT<br/>Payable?}
+    VATPayable -->|Payable| VATToPay[VAT Payable:<br/>Output exceeds Input]
+    VATPayable -->|Receivable| VATToReceive[VAT Receivable:<br/>Input exceeds Output]
+
+    VATToPay --> WHTRecon
+    VATToReceive --> WHTRecon{WHT<br/>Reconciliation?}
+
+    WHTRecon -->|Yes| WHTSummary[WHT Summary by Type:<br/>Personal, Corporate, Specific]
+    WHTRecon -->|No| ExportReport
+
+    WHTSummary --> WHTPayable[Calculate Total WHT Withheld]
+    WHTPayable --> ExportReport[Export Tax Report:<br/>POST /api/TaxReconcile/export]
+
+    ExportReport --> GenerateForms[Generate Tax Forms:<br/>VAT PP30, WHT PND]
+    GenerateForms --> FilingPrep[Prepare Tax Filing]
+
+    FilingPrep --> ReviewRec{Reconciliation<br/>Correct?}
+    ReviewRec -->|No| AdjustEntries[Create Adjusting Entries]
+    AdjustEntries --> ExtractTax
+
+    ReviewRec -->|Yes| ApproveRec[Approve Tax Reconciliation]
+    ApproveRec --> SubmitTax[Submit Tax Return to Revenue Dept]
+
+    SubmitTax --> PayTax[Pay Tax Liability]
+    PayTax --> RecordPayment[Record Tax Payment]
+
+    RecordPayment --> CloseRec[Close Tax Reconciliation Period]
+    CloseRec --> ArchiveRec[Archive Tax Documents]
+
+    ArchiveRec --> EndTax([End: Tax Complete])</div><h3>Tax Profile Management</h3>
+<p><strong>Purpose</strong>: Configure tax rates and rules for VAT, WHT, and other taxes</p>
+<p><strong>Tax Profile Types</strong>:</p>
+<ol>
+<li><p><strong>VAT (Value Added Tax)</strong></p>
+<ul>
+<li>Output VAT: 7% on sales (Thailand standard rate)</li>
+<li>Input VAT: 7% on purchases (reclaimable)</li>
+<li>Exempt VAT: 0% for exempt goods/services</li>
+<li>Export VAT: 0% for exports</li>
+</ul>
+</li>
+<li><p><strong>WHT (Withholding Tax)</strong></p>
+<ul>
+<li>Personal Services: 1-5% depending on service type</li>
+<li>Corporate Services: 1-3% depending on service type</li>
+<li>Rental Income: 5% withholding</li>
+<li>Professional Fees: 3% withholding</li>
+<li>Interest/Dividends: 10-15% withholding</li>
+</ul>
+</li>
+<li><p><strong>Other Taxes</strong></p>
+<ul>
+<li>Specific Business Tax (SBT): For certain industries</li>
+<li>Stamp Duty: For legal documents</li>
+<li>Custom taxes based on requirements</li>
+</ul>
+</li>
+</ol>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/taxProfile/search
+GET    /api/taxProfile
+GET    /api/taxProfile/{id}
+POST   /api/taxProfile
+PUT    /api/taxProfile/{id}
+DELETE /api/taxProfile/{id}</code></pre><h3>Tax Calculation Process</h3>
+<p><strong>VAT Calculation</strong>:</p>
+<ul>
+<li><strong>Output VAT</strong> (Sales): <code>Sale Amount × VAT Rate</code> → Credit to VAT Payable</li>
+<li><strong>Input VAT</strong> (Purchases): <code>Purchase Amount × VAT Rate</code> → Debit to VAT Receivable</li>
+<li><strong>Net VAT</strong>: <code>Output VAT - Input VAT</code> → Net Payable or Receivable</li>
+</ul>
+<p><strong>WHT Calculation</strong>:</p>
+<ul>
+<li><strong>WHT Amount</strong>: <code>Gross Payment × WHT Rate</code> → Credit to WHT Payable</li>
+<li><strong>Net Payment</strong>: <code>Gross Payment - WHT Amount</code> → Actual amount paid to vendor</li>
+<li><strong>WHT Certificate</strong>: Issue to vendor for tax credit claim</li>
+</ul>
+<p><strong>Integrated Tax Calculation</strong>:</p>
+<ul>
+<li>AP invoices: Calculate Input VAT and WHT on purchases</li>
+<li>AR invoices: Calculate Output VAT on sales</li>
+<li>GL journals: Manual tax entries for adjustments</li>
+</ul>
+<h3>Tax Reconciliation Process</h3>
+<p><strong>Purpose</strong>: Reconcile tax transactions, prepare tax returns, and generate tax reports</p>
+<p><strong>Process Steps</strong>:</p>
+<ol>
+<li><strong>Period Selection</strong>: Select reconciliation period (monthly for VAT, various for WHT)</li>
+<li><strong>Transaction Extraction</strong>: Extract all tax transactions for period</li>
+<li><strong>Tax Grouping</strong>: Group by tax type, tax code, and prefix</li>
+<li><strong>Reconciliation</strong>: Reconcile tax accounts to transaction details</li>
+<li><strong>Report Generation</strong>: Generate tax reconciliation reports</li>
+<li><strong>Export</strong>: Export tax data for government filing</li>
+</ol>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/TaxReconcile/batch
+GET    /api/TaxReconcile/{frDate}/{toDate}
+POST   /api/TaxReconcile/export/{frDate}/{toDate}/{overWrite}
+POST   /api/TaxReconcile/search
+GET    /api/TaxReconcile/{id}
+GET    /api/TaxReconcile/prefix/{prefix}
+POST   /api/TaxReconcile
+PUT    /api/TaxReconcile/{id}
+DELETE /api/TaxReconcile/{id}
+GET    /api/TaxReconcile/prefix
+GET    /api/TaxReconcile</code></pre><h3>Tax Reporting and Filing</h3>
+<p><strong>VAT Reporting (PP30)</strong>:</p>
+<ul>
+<li>Monthly VAT return (PP30 form)</li>
+<li>Output VAT from sales</li>
+<li>Input VAT from purchases</li>
+<li>Net VAT payable/receivable</li>
+<li>Due date: 15th of following month</li>
+</ul>
+<p><strong>WHT Reporting (PND Forms)</strong>:</p>
+<ul>
+<li>PND 1: Personal income WHT</li>
+<li>PND 3: Corporate income WHT</li>
+<li>PND 53: Special WHT (e.g., dividends, interest)</li>
+<li>Monthly/annual filing depending on type</li>
+<li>WHT certificate issuance to vendors</li>
+</ul>
+<p><strong>Export Functionality</strong>:</p>
+<ul>
+<li>Export reconciliation data to CSV/Excel</li>
+<li>Generate government-required XML format</li>
+<li>Prepare supporting documentation</li>
+<li>Batch export for multiple tax types</li>
+</ul>
+<h3>Controls and Validation</h3>
+<ul>
+<li><strong>Tax Profile Validation</strong>: Validate tax rates and GL account mappings</li>
+<li><strong>Calculation Accuracy</strong>: Verify tax calculations before posting</li>
+<li><strong>Reconciliation</strong>: Monthly reconciliation of tax accounts</li>
+<li><strong>Compliance</strong>: Ensure compliance with Thai Revenue Department requirements</li>
+<li><strong>Audit Trail</strong>: Complete log of all tax transactions and adjustments</li>
+<li><strong>Period Lock</strong>: Prevent changes to filed tax periods</li>
+<li><strong>WHT Certificates</strong>: Track and issue WHT certificates to vendors</li>
+<li><strong>Filing Deadlines</strong>: Monitor and alert for tax filing deadlines</li>
+</ul>
+<h3>Key Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>System</th>
+<th>Data Flow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tax Profile Setup</strong></td>
+<td>Tax Module</td>
+<td>Tax Rules → System Configuration</td>
+</tr>
+<tr>
+<td><strong>Tax Calculation</strong></td>
+<td>AP/AR/GL Modules</td>
+<td>Transactions → Tax Amounts</td>
+</tr>
+<tr>
+<td><strong>Tax Reconciliation</strong></td>
+<td>Tax Module</td>
+<td>Tax Transactions → Reconciliation Report</td>
+</tr>
+<tr>
+<td><strong>Tax Filing</strong></td>
+<td>Tax Module</td>
+<td>Reconciliation Data → Government Forms</td>
+</tr>
+<tr>
+<td><strong>Tax Payment</strong></td>
+<td>GL Module</td>
+<td>Tax Liability → Payment Entry</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Key Process Metrics (KPIs)</h2>
+<h3>Procure-to-Pay (P2P)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Invoice Processing Time</strong></td>
+<td>&lt; 3 days</td>
+<td>Receipt to posting</td>
+</tr>
+<tr>
+<td><strong>Invoice Accuracy</strong></td>
+<td>&gt; 98%</td>
+<td>Correct invoices / Total invoices</td>
+</tr>
+<tr>
+<td><strong>Payment Accuracy</strong></td>
+<td>&gt; 99%</td>
+<td>Correct payments / Total payments</td>
+</tr>
+<tr>
+<td><strong>Early Payment Discount Capture</strong></td>
+<td>&gt; 80%</td>
+<td>Discounts taken / Discounts available</td>
+</tr>
+<tr>
+<td><strong>Days Payable Outstanding (DPO)</strong></td>
+<td>45-60 days</td>
+<td>AP Balance / (COGS/365)</td>
+</tr>
+</tbody></table>
+<h3>PMS-to-Cash (Revenue Cycle)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PMS Data Import Success</strong></td>
+<td>&gt; 99%</td>
+<td>Successful imports / Total imports</td>
+</tr>
+<tr>
+<td><strong>Folio Processing Time</strong></td>
+<td>&lt; 1 day</td>
+<td>PMS export to AR invoice</td>
+</tr>
+<tr>
+<td><strong>Account Mapping Accuracy</strong></td>
+<td>&gt; 99%</td>
+<td>Correct mappings / Total transactions</td>
+</tr>
+<tr>
+<td><strong>Invoice Accuracy</strong></td>
+<td>&gt; 98%</td>
+<td>Correct invoices / Total invoices</td>
+</tr>
+<tr>
+<td><strong>Days Sales Outstanding (DSO)</strong></td>
+<td>&lt; 30 days</td>
+<td>AR Balance / (Revenue/365)</td>
+</tr>
+<tr>
+<td><strong>Collection Effectiveness</strong></td>
+<td>&gt; 95%</td>
+<td>Collections / Billed amount</td>
+</tr>
+<tr>
+<td><strong>PMS-Carmen Revenue Variance</strong></td>
+<td>&lt; 1%</td>
+<td>Variance / Total PMS revenue</td>
+</tr>
+</tbody></table>
+<h3>Income Module</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Revenue Recognition Accuracy</strong></td>
+<td>&gt; 99%</td>
+<td>Correct recognition / Total recognition</td>
+</tr>
+<tr>
+<td><strong>Deferred Revenue Balance</strong></td>
+<td>Reconciled</td>
+<td>Monthly reconciliation completion</td>
+</tr>
+<tr>
+<td><strong>Income Invoice Processing</strong></td>
+<td>&lt; 1 day</td>
+<td>Recognition to invoice generation</td>
+</tr>
+<tr>
+<td><strong>AR Integration Success</strong></td>
+<td>100%</td>
+<td>Successful AR posts / Total posts</td>
+</tr>
+<tr>
+<td><strong>PMS Income Reconciliation</strong></td>
+<td>100%</td>
+<td>Daily reconciliation completion</td>
+</tr>
+</tbody></table>
+<h3>Record-to-Report (R2R)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Month-End Close Time</strong></td>
+<td>&lt; 5 days</td>
+<td>Period end to close completion</td>
+</tr>
+<tr>
+<td><strong>Reconciliation Completion</strong></td>
+<td>100%</td>
+<td>Reconciled accounts / Total accounts</td>
+</tr>
+<tr>
+<td><strong>Adjusting Entries</strong></td>
+<td>&lt; 10</td>
+<td>Number of manual adjustments</td>
+</tr>
+<tr>
+<td><strong>Trial Balance Accuracy</strong></td>
+<td>100%</td>
+<td>First-time balanced trial balance</td>
+</tr>
+<tr>
+<td><strong>Report Timeliness</strong></td>
+<td>100%</td>
+<td>On-time report delivery</td>
+</tr>
+<tr>
+<td><strong>Audit Adjustments</strong></td>
+<td>&lt; 5</td>
+<td>Audit adjustments per year</td>
+</tr>
+</tbody></table>
+<h3>Asset Lifecycle</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Asset Utilization</strong></td>
+<td>&gt; 80%</td>
+<td>In-service assets / Total assets</td>
+</tr>
+<tr>
+<td><strong>Physical Verification</strong></td>
+<td>100%</td>
+<td>Assets verified / Total assets</td>
+</tr>
+<tr>
+<td><strong>Depreciation Accuracy</strong></td>
+<td>&gt; 99%</td>
+<td>Correct depreciation / Total depreciation</td>
+</tr>
+<tr>
+<td><strong>Disposal Processing Time</strong></td>
+<td>&lt; 7 days</td>
+<td>Approval to disposal completion</td>
+</tr>
+<tr>
+<td><strong>Asset Tracking Accuracy</strong></td>
+<td>&gt; 98%</td>
+<td>Matched assets / Physical count</td>
+</tr>
+</tbody></table>
+<h3>Bank Reconciliation</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Bank Rec Completion</strong></td>
+<td>100%</td>
+<td>Bank accounts reconciled / Total accounts</td>
+</tr>
+<tr>
+<td><strong>Reconciliation Timeliness</strong></td>
+<td>&lt; 5 days</td>
+<td>Days from statement date to completion</td>
+</tr>
+<tr>
+<td><strong>Auto-Match Success Rate</strong></td>
+<td>&gt; 85%</td>
+<td>Auto-matched transactions / Total transactions</td>
+</tr>
+<tr>
+<td><strong>Unreconciled Items</strong></td>
+<td>&lt; 5%</td>
+<td>Outstanding items / Total transactions</td>
+</tr>
+<tr>
+<td><strong>Bank File Import Success</strong></td>
+<td>&gt; 99%</td>
+<td>Successful imports / Total imports</td>
+</tr>
+</tbody></table>
+<h3>Tax Management</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tax Calculation Accuracy</strong></td>
+<td>&gt; 99.5%</td>
+<td>Correct tax calculations / Total calculations</td>
+</tr>
+<tr>
+<td><strong>VAT Reconciliation</strong></td>
+<td>100%</td>
+<td>Monthly VAT reconciliation completion</td>
+</tr>
+<tr>
+<td><strong>WHT Certificate Issuance</strong></td>
+<td>100%</td>
+<td>WHT certificates issued / WHT transactions</td>
+</tr>
+<tr>
+<td><strong>Tax Filing Timeliness</strong></td>
+<td>100%</td>
+<td>On-time filings / Total filings</td>
+</tr>
+<tr>
+<td><strong>Tax Compliance</strong></td>
+<td>100%</td>
+<td>Compliant filings / Total filings</td>
+</tr>
+<tr>
+<td><strong>Tax Reconciliation Variance</strong></td>
+<td>&lt; 0.5%</td>
+<td>Variance / Total tax liability</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>Document Version</strong>: 4.0<br><strong>Last Updated</strong>: 2025-10-07<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis (VERIFIED COMPLETE)</p>
+<p><strong>Change Log</strong>:</p>
+<ul>
+<li><strong>v4.0 (2025-10-07)</strong>: BANK &amp; TAX MODULES ADDED - Complete bank and tax process documentation<ul>
+<li>Added &quot;Bank Reconciliation Process&quot; section with comprehensive workflows</li>
+<li>Documented bank file import process (GblFileFromBank module)</li>
+<li>Added bank reconciliation matching rules (auto-match and manual match)</li>
+<li>Added &quot;Tax Management Process&quot; section with VAT and WHT processes</li>
+<li>Documented Tax Profile management (TaxProfile module)</li>
+<li>Documented Tax Reconciliation process (TaxReconcile module)</li>
+<li>Added Thai tax compliance documentation (PP30, PND forms)</li>
+<li>23 API endpoints documented: 6 bank + 17 tax</li>
+<li>Added Bank Reconciliation KPIs</li>
+<li>Added Tax Management KPIs</li>
+<li>All procedures validated against source code - NO fictional processes</li>
+</ul>
+</li>
+<li><strong>v3.0 (2025-10-07)</strong>: COMPREHENSIVE UPDATE - Added missing procedures from source code<ul>
+<li>Added &quot;GL Monthly Procedures&quot; section (Standard JV, Amortization, Data Verification)</li>
+<li>Added &quot;Detailed Period Close Procedures&quot; with all API endpoints</li>
+<li>Documented 19 GL procedure endpoints: verifyData, closePeriod, reCalPeriod, reCalPeriodNoWait, createGlHis, postAp, postAr, postAsset, postAssetDepre, postAssetDisposal, applyStandardJv, applyAmortizeJv, checkPostInvalid</li>
+<li>Documented AP, AR, Asset, and Income period close procedures</li>
+<li>Added Asset postAp procedure (asset acquisition from AP)</li>
+<li>Added Income postHmsRevenue procedure (HMS/PMS revenue posting)</li>
+<li>All procedures validated against source code - NO fictional processes</li>
+</ul>
+</li>
+<li><strong>v2.0 (2025-10-07)</strong>: MAJOR CORRECTION - Removed fictional Order-to-Cash (O2C) process<ul>
+<li>Carmen.NET has NO sales quotations, sales orders, or traditional O2C workflow</li>
+<li>System is designed for hospitality industry with PMS integration</li>
+<li>Replaced O2C with accurate &quot;PMS-to-Cash Revenue Cycle&quot; workflow</li>
+<li>Updated Income Module documentation to reflect PMS data source</li>
+<li>Added PMS integration details (Shiji, HotelLogix, HotelTime)</li>
+<li>Updated KPIs to reflect actual business processes</li>
+</ul>
+</li>
+<li><strong>v1.0 (2025-10-06)</strong>: Initial documentation with incorrect O2C assumptions</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

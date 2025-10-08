@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Decision Records (ADRs) - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Architecture Decision Records (ADRs)</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Architecture Decision Records (ADRs)</h1>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 5 - Solution Architect Documentation</p>
+<hr>
+<h2>Overview</h2>
+<p>This document captures key architectural decisions made during the design and evolution of the Carmen.NET ERP system. Each ADR follows a structured format documenting the context, decision, consequences, and rationale.</p>
+<p><strong>ADR Format</strong>:</p>
+<ul>
+<li><strong>Title</strong>: Short, descriptive name</li>
+<li><strong>Status</strong>: Proposed | Accepted | Deprecated | Superseded</li>
+<li><strong>Date</strong>: Decision date</li>
+<li><strong>Context</strong>: Problem and constraints</li>
+<li><strong>Decision</strong>: What was decided</li>
+<li><strong>Consequences</strong>: Positive and negative outcomes</li>
+<li><strong>Alternatives Considered</strong>: Other options evaluated</li>
+</ul>
+<hr>
+<h2>ADR Index</h2>
+<table>
+<thead>
+<tr>
+<th>ADR #</th>
+<th>Title</th>
+<th>Status</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ADR-001</td>
+<td>Multi-Tenant Architecture</td>
+<td>✅ Accepted</td>
+<td>2020-Q1</td>
+</tr>
+<tr>
+<td>ADR-002</td>
+<td>ASP.NET Web API Framework</td>
+<td>✅ Accepted</td>
+<td>2020-Q1</td>
+</tr>
+<tr>
+<td>ADR-003</td>
+<td>JWT Authentication</td>
+<td>✅ Accepted</td>
+<td>2020-Q2</td>
+</tr>
+<tr>
+<td>ADR-004</td>
+<td>Repository Pattern</td>
+<td>✅ Accepted</td>
+<td>2020-Q2</td>
+</tr>
+<tr>
+<td>ADR-005</td>
+<td>Entity Framework 6.x ORM</td>
+<td>✅ Accepted</td>
+<td>2020-Q2</td>
+</tr>
+<tr>
+<td>ADR-006</td>
+<td>Modular Monolith Architecture</td>
+<td>✅ Accepted</td>
+<td>2020-Q3</td>
+</tr>
+<tr>
+<td>ADR-007</td>
+<td>Database-First Approach</td>
+<td>✅ Accepted</td>
+<td>2020-Q3</td>
+</tr>
+<tr>
+<td>ADR-008</td>
+<td>State Machine Workflows</td>
+<td>✅ Accepted</td>
+<td>2020-Q4</td>
+</tr>
+<tr>
+<td>ADR-009</td>
+<td>Role-Based Access Control (RBAC)</td>
+<td>✅ Accepted</td>
+<td>2020-Q4</td>
+</tr>
+<tr>
+<td>ADR-010</td>
+<td>Synchronous API Design</td>
+<td>✅ Accepted</td>
+<td>2021-Q1</td>
+</tr>
+<tr>
+<td>ADR-011</td>
+<td>10-Digit Chart of Accounts</td>
+<td>✅ Accepted</td>
+<td>2021-Q2</td>
+</tr>
+<tr>
+<td>ADR-012</td>
+<td>WHT &amp; VAT Tax Engine</td>
+<td>✅ Accepted</td>
+<td>2021-Q2</td>
+</tr>
+<tr>
+<td>ADR-013</td>
+<td>Excel Integration Strategy</td>
+<td>✅ Accepted</td>
+<td>2021-Q3</td>
+</tr>
+<tr>
+<td>ADR-014</td>
+<td>File-Based Import/Export</td>
+<td>✅ Accepted</td>
+<td>2021-Q4</td>
+</tr>
+<tr>
+<td>ADR-015</td>
+<td>Centralized Error Handling</td>
+<td>✅ Accepted</td>
+<td>2022-Q1</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>ADR-001: Multi-Tenant Architecture</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q1<br><strong>Decision Maker</strong>: Solution Architect</p>
+<h3>Context</h3>
+<p>The Carmen.NET ERP system needed to support multiple independent organizations (tenants) using a single codebase and infrastructure, with complete data isolation and tenant-specific configuration.</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Complete data isolation between tenants</li>
+<li>Shared codebase for all tenants</li>
+<li>Tenant-specific customization support</li>
+<li>Cost-effective infrastructure utilization</li>
+<li>Scalability to 100+ tenants</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement multi-tenant architecture with row-level tenant isolation using <code>TenantCode</code> discriminator.</strong></p>
+<p><strong>Key Design</strong>:</p>
+<pre><code class="language-csharp">public abstract class TenantEntity
+{
+    public string TenantCode { get; set; }
+    // Other common properties
+}
+
+// Applied automatically via base service
+public class FncBase
+{
+    protected void ApplyTenantIfUseTenant(IQueryable&lt;T&gt; query)
+    {
+        if (UseTenant)
+            query = query.Where(x =&gt; x.TenantCode == CurrentTenantCode);
+    }
+}</code></pre><p><strong>Tenant Identification</strong>:</p>
+<ul>
+<li>JWT token contains <code>TenantCode</code> claim</li>
+<li>All database queries filtered by <code>TenantCode</code></li>
+<li>Tenant context established at authentication</li>
+</ul>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Single codebase reduces maintenance costs by 70%</li>
+<li>✅ Efficient resource utilization (shared infrastructure)</li>
+<li>✅ Easy tenant onboarding (add tenant record + data)</li>
+<li>✅ Centralized updates benefit all tenants simultaneously</li>
+<li>✅ Cost-effective scaling</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Requires careful query filtering to prevent data leakage</li>
+<li>⚠️ Performance impact from additional WHERE clause</li>
+<li>⚠️ Complex backup/restore for single tenant</li>
+<li>⚠️ &quot;Noisy neighbor&quot; risk (one tenant affects others)</li>
+<li>⚠️ Limited tenant-specific customization</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Enforce <code>TenantCode</code> filtering at base service level</li>
+<li>Database indexes on <code>TenantCode</code> for performance</li>
+<li>Resource quotas per tenant</li>
+<li>Tenant-specific configuration tables</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Database-per-Tenant</strong></p>
+<ul>
+<li>❌ Rejected: High infrastructure costs, complex updates</li>
+<li>✅ Benefit: Complete isolation, easier backup/restore</li>
+<li>Decision: Cost outweighs benefits for target market (SMBs)</li>
+</ul>
+<p><strong>2. Schema-per-Tenant</strong></p>
+<ul>
+<li>❌ Rejected: Database schema proliferation, update complexity</li>
+<li>✅ Benefit: Better isolation than row-level</li>
+<li>Decision: Adds complexity without significant benefit</li>
+</ul>
+<p><strong>3. Separate Application Instances</strong></p>
+<ul>
+<li>❌ Rejected: Highest cost, no code sharing</li>
+<li>✅ Benefit: Complete isolation, tenant-specific customization</li>
+<li>Decision: Not cost-effective for target market</li>
+</ul>
+<hr>
+<h2>ADR-002: ASP.NET Web API Framework</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q1<br><strong>Decision Maker</strong>: Solution Architect</p>
+<h3>Context</h3>
+<p>Need to select a web framework for building RESTful API backend that supports:</p>
+<ul>
+<li>High performance and scalability</li>
+<li>Strong typing and compile-time safety</li>
+<li>Mature ecosystem and community support</li>
+<li>Integration with Microsoft SQL Server</li>
+<li>Long-term vendor support</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Use ASP.NET Web API (.NET Framework 4.x) as the primary backend framework.</strong></p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>Mature, proven framework with 10+ years of production use</li>
+<li>Excellent performance (10,000+ requests/second)</li>
+<li>Strong typing with C# language</li>
+<li>Native SQL Server integration</li>
+<li>Large developer talent pool in Thailand</li>
+<li>Microsoft long-term support</li>
+</ul>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Excellent performance and scalability</li>
+<li>✅ Strong typing prevents runtime errors</li>
+<li>✅ Mature ecosystem (NuGet packages)</li>
+<li>✅ Easy to find ASP.NET developers</li>
+<li>✅ Comprehensive documentation</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Windows-only deployment (.NET Framework)</li>
+<li>⚠️ Monolithic architecture (not microservices-friendly)</li>
+<li>⚠️ Larger memory footprint than alternatives</li>
+<li>⚠️ Vendor lock-in to Microsoft stack</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Plan migration to .NET Core/.NET 8 for cross-platform support</li>
+<li>Use modular monolith pattern for future microservices extraction</li>
+<li>Containerization for deployment flexibility</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Node.js + Express</strong></p>
+<ul>
+<li>❌ Rejected: Weaker typing, less mature for enterprise</li>
+<li>✅ Benefit: Cross-platform, JavaScript ecosystem</li>
+<li>Decision: Type safety critical for financial ERP</li>
+</ul>
+<p><strong>2. Java Spring Boot</strong></p>
+<ul>
+<li>❌ Rejected: Smaller developer pool in Thailand</li>
+<li>✅ Benefit: Cross-platform, mature ecosystem</li>
+<li>Decision: .NET expertise more available locally</li>
+</ul>
+<p><strong>3. Python Django/Flask</strong></p>
+<ul>
+<li>❌ Rejected: Performance concerns for high-volume transactions</li>
+<li>✅ Benefit: Rapid development, good for data processing</li>
+<li>Decision: Performance critical for real-time ERP</li>
+</ul>
+<hr>
+<h2>ADR-003: JWT Authentication</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q2<br><strong>Decision Maker</strong>: Security Architect</p>
+<h3>Context</h3>
+<p>Need secure, stateless authentication mechanism for:</p>
+<ul>
+<li>RESTful API (stateless)</li>
+<li>Mobile clients (token-based)</li>
+<li>Third-party integrations</li>
+<li>Multi-tenant environment</li>
+<li>Session management across load-balanced servers</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement JWT (JSON Web Tokens) for authentication with Bearer token scheme.</strong></p>
+<p><strong>Token Structure</strong>:</p>
+<pre><code class="language-json">{
+  &quot;sub&quot;: &quot;user123&quot;,
+  &quot;email&quot;: &quot;user@tenant.com&quot;,
+  &quot;tenantCode&quot;: &quot;TENANT001&quot;,
+  &quot;roles&quot;: [&quot;AP.Manager&quot;, &quot;AR.Clerk&quot;],
+  &quot;exp&quot;: 1735689600,
+  &quot;iat&quot;: 1735603200
+}</code></pre><p><strong>Flow</strong>:</p>
+<ol>
+<li>User logs in with email/password</li>
+<li>Server validates and returns JWT access token (15 min) + refresh token (7 days)</li>
+<li>Client includes token in <code>Authorization: Bearer {token}</code> header</li>
+<li>Server validates token signature and expiration</li>
+<li>Server extracts claims (user, tenant, roles) for authorization</li>
+</ol>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Stateless (no server-side session storage)</li>
+<li>✅ Scalable (works with load balancers)</li>
+<li>✅ Mobile-friendly (token-based)</li>
+<li>✅ Self-contained (all info in token)</li>
+<li>✅ Industry standard (widespread support)</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Cannot revoke tokens before expiration</li>
+<li>⚠️ Token size larger than session ID</li>
+<li>⚠️ Sensitive data in token (needs encryption)</li>
+<li>⚠️ XSS vulnerability if stored in localStorage</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Short token expiration (15 minutes)</li>
+<li>Refresh token rotation for security</li>
+<li>Store tokens in httpOnly cookies (web) or secure storage (mobile)</li>
+<li>Token blacklist for critical revocations</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Session-Based Authentication</strong></p>
+<ul>
+<li>❌ Rejected: Requires sticky sessions or shared session store</li>
+<li>✅ Benefit: Easy revocation, smaller overhead</li>
+<li>Decision: Scalability concerns with load balancing</li>
+</ul>
+<p><strong>2. OAuth 2.0 with External Provider</strong></p>
+<ul>
+<li>❌ Rejected: Adds external dependency, complexity</li>
+<li>✅ Benefit: Delegated authentication, SSO</li>
+<li>Decision: Internal users don&#39;t require external OAuth</li>
+</ul>
+<p><strong>3. API Keys</strong></p>
+<ul>
+<li>❌ Rejected: No user context, difficult to rotate</li>
+<li>✅ Benefit: Simple, long-lived</li>
+<li>Decision: Need user-level permissions, not just API access</li>
+</ul>
+<hr>
+<h2>ADR-004: Repository Pattern</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q2<br><strong>Decision Maker</strong>: Lead Developer</p>
+<h3>Context</h3>
+<p>Need consistent data access layer that:</p>
+<ul>
+<li>Abstracts database implementation</li>
+<li>Provides testability (mock repositories)</li>
+<li>Centralizes query logic</li>
+<li>Supports multiple data sources</li>
+<li>Maintains clean separation of concerns</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement Repository Pattern with generic base repository and entity-specific repositories.</strong></p>
+<p><strong>Pattern</strong>:</p>
+<pre><code class="language-csharp">// Generic base repository
+public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
+{
+    protected DbContext Context { get; }
+
+    public virtual IQueryable&lt;T&gt; GetAll() =&gt; Context.Set&lt;T&gt;();
+    public virtual T GetById(int id) =&gt; Context.Set&lt;T&gt;().Find(id);
+    public virtual void Add(T entity) =&gt; Context.Set&lt;T&gt;().Add(entity);
+    // ... other CRUD operations
+}
+
+// Entity-specific repository
+public class ApInvoiceRepository : Repository&lt;ApInvoiceHeader&gt;
+{
+    public IQueryable&lt;ApInvoiceHeader&gt; GetPendingApproval()
+    {
+        return GetAll().Where(x =&gt; x.Status == &quot;PendingApproval&quot;);
+    }
+}</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Clean separation: Controllers → Services → Repositories → Database</li>
+<li>✅ Testability: Easy to mock repositories</li>
+<li>✅ Reusability: Generic base repository</li>
+<li>✅ Flexibility: Can switch data sources</li>
+<li>✅ Encapsulation: Business queries in repositories</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Additional abstraction layer (complexity)</li>
+<li>⚠️ Potential performance overhead</li>
+<li>⚠️ Risk of &quot;leaky abstraction&quot; (IQueryable exposure)</li>
+<li>⚠️ More code to maintain</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Use IQueryable for flexibility, but encapsulate complex queries</li>
+<li>Performance testing to identify bottlenecks</li>
+<li>Clear repository interface contracts</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Direct DbContext Usage</strong></p>
+<ul>
+<li>❌ Rejected: Tight coupling, difficult to test</li>
+<li>✅ Benefit: Simpler, less abstraction</li>
+<li>Decision: Testability and separation of concerns critical</li>
+</ul>
+<p><strong>2. CQRS with Separate Read/Write Models</strong></p>
+<ul>
+<li>❌ Rejected: Over-engineering for current scale</li>
+<li>✅ Benefit: Optimized reads and writes</li>
+<li>Decision: Complexity not justified yet (future consideration)</li>
+</ul>
+<hr>
+<h2>ADR-005: Entity Framework 6.x ORM</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q2<br><strong>Decision Maker</strong>: Database Architect</p>
+<h3>Context</h3>
+<p>Need Object-Relational Mapping (ORM) tool for:</p>
+<ul>
+<li>Type-safe database queries (LINQ)</li>
+<li>Automatic change tracking</li>
+<li>Database schema management</li>
+<li>Reduced SQL boilerplate</li>
+<li>Integration with ASP.NET Web API</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Use Entity Framework 6.x as the ORM layer.</strong></p>
+<p><strong>Approach</strong>:</p>
+<ul>
+<li>Database-First (generate models from existing database)</li>
+<li>DbContext per module (ApContext, ArContext, etc.)</li>
+<li>Lazy loading disabled (explicit eager loading)</li>
+<li>Query optimization with Include/AsNoTracking</li>
+</ul>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Type-safe LINQ queries (compile-time checking)</li>
+<li>✅ Automatic change tracking (no manual SQL updates)</li>
+<li>✅ Reduced boilerplate code (80% less SQL)</li>
+<li>✅ Migration support (code-first when needed)</li>
+<li>✅ Strong Microsoft support</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Performance overhead vs. raw SQL (10-20%)</li>
+<li>⚠️ N+1 query problem if not careful</li>
+<li>⚠️ Complex queries can be slower than stored procedures</li>
+<li>⚠️ Learning curve for optimization</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Profiling and query optimization</li>
+<li>Use AsNoTracking for read-only queries</li>
+<li>Explicit Include for eager loading</li>
+<li>Stored procedures for complex reports</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Dapper (Micro-ORM)</strong></p>
+<ul>
+<li>❌ Rejected: Less productivity, more manual mapping</li>
+<li>✅ Benefit: Better performance, lightweight</li>
+<li>Decision: Productivity more important than marginal performance</li>
+</ul>
+<p><strong>2. Raw ADO.NET</strong></p>
+<ul>
+<li>❌ Rejected: Too much boilerplate, error-prone</li>
+<li>✅ Benefit: Maximum performance control</li>
+<li>Decision: Maintainability concerns</li>
+</ul>
+<p><strong>3. NHibernate</strong></p>
+<ul>
+<li>❌ Rejected: Smaller community, complex configuration</li>
+<li>✅ Benefit: More mature, feature-rich</li>
+<li>Decision: EF better Microsoft ecosystem integration</li>
+</ul>
+<hr>
+<h2>ADR-006: Modular Monolith Architecture</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q3<br><strong>Decision Maker</strong>: Solution Architect</p>
+<h3>Context</h3>
+<p>Need architectural style that:</p>
+<ul>
+<li>Supports 11 distinct business modules</li>
+<li>Allows independent module development</li>
+<li>Maintains single deployment unit</li>
+<li>Provides clear module boundaries</li>
+<li>Enables future microservices extraction</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Adopt Modular Monolith architecture with clear module boundaries.</strong></p>
+<p><strong>Structure</strong>:</p>
+<pre><code class="language-text">Carmen.NET.sln
+├── Carmen.Ap/          (AP Module)
+│   ├── Controllers/
+│   ├── Services/
+│   ├── Repositories/
+│   └── Models/
+├── Carmen.Ar/          (AR Module)
+├── Carmen.Gl/          (GL Module)
+├── Carmen.Asset/       (Asset Module)
+├── Carmen.Common/      (Shared utilities)
+└── Carmen.Api/         (API host)</code></pre><p><strong>Module Isolation</strong>:</p>
+<ul>
+<li>Each module has own namespace</li>
+<li>No cross-module direct dependencies</li>
+<li>Communication via shared interfaces or events</li>
+<li>Shared entities in Common module</li>
+</ul>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Clear module boundaries (maintainability)</li>
+<li>✅ Independent module development</li>
+<li>✅ Single deployment (simplicity)</li>
+<li>✅ Shared infrastructure (cost-effective)</li>
+<li>✅ Easy to extract modules later (microservices path)</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Risk of tight coupling if not disciplined</li>
+<li>⚠️ Single database (not ideal for microservices)</li>
+<li>⚠️ All modules scale together</li>
+<li>⚠️ One module failure can affect others</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Strict module dependency rules</li>
+<li>Shared kernel pattern for common code</li>
+<li>Health checks per module</li>
+<li>Plan for future microservices extraction</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Microservices Architecture</strong></p>
+<ul>
+<li>❌ Rejected: Over-engineering for current scale</li>
+<li>✅ Benefit: Independent scaling, fault isolation</li>
+<li>Decision: Complexity not justified (10 modules, single team)</li>
+</ul>
+<p><strong>2. Layered Monolith</strong></p>
+<ul>
+<li>❌ Rejected: Poor module boundaries</li>
+<li>✅ Benefit: Simpler, traditional approach</li>
+<li>Decision: Module independence important for future</li>
+</ul>
+<hr>
+<h2>ADR-007: Database-First Approach</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q3<br><strong>Decision Maker</strong>: Database Architect</p>
+<h3>Context</h3>
+<p>Need to decide between Code-First vs. Database-First for Entity Framework:</p>
+<ul>
+<li>Database design experience in team</li>
+<li>Complex financial schema requirements</li>
+<li>Need for database-level constraints</li>
+<li>Performance optimization needs</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Use Database-First approach with T4 templates for model generation.</strong></p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>Design database schema in SQL Server Management Studio</li>
+<li>Apply migrations via SQL scripts</li>
+<li>Generate EF models using T4 templates</li>
+<li>Customize models with partial classes</li>
+</ol>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ DBA-friendly (visual database design)</li>
+<li>✅ Database constraints at DB level (triggers, check constraints)</li>
+<li>✅ Performance optimization (indexes, partitions)</li>
+<li>✅ Schema version control (SQL scripts)</li>
+<li>✅ Model generation automation</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Manual synchronization (schema → models)</li>
+<li>⚠️ Risk of model regeneration overwriting customizations</li>
+<li>⚠️ Migrations not automatic (manual SQL scripts)</li>
+<li>⚠️ Less C#-centric workflow</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Partial classes for customizations</li>
+<li>T4 template customization</li>
+<li>Migration script versioning</li>
+<li>Clear sync process documentation</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Code-First Migrations</strong></p>
+<ul>
+<li>❌ Rejected: Team prefers database design tools</li>
+<li>✅ Benefit: Automatic migrations, version control</li>
+<li>Decision: DBA expertise better utilized with DB-first</li>
+</ul>
+<p><strong>2. Hybrid (Code-First for new, DB-First for existing)</strong></p>
+<ul>
+<li>❌ Rejected: Inconsistent approach, confusion</li>
+<li>✅ Benefit: Best of both worlds</li>
+<li>Decision: Consistency more important</li>
+</ul>
+<hr>
+<h2>ADR-008: State Machine Workflows</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q4<br><strong>Decision Maker</strong>: Business Analyst + Architect</p>
+<h3>Context</h3>
+<p>Business processes (invoice approval, payment processing, period close) require:</p>
+<ul>
+<li>Clear state transitions</li>
+<li>Approval workflows</li>
+<li>Audit trail</li>
+<li>Status validation</li>
+<li>Rollback capabilities</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement state machine pattern for core workflows with status enums and validation.</strong></p>
+<p><strong>Pattern</strong>:</p>
+<pre><code class="language-csharp">public enum ApInvoiceStatus
+{
+    Draft = 1,
+    PendingApproval = 2,
+    Approved = 3,
+    Rejected = 4,
+    Posted = 5,
+    PartiallyPaid = 6,
+    FullyPaid = 7,
+    Cancelled = 8
+}
+
+// Allowed transitions
+Dictionary&lt;ApInvoiceStatus, List&lt;ApInvoiceStatus&gt;&gt; transitions = new()
+{
+    { Draft, new() { PendingApproval, Cancelled } },
+    { PendingApproval, new() { Approved, Rejected } },
+    { Approved, new() { Posted, Cancelled } },
+    // ...
+};</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Clear business process visibility</li>
+<li>✅ Prevents invalid state transitions</li>
+<li>✅ Audit trail (status history)</li>
+<li>✅ Easy to understand and maintain</li>
+<li>✅ Supports complex approval workflows</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Rigidity (difficult to change states)</li>
+<li>⚠️ Complex transition logic for multi-path workflows</li>
+<li>⚠️ Status proliferation (many statuses)</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Centralized state transition validation</li>
+<li>Status history table for audit</li>
+<li>Clear documentation of allowed transitions</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Workflow Engine (Windows Workflow Foundation)</strong></p>
+<ul>
+<li>❌ Rejected: Over-engineering, complex configuration</li>
+<li>✅ Benefit: Visual workflow designer, complex routing</li>
+<li>Decision: Simple state machines sufficient</li>
+</ul>
+<p><strong>2. Boolean Flags (IsApproved, IsPosted, etc.)</strong></p>
+<ul>
+<li>❌ Rejected: Unclear state, no workflow</li>
+<li>✅ Benefit: Flexible</li>
+<li>Decision: Lack of clarity, difficult to maintain</li>
+</ul>
+<hr>
+<h2>ADR-009: Role-Based Access Control (RBAC)</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2020-Q4<br><strong>Decision Maker</strong>: Security Architect</p>
+<h3>Context</h3>
+<p>Need fine-grained access control for:</p>
+<ul>
+<li>11 modules with different permissions</li>
+<li>Multiple user roles (clerk, manager, controller, admin)</li>
+<li>CRUD operations per entity</li>
+<li>Special permissions (approve, post, close)</li>
+<li>Multi-tenant environment</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement RBAC with module.entity.action permission naming convention.</strong></p>
+<p><strong>Permission Format</strong>: <code>{Module}.{Entity}.{Action}</code></p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li><code>AP.Invoice.View</code></li>
+<li><code>AP.Invoice.Create</code></li>
+<li><code>AP.Invoice.Approve</code></li>
+<li><code>AR.Receipt.Post</code></li>
+<li><code>GL.Period.Close</code></li>
+</ul>
+<p><strong>Implementation</strong>:</p>
+<pre><code class="language-csharp">[Authorize]
+[Permission(&quot;AP.Invoice.Approve&quot;)]
+public async Task&lt;IActionResult&gt; ApproveInvoice(int id)
+{
+    // Permission checked via custom authorization filter
+}</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Granular permissions (100+ permissions)</li>
+<li>✅ Clear naming convention</li>
+<li>✅ Role composition (roles contain permissions)</li>
+<li>✅ Easy to understand and audit</li>
+<li>✅ Supports multi-tenant (permissions per tenant)</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Permission proliferation (management complexity)</li>
+<li>⚠️ No dynamic permissions (code-based)</li>
+<li>⚠️ Performance (permission check on each request)</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Permission caching in JWT token</li>
+<li>Admin UI for role/permission management</li>
+<li>Permission grouping by role templates</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Claims-Based Authorization</strong></p>
+<ul>
+<li>❌ Rejected: Less structured, harder to manage</li>
+<li>✅ Benefit: Flexible, built-in .NET support</li>
+<li>Decision: Structure needed for audit and management</li>
+</ul>
+<p><strong>2. Attribute-Based Access Control (ABAC)</strong></p>
+<ul>
+<li>❌ Rejected: Too complex for current needs</li>
+<li>✅ Benefit: Policy-based, very flexible</li>
+<li>Decision: RBAC sufficient for current requirements</li>
+</ul>
+<hr>
+<h2>ADR-010: Synchronous API Design</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2021-Q1<br><strong>Decision Maker</strong>: Lead Developer</p>
+<h3>Context</h3>
+<p>Need to decide between synchronous vs. asynchronous API design:</p>
+<ul>
+<li>Most operations complete in &lt;2 seconds</li>
+<li>Clients expect immediate response</li>
+<li>Database operations are primary bottleneck</li>
+<li>Limited long-running operations</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Use synchronous API design with async/await for I/O operations.</strong></p>
+<p><strong>Pattern</strong>:</p>
+<pre><code class="language-csharp">[HttpPost]
+public async Task&lt;IActionResult&gt; CreateInvoice([FromBody] ApInvoiceRequest request)
+{
+    // Async for I/O (database, external calls)
+    var invoice = await _service.CreateInvoiceAsync(request);
+    return Ok(invoice);
+}</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Simple request/response pattern</li>
+<li>✅ Immediate feedback to user</li>
+<li>✅ Easy error handling</li>
+<li>✅ Client-side simplicity</li>
+<li>✅ Async/await for I/O scalability</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Client waits for long operations</li>
+<li>⚠️ Not suitable for batch processing</li>
+<li>⚠️ Timeout issues for slow operations</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Background jobs for batch processing (e.g., period close)</li>
+<li>Polling for long-running operations</li>
+<li>Timeout configuration (30-60 seconds)</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Asynchronous (Job Queue) API</strong></p>
+<ul>
+<li>❌ Rejected: Adds complexity for most operations</li>
+<li>✅ Benefit: Better for long-running tasks</li>
+<li>Decision: Use for specific long-running operations only</li>
+</ul>
+<p><strong>2. GraphQL</strong></p>
+<ul>
+<li>❌ Rejected: Learning curve, over-engineering</li>
+<li>✅ Benefit: Flexible queries, reduce over-fetching</li>
+<li>Decision: REST sufficient for current needs</li>
+</ul>
+<hr>
+<h2>ADR-011: 10-Digit Chart of Accounts</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2021-Q2<br><strong>Decision Maker</strong>: CFO + Business Analyst</p>
+<h3>Context</h3>
+<p>Need flexible chart of accounts structure that supports:</p>
+<ul>
+<li>Account hierarchy (Assets, Liabilities, Equity, Revenue, Expenses)</li>
+<li>Sub-account categorization</li>
+<li>Department/cost center tracking</li>
+<li>Project tracking</li>
+<li>Future extensibility</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement 10-digit chart of accounts: AAAA-BB-CC-DD</strong></p>
+<p><strong>Structure</strong>:</p>
+<ul>
+<li><strong>AAAA</strong> (4 digits): Main Account (1000-9999)</li>
+<li><strong>BB</strong> (2 digits): Sub-Account (01-99)</li>
+<li><strong>CC</strong> (2 digits): Department/Cost Center (01-99)</li>
+<li><strong>DD</strong> (2 digits): Project/Segment (01-99)</li>
+</ul>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li><code>1100-00-00-00</code>: Cash in Bank</li>
+<li><code>1100-01-00-00</code>: Cash in Bank - Checking</li>
+<li><code>1100-01-10-00</code>: Cash in Bank - Checking - IT Department</li>
+<li><code>5100-00-15-20</code>: Consulting Expense - Marketing Dept - Project Alpha</li>
+</ul>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Flexible reporting (by account, dept, project)</li>
+<li>✅ Multi-dimensional analysis</li>
+<li>✅ Hierarchical structure (roll-ups)</li>
+<li>✅ Supports future growth</li>
+<li>✅ Industry-standard approach</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Complex account code (10 digits)</li>
+<li>⚠️ User training required</li>
+<li>⚠️ Potential for misuse (wrong dimensions)</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Account code validation</li>
+<li>Dropdown selectors (not free text)</li>
+<li>Default values for common scenarios</li>
+<li>Training documentation</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Simple 4-Digit Accounts</strong></p>
+<ul>
+<li>❌ Rejected: Insufficient for multi-dimensional reporting</li>
+<li>✅ Benefit: Simple, easy to use</li>
+<li>Decision: Flexibility needed for growing businesses</li>
+</ul>
+<p><strong>2. Tag-Based Accounting</strong></p>
+<ul>
+<li>❌ Rejected: Non-standard, difficult migration</li>
+<li>✅ Benefit: Unlimited dimensions</li>
+<li>Decision: Traditional structure preferred by accountants</li>
+</ul>
+<hr>
+<h2>ADR-012: WHT &amp; VAT Tax Engine</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2021-Q2<br><strong>Decision Maker</strong>: Tax Compliance Officer + Architect</p>
+<h3>Context</h3>
+<p>Thai tax regulations require:</p>
+<ul>
+<li>Withholding Tax (WHT): 3%, 5%, 10%, 15% based on transaction type</li>
+<li>Value Added Tax (VAT): 7% standard rate</li>
+<li>Tax exemptions and special cases</li>
+<li>Monthly tax filing</li>
+<li>Audit trail</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Build custom tax engine with configurable tax codes and calculation rules.</strong></p>
+<p><strong>Tax Code Structure</strong>:</p>
+<pre><code class="language-csharp">public class TaxCode
+{
+    public string Code { get; set; }          // WHT05, VAT07
+    public string Type { get; set; }          // WHT, VAT
+    public decimal Rate { get; set; }         // 0.05, 0.07
+    public string TransactionType { get; set; } // Service, Interest, Dividend
+}</code></pre><p><strong>Calculation Engine</strong>:</p>
+<pre><code class="language-csharp">public class TaxCalculator
+{
+    public TaxResult Calculate(decimal amount, string taxCode)
+    {
+        var tax = _taxCodes[taxCode];
+        var taxAmount = amount * tax.Rate;
+
+        return new TaxResult
+        {
+            TaxableAmount = amount,
+            TaxRate = tax.Rate,
+            TaxAmount = taxAmount,
+            NetAmount = amount - taxAmount  // For WHT
+        };
+    }
+}</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Compliant with Thai tax regulations</li>
+<li>✅ Configurable tax codes (no code changes)</li>
+<li>✅ Accurate calculations</li>
+<li>✅ Audit trail (tax history)</li>
+<li>✅ Monthly tax reports</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Complex tax rules (multiple scenarios)</li>
+<li>⚠️ Regulation changes require configuration updates</li>
+<li>⚠️ Testing complexity</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Tax code configuration UI</li>
+<li>Comprehensive test scenarios</li>
+<li>Regular compliance reviews</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. Third-Party Tax Service</strong></p>
+<ul>
+<li>❌ Rejected: Thai market specificity, cost</li>
+<li>✅ Benefit: Automatic updates, less maintenance</li>
+<li>Decision: Custom solution more cost-effective</li>
+</ul>
+<p><strong>2. Hardcoded Tax Rates</strong></p>
+<ul>
+<li>❌ Rejected: Inflexible, requires code changes</li>
+<li>✅ Benefit: Simple</li>
+<li>Decision: Configuration needed for rate changes</li>
+</ul>
+<hr>
+<h2>ADR-013: Excel Integration Strategy</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2021-Q3<br><strong>Decision Maker</strong>: Product Owner + Architect</p>
+<h3>Context</h3>
+<p>Users need:</p>
+<ul>
+<li>Bulk data entry (100+ invoices)</li>
+<li>Excel-based reporting</li>
+<li>Data export for analysis</li>
+<li>Familiar interface (Excel)</li>
+<li>Integration with existing Excel workflows</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Support Excel integration via three approaches:</strong></p>
+<ol>
+<li><strong>Template-Based Import</strong>: Download Excel templates, fill data, upload</li>
+<li><strong>Direct Export</strong>: Export data to Excel format (XLSX)</li>
+<li><strong>Excel Add-in</strong> (future): Real-time Excel ↔ API integration</li>
+</ol>
+<p><strong>Import Flow</strong>:</p>
+<pre><code class="language-text">1. Download Excel template (predefined columns)
+2. User fills data in Excel
+3. Upload file to API
+4. Server validates and imports
+5. Return error file for failed rows</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Familiar interface (Excel)</li>
+<li>✅ Bulk operations (100+ records)</li>
+<li>✅ Offline data entry</li>
+<li>✅ Power users productivity</li>
+<li>✅ Ad-hoc reporting</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Data validation complexity (Excel vs. API)</li>
+<li>⚠️ Error handling (partial success)</li>
+<li>⚠️ Version control (template changes)</li>
+<li>⚠️ File size limitations</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Clear validation rules in templates</li>
+<li>Error file with row-level errors</li>
+<li>Template versioning</li>
+<li>File size limits (100 MB, 100K rows)</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. CSV Only</strong></p>
+<ul>
+<li>❌ Rejected: Less user-friendly, no formulas</li>
+<li>✅ Benefit: Simple, universal format</li>
+<li>Decision: Excel provides better UX</li>
+</ul>
+<p><strong>2. Web-Based Bulk Entry</strong></p>
+<ul>
+<li>❌ Rejected: Less efficient than Excel for power users</li>
+<li>✅ Benefit: No file upload, instant validation</li>
+<li>Decision: Both approaches supported (web + Excel)</li>
+</ul>
+<hr>
+<h2>ADR-014: File-Based Import/Export</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2021-Q4<br><strong>Decision Maker</strong>: Integration Specialist</p>
+<h3>Context</h3>
+<p>Integration with external systems requires:</p>
+<ul>
+<li>Bank statement import (MT940, CSV)</li>
+<li>Tax filing export (TXT, XML)</li>
+<li>Third-party system integration</li>
+<li>Batch processing</li>
+<li>Scheduled imports</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Support multiple file formats with standardized import/export API.</strong></p>
+<p><strong>Supported Formats</strong>:</p>
+<ul>
+<li><strong>CSV</strong>: General data import/export</li>
+<li><strong>Excel (XLSX)</strong>: User-friendly bulk entry</li>
+<li><strong>JSON</strong>: API integration</li>
+<li><strong>XML</strong>: Legacy system integration</li>
+<li><strong>MT940</strong>: Bank statement import</li>
+<li><strong>PDF</strong>: Document generation</li>
+</ul>
+<p><strong>Import API</strong>:</p>
+<pre><code class="language-http">POST /api/import/{module}/{entity}
+Content-Type: multipart/form-data
+
+file: &lt;uploaded file&gt;
+options: {
+  &quot;validateOnly&quot;: false,
+  &quot;skipErrors&quot;: true,
+  &quot;batchSize&quot;: 100
+}</code></pre><h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Multiple format support</li>
+<li>✅ Batch processing (1000+ records)</li>
+<li>✅ Error handling (skip/fail fast)</li>
+<li>✅ Validation before import</li>
+<li>✅ Audit trail</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Format parsing complexity</li>
+<li>⚠️ Large file memory usage</li>
+<li>⚠️ Validation complexity</li>
+<li>⚠️ Error reporting</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Streaming parsers for large files</li>
+<li>Row-by-row processing</li>
+<li>Comprehensive error messages</li>
+<li>File size limits (100 MB)</li>
+</ul>
+<h3>Alternatives Considered</h3>
+<p><strong>1. API-Only Integration</strong></p>
+<ul>
+<li>❌ Rejected: Requires technical expertise</li>
+<li>✅ Benefit: Real-time, no file handling</li>
+<li>Decision: File-based needed for legacy systems</li>
+</ul>
+<p><strong>2. Message Queue (RabbitMQ, Kafka)</strong></p>
+<ul>
+<li>❌ Rejected: Over-engineering for current needs</li>
+<li>✅ Benefit: Asynchronous, scalable</li>
+<li>Decision: File-based simpler for current requirements</li>
+</ul>
+<hr>
+<h2>ADR-015: Centralized Error Handling</h2>
+<p><strong>Status</strong>: ✅ Accepted<br><strong>Date</strong>: 2022-Q1<br><strong>Decision Maker</strong>: Lead Developer</p>
+<h3>Context</h3>
+<p>Need consistent error handling across:</p>
+<ul>
+<li>351+ API endpoints</li>
+<li>Validation errors</li>
+<li>Business rule violations</li>
+<li>System exceptions</li>
+<li>User-friendly error messages</li>
+</ul>
+<h3>Decision</h3>
+<p><strong>Implement centralized error handling with standardized error codes and responses.</strong></p>
+<p><strong>Error Response Format</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;VAL-001&quot;,
+  &quot;message&quot;: &quot;Validation failed&quot;,
+  &quot;errors&quot;: [
+    {
+      &quot;field&quot;: &quot;invoiceDate&quot;,
+      &quot;message&quot;: &quot;Invoice date cannot be in the future&quot;
+    }
+  ],
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;
+}</code></pre><p><strong>Error Categories</strong>:</p>
+<ul>
+<li><strong>AUTH</strong>: Authentication/authorization errors (AUTH-001 to AUTH-009)</li>
+<li><strong>VAL</strong>: Validation errors (VAL-001 to VAL-008)</li>
+<li><strong>BUS</strong>: Business rule violations (BUS-001 to BUS-010)</li>
+<li><strong>RES</strong>: Resource errors (RES-001 to RES-005)</li>
+<li><strong>RATE</strong>: Rate limiting (RATE-001 to RATE-002)</li>
+<li><strong>SRV</strong>: Server errors (SRV-001 to SRV-004)</li>
+</ul>
+<h3>Consequences</h3>
+<p><strong>Positive</strong>:</p>
+<ul>
+<li>✅ Consistent error responses</li>
+<li>✅ Machine-readable error codes</li>
+<li>✅ User-friendly messages</li>
+<li>✅ Debugging support (traceId)</li>
+<li>✅ Client error handling</li>
+</ul>
+<p><strong>Negative</strong>:</p>
+<ul>
+<li>⚠️ Error code maintenance</li>
+<li>⚠️ Localization complexity</li>
+<li>⚠️ Documentation overhead</li>
+</ul>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Error code catalog documentation</li>
+<li>i18n support for messages</li>
+<li>Automated error code validation</li>
+</ul>
+<hr>
+<h2>Summary</h2>
+<p>These 15 ADRs capture the foundational architectural decisions that shaped the Carmen.NET ERP system. They provide context for current design choices and guide future evolution.</p>
+<p><strong>Key Architectural Principles</strong>:</p>
+<ol>
+<li><strong>Multi-Tenancy</strong>: Single codebase, row-level isolation</li>
+<li><strong>Modularity</strong>: Modular monolith with clear boundaries</li>
+<li><strong>Security</strong>: JWT + RBAC with fine-grained permissions</li>
+<li><strong>Statelessness</strong>: RESTful API with stateless authentication</li>
+<li><strong>Flexibility</strong>: Configurable tax codes, workflows, chart of accounts</li>
+<li><strong>Integration</strong>: Multiple formats (Excel, CSV, JSON, XML, MT940)</li>
+<li><strong>Consistency</strong>: Centralized error handling, standardized responses</li>
+</ol>
+<p><strong>Future ADRs</strong> (Recommended):</p>
+<ul>
+<li>ADR-016: .NET 8 Migration Strategy</li>
+<li>ADR-017: Cloud Deployment Architecture</li>
+<li>ADR-018: Microservices Extraction Criteria</li>
+<li>ADR-019: AI/ML Integration Approach</li>
+<li>ADR-020: Mobile Application Architecture</li>
+</ul>
+<hr>
+<p><strong>Document Owner</strong>: Solution Architect<br><strong>Review Cycle</strong>: Quarterly (add new ADRs as decisions made)<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Next Review</strong>: 2026-01-06</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

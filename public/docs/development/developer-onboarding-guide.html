@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Developer Onboarding Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Developer Onboarding Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Developer Onboarding Guide</h1>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 5 - Developer Documentation<br><strong>Target</strong>: New Developers (Day 1-30)</p>
+<hr>
+<h2>Welcome to Carmen.NET!</h2>
+<p>This guide will help you get up and running with the Carmen.NET ERP system development environment in <strong>less than 2 days</strong>.</p>
+<p><strong>What You&#39;ll Learn</strong>:</p>
+<ul>
+<li>Development environment setup (Day 1, ~4 hours)</li>
+<li>Codebase structure and navigation (Day 1-2, ~8 hours)</li>
+<li>Common development tasks (Day 2-5, ~16 hours)</li>
+<li>Best practices and coding standards (Ongoing)</li>
+</ul>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#day-1-environment-setup">Day 1: Environment Setup</a></li>
+<li><a href="#day-2-5-codebase-familiarization">Day 2-5: Codebase Familiarization</a></li>
+<li><a href="#week-2-4-first-contributions">Week 2-4: First Contributions</a></li>
+<li><a href="#reference-materials">Reference Materials</a></li>
+</ol>
+<hr>
+<h2>Prerequisites</h2>
+<h3>Required Knowledge</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Level</th>
+<th>Resources</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>C#</strong></td>
+<td>Intermediate+</td>
+<td>LINQ, async/await, OOP</td>
+</tr>
+<tr>
+<td><strong>ASP.NET Web API</strong></td>
+<td>Intermediate</td>
+<td>REST, routing, controllers</td>
+</tr>
+<tr>
+<td><strong>Entity Framework</strong></td>
+<td>Beginner+</td>
+<td>LINQ to Entities, DbContext</td>
+</tr>
+<tr>
+<td><strong>SQL Server</strong></td>
+<td>Beginner+</td>
+<td>T-SQL, stored procedures</td>
+</tr>
+<tr>
+<td><strong>Git</strong></td>
+<td>Beginner+</td>
+<td>Clone, branch, commit, push</td>
+</tr>
+</tbody></table>
+<h3>Recommended Knowledge</h3>
+<ul>
+<li>TypeScript/JavaScript (for frontend work)</li>
+<li>Financial/accounting concepts (AP, AR, GL basics)</li>
+<li>Multi-tenant architecture patterns</li>
+<li>JWT authentication</li>
+</ul>
+<hr>
+<h2>Day 1: Environment Setup</h2>
+<p><strong>Goal</strong>: Get development environment running and build the project successfully</p>
+<p><strong>Time</strong>: ~4 hours</p>
+<h3>Step 1: Install Development Tools (60 min)</h3>
+<h4>1.1 Visual Studio 2022</h4>
+<pre><code class="language-powershell"># Download from: https://visualstudio.microsoft.com/downloads/
+# Required Workloads:
+- ASP.NET and web development
+- .NET desktop development
+- Data storage and processing</code></pre><p><strong>Recommended Extensions</strong>:</p>
+<ul>
+<li>ReSharper or Visual Studio IntelliCode</li>
+<li>Git Extensions or GitKraken</li>
+<li>SQL Server Management Studio</li>
+<li>Postman (for API testing)</li>
+</ul>
+<h4>1.2 SQL Server 2019+</h4>
+<pre><code class="language-powershell"># Download SQL Server Developer Edition (free)
+https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+
+# Install SQL Server Management Studio (SSMS)
+https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms</code></pre><h4>1.3 Git</h4>
+<pre><code class="language-powershell"># Download from: https://git-scm.com/downloads
+# Verify installation
+git --version</code></pre><h4>1.4 Node.js (for frontend work)</h4>
+<pre><code class="language-powershell"># Download LTS version from: https://nodejs.org/
+# Verify installation
+node --version
+npm --version</code></pre><hr>
+<h3>Step 2: Clone Repository (15 min)</h3>
+<pre><code class="language-powershell"># Navigate to your workspace
+cd C:\Projects
+
+# Clone the repository
+git clone https://your-git-server.com/carmen/carmen-net.git
+cd carmen-net
+
+# Create your development branch
+git checkout -b dev/yourname/onboarding</code></pre><p><strong>Repository Structure</strong>:</p>
+<div class="mermaid">graph TD
+    Root["carmen-net/"]
+
+    Root --> Src["src/<br/>Source code"]
+    Root --> Tests["tests/<br/>Test projects"]
+    Root --> Docs["docs/<br/>Documentation"]
+    Root --> Scripts["scripts/<br/>Build/deployment scripts"]
+    Root --> Sln["Carmen.sln<br/>Solution file"]
+
+    Src --> Ap["Carmen.Ap/<br/>AP module"]
+    Src --> Ar["Carmen.Ar/<br/>AR module"]
+    Src --> Gl["Carmen.Gl/<br/>GL module"]
+    Src --> Asset["Carmen.Asset/<br/>Asset module"]
+    Src --> Common["Carmen.Common/<br/>Shared utilities"]
+    Src --> Api["Carmen.Api/<br/>API host project"]
+
+    style Root fill:#e1f5ff,stroke:#0288d1
+    style Src fill:#e8f5e9,stroke:#4caf50
+    style Tests fill:#fff3e0,stroke:#ff9800
+    style Docs fill:#f3e5f5,stroke:#9c27b0</div><hr>
+<h3>Step 3: Database Setup (45 min)</h3>
+<h4>3.1 Restore Development Database</h4>
+<pre><code class="language-sql">-- Open SQL Server Management Studio
+-- Connect to: localhost
+
+-- Create development database
+CREATE DATABASE Carmen_Dev;
+
+-- Restore from backup (if available)
+RESTORE DATABASE Carmen_Dev
+FROM DISK = &#039;C:\Backup\Carmen_Dev.bak&#039;
+WITH MOVE &#039;Carmen_Data&#039; TO &#039;C:\SQL\Carmen_Dev.mdf&#039;,
+     MOVE &#039;Carmen_Log&#039; TO &#039;C:\SQL\Carmen_Dev_Log.ldf&#039;;
+
+-- OR run creation scripts
+USE Carmen_Dev;
+GO
+-- Execute schema creation scripts from /database/schema/</code></pre><h4>3.2 Seed Development Data</h4>
+<pre><code class="language-sql">-- Run seed data scripts
+USE Carmen_Dev;
+GO
+
+-- Execute seed scripts in order:
+-- 1. Master data
+:r database/seed/01-master-data.sql
+
+-- 2. Sample tenants
+:r database/seed/02-tenants.sql
+
+-- 3. Sample users
+:r database/seed/03-users.sql
+
+-- 4. Sample transactions
+:r database/seed/04-sample-data.sql</code></pre><p><strong>Default Development Credentials</strong>:</p>
+<pre><code class="language-text">Tenant Code: DEV001
+Username: admin@dev.com
+Password: Dev@123456
+
+Username: ap.clerk@dev.com
+Password: Dev@123456
+
+Username: ar.clerk@dev.com
+Password: Dev@123456</code></pre><hr>
+<h3>Step 4: Configure Application (30 min)</h3>
+<h4>4.1 Update Connection String</h4>
+<p><strong>File</strong>: <code>src/Carmen.Api/Web.config</code></p>
+<pre><code class="language-xml">&lt;connectionStrings&gt;
+  &lt;add name=&quot;CarmenContext&quot;
+       connectionString=&quot;Server=localhost;Database=Carmen_Dev;Integrated Security=true;&quot;
+       providerName=&quot;System.Data.SqlClient&quot; /&gt;
+&lt;/connectionStrings&gt;</code></pre><h4>4.2 Configure App Settings</h4>
+<p><strong>File</strong>: <code>src/Carmen.Api/Web.config</code></p>
+<pre><code class="language-xml">&lt;appSettings&gt;
+  &lt;!-- JWT Settings --&gt;
+  &lt;add key=&quot;JwtSecret&quot; value=&quot;YourDevelopmentSecretKeyMinimum32Characters&quot; /&gt;
+  &lt;add key=&quot;JwtIssuer&quot; value=&quot;https://localhost:44300&quot; /&gt;
+  &lt;add key=&quot;JwtAudience&quot; value=&quot;https://localhost:44300&quot; /&gt;
+  &lt;add key=&quot;JwtExpirationMinutes&quot; value=&quot;60&quot; /&gt;
+
+  &lt;!-- Multi-Tenant Settings --&gt;
+  &lt;add key=&quot;UseTenant&quot; value=&quot;true&quot; /&gt;
+
+  &lt;!-- Environment --&gt;
+  &lt;add key=&quot;Environment&quot; value=&quot;Development&quot; /&gt;
+  &lt;add key=&quot;EnableSwagger&quot; value=&quot;true&quot; /&gt;
+&lt;/appSettings&gt;</code></pre><hr>
+<h3>Step 5: Build and Run (30 min)</h3>
+<h4>5.1 Restore NuGet Packages</h4>
+<pre><code class="language-powershell"># In Visual Studio Package Manager Console
+Update-Package -reinstall
+
+# Or using dotnet CLI
+dotnet restore</code></pre><h4>5.2 Build Solution</h4>
+<pre><code class="language-powershell"># In Visual Studio
+Build → Build Solution (Ctrl+Shift+B)
+
+# Or using dotnet CLI
+dotnet build Carmen.sln</code></pre><p><strong>Expected Output</strong>:</p>
+<pre><code class="language-text">Build succeeded.
+    0 Warning(s)
+    0 Error(s)</code></pre><h4>5.3 Run Application</h4>
+<pre><code class="language-powershell"># Press F5 in Visual Studio
+# Or
+dotnet run --project src/Carmen.Api/Carmen.Api.csproj</code></pre><p><strong>Application should start</strong>:</p>
+<pre><code class="language-text">API running at: https://localhost:44300
+Swagger UI: https://localhost:44300/swagger</code></pre><hr>
+<h3>Step 6: Verify Setup (30 min)</h3>
+<h4>6.1 Test API Endpoint</h4>
+<p><strong>Using Postman</strong>:</p>
+<pre><code class="language-http">POST https://localhost:44300/api/account/login
+Content-Type: application/json
+
+{
+  &quot;email&quot;: &quot;admin@dev.com&quot;,
+  &quot;password&quot;: &quot;Dev@123456&quot;,
+  &quot;tenantCode&quot;: &quot;DEV001&quot;
+}</code></pre><p><strong>Expected Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;,
+    &quot;refreshToken&quot;: &quot;...&quot;,
+    &quot;expiresIn&quot;: 3600,
+    &quot;user&quot;: {
+      &quot;id&quot;: 1,
+      &quot;email&quot;: &quot;admin@dev.com&quot;,
+      &quot;name&quot;: &quot;System Administrator&quot;
+    }
+  }
+}</code></pre><h4>6.2 Test Protected Endpoint</h4>
+<pre><code class="language-http">GET https://localhost:44300/api/ap/invoice/list
+Authorization: Bearer {accessToken}</code></pre><p><strong>Expected Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;items&quot;: [],
+    &quot;totalCount&quot;: 0,
+    &quot;page&quot;: 1,
+    &quot;pageSize&quot;: 20
+  }
+}</code></pre><h4>6.3 Verify Swagger UI</h4>
+<p>Navigate to: <code>https://localhost:44300/swagger</code></p>
+<p><strong>Expected</strong>: Interactive API documentation with 351+ endpoints</p>
+<hr>
+<h2>✅ Day 1 Checklist</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Visual Studio 2022 installed with required workloads</li>
+<li><input disabled="" type="checkbox"> SQL Server and SSMS installed</li>
+<li><input disabled="" type="checkbox"> Git installed and configured</li>
+<li><input disabled="" type="checkbox"> Repository cloned successfully</li>
+<li><input disabled="" type="checkbox"> Development database created and seeded</li>
+<li><input disabled="" type="checkbox"> Application configured (connection string, app settings)</li>
+<li><input disabled="" type="checkbox"> Solution builds without errors</li>
+<li><input disabled="" type="checkbox"> Application runs and Swagger UI loads</li>
+<li><input disabled="" type="checkbox"> Login API works and returns JWT token</li>
+<li><input disabled="" type="checkbox"> Protected endpoint accepts Bearer token</li>
+<li><input disabled="" type="checkbox"> Familiarized with codebase structure</li>
+</ul>
+<p><strong>If all items checked</strong>: ✅ Environment setup complete! Ready for Day 2.</p>
+<hr>
+<h2>Day 2-5: Codebase Familiarization</h2>
+<p><strong>Goal</strong>: Understand codebase structure, common patterns, and make first small change</p>
+<p><strong>Time</strong>: ~16 hours over 4 days</p>
+<h3>Day 2: Codebase Structure (4 hours)</h3>
+<h4>Solution Architecture</h4>
+<pre><code class="language-text">Carmen.NET Solution (Modular Monolith)
+│
+├── Carmen.Ap (AP Module)
+│   ├── Controllers/          # API endpoints
+│   ├── Services/             # Business logic
+│   ├── Repositories/         # Data access
+│   ├── Models/               # Domain models
+│   └── DTOs/                 # Data transfer objects
+│
+├── Carmen.Ar (AR Module)
+│   └── [same structure as AP]
+│
+├── Carmen.Gl (GL Module)
+│   └── [same structure as AP]
+│
+├── Carmen.Asset (Asset Module)
+│   └── [same structure as AP]
+│
+├── Carmen.Common (Shared)
+│   ├── Auth/                 # JWT, permissions
+│   ├── Exceptions/           # Custom exceptions
+│   ├── Extensions/           # C# extensions
+│   ├── Filters/              # API filters
+│   ├── Helpers/              # Utility classes
+│   └── Models/               # Base models
+│
+└── Carmen.Api (Host)
+    ├── Controllers/          # Account, config
+    ├── App_Start/            # Startup config
+    └── Web.config            # Configuration</code></pre><h4>Layered Architecture</h4>
+<div class="mermaid">graph TD
+    CLIENT[Client / Postman] -->|HTTP Request| CONTROLLER[Controller Layer]
+    CONTROLLER -->|DTO| SERVICE[Service Layer]
+    SERVICE -->|Business Logic| REPO[Repository Layer]
+    REPO -->|Entity Framework| DB[(SQL Server)]
+    SERVICE -->|Domain Model| CONTROLLER
+    CONTROLLER -->|JSON Response| CLIENT</div><p><strong>Flow Example</strong> (Create AP Invoice):</p>
+<pre><code class="language-text">1. POST /api/ap/invoice/create
+2. ApInvoiceController.CreateInvoice(ApInvoiceCreateRequest dto)
+3. ApInvoiceService.CreateInvoiceAsync(dto)
+   ├── Validate invoice data
+   ├── Check permissions (AP.Invoice.Create)
+   ├── Apply tenant filter (TenantCode)
+   ├── Calculate tax (WHT, VAT)
+   └── Save to repository
+4. ApInvoiceRepository.Add(invoiceHeader)
+5. DbContext.SaveChanges()
+6. Return ApInvoiceResponse</code></pre><hr>
+<h3>Day 3: Common Patterns (4 hours)</h3>
+<h4>Pattern 1: Repository Pattern</h4>
+<p><strong>Purpose</strong>: Data access abstraction</p>
+<p><strong>Example</strong>: <code>Carmen.Ap/Repositories/ApInvoiceRepository.cs</code></p>
+<pre><code class="language-csharp">public class ApInvoiceRepository : Repository&lt;ApInvoiceHeader&gt;
+{
+    public ApInvoiceRepository(ApContext context) : base(context)
+    {
+    }
+
+    public IQueryable&lt;ApInvoiceHeader&gt; GetPendingApproval()
+    {
+        return GetAll()
+            .Where(x =&gt; x.Status == &quot;PendingApproval&quot;)
+            .OrderBy(x =&gt; x.InvoiceDate);
+    }
+
+    public async Task&lt;ApInvoiceHeader&gt; GetWithDetailsAsync(int id)
+    {
+        return await GetAll()
+            .Include(x =&gt; x.Lines)
+            .Include(x =&gt; x.Vendor)
+            .FirstOrDefaultAsync(x =&gt; x.Id == id);
+    }
+}</code></pre><h4>Pattern 2: Service Pattern</h4>
+<p><strong>Purpose</strong>: Business logic encapsulation</p>
+<p><strong>Example</strong>: <code>Carmen.Ap/Services/ApInvoiceService.cs</code></p>
+<pre><code class="language-csharp">public class ApInvoiceService
+{
+    private readonly ApInvoiceRepository _repository;
+    private readonly ITaxCalculator _taxCalculator;
+    private readonly IPermissionService _permission;
+
+    public async Task&lt;ApInvoiceResponse&gt; CreateInvoiceAsync(ApInvoiceCreateRequest request)
+    {
+        // 1. Permission check
+        _permission.RequirePermission(&quot;AP.Invoice.Create&quot;);
+
+        // 2. Validation
+        ValidateInvoiceRequest(request);
+
+        // 3. Business logic
+        var invoice = MapToEntity(request);
+        invoice.TenantCode = _currentTenant.TenantCode;
+        invoice.Status = &quot;Draft&quot;;
+        invoice.CreatedBy = _currentUser.UserId;
+        invoice.CreatedDate = DateTime.Now;
+
+        // 4. Calculate tax
+        invoice.TaxAmount = _taxCalculator.CalculateVAT(invoice.Amount);
+        invoice.WhtAmount = _taxCalculator.CalculateWHT(invoice.Amount, invoice.VendorCode);
+
+        // 5. Save
+        _repository.Add(invoice);
+        await _repository.SaveChangesAsync();
+
+        // 6. Return DTO
+        return MapToResponse(invoice);
+    }
+}</code></pre><h4>Pattern 3: DTO Pattern</h4>
+<p><strong>Purpose</strong>: Data transfer between layers</p>
+<p><strong>Example</strong>: <code>Carmen.Ap/DTOs/ApInvoiceCreateRequest.cs</code></p>
+<pre><code class="language-csharp">public class ApInvoiceCreateRequest
+{
+    [Required]
+    [StringLength(50)]
+    public string InvoiceNumber { get; set; }
+
+    [Required]
+    public DateTime InvoiceDate { get; set; }
+
+    [Required]
+    public DateTime DueDate { get; set; }
+
+    [Required]
+    [StringLength(20)]
+    public string VendorCode { get; set; }
+
+    [StringLength(500)]
+    public string Description { get; set; }
+
+    [Required]
+    [Range(0.01, double.MaxValue)]
+    public decimal Amount { get; set; }
+
+    public List&lt;ApInvoiceLineRequest&gt; Lines { get; set; }
+}</code></pre><h4>Pattern 4: Multi-Tenant Filtering</h4>
+<p><strong>Purpose</strong>: Automatic tenant isolation</p>
+<p><strong>Example</strong>: <code>Carmen.Common/Services/FncBase.cs</code></p>
+<pre><code class="language-csharp">protected void ApplyTenantIfUseTenant&lt;T&gt;(ref IQueryable&lt;T&gt; query)
+    where T : TenantEntity
+{
+    if (UseTenant)
+    {
+        var tenantCode = _currentTenant.TenantCode;
+        query = query.Where(x =&gt; x.TenantCode == tenantCode);
+    }
+}
+
+// Usage in repository
+public override IQueryable&lt;ApInvoiceHeader&gt; GetAll()
+{
+    var query = base.GetAll();
+    ApplyTenantIfUseTenant(ref query);
+    return query;
+}</code></pre><hr>
+<h3>Day 4: Testing &amp; Debugging (4 hours)</h3>
+<h4>Running Tests</h4>
+<pre><code class="language-powershell"># Run all tests
+dotnet test
+
+# Run specific test project
+dotnet test tests/Carmen.Ap.Tests/
+
+# Run specific test class
+dotnet test --filter ClassName=ApInvoiceServiceTests
+
+# Run with code coverage
+dotnet test /p:CollectCoverage=true</code></pre><h4>Debugging Tips</h4>
+<p><strong>1. Breakpoint in Controller</strong>:</p>
+<pre><code class="language-csharp">[HttpPost(&quot;create&quot;)]
+public async Task&lt;IActionResult&gt; CreateInvoice([FromBody] ApInvoiceCreateRequest request)
+{
+    // Set breakpoint here (F9)
+    var result = await _service.CreateInvoiceAsync(request);
+    return Ok(result);
+}</code></pre><p><strong>2. SQL Profiler</strong> (see actual queries):</p>
+<pre><code class="language-sql">-- In SSMS → Tools → SQL Server Profiler
+-- Monitor queries while debugging</code></pre><p><strong>3. Check Logs</strong>:</p>
+<pre><code class="language-csharp">// Application logs in:
+C:\Logs\Carmen\carmen-{date}.log
+
+// Look for errors/exceptions
+tail -f C:\Logs\Carmen\carmen-20251006.log</code></pre><h4>Common Debugging Scenarios</h4>
+<p><strong>Issue</strong>: &quot;Unauthorized&quot; response</p>
+<pre><code class="language-text">Solution: Check JWT token is included in Authorization header
+Verify: User has required permission in token claims</code></pre><p><strong>Issue</strong>: No data returned</p>
+<pre><code class="language-text">Solution: Check tenant filter is applying correctly
+Verify: TenantCode in token matches data TenantCode</code></pre><p><strong>Issue</strong>: Validation error</p>
+<pre><code class="language-text">Solution: Check DTO validation attributes
+Verify: Request body matches DTO structure</code></pre><hr>
+<h3>Day 5: First Code Change (4 hours)</h3>
+<h4>Exercise 1: Add a New Property</h4>
+<p><strong>Goal</strong>: Add <code>Reference</code> field to AP Invoice</p>
+<p><strong>Steps</strong>:</p>
+<p><strong>1. Database Migration</strong>:</p>
+<pre><code class="language-sql">ALTER TABLE AP_INVOICE_H
+ADD Reference NVARCHAR(50) NULL;</code></pre><p><strong>2. Update Entity Model</strong>:</p>
+<pre><code class="language-csharp">// Carmen.Ap/Models/ApInvoiceHeader.cs
+public class ApInvoiceHeader : TenantEntity
+{
+    // ... existing properties
+
+    [StringLength(50)]
+    public string Reference { get; set; }  // ← Add this
+}</code></pre><p><strong>3. Update DTO</strong>:</p>
+<pre><code class="language-csharp">// Carmen.Ap/DTOs/ApInvoiceCreateRequest.cs
+public class ApInvoiceCreateRequest
+{
+    // ... existing properties
+
+    [StringLength(50)]
+    public string Reference { get; set; }  // ← Add this
+}</code></pre><p><strong>4. Update Mapping</strong>:</p>
+<pre><code class="language-csharp">// Carmen.Ap/Services/ApInvoiceService.cs
+private ApInvoiceHeader MapToEntity(ApInvoiceCreateRequest request)
+{
+    return new ApInvoiceHeader
+    {
+        // ... existing mappings
+        Reference = request.Reference  // ← Add this
+    };
+}</code></pre><p><strong>5. Test</strong>:</p>
+<pre><code class="language-http">POST /api/ap/invoice/create
+{
+  &quot;invoiceNumber&quot;: &quot;INV-001&quot;,
+  &quot;reference&quot;: &quot;PO-12345&quot;,  ← New field
+  &quot;amount&quot;: 1000,
+  ...
+}</code></pre><hr>
+<h2>Week 2-4: First Contributions</h2>
+<p><strong>Goal</strong>: Make meaningful contributions to the codebase</p>
+<h3>Week 2: Bug Fixes</h3>
+<p><strong>Recommended Tasks</strong>:</p>
+<ol>
+<li>Fix validation issues in DTOs</li>
+<li>Improve error messages</li>
+<li>Add missing field validations</li>
+<li>Fix null reference exceptions</li>
+</ol>
+<p><strong>Example Bug Fix</strong>:</p>
+<pre><code class="language-csharp">// Before (bug)
+public async Task&lt;ApInvoice&gt; GetInvoiceAsync(int id)
+{
+    return await _repository.GetByIdAsync(id);  // ← Might return null
+}
+
+// After (fixed)
+public async Task&lt;ApInvoice&gt; GetInvoiceAsync(int id)
+{
+    var invoice = await _repository.GetByIdAsync(id);
+    if (invoice == null)
+        throw new NotFoundException($&quot;Invoice {id} not found&quot;);
+
+    return invoice;
+}</code></pre><h3>Week 3: Small Features</h3>
+<p><strong>Recommended Tasks</strong>:</p>
+<ol>
+<li>Add new API endpoint</li>
+<li>Implement new filter criteria</li>
+<li>Add export functionality</li>
+<li>Implement soft delete</li>
+</ol>
+<p><strong>Example Feature</strong> (Add filter by date range):</p>
+<pre><code class="language-csharp">// Add to ApInvoiceRepository
+public IQueryable&lt;ApInvoiceHeader&gt; GetByDateRange(DateTime from, DateTime to)
+{
+    return GetAll()
+        .Where(x =&gt; x.InvoiceDate &gt;= from &amp;&amp; x.InvoiceDate &lt;= to)
+        .OrderBy(x =&gt; x.InvoiceDate);
+}
+
+// Add to ApInvoiceController
+[HttpGet(&quot;list/by-date&quot;)]
+public async Task&lt;IActionResult&gt; GetByDateRange(
+    [FromQuery] DateTime from,
+    [FromQuery] DateTime to)
+{
+    var invoices = await _service.GetByDateRangeAsync(from, to);
+    return Ok(invoices);
+}</code></pre><h3>Week 4: Code Reviews</h3>
+<p><strong>Participate in Code Reviews</strong>:</p>
+<ol>
+<li>Review pull requests</li>
+<li>Provide constructive feedback</li>
+<li>Learn from senior developers</li>
+<li>Ask questions</li>
+</ol>
+<p><strong>Code Review Checklist</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Code follows project conventions</li>
+<li><input disabled="" type="checkbox"> DTOs have proper validation</li>
+<li><input disabled="" type="checkbox"> Business logic in service layer (not controller)</li>
+<li><input disabled="" type="checkbox"> Tenant filtering applied</li>
+<li><input disabled="" type="checkbox"> Permission checks present</li>
+<li><input disabled="" type="checkbox"> Unit tests included</li>
+<li><input disabled="" type="checkbox"> No hardcoded values</li>
+<li><input disabled="" type="checkbox"> Error handling implemented</li>
+<li><input disabled="" type="checkbox"> SQL injection prevention (use parameterized queries)</li>
+<li><input disabled="" type="checkbox"> Documentation updated</li>
+</ul>
+<hr>
+<h2>Common Development Tasks</h2>
+<h3>Task 1: Create New API Endpoint</h3>
+<p><strong>Scenario</strong>: Add endpoint to get invoice by number</p>
+<pre><code class="language-csharp">// 1. Add to Repository
+public async Task&lt;ApInvoiceHeader&gt; GetByInvoiceNumberAsync(string invoiceNumber)
+{
+    return await GetAll()
+        .FirstOrDefaultAsync(x =&gt; x.InvoiceNumber == invoiceNumber);
+}
+
+// 2. Add to Service
+public async Task&lt;ApInvoiceResponse&gt; GetByInvoiceNumberAsync(string invoiceNumber)
+{
+    var invoice = await _repository.GetByInvoiceNumberAsync(invoiceNumber);
+    if (invoice == null)
+        throw new NotFoundException($&quot;Invoice {invoiceNumber} not found&quot;);
+
+    return MapToResponse(invoice);
+}
+
+// 3. Add to Controller
+[HttpGet(&quot;by-number/{invoiceNumber}&quot;)]
+[Permission(&quot;AP.Invoice.View&quot;)]
+public async Task&lt;IActionResult&gt; GetByInvoiceNumber(string invoiceNumber)
+{
+    var result = await _service.GetByInvoiceNumberAsync(invoiceNumber);
+    return Ok(result);
+}</code></pre><h3>Task 2: Add Validation Rule</h3>
+<p><strong>Scenario</strong>: Invoice date cannot be in future</p>
+<pre><code class="language-csharp">// In Service
+private void ValidateInvoiceRequest(ApInvoiceCreateRequest request)
+{
+    if (request.InvoiceDate &gt; DateTime.Today)
+        throw new ValidationException(&quot;Invoice date cannot be in the future&quot;);
+
+    if (request.DueDate &lt; request.InvoiceDate)
+        throw new ValidationException(&quot;Due date must be after invoice date&quot;);
+}</code></pre><h3>Task 3: Add Permission Check</h3>
+<p><strong>Scenario</strong>: Only managers can approve invoices &gt;$10,000</p>
+<pre><code class="language-csharp">public async Task ApproveInvoiceAsync(int id)
+{
+    var invoice = await _repository.GetByIdAsync(id);
+
+    // Basic permission
+    _permission.RequirePermission(&quot;AP.Invoice.Approve&quot;);
+
+    // Amount-based permission
+    if (invoice.Amount &gt; 10000)
+    {
+        _permission.RequirePermission(&quot;AP.Invoice.ApproveHighValue&quot;);
+    }
+
+    invoice.Status = &quot;Approved&quot;;
+    await _repository.SaveChangesAsync();
+}</code></pre><hr>
+<h2>Best Practices &amp; Coding Standards</h2>
+<h3>Naming Conventions</h3>
+<pre><code class="language-csharp">// Classes: PascalCase
+public class ApInvoiceService { }
+
+// Methods: PascalCase
+public async Task&lt;ApInvoice&gt; GetInvoiceAsync(int id) { }
+
+// Properties: PascalCase
+public string InvoiceNumber { get; set; }
+
+// Private fields: _camelCase
+private readonly IRepository _repository;
+
+// Parameters: camelCase
+public void ProcessInvoice(int invoiceId, string status) { }
+
+// Constants: UPPER_CASE
+private const string DEFAULT_STATUS = &quot;Draft&quot;;</code></pre><h3>Code Organization</h3>
+<pre><code class="language-csharp">public class ApInvoiceService
+{
+    // 1. Private fields
+    private readonly IRepository _repository;
+    private readonly IMapper _mapper;
+
+    // 2. Constructor
+    public ApInvoiceService(IRepository repository, IMapper mapper)
+    {
+        _repository = repository;
+        _mapper = mapper;
+    }
+
+    // 3. Public methods
+    public async Task&lt;ApInvoice&gt; CreateAsync(ApInvoiceRequest request)
+    {
+        // ...
+    }
+
+    // 4. Private helper methods
+    private void ValidateRequest(ApInvoiceRequest request)
+    {
+        // ...
+    }
+}</code></pre><h3>Error Handling</h3>
+<pre><code class="language-csharp">// DO: Use specific exceptions
+if (invoice == null)
+    throw new NotFoundException($&quot;Invoice {id} not found&quot;);
+
+if (!_permission.HasPermission(&quot;AP.Invoice.View&quot;))
+    throw new UnauthorizedException(&quot;Permission denied&quot;);
+
+if (invoice.Amount &lt;= 0)
+    throw new ValidationException(&quot;Amount must be greater than zero&quot;);
+
+// DON&#039;T: Catch and swallow exceptions
+try
+{
+    await _repository.SaveChangesAsync();
+}
+catch { } // ← Never do this!</code></pre><h3>Async/Await</h3>
+<pre><code class="language-csharp">// DO: Use async for I/O operations
+public async Task&lt;ApInvoice&gt; GetInvoiceAsync(int id)
+{
+    return await _repository.GetByIdAsync(id);
+}
+
+// DON&#039;T: Mix sync and async
+public async Task&lt;ApInvoice&gt; GetInvoice(int id)
+{
+    return _repository.GetById(id); // ← Wrong! Not async
+}
+
+// DON&#039;T: Use .Result or .Wait()
+var invoice = _repository.GetByIdAsync(id).Result; // ← Deadlock risk!</code></pre><hr>
+<h2>Troubleshooting Guide</h2>
+<h3>Issue: Build Fails</h3>
+<p><strong>Error</strong>: &quot;Could not find part of the path&quot;</p>
+<pre><code class="language-text">Solution: Clean and rebuild
+1. Clean Solution (Build → Clean Solution)
+2. Delete bin/ and obj/ folders
+3. Rebuild Solution</code></pre><p><strong>Error</strong>: &quot;Missing NuGet packages&quot;</p>
+<pre><code class="language-text">Solution: Restore packages
+Update-Package -reinstall</code></pre><h3>Issue: Database Connection</h3>
+<p><strong>Error</strong>: &quot;Cannot connect to server&quot;</p>
+<pre><code class="language-text">Solution: Check connection string
+1. Verify SQL Server is running
+2. Check server name in Web.config
+3. Test connection in SSMS</code></pre><p><strong>Error</strong>: &quot;Login failed for user&quot;</p>
+<pre><code class="language-text">Solution: Check authentication
+1. Use Integrated Security or SQL auth
+2. Verify user permissions on database</code></pre><h3>Issue: Application Runtime</h3>
+<p><strong>Error</strong>: 401 Unauthorized</p>
+<pre><code class="language-text">Solution: Check JWT token
+1. Verify Authorization header format: &quot;Bearer {token}&quot;
+2. Check token expiration
+3. Verify permission in token claims</code></pre><p><strong>Error</strong>: 500 Internal Server Error</p>
+<pre><code class="language-text">Solution: Check logs
+1. Review application logs
+2. Check SQL Profiler for database errors
+3. Enable detailed errors in Web.config</code></pre><hr>
+<h2>Reference Materials</h2>
+<h3>Documentation</h3>
+<ul>
+<li><strong>Architecture Decision Records</strong>: <code>/docs/architecture/architecture-decision-records.md</code></li>
+<li><strong>API Reference</strong>: <code>/docs/api/api-reference.md</code></li>
+<li><strong>Permission Matrix</strong>: <code>/docs/requirements/permission-matrix.md</code></li>
+<li><strong>Database Schema</strong>: <code>/docs/database/schema-documentation.md</code></li>
+</ul>
+<h3>Code Examples</h3>
+<ul>
+<li><strong>AP Invoice CRUD</strong>: <code>/src/Carmen.Ap/Controllers/ApInvoiceController.cs</code></li>
+<li><strong>AR Receipt</strong>: <code>/src/Carmen.Ar/Controllers/ArReceiptController.cs</code></li>
+<li><strong>GL Journal Entry</strong>: <code>/src/Carmen.Gl/Controllers/GlJvController.cs</code></li>
+</ul>
+<h3>Testing</h3>
+<ul>
+<li><strong>Unit Tests</strong>: <code>/tests/Carmen.Ap.Tests/Services/ApInvoiceServiceTests.cs</code></li>
+<li><strong>Integration Tests</strong>: <code>/tests/Carmen.Api.Tests/Controllers/ApInvoiceControllerTests.cs</code></li>
+</ul>
+<h3>Tools</h3>
+<ul>
+<li><strong>Postman Collection</strong>: <code>/docs/api/carmen-api-postman-collection.json</code></li>
+<li><strong>Database Scripts</strong>: <code>/database/schema/</code> and <code>/database/seed/</code></li>
+</ul>
+<hr>
+<h2>Getting Help</h2>
+<h3>Internal Resources</h3>
+<p><strong>Slack Channels</strong>:</p>
+<ul>
+<li><code>#carmen-dev</code> - General development questions</li>
+<li><code>#carmen-support</code> - Bug reports and issues</li>
+<li><code>#carmen-architecture</code> - Architecture discussions</li>
+</ul>
+<p><strong>Team Contacts</strong>:</p>
+<ul>
+<li><strong>Tech Lead</strong>: <a href="mailto:tech.lead@company.com">tech.lead@company.com</a></li>
+<li><strong>Senior Developer</strong>: <a href="mailto:senior.dev@company.com">senior.dev@company.com</a></li>
+<li><strong>DBA</strong>: <a href="mailto:dba@company.com">dba@company.com</a></li>
+</ul>
+<h3>Code Review Process</h3>
+<ol>
+<li>Create feature branch: <code>feature/yourname/description</code></li>
+<li>Make changes and commit</li>
+<li>Push to remote</li>
+<li>Create Pull Request</li>
+<li>Request review from senior developer</li>
+<li>Address feedback</li>
+<li>Merge when approved</li>
+</ol>
+<h3>Pair Programming</h3>
+<p><strong>Schedule pairing sessions</strong>:</p>
+<ul>
+<li>Week 1-2: Daily 1-hour sessions</li>
+<li>Week 3-4: 2-3 times per week</li>
+<li>Month 2+: As needed</li>
+</ul>
+<hr>
+<h2>30-Day Milestones</h2>
+<h3>Week 1</h3>
+<ul>
+<li>✅ Environment setup complete</li>
+<li>✅ Successfully built and run application</li>
+<li>✅ Understand codebase structure</li>
+<li>✅ Made first small code change</li>
+</ul>
+<h3>Week 2</h3>
+<ul>
+<li>✅ Fixed 2-3 simple bugs</li>
+<li>✅ Added unit tests</li>
+<li>✅ Participated in code review</li>
+<li>✅ Understand common patterns</li>
+</ul>
+<h3>Week 3</h3>
+<ul>
+<li>✅ Implemented small feature</li>
+<li>✅ Added new API endpoint</li>
+<li>✅ Comfortable with debugging</li>
+<li>✅ Contributing to discussions</li>
+</ul>
+<h3>Week 4</h3>
+<ul>
+<li>✅ Independently implement features</li>
+<li>✅ Provide code review feedback</li>
+<li>✅ Help onboard next new developer</li>
+<li>✅ Fully productive team member</li>
+</ul>
+<hr>
+<h2>Conclusion</h2>
+<p><strong>Congratulations!</strong> You&#39;ve completed the Carmen.NET onboarding process.</p>
+<p><strong>You should now be able to</strong>:</p>
+<ul>
+<li>✅ Set up and run development environment</li>
+<li>✅ Navigate the codebase confidently</li>
+<li>✅ Implement new features</li>
+<li>✅ Fix bugs and write tests</li>
+<li>✅ Follow coding standards and best practices</li>
+<li>✅ Participate in code reviews</li>
+<li>✅ Contribute meaningfully to the team</li>
+</ul>
+<p><strong>Next Steps</strong>:</p>
+<ol>
+<li>Review <strong>Architecture Decision Records</strong> for design context</li>
+<li>Study <strong>Business Workflows</strong> to understand domain</li>
+<li>Explore <strong>Advanced Topics</strong> (caching, performance, security)</li>
+<li>Mentor the next new developer</li>
+</ol>
+<p><strong>Welcome to the team!</strong> 🎉</p>
+<hr>
+<p><strong>Document Owner</strong>: Development Team Lead<br><strong>Review Cycle</strong>: Quarterly (update with new practices)<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Feedback</strong>: Submit suggestions to #carmen-dev</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

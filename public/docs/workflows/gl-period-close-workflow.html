@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GL Period Close Workflow - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>GL Period Close Workflow</h1>
+        </div>
+        <div class="doc-content">
+            <h1>GL Period Close Workflow</h1>
+<h2>Overview</h2>
+<p>The GL Period Close workflow manages the month-end/year-end closing process, ensuring all transactions are properly recorded, reconciled, and locked before advancing to the next accounting period.</p>
+<h2>Workflow States</h2>
+<div class="mermaid">stateDiagram-v2
+    [*] --> Open
+    Open --> PreClose: Initiate Close Process
+
+    PreClose --> Validating: Run Validation Checks
+    Validating --> ValidationFailed: Validation Errors
+    Validating --> ReadyToClose: All Checks Passed
+
+    ValidationFailed --> PreClose: Fix Issues
+
+    ReadyToClose --> Closing: Execute Close
+    Closing --> Closed: Close Successful
+    Closing --> CloseFailed: Close Error
+
+    CloseFailed --> ReadyToClose: Retry Close
+
+    Closed --> Reopening: Reopen Period
+    Reopening --> Open: Reopen Successful
+    Reopening --> ReopenFailed: Reopen Error
+
+    ReopenFailed --> Closed: Cancel Reopen
+
+    Closed --> [*]</div><h2>Status Codes</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Value</th>
+<th>Description</th>
+<th>Allowed Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Open</strong></td>
+<td>0</td>
+<td>Period is open for transactions</td>
+<td>Post transactions, Initiate close</td>
+</tr>
+<tr>
+<td><strong>Pre-Close</strong></td>
+<td>1</td>
+<td>Close process initiated, validation in progress</td>
+<td>Run checks, Fix issues</td>
+</tr>
+<tr>
+<td><strong>Validating</strong></td>
+<td>2</td>
+<td>System running validation checks</td>
+<td>Monitor progress</td>
+</tr>
+<tr>
+<td><strong>Validation Failed</strong></td>
+<td>3</td>
+<td>Validation checks failed</td>
+<td>Review errors, Fix issues</td>
+</tr>
+<tr>
+<td><strong>Ready to Close</strong></td>
+<td>4</td>
+<td>All validations passed, ready to close</td>
+<td>Execute close</td>
+</tr>
+<tr>
+<td><strong>Closing</strong></td>
+<td>5</td>
+<td>Close process executing</td>
+<td>Monitor progress</td>
+</tr>
+<tr>
+<td><strong>Closed</strong></td>
+<td>6</td>
+<td>Period closed and locked</td>
+<td>View only, Reopen if authorized</td>
+</tr>
+<tr>
+<td><strong>Close Failed</strong></td>
+<td>7</td>
+<td>Close process encountered error</td>
+<td>Review error, Retry</td>
+</tr>
+<tr>
+<td><strong>Reopening</strong></td>
+<td>8</td>
+<td>Reopen process executing</td>
+<td>Monitor progress</td>
+</tr>
+<tr>
+<td><strong>Reopen Failed</strong></td>
+<td>9</td>
+<td>Reopen process encountered error</td>
+<td>Review error, Retry</td>
+</tr>
+</tbody></table>
+<h2>Workflow Diagram</h2>
+<div class="mermaid">flowchart TD
+    Start([Start: Month-End/Year-End]) --> CheckStatus{Period<br/>Status?}
+
+    CheckStatus -->|Not Open| Error[Error: Invalid Period Status]
+    CheckStatus -->|Open| InitiateClose[Initiate Close Process]
+
+    InitiateClose --> CheckPermission{Has Close<br/>Permission?}
+    CheckPermission -->|No| Forbidden[Permission Denied]
+    CheckPermission -->|Yes| SetPreClose[Set Status: Pre-Close]
+
+    SetPreClose --> RunChecks[Run Pre-Close Validation Checks]
+
+    RunChecks --> Check1{All transactions<br/>posted?}
+    Check1 -->|No| ErrorUnposted[Error: Unposted Transactions]
+    Check1 -->|Yes| Check2{All modules<br/>reconciled?}
+
+    Check2 -->|No| ErrorUnreconciled[Error: Unreconciled Modules]
+    Check2 -->|Yes| Check3{Bank reconciliation<br/>complete?}
+
+    Check3 -->|No| ErrorBank[Error: Bank Not Reconciled]
+    Check3 -->|Yes| Check4{All journal entries<br/>balanced?}
+
+    Check4 -->|No| ErrorUnbalanced[Error: Unbalanced Entries]
+    Check4 -->|Yes| Check5{All required reports<br/>generated?}
+
+    Check5 -->|No| ErrorReports[Error: Missing Reports]
+    Check5 -->|Yes| Check6{Budget variance<br/>within limits?}
+
+    Check6 -->|No| WarningBudget[Warning: Budget Variance]
+    Check6 -->|Yes| Check7{All approvals<br/>complete?}
+
+    Check7 -->|No| ErrorApprovals[Error: Pending Approvals]
+    Check7 -->|Yes| Check8{Inter-company<br/>reconciled?}
+
+    Check8 -->|No| ErrorIC[Error: IC Not Reconciled]
+    Check8 -->|Yes| AllChecksPass[All Validation Checks Passed]
+
+    ErrorUnposted --> DisplayErrors
+    ErrorUnreconciled --> DisplayErrors
+    ErrorBank --> DisplayErrors
+    ErrorUnbalanced --> DisplayErrors
+    ErrorReports --> DisplayErrors
+    ErrorApprovals --> DisplayErrors
+    ErrorIC --> DisplayErrors
+
+    DisplayErrors[Display Validation Errors] --> SetValidationFailed[Set Status: Validation Failed]
+    SetValidationFailed --> NotifyUsers[Notify Responsible Users]
+    NotifyUsers --> WaitFix[Wait for Issue Resolution]
+
+    WaitFix --> RetryChecks{Retry<br/>Validation?}
+    RetryChecks -->|Yes| RunChecks
+    RetryChecks -->|No| Cancel[Cancel Close Process]
+
+    WarningBudget --> ReviewWarnings{Review<br/>Warnings?}
+    ReviewWarnings -->|Override| AllChecksPass
+    ReviewWarnings -->|Fix| WaitFix
+
+    AllChecksPass --> SetReadyToClose[Set Status: Ready to Close]
+    SetReadyToClose --> ConfirmClose{Confirm<br/>Close?}
+
+    ConfirmClose -->|No| Cancel
+    ConfirmClose -->|Yes| ExecuteClose[Execute Period Close]
+
+    ExecuteClose --> SetClosing[Set Status: Closing]
+    SetClosing --> LockPeriod[Lock Period for Transactions]
+
+    LockPeriod --> RunClosingJV{Closing JV<br/>Required?}
+    RunClosingJV -->|Yes| GenerateClosingJV[Generate Closing Journal Vouchers]
+    RunClosingJV -->|No| UpdateBalances
+
+    GenerateClosingJV --> PostClosingJV[Post Closing JVs]
+    PostClosingJV --> UpdateBalances[Update Account Balances]
+
+    UpdateBalances --> CarryForward[Carry Forward Balances to Next Period]
+    CarryForward --> GenerateReports[Generate Closing Reports]
+
+    GenerateReports --> ArchiveData[Archive Period Data]
+    ArchiveData --> ValidateClose{Close<br/>Successful?}
+
+    ValidateClose -->|No| SetCloseFailed[Set Status: Close Failed]
+    ValidateClose -->|Yes| SetClosed[Set Status: Closed]
+
+    SetCloseFailed --> NotifyError[Notify Administrators]
+    NotifyError --> ReviewError{Review<br/>Error?}
+    ReviewError -->|Retry| ExecuteClose
+    ReviewError -->|Abort| Cancel
+
+    SetClosed --> NotifySuccess[Notify All Users: Period Closed]
+    NotifySuccess --> End([End])
+
+    Cancel --> SetOpen[Set Status: Open]
+    SetOpen --> End</div><h2>Pre-Close Validation Checks</h2>
+<h3>Critical Validations (Must Pass)</h3>
+<ol>
+<li><p><strong>All Transactions Posted</strong></p>
+<ul>
+<li>No draft or pending transactions in any module</li>
+<li>All batch uploads completed</li>
+<li>All interface transactions processed</li>
+</ul>
+</li>
+<li><p><strong>Module Reconciliation</strong></p>
+<ul>
+<li>AP: All invoices and payments reconciled</li>
+<li>AR: All invoices and receipts reconciled</li>
+<li>Asset: All asset transactions posted</li>
+<li>Income: All revenue transactions recorded</li>
+</ul>
+</li>
+<li><p><strong>Bank Reconciliation</strong></p>
+<ul>
+<li>All bank accounts reconciled</li>
+<li>Outstanding items documented</li>
+<li>Reconciliation reports generated</li>
+</ul>
+</li>
+<li><p><strong>Journal Entry Balance</strong></p>
+<ul>
+<li>All JVs debits = credits</li>
+<li>No unbalanced entries</li>
+<li>All temporary accounts cleared</li>
+</ul>
+</li>
+<li><p><strong>Approvals Complete</strong></p>
+<ul>
+<li>No pending approval workflows</li>
+<li>All high-value transactions approved</li>
+<li>All adjustments authorized</li>
+</ul>
+</li>
+<li><p><strong>Inter-Company Reconciliation</strong></p>
+<ul>
+<li>IC transactions balanced</li>
+<li>IC eliminations processed</li>
+<li>IC clearing accounts reconciled</li>
+</ul>
+</li>
+</ol>
+<h3>Warning Validations (Override Allowed)</h3>
+<ol>
+<li><p><strong>Budget Variance</strong></p>
+<ul>
+<li>Variance &gt;10% flagged for review</li>
+<li>Department budget overruns</li>
+<li>Material variance explanations</li>
+</ul>
+</li>
+<li><p><strong>Aging Analysis</strong></p>
+<ul>
+<li>Excessive aged receivables</li>
+<li>Excessive aged payables</li>
+<li>Unusual aging patterns</li>
+</ul>
+</li>
+<li><p><strong>Reporting Compliance</strong></p>
+<ul>
+<li>All scheduled reports generated</li>
+<li>Management reports reviewed</li>
+<li>Regulatory reports prepared</li>
+</ul>
+</li>
+</ol>
+<h2>Business Rules</h2>
+<h3>Period Close Rules</h3>
+<ol>
+<li><p><strong>Sequential Close</strong>:</p>
+<ul>
+<li>Periods must be closed in chronological order</li>
+<li>Cannot close Period N+1 before Period N</li>
+<li>Year-end close requires all months closed</li>
+</ul>
+</li>
+<li><p><strong>Transaction Cutoff</strong>:</p>
+<ul>
+<li>Transaction date must be within period</li>
+<li>No backdated transactions after close</li>
+<li>Adjusting entries require reopen</li>
+</ul>
+</li>
+<li><p><strong>Access Control</strong>:</p>
+<ul>
+<li>Only authorized users can close periods</li>
+<li>Segregation of duties enforced</li>
+<li>Close actions logged and audited</li>
+</ul>
+</li>
+<li><p><strong>Reopen Rules</strong>:</p>
+<ul>
+<li>Requires higher authorization than close</li>
+<li>Must provide business justification</li>
+<li>Limited reopen window (e.g., 5 business days)</li>
+<li>Cannot reopen after external reporting</li>
+</ul>
+</li>
+</ol>
+<h3>Permission Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Permission</th>
+<th>Permission Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>View Status</strong></td>
+<td>View permission</td>
+<td><code>GL.Period.View</code></td>
+</tr>
+<tr>
+<td><strong>Initiate Close</strong></td>
+<td>Close permission</td>
+<td><code>GL.Period.Close</code></td>
+</tr>
+<tr>
+<td><strong>Execute Close</strong></td>
+<td>Close permission</td>
+<td><code>GL.Period.Close</code></td>
+</tr>
+<tr>
+<td><strong>Reopen Period</strong></td>
+<td>Reopen permission</td>
+<td><code>GL.Period.Reopen</code></td>
+</tr>
+<tr>
+<td><strong>Override Warnings</strong></td>
+<td>Override permission</td>
+<td><code>GL.Period.Override</code></td>
+</tr>
+<tr>
+<td><strong>View Close Log</strong></td>
+<td>Audit permission</td>
+<td><code>GL.Period.Audit</code></td>
+</tr>
+</tbody></table>
+<h2>GL Posting - Year-End Close</h2>
+<h3>Closing Journal Vouchers</h3>
+<p><strong>Close Revenue Accounts</strong>:</p>
+<pre><code class="language-text">DR: Revenue Accounts                       XXX.XX
+CR: Retained Earnings                      XXX.XX</code></pre><p><strong>Close Expense Accounts</strong>:</p>
+<pre><code class="language-text">DR: Retained Earnings                      XXX.XX
+CR: Expense Accounts                       XXX.XX</code></pre><p><strong>Close Dividend Accounts</strong>:</p>
+<pre><code class="language-text">DR: Retained Earnings                      XXX.XX
+CR: Dividends Declared                     XXX.XX</code></pre><h3>Balance Carry-Forward</h3>
+<ul>
+<li><strong>Balance Sheet Accounts</strong>: Carry forward ending balance</li>
+<li><strong>Income Statement Accounts</strong>: Reset to zero, transfer to RE</li>
+<li><strong>Statistical Accounts</strong>: Carry forward or reset based on configuration</li>
+</ul>
+<h2>Multi-Tenant Isolation</h2>
+<p>All period close operations enforce tenant isolation:</p>
+<ul>
+<li><code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> applied to all queries</li>
+<li>Each tenant has independent period status</li>
+<li>Cross-tenant close operations not allowed</li>
+<li>Tenant-specific close calendars supported</li>
+</ul>
+<h2>Period Reopen Process</h2>
+<h3>Reopen Workflow</h3>
+<div class="mermaid">flowchart TD
+    StartReopen([Reopen Request]) --> CheckReopenPermission{Has Reopen<br/>Permission?}
+    CheckReopenPermission -->|No| ForbiddenReopen[Permission Denied]
+    CheckReopenPermission -->|Yes| CheckReopenWindow{Within Reopen<br/>Window?}
+
+    CheckReopenWindow -->|No| ErrorWindow[Error: Reopen Window Expired]
+    CheckReopenWindow -->|Yes| RequestJustification[Enter Business Justification]
+
+    RequestJustification --> SubmitApproval[Submit for Approval]
+    SubmitApproval --> ApprovalDecision{Approved?}
+
+    ApprovalDecision -->|No| ReopenDenied[Reopen Denied]
+    ApprovalDecision -->|Yes| ExecuteReopen[Execute Reopen]
+
+    ExecuteReopen --> SetReopening[Set Status: Reopening]
+    SetReopening --> UnlockPeriod[Unlock Period]
+
+    UnlockPeriod --> ReverseClosingJV{Closing JVs<br/>Exist?}
+    ReverseClosingJV -->|Yes| CreateReversalJV[Create Reversal JVs]
+    ReverseClosingJV -->|No| RestoreBalances
+
+    CreateReversalJV --> PostReversalJV[Post Reversal JVs]
+    PostReversalJV --> RestoreBalances[Restore Account Balances]
+
+    RestoreBalances --> ValidateReopen{Reopen<br/>Successful?}
+
+    ValidateReopen -->|No| SetReopenFailed[Set Status: Reopen Failed]
+    ValidateReopen -->|Yes| SetOpen[Set Status: Open]
+
+    SetReopenFailed --> NotifyReopenError[Notify Administrators]
+    SetOpen --> NotifyReopenSuccess[Notify Users: Period Reopened]
+
+    NotifyReopenSuccess --> EndReopen([End])
+    ReopenDenied --> EndReopen
+    ErrorWindow --> EndReopen
+    ForbiddenReopen --> EndReopen</div><h3>Reopen Authorization Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Reopen Scenario</th>
+<th>Approver</th>
+<th>Time Limit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Same Month</strong></td>
+<td>Controller</td>
+<td>5 business days</td>
+</tr>
+<tr>
+<td><strong>Prior Month</strong></td>
+<td>CFO</td>
+<td>10 business days</td>
+</tr>
+<tr>
+<td><strong>Prior Quarter</strong></td>
+<td>CFO + Audit Committee</td>
+<td>15 business days</td>
+</tr>
+<tr>
+<td><strong>Prior Year</strong></td>
+<td>Board Approval</td>
+<td>30 business days</td>
+</tr>
+</tbody></table>
+<h2>Error Handling</h2>
+<h3>Common Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Unposted Transactions</strong></td>
+<td>Draft/pending transactions exist</td>
+<td>Post all transactions or delete drafts</td>
+</tr>
+<tr>
+<td><strong>Unbalanced JVs</strong></td>
+<td>Debit ≠ Credit</td>
+<td>Correct journal entries</td>
+</tr>
+<tr>
+<td><strong>Bank Not Reconciled</strong></td>
+<td>Bank reconciliation incomplete</td>
+<td>Complete bank reconciliation</td>
+</tr>
+<tr>
+<td><strong>Pending Approvals</strong></td>
+<td>Unapproved transactions exist</td>
+<td>Approve or reject pending items</td>
+</tr>
+<tr>
+<td><strong>IC Not Balanced</strong></td>
+<td>Inter-company mismatch</td>
+<td>Reconcile inter-company accounts</td>
+</tr>
+<tr>
+<td><strong>Permission Denied</strong></td>
+<td>User lacks close permission</td>
+<td>Request permission from administrator</td>
+</tr>
+<tr>
+<td><strong>Period Sequence Error</strong></td>
+<td>Prior period not closed</td>
+<td>Close prior periods first</td>
+</tr>
+<tr>
+<td><strong>Reopen Window Expired</strong></td>
+<td>Too late to reopen</td>
+<td>Submit exception request to CFO</td>
+</tr>
+</tbody></table>
+<h2>API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/gl/period/list</code></td>
+<td>GET</td>
+<td>List all periods</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/{id}</code></td>
+<td>GET</td>
+<td>Get period details</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/status/{id}</code></td>
+<td>GET</td>
+<td>Get period status</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/initiate-close/{id}</code></td>
+<td>POST</td>
+<td>Initiate close process</td>
+<td>Close</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/validate/{id}</code></td>
+<td>POST</td>
+<td>Run validation checks</td>
+<td>Close</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/execute-close/{id}</code></td>
+<td>POST</td>
+<td>Execute period close</td>
+<td>Close</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/reopen/{id}</code></td>
+<td>POST</td>
+<td>Reopen closed period</td>
+<td>Reopen</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/close-log/{id}</code></td>
+<td>GET</td>
+<td>Get close audit log</td>
+<td>Audit</td>
+</tr>
+<tr>
+<td><code>/api/gl/period/validation-report/{id}</code></td>
+<td>GET</td>
+<td>Get validation report</td>
+<td>View</td>
+</tr>
+</tbody></table>
+<h2>Reporting</h2>
+<h3>Pre-Close Reports</h3>
+<ol>
+<li><strong>Trial Balance</strong>: Verify all accounts balanced</li>
+<li><strong>Unposted Transactions</strong>: List all draft/pending items</li>
+<li><strong>Bank Reconciliation Status</strong>: All bank accounts reconciled</li>
+<li><strong>Approval Status</strong>: Pending approvals by module</li>
+<li><strong>Budget Variance</strong>: Actual vs. Budget comparison</li>
+<li><strong>Aging Analysis</strong>: AP/AR aging reports</li>
+<li><strong>Inter-Company Reconciliation</strong>: IC balances by entity</li>
+</ol>
+<h3>Post-Close Reports</h3>
+<ol>
+<li><strong>Financial Statements</strong>: Balance Sheet, Income Statement, Cash Flow</li>
+<li><strong>Management Reports</strong>: KPIs, variance analysis, trends</li>
+<li><strong>Regulatory Reports</strong>: Tax filings, statutory reporting</li>
+<li><strong>Audit Trail</strong>: All transactions posted during period</li>
+<li><strong>Close Summary</strong>: Close process log and timeline</li>
+</ol>
+<h2>Best Practices</h2>
+<ol>
+<li><p><strong>Pre-Close Preparation</strong>:</p>
+<ul>
+<li>Establish close calendar with key dates</li>
+<li>Communicate deadlines to all departments</li>
+<li>Run validation checks daily during close window</li>
+<li>Monitor outstanding items dashboard</li>
+</ul>
+</li>
+<li><p><strong>Close Execution</strong>:</p>
+<ul>
+<li>Follow standardized close checklist</li>
+<li>Document all manual adjustments</li>
+<li>Review financial statements before finalizing</li>
+<li>Obtain management sign-off</li>
+</ul>
+</li>
+<li><p><strong>Quality Control</strong>:</p>
+<ul>
+<li>Perform month-over-month variance analysis</li>
+<li>Review unusual account balances</li>
+<li>Verify accruals and deferrals</li>
+<li>Cross-check sub-ledger to GL reconciliation</li>
+</ul>
+</li>
+<li><p><strong>Communication</strong>:</p>
+<ul>
+<li>Daily status updates during close</li>
+<li>Escalate issues immediately</li>
+<li>Document lessons learned</li>
+<li>Continuous process improvement</li>
+</ul>
+</li>
+<li><p><strong>Audit Readiness</strong>:</p>
+<ul>
+<li>Maintain complete audit trail</li>
+<li>Store supporting documentation</li>
+<li>Document close procedures</li>
+<li>Retain period close reports</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+@startuml
+title Carmen.NET - Master Data Model Overview
+
+package "Accounts Payable" {
+  entity "VENDOR" as vendor
+  entity "AP_INVOICE" as ap_inv
+  entity "AP_PAYMENT" as ap_pay
+  entity "AP_WHT" as ap_wht
+}
+
+package "Accounts Receivable" {
+  entity "CUSTOMER" as customer
+  entity "AR_INVOICE" as ar_inv
+  entity "AR_RECEIPT" as ar_rcpt
+  entity "AR_CONTRACT" as ar_contract
+}
+
+package "General Ledger" {
+  entity "ACCOUNT_CODE" as account
+  entity "GL_JV" as gl_jv
+  entity "GL_PERIOD" as gl_period
+  entity "GL_AMORTIZE" as gl_amort
+}
+
+package "Asset Management" {
+  entity "ASSET_REGISTER" as asset
+  entity "ASSET_CATEGORY" as asset_cat
+  entity "ASSET_DISPOSAL" as asset_disp
+}
+
+package "Income/Revenue" {
+  entity "INCOME_SOURCE" as inc_source
+  entity "INCOME_INVOICE" as inc_inv
+  entity "INCOME_PRODUCT" as inc_prod
+}
+
+package "Master Data" {
+  entity "USER" as user
+  entity "TENANT" as tenant
+  entity "COMPANY" as company
+  entity "DEPARTMENT" as dept
+  entity "CURRENCY" as currency
+}
+
+package "System" {
+  entity "PERMISSION" as perm
+  entity "WORKFLOW" as workflow
+  entity "DIMENSION" as dimension
+}
+
+' AP to GL
+ap_inv --> gl_jv : "posts to"
+ap_pay --> gl_jv : "posts to"
+
+' AR to GL
+ar_inv --> gl_jv : "posts to"
+ar_rcpt --> gl_jv : "posts to"
+
+' Asset to GL
+asset --> gl_jv : "posts depreciation"
+asset_disp --> gl_jv : "posts disposal"
+
+' Income to GL
+inc_inv --> gl_jv : "posts revenue"
+
+' All to Account Code
+gl_jv --> account : "uses"
+
+' Multi-tenant
+tenant --> company : "owns"
+user --> tenant : "belongs to"
+
+' Dimension allocation
+dimension --> gl_jv : "allocates"
+dimension --> dept : "references"
+
+@enduml

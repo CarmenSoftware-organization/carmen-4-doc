@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Mermaid in Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        button {
+            background: #1976D2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+        button:hover {
+            background: #1565C0;
+        }
+        button.secondary {
+            background: #424242;
+        }
+        button.secondary:hover {
+            background: #212121;
+        }
+        .doc-link {
+            background: white;
+            padding: 16px;
+            border: 2px solid #1976D2;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+            text-decoration: none;
+            color: #1976D2;
+            font-weight: 600;
+        }
+        .doc-link:hover {
+            background: #e3f2fd;
+        }
+        ol {
+            line-height: 2;
+        }
+        pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-check-circle"></i> Mermaid Rendering Verification</h1>
+
+    <div class="test-card">
+        <h2>Automatic Test Instructions</h2>
+        <ol>
+            <li>Click the "Open Main Site" button below</li>
+            <li>The main documentation site will open</li>
+            <li>Click on "Business Process Flows" in the sidebar</li>
+            <li>Wait for the markdown modal to open</li>
+            <li>Look for rendered flowchart diagrams (not code blocks)</li>
+            <li>If you see flowcharts with boxes and arrows → <strong>SUCCESS ✅</strong></li>
+            <li>If you see code blocks with "```mermaid" → <strong>FAILED ❌</strong></li>
+        </ol>
+    </div>
+
+    <div class="test-card">
+        <h2>Quick Access Links</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="index.html" class="doc-link" target="_blank">
+                <i class="fas fa-home"></i> Open Main Documentation Site
+            </a>
+            <a href="test-mermaid.html" class="doc-link" target="_blank">
+                <i class="fas fa-flask"></i> Open Standalone Mermaid Test
+            </a>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>Files to Test (Have Mermaid Diagrams)</h2>
+        <ul style="line-height: 2;">
+            <li><strong>Business Process Flows</strong> - P2P, O2C, R2R workflows</li>
+            <li><strong>AP Invoice Workflow</strong> - Invoice lifecycle</li>
+            <li><strong>Screen Flow Diagrams</strong> - UI navigation flows</li>
+            <li><strong>Database Schema Guide</strong> - ERD relationships</li>
+            <li><strong>Modernization Recommendations</strong> - Migration strategy</li>
+        </ul>
+    </div>
+
+    <div class="test-card">
+        <h2>Expected vs Actual</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+            <div>
+                <h3 style="color: #2e7d32;">✅ Expected (SUCCESS)</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='300' height='200' fill='%23f9fafb'/%3E%3Crect x='50' y='30' width='80' height='40' fill='%234caf50' stroke='%23000' stroke-width='2'/%3E%3Ctext x='90' y='55' text-anchor='middle' font-family='Arial' font-size='14' fill='white'%3EStart%3C/text%3E%3Crect x='170' y='30' width='80' height='40' fill='%234caf50' stroke='%23000' stroke-width='2'/%3E%3Ctext x='210' y='55' text-anchor='middle' font-family='Arial' font-size='14' fill='white'%3EEnd%3C/text%3E%3Cpath d='M 130 50 L 170 50' stroke='%23000' stroke-width='2' fill='none' marker-end='url(%23arrowhead)'/%3E%3Cdefs%3E%3Cmarker id='arrowhead' markerWidth='10' markerHeight='10' refX='5' refY='3' orient='auto'%3E%3Cpolygon points='0 0, 10 3, 0 6' fill='%23000' /%3E%3C/marker%3E%3C/defs%3E%3Ctext x='150' y='130' text-anchor='middle' font-family='Arial' font-size='12' fill='%232e7d32'%3E✓ Rendered Diagram%3C/text%3E%3C/svg%3E" alt="Success" style="border: 2px solid #2e7d32; border-radius: 8px;"/>
+                <p style="color: #2e7d32; margin-top: 8px;">Visual flowchart with boxes and arrows</p>
+            </div>
+            <div>
+                <h3 style="color: #d32f2f;">❌ Actual (FAILED)</h3>
+                <pre style="margin-top: 8px; background: #f5f5f5; color: #333; border: 2px solid #d32f2f;">```mermaid
+flowchart TD
+    Start --> End
+```</pre>
+                <p style="color: #d32f2f; margin-top: 8px;">Code block showing raw mermaid syntax</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>Browser Console Check</h2>
+        <p>Open browser DevTools (F12) and check for:</p>
+        <pre id="console-check">✅ Expected messages:
+- "Markdown loader initialized"
+- "Carmen.NET Documentation Site loaded successfully!"
+- No mermaid errors
+
+❌ Error messages to watch for:
+- "Mermaid rendering error"
+- "Failed to load"
+- "mermaid is not defined"</pre>
+    </div>
+
+    <div class="test-card">
+        <h2>Automated Actions</h2>
+        <button onclick="openMainSite()">
+            <i class="fas fa-external-link-alt"></i> Open Main Site
+        </button>
+        <button onclick="openTest()" class="secondary">
+            <i class="fas fa-vial"></i> Open Test Page
+        </button>
+        <button onclick="checkServer()" class="secondary">
+            <i class="fas fa-server"></i> Check Server
+        </button>
+
+        <div id="server-status" style="margin-top: 16px;"></div>
+    </div>
+
+    <script>
+        function openMainSite() {
+            window.open('index.html', '_blank');
+            setTimeout(() => {
+                alert('📋 Instructions:\n\n1. Click "Business Process Flows" in the sidebar\n2. Look for rendered flowcharts\n3. If you see visual diagrams = SUCCESS ✅\n4. If you see code blocks = FAILED ❌');
+            }, 500);
+        }
+
+        function openTest() {
+            window.open('test-mermaid.html', '_blank');
+        }
+
+        async function checkServer() {
+            const statusDiv = document.getElementById('server-status');
+            statusDiv.innerHTML = '<div class="status pending"><i class="fas fa-spinner spinner"></i> Checking server...</div>';
+
+            try {
+                const response = await fetch('/public/index.html');
+                if (response.ok) {
+                    statusDiv.innerHTML = '<div class="status success"><i class="fas fa-check-circle"></i> Server is running! Ready to test.</div>';
+                } else {
+                    statusDiv.innerHTML = '<div class="status error"><i class="fas fa-exclamation-triangle"></i> Server returned error: ' + response.status + '</div>';
+                }
+            } catch (err) {
+                statusDiv.innerHTML = '<div class="status error"><i class="fas fa-times-circle"></i> Server not running. Start with: python3 -m http.server 8000</div>';
+            }
+        }
+
+        // Auto-check server on load
+        window.addEventListener('load', () => {
+            setTimeout(checkServer, 500);
+        });
+    </script>
+</body>
+</html>

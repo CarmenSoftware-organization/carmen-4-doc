@@ -1,0 +1,94 @@
+@startuml
+title General Ledger (GL) Module - Entity Relationship Diagram
+
+entity "ACCOUNT_CODE" as account {
+  * AccCode : varchar(50) <<PK>>
+  --
+  AccName : varchar(200)
+  AccType : int
+  AccNature : int
+  AccLevel : int
+  ParentAccCode : varchar(50)
+  IsActive : bit
+}
+
+entity "GL_JV_H" as gl_jv {
+  * JvhId : bigint <<PK>>
+  --
+  JvhNo : varchar(50)
+  JvhDate : datetime
+  JvhDesc : varchar(500)
+  JvhStatus : int
+  JvhSource : varchar(50)
+  JvhType : int
+}
+
+entity "GL_JV_D" as gl_jv_d {
+  * JvdId : bigint <<PK>>
+  * JvhId : bigint <<FK>>
+  * AccCode : varchar(50) <<FK>>
+  --
+  JvdSeq : int
+  JvdDesc : varchar(500)
+  JvdDr : decimal(18,2)
+  JvdCr : decimal(18,2)
+  DeptCode : varchar(20)
+  ProjectCode : varchar(20)
+}
+
+entity "GL_PERIOD" as gl_period {
+  * PeriodId : bigint <<PK>>
+  --
+  PeriodYear : int
+  PeriodMonth : int
+  PeriodStatus : int
+  StartDate : datetime
+  EndDate : datetime
+}
+
+entity "GL_ALLOCATION_JV_H" as gl_alloc {
+  * AllocId : bigint <<PK>>
+  --
+  AllocNo : varchar(50)
+  AllocDate : datetime
+  AllocDesc : varchar(500)
+  AllocType : varchar(20)
+}
+
+entity "GL_ALLOCATION_JV_D" as gl_alloc_d {
+  * AllocdId : bigint <<PK>>
+  * AllocId : bigint <<FK>>
+  * AccCode : varchar(50) <<FK>>
+  --
+  AllocdSeq : int
+  AllocdRate : decimal(5,2)
+  AllocdAmt : decimal(18,2)
+}
+
+entity "GL_AMORTIZE" as gl_amortize {
+  * AmortizeId : bigint <<PK>>
+  * AccCode : varchar(50) <<FK>>
+  --
+  AmortizeNo : varchar(50)
+  AmortizeType : int
+  StartDate : datetime
+  EndDate : datetime
+  TotalAmt : decimal(18,2)
+  MonthlyAmt : decimal(18,2)
+}
+
+entity "GL_JV_FR_H" as gl_jv_fr {
+  * JvFrId : bigint <<PK>>
+  --
+  JvFrNo : varchar(50)
+  JvFrDate : datetime
+  JvFrDesc : varchar(500)
+}
+
+account ||--o{ gl_jv_d : "posted to"
+gl_jv ||--|{ gl_jv_d : "contains"
+account ||--o{ gl_alloc_d : "allocated to"
+gl_alloc ||--|{ gl_alloc_d : "contains"
+account ||--o{ gl_amortize : "amortized"
+
+@enduml

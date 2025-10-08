@@ -1,0 +1,26 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context Diagram - Carmen.NET ERP
+
+Person(user, "Business User", "AP/AR/GL clerk, Manager, Accountant")
+Person(admin, "System Administrator", "IT administrator, System configurator")
+
+System(carmen, "Carmen.NET ERP", "Multi-tenant financial ERP system\n60 controllers, 351+ API endpoints\n11 core modules, 28 projects")
+
+System_Ext(bank, "Banking System", "Payment file exchange\nBank statement import")
+System_Ext(tax, "Tax Authority", "VAT/WHT filing\nTax reporting")
+System_Ext(excel, "Microsoft Excel", "Excel add-in\nData import/export")
+System_Ext(third_party, "Third-Party Systems", "External integrations\nWeb APIs")
+
+Rel(user, carmen, "Uses", "HTTPS/Browser")
+Rel(admin, carmen, "Configures & manages", "HTTPS")
+Rel(carmen, bank, "Exchanges payment files", "File/SFTP")
+Rel(carmen, tax, "Submits tax reports", "File/API")
+Rel(excel, carmen, "Integrates with", "REST API")
+Rel(carmen, third_party, "Integrates with", "REST API/Database")
+
+SHOW_LEGEND()
+@enduml

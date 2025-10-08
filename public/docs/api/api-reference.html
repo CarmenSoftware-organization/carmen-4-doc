@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET API Reference - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET API Reference</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET API Reference</h1>
+<h2>Overview</h2>
+<p>This document provides a comprehensive reference for all Carmen.NET API endpoints, organized by module. All endpoints require authentication via JWT token unless otherwise specified.</p>
+<p><strong>Base URL</strong>: <code>https://api.carmen.com</code></p>
+<p><strong>API Version</strong>: v1</p>
+<p><strong>Authentication</strong>: Bearer Token (JWT)</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#account--authentication">Account &amp; Authentication</a></li>
+<li><a href="#ap-accounts-payable-module">AP (Accounts Payable) Module</a></li>
+<li><a href="#ar-accounts-receivable-module">AR (Accounts Receivable) Module</a></li>
+<li><a href="#gl-general-ledger-module">GL (General Ledger) Module</a></li>
+<li><a href="#asset-management-module">Asset Management Module</a></li>
+<li><a href="#income-revenue-module">Income/Revenue Module</a></li>
+<li><a href="#master-data">Master Data</a></li>
+</ol>
+<h2>Common Request Headers</h2>
+<pre><code class="language-http">Authorization: Bearer {jwt_token}
+Content-Type: application/json
+Accept: application/json
+X-Tenant: {tenant_code}</code></pre><h2>Common Response Format</h2>
+<h3>Success Response</h3>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: { /* response data */ },
+  &quot;message&quot;: &quot;Operation completed successfully&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;
+}</code></pre><h3>Error Response</h3>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;ERROR_CODE&quot;,
+  &quot;message&quot;: &quot;Error description&quot;,
+  &quot;details&quot;: &quot;Additional error information&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc-123-def-456&quot;
+}</code></pre><hr>
+<h2>Account &amp; Authentication</h2>
+<h3>POST /api/account/login</h3>
+<p><strong>Description</strong>: Authenticate user and obtain JWT token</p>
+<p><strong>Permission</strong>: Public (no authentication required)</p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;userName&quot;: &quot;user@company.com&quot;,
+  &quot;password&quot;: &quot;password&quot;,
+  &quot;useTenant&quot;: &quot;TENANT001&quot;
+}</code></pre><p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;,
+  &quot;refreshToken&quot;: &quot;refresh_token_here&quot;,
+  &quot;tokenExpiration&quot;: &quot;2025-10-06T11:30:00Z&quot;,
+  &quot;user&quot;: {
+    &quot;userId&quot;: &quot;12345&quot;,
+    &quot;userName&quot;: &quot;user@company.com&quot;,
+    &quot;fullName&quot;: &quot;John Doe&quot;,
+    &quot;roles&quot;: [&quot;AP.Manager&quot;],
+    &quot;tenantCode&quot;: &quot;TENANT001&quot;,
+    &quot;permissions&quot;: {}
+  }
+}</code></pre><h3>POST /api/account/refresh-token</h3>
+<p><strong>Description</strong>: Refresh expired access token</p>
+<p><strong>Permission</strong>: Public (no authentication required)</p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;refreshToken&quot;: &quot;refresh_token_here&quot;
+}</code></pre><p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;token&quot;: &quot;new_jwt_token&quot;,
+  &quot;tokenExpiration&quot;: &quot;2025-10-06T12:30:00Z&quot;
+}</code></pre><h3>POST /api/account/logout</h3>
+<p><strong>Description</strong>: Logout and invalidate tokens</p>
+<p><strong>Permission</strong>: Authenticated users</p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Logged out successfully&quot;
+}</code></pre><h3>GET /api/account/tenants</h3>
+<p><strong>Description</strong>: Get list of tenants user has access to</p>
+<p><strong>Permission</strong>: Authenticated users</p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;tenants&quot;: [
+    {
+      &quot;tenantCode&quot;: &quot;TENANT001&quot;,
+      &quot;tenantName&quot;: &quot;ABC Corporation&quot;,
+      &quot;isActive&quot;: true
+    }
+  ]
+}</code></pre><hr>
+<h2>AP (Accounts Payable) Module</h2>
+<h3>AP Invoice Endpoints</h3>
+<h4>GET /api/ap/invoice/list</h4>
+<p><strong>Description</strong>: Get list of AP invoices with filtering and pagination</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.View</code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul>
+<li><code>page</code> (integer): Page number (default: 1)</li>
+<li><code>pageSize</code> (integer): Records per page (default: 50, max: 100)</li>
+<li><code>status</code> (integer): Filter by status (0=Draft, 1=Posted, 2=Pending, 3=Approved, 4=Rejected, 5=Partially Paid, 6=Fully Paid, 9=Cancelled)</li>
+<li><code>vendorCode</code> (string): Filter by vendor</li>
+<li><code>fromDate</code> (date): Filter by invoice date from</li>
+<li><code>toDate</code> (date): Filter by invoice date to</li>
+<li><code>search</code> (string): Search in invoice number, description</li>
+</ul>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;12345&quot;,
+      &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+      &quot;invoiceDate&quot;: &quot;2025-10-06&quot;,
+      &quot;dueDate&quot;: &quot;2025-11-05&quot;,
+      &quot;vendorCode&quot;: &quot;V001&quot;,
+      &quot;vendorName&quot;: &quot;ABC Supplier&quot;,
+      &quot;amount&quot;: 100000.00,
+      &quot;taxAmount&quot;: 7000.00,
+      &quot;whtAmount&quot;: 5000.00,
+      &quot;netAmount&quot;: 102000.00,
+      &quot;outstandingAmount&quot;: 102000.00,
+      &quot;status&quot;: 1,
+      &quot;statusName&quot;: &quot;Posted&quot;,
+      &quot;createdBy&quot;: &quot;user@company.com&quot;,
+      &quot;createdDate&quot;: &quot;2025-10-06T10:00:00Z&quot;
+    }
+  ],
+  &quot;pagination&quot;: {
+    &quot;page&quot;: 1,
+    &quot;pageSize&quot;: 50,
+    &quot;totalRecords&quot;: 150,
+    &quot;totalPages&quot;: 3
+  }
+}</code></pre><h4>GET /api/ap/invoice/{id}</h4>
+<p><strong>Description</strong>: Get AP invoice details by ID</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.View</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;12345&quot;,
+    &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+    &quot;invoiceDate&quot;: &quot;2025-10-06&quot;,
+    &quot;dueDate&quot;: &quot;2025-11-05&quot;,
+    &quot;vendorCode&quot;: &quot;V001&quot;,
+    &quot;vendorName&quot;: &quot;ABC Supplier&quot;,
+    &quot;description&quot;: &quot;Professional Services&quot;,
+    &quot;amount&quot;: 100000.00,
+    &quot;taxAmount&quot;: 7000.00,
+    &quot;whtAmount&quot;: 5000.00,
+    &quot;netAmount&quot;: 102000.00,
+    &quot;status&quot;: 1,
+    &quot;statusName&quot;: &quot;Posted&quot;,
+    &quot;lines&quot;: [
+      {
+        &quot;lineNo&quot;: 1,
+        &quot;accountCode&quot;: &quot;5100&quot;,
+        &quot;accountName&quot;: &quot;Professional Expense&quot;,
+        &quot;description&quot;: &quot;Consulting Services&quot;,
+        &quot;amount&quot;: 100000.00,
+        &quot;departmentCode&quot;: &quot;IT&quot;
+      }
+    ],
+    &quot;approvalHistory&quot;: [
+      {
+        &quot;approvalDate&quot;: &quot;2025-10-06T14:00:00Z&quot;,
+        &quot;approver&quot;: &quot;manager@company.com&quot;,
+        &quot;action&quot;: &quot;Approved&quot;,
+        &quot;comments&quot;: &quot;Approved as per PO&quot;
+      }
+    ]
+  }
+}</code></pre><h4>POST /api/ap/invoice/create</h4>
+<p><strong>Description</strong>: Create new AP invoice</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+  &quot;invoiceDate&quot;: &quot;2025-10-06&quot;,
+  &quot;dueDate&quot;: &quot;2025-11-05&quot;,
+  &quot;vendorCode&quot;: &quot;V001&quot;,
+  &quot;description&quot;: &quot;Professional Services&quot;,
+  &quot;amount&quot;: 100000.00,
+  &quot;taxAmount&quot;: 7000.00,
+  &quot;whtAmount&quot;: 5000.00,
+  &quot;lines&quot;: [
+    {
+      &quot;lineNo&quot;: 1,
+      &quot;accountCode&quot;: &quot;5100&quot;,
+      &quot;description&quot;: &quot;Consulting Services&quot;,
+      &quot;amount&quot;: 100000.00,
+      &quot;departmentCode&quot;: &quot;IT&quot;
+    }
+  ]
+}</code></pre><p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;12345&quot;,
+    &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+    &quot;status&quot;: 0,
+    &quot;statusName&quot;: &quot;Draft&quot;
+  },
+  &quot;message&quot;: &quot;Invoice created successfully&quot;
+}</code></pre><h4>PUT /api/ap/invoice/update</h4>
+<p><strong>Description</strong>: Update existing AP invoice (Draft status only)</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Update</code></p>
+<p><strong>Request Body</strong>: Same as create, plus <code>id</code> field</p>
+<h4>DELETE /api/ap/invoice/{id}</h4>
+<p><strong>Description</strong>: Delete AP invoice (Draft status only)</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Delete</code></p>
+<h4>POST /api/ap/invoice/submit/{id}</h4>
+<p><strong>Description</strong>: Submit invoice for approval</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Create</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;12345&quot;,
+    &quot;status&quot;: 2,
+    &quot;statusName&quot;: &quot;Pending Approval&quot;,
+    &quot;assignedApprover&quot;: &quot;manager@company.com&quot;
+  }
+}</code></pre><h4>POST /api/ap/invoice/approve/{id}</h4>
+<p><strong>Description</strong>: Approve invoice</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Approve</code></p>
+<p><strong>Request Body</strong> (optional):</p>
+<pre><code class="language-json">{
+  &quot;comments&quot;: &quot;Approved as per PO#12345&quot;
+}</code></pre><h4>POST /api/ap/invoice/reject/{id}</h4>
+<p><strong>Description</strong>: Reject invoice</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Approve</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;reason&quot;: &quot;Missing purchase order reference&quot;
+}</code></pre><h4>POST /api/ap/invoice/post/{id}</h4>
+<p><strong>Description</strong>: Post invoice to GL</p>
+<p><strong>Permission</strong>: <code>AP.Invoice.Post</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;12345&quot;,
+    &quot;status&quot;: 1,
+    &quot;statusName&quot;: &quot;Posted&quot;,
+    &quot;glJvNumber&quot;: &quot;JV-2025-100&quot;,
+    &quot;postingDate&quot;: &quot;2025-10-06T15:00:00Z&quot;
+  }
+}</code></pre><h3>AP Payment Endpoints</h3>
+<h4>GET /api/ap/payment/list</h4>
+<p><strong>Description</strong>: Get list of AP payments</p>
+<p><strong>Permission</strong>: <code>AP.Payment.View</code></p>
+<p><strong>Query Parameters</strong>: Similar to invoice list (page, pageSize, status, vendorCode, fromDate, toDate)</p>
+<h4>GET /api/ap/payment/{id}</h4>
+<p><strong>Description</strong>: Get payment details</p>
+<p><strong>Permission</strong>: <code>AP.Payment.View</code></p>
+<h4>POST /api/ap/payment/create</h4>
+<p><strong>Description</strong>: Create new payment</p>
+<p><strong>Permission</strong>: <code>AP.Payment.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;paymentDate&quot;: &quot;2025-10-06&quot;,
+  &quot;bankAccountCode&quot;: &quot;BANK001&quot;,
+  &quot;paymentMethod&quot;: &quot;Check&quot;,
+  &quot;checkNumber&quot;: &quot;CHK-2025-100&quot;,
+  &quot;description&quot;: &quot;Payment to vendor&quot;,
+  &quot;invoices&quot;: [
+    {
+      &quot;invoiceId&quot;: &quot;12345&quot;,
+      &quot;paymentAmount&quot;: 102000.00
+    }
+  ]
+}</code></pre><h4>POST /api/ap/payment/post/{id}</h4>
+<p><strong>Description</strong>: Post payment to GL</p>
+<p><strong>Permission</strong>: <code>AP.Payment.Post</code></p>
+<h4>POST /api/ap/payment/void/{id}</h4>
+<p><strong>Description</strong>: Void posted payment</p>
+<p><strong>Permission</strong>: <code>AP.Payment.Void</code></p>
+<hr>
+<h2>AR (Accounts Receivable) Module</h2>
+<h3>AR Invoice Endpoints</h3>
+<h4>GET /api/ar/invoice/list</h4>
+<p><strong>Description</strong>: Get list of AR invoices</p>
+<p><strong>Permission</strong>: <code>AR.Invoice.View</code></p>
+<p><strong>Query Parameters</strong>: page, pageSize, status, customerCode, fromDate, toDate, search</p>
+<h4>POST /api/ar/invoice/create</h4>
+<p><strong>Description</strong>: Create AR invoice</p>
+<p><strong>Permission</strong>: <code>AR.Invoice.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;invoiceNumber&quot;: &quot;AR-2025-001&quot;,
+  &quot;invoiceDate&quot;: &quot;2025-10-06&quot;,
+  &quot;dueDate&quot;: &quot;2025-11-05&quot;,
+  &quot;customerCode&quot;: &quot;C001&quot;,
+  &quot;description&quot;: &quot;Services rendered&quot;,
+  &quot;amount&quot;: 50000.00,
+  &quot;taxAmount&quot;: 3500.00,
+  &quot;lines&quot;: [
+    {
+      &quot;lineNo&quot;: 1,
+      &quot;revenueAccountCode&quot;: &quot;4100&quot;,
+      &quot;description&quot;: &quot;Consulting Services&quot;,
+      &quot;amount&quot;: 50000.00
+    }
+  ]
+}</code></pre><h4>POST /api/ar/invoice/generate-from-contract</h4>
+<p><strong>Description</strong>: Generate invoice from AR contract</p>
+<p><strong>Permission</strong>: <code>AR.Invoice.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;contractId&quot;: &quot;67890&quot;,
+  &quot;invoiceDate&quot;: &quot;2025-10-06&quot;,
+  &quot;description&quot;: &quot;Monthly billing&quot;
+}</code></pre><h4>POST /api/ar/invoice/send/{id}</h4>
+<p><strong>Description</strong>: Send invoice to customer</p>
+<p><strong>Permission</strong>: <code>AR.Invoice.View</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;method&quot;: &quot;Email&quot;,
+  &quot;recipientEmail&quot;: &quot;customer@company.com&quot;,
+  &quot;subject&quot;: &quot;Invoice AR-2025-001&quot;,
+  &quot;message&quot;: &quot;Please find attached invoice&quot;
+}</code></pre><h3>AR Receipt Endpoints</h3>
+<h4>GET /api/ar/receipt/list</h4>
+<p><strong>Description</strong>: Get list of receipts</p>
+<p><strong>Permission</strong>: <code>AR.Receipt.View</code></p>
+<h4>POST /api/ar/receipt/create</h4>
+<p><strong>Description</strong>: Create receipt</p>
+<p><strong>Permission</strong>: <code>AR.Receipt.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;receiptDate&quot;: &quot;2025-10-06&quot;,
+  &quot;receiptNumber&quot;: &quot;RCP-2025-001&quot;,
+  &quot;customerCode&quot;: &quot;C001&quot;,
+  &quot;paymentMethod&quot;: &quot;Check&quot;,
+  &quot;amount&quot;: 50000.00,
+  &quot;checkNumber&quot;: &quot;123456&quot;,
+  &quot;bankAccountCode&quot;: &quot;BANK001&quot;,
+  &quot;applications&quot;: [
+    {
+      &quot;invoiceId&quot;: &quot;67890&quot;,
+      &quot;appliedAmount&quot;: 50000.00
+    }
+  ]
+}</code></pre><h4>POST /api/ar/receipt/deposit/{id}</h4>
+<p><strong>Description</strong>: Mark receipt as deposited</p>
+<p><strong>Permission</strong>: <code>AR.Receipt.Deposit</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;depositDate&quot;: &quot;2025-10-06&quot;,
+  &quot;depositSlipNumber&quot;: &quot;DEP-2025-001&quot;
+}</code></pre><hr>
+<h2>GL (General Ledger) Module</h2>
+<h3>GL Period Endpoints</h3>
+<h4>GET /api/gl/period/list</h4>
+<p><strong>Description</strong>: Get list of GL periods</p>
+<p><strong>Permission</strong>: <code>GL.Period.View</code></p>
+<h4>GET /api/gl/period/current</h4>
+<p><strong>Description</strong>: Get current open GL period</p>
+<p><strong>Permission</strong>: <code>GL.Period.View</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;periodCode&quot;: &quot;2025-10&quot;,
+    &quot;periodName&quot;: &quot;October 2025&quot;,
+    &quot;startDate&quot;: &quot;2025-10-01&quot;,
+    &quot;endDate&quot;: &quot;2025-10-31&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;fiscalYear&quot;: &quot;2025&quot;
+  }
+}</code></pre><h4>POST /api/gl/period/validate/{periodCode}</h4>
+<p><strong>Description</strong>: Run pre-close validation</p>
+<p><strong>Permission</strong>: <code>GL.Period.Close</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;validationPassed&quot;: true,
+  &quot;validationResults&quot;: [
+    {
+      &quot;category&quot;: &quot;Unposted Transactions&quot;,
+      &quot;status&quot;: &quot;Passed&quot;,
+      &quot;message&quot;: &quot;All transactions posted&quot;
+    },
+    {
+      &quot;category&quot;: &quot;Bank Reconciliation&quot;,
+      &quot;status&quot;: &quot;Passed&quot;,
+      &quot;message&quot;: &quot;All bank accounts reconciled&quot;
+    }
+  ]
+}</code></pre><h4>POST /api/gl/period/execute-close/{periodCode}</h4>
+<p><strong>Description</strong>: Execute period close</p>
+<p><strong>Permission</strong>: <code>GL.Period.Close</code></p>
+<h4>POST /api/gl/period/reopen/{periodCode}</h4>
+<p><strong>Description</strong>: Reopen closed period</p>
+<p><strong>Permission</strong>: <code>GL.Period.Reopen</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;reason&quot;: &quot;Need to post adjusting entries&quot;,
+  &quot;approvalReference&quot;: &quot;CFO-APPROVAL-001&quot;
+}</code></pre><h3>GL Journal Voucher Endpoints</h3>
+<h4>GET /api/gl/jv/list</h4>
+<p><strong>Description</strong>: Get list of journal vouchers</p>
+<p><strong>Permission</strong>: <code>GL.JV.View</code></p>
+<h4>POST /api/gl/jv/create</h4>
+<p><strong>Description</strong>: Create journal voucher</p>
+<p><strong>Permission</strong>: <code>GL.JV.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;jvDate&quot;: &quot;2025-10-06&quot;,
+  &quot;jvNumber&quot;: &quot;JV-2025-001&quot;,
+  &quot;description&quot;: &quot;Accrual entry&quot;,
+  &quot;lines&quot;: [
+    {
+      &quot;lineNo&quot;: 1,
+      &quot;accountCode&quot;: &quot;1100&quot;,
+      &quot;debit&quot;: 10000.00,
+      &quot;credit&quot;: 0,
+      &quot;description&quot;: &quot;Cash&quot;
+    },
+    {
+      &quot;lineNo&quot;: 2,
+      &quot;accountCode&quot;: &quot;4100&quot;,
+      &quot;debit&quot;: 0,
+      &quot;credit&quot;: 10000.00,
+      &quot;description&quot;: &quot;Revenue&quot;
+    }
+  ]
+}</code></pre><hr>
+<h2>Asset Management Module</h2>
+<h3>Asset Register Endpoints</h3>
+<h4>GET /api/asset/register/list</h4>
+<p><strong>Description</strong>: Get list of assets</p>
+<p><strong>Permission</strong>: <code>Asset.Register.View</code></p>
+<p><strong>Query Parameters</strong>: page, pageSize, categoryCode, locationCode, status</p>
+<h4>POST /api/asset/register/create</h4>
+<p><strong>Description</strong>: Create new asset</p>
+<p><strong>Permission</strong>: <code>Asset.Register.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;assetCode&quot;: &quot;AST-2025-001&quot;,
+  &quot;assetName&quot;: &quot;Dell Laptop&quot;,
+  &quot;categoryCode&quot;: &quot;IT-EQUIP&quot;,
+  &quot;acquisitionDate&quot;: &quot;2025-10-06&quot;,
+  &quot;acquisitionCost&quot;: 50000.00,
+  &quot;depreciationMethod&quot;: &quot;StraightLine&quot;,
+  &quot;usefulLife&quot;: 5,
+  &quot;salvageValue&quot;: 5000.00,
+  &quot;locationCode&quot;: &quot;HQ-IT&quot;,
+  &quot;custodianCode&quot;: &quot;EMP-001&quot;
+}</code></pre><h3>Asset Disposal Endpoints</h3>
+<h4>POST /api/asset/disposal/create</h4>
+<p><strong>Description</strong>: Create asset disposal</p>
+<p><strong>Permission</strong>: <code>Asset.Disposal.Create</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;assetCode&quot;: &quot;AST-2025-001&quot;,
+  &quot;disposalDate&quot;: &quot;2025-10-06&quot;,
+  &quot;disposalMethod&quot;: &quot;Sale&quot;,
+  &quot;salePrice&quot;: 15000.00,
+  &quot;disposalCost&quot;: 500.00,
+  &quot;reason&quot;: &quot;Asset obsolete&quot;
+}</code></pre><hr>
+<h2>Income/Revenue Module</h2>
+<h3>Income Invoice Endpoints</h3>
+<h4>GET /api/income/invoice/list</h4>
+<p><strong>Description</strong>: Get list of income invoices</p>
+<p><strong>Permission</strong>: <code>Income.Invoice.View</code></p>
+<h4>POST /api/income/invoice/create</h4>
+<p><strong>Description</strong>: Create income invoice</p>
+<p><strong>Permission</strong>: <code>Income.Invoice.Create</code></p>
+<hr>
+<h2>Master Data</h2>
+<h3>Vendor Endpoints</h3>
+<h4>GET /api/master/vendor/list</h4>
+<p><strong>Description</strong>: Get list of vendors</p>
+<p><strong>Permission</strong>: <code>Master.Vendor.View</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: [
+    {
+      &quot;vendorCode&quot;: &quot;V001&quot;,
+      &quot;vendorName&quot;: &quot;ABC Supplier&quot;,
+      &quot;taxId&quot;: &quot;1234567890&quot;,
+      &quot;isActive&quot;: true,
+      &quot;paymentTerms&quot;: &quot;Net 30&quot;,
+      &quot;whtRate&quot;: 5.00,
+      &quot;contactEmail&quot;: &quot;vendor@abc.com&quot;
+    }
+  ]
+}</code></pre><h4>GET /api/master/vendor/{code}</h4>
+<p><strong>Description</strong>: Get vendor details</p>
+<p><strong>Permission</strong>: <code>Master.Vendor.View</code></p>
+<h3>Customer Endpoints</h3>
+<h4>GET /api/master/customer/list</h4>
+<p><strong>Description</strong>: Get list of customers</p>
+<p><strong>Permission</strong>: <code>Master.Customer.View</code></p>
+<h4>GET /api/master/customer/{code}</h4>
+<p><strong>Description</strong>: Get customer details</p>
+<p><strong>Permission</strong>: <code>Master.Customer.View</code></p>
+<h3>GL Account Endpoints</h3>
+<h4>GET /api/gl/account/list</h4>
+<p><strong>Description</strong>: Get chart of accounts</p>
+<p><strong>Permission</strong>: <code>GL.Account.View</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;data&quot;: [
+    {
+      &quot;accountCode&quot;: &quot;1100&quot;,
+      &quot;accountName&quot;: &quot;Cash&quot;,
+      &quot;accountType&quot;: &quot;Asset&quot;,
+      &quot;isActive&quot;: true,
+      &quot;allowPosting&quot;: true
+    }
+  ]
+}</code></pre><hr>
+<h2>Rate Limiting</h2>
+<p><strong>Rate Limits</strong>:</p>
+<ul>
+<li><strong>Standard</strong>: 100 requests per minute per user</li>
+<li><strong>Batch operations</strong>: 10 requests per minute</li>
+<li><strong>File uploads</strong>: 5 requests per minute</li>
+</ul>
+<p><strong>Rate Limit Headers</strong>:</p>
+<pre><code class="language-http">X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1696600200</code></pre><h2>Versioning</h2>
+<p>API version is specified in the URL path: <code>/api/v1/...</code></p>
+<p>Current version: <code>v1</code></p>
+<h2>Pagination</h2>
+<p>All list endpoints support pagination:</p>
+<p><strong>Query Parameters</strong>:</p>
+<ul>
+<li><code>page</code>: Page number (default: 1)</li>
+<li><code>pageSize</code>: Records per page (default: 50, max: 100)</li>
+</ul>
+<p><strong>Response includes</strong>:</p>
+<pre><code class="language-json">{
+  &quot;pagination&quot;: {
+    &quot;page&quot;: 1,
+    &quot;pageSize&quot;: 50,
+    &quot;totalRecords&quot;: 150,
+    &quot;totalPages&quot;: 3,
+    &quot;hasNextPage&quot;: true,
+    &quot;hasPreviousPage&quot;: false
+  }
+}</code></pre><h2>Filtering &amp; Sorting</h2>
+<p><strong>Common Filter Parameters</strong>:</p>
+<ul>
+<li><code>search</code>: Full-text search</li>
+<li><code>fromDate</code>, <code>toDate</code>: Date range filtering</li>
+<li><code>status</code>: Status filtering</li>
+<li><code>orderBy</code>: Sort field</li>
+<li><code>orderDirection</code>: <code>asc</code> or <code>desc</code></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-text">GET /api/ap/invoice/list?status=1&amp;fromDate=2025-10-01&amp;toDate=2025-10-31&amp;orderBy=invoiceDate&amp;orderDirection=desc</code></pre><hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 4 - API &amp; Integration Documentation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET UI Component Inventory - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET UI Component Inventory</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET UI Component Inventory</h1>
+<p><strong>Document Version:</strong> 1.0<br><strong>Last Updated:</strong> October 6, 2025<br><strong>Target Audience:</strong> UI/UX Designers, Frontend Developers, Product Managers<br><strong>Prerequisites:</strong> Functional Requirements, API Documentation</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#ui-architecture-overview">UI Architecture Overview</a></li>
+<li><a href="#component-categories">Component Categories</a></li>
+<li><a href="#layout-components">Layout Components</a></li>
+<li><a href="#data-display-components">Data Display Components</a></li>
+<li><a href="#form-components">Form Components</a></li>
+<li><a href="#navigation-components">Navigation Components</a></li>
+<li><a href="#feedback-components">Feedback Components</a></li>
+<li><a href="#business-components">Business Components</a></li>
+<li><a href="#component-design-patterns">Component Design Patterns</a></li>
+</ol>
+<hr>
+<h2>1. UI Architecture Overview</h2>
+<h3>Current Architecture</h3>
+<p>Carmen.NET uses a <strong>hybrid architecture</strong>:</p>
+<pre><code class="language-text">┌─────────────────────────────────────────────┐
+│   Carmen.WebSupport (MVC Views)              │  ← Legacy UI (Admin)
+├─────────────────────────────────────────────┤
+│   Carmen.WebApi (RESTful API)                │  ← API Layer
+├─────────────────────────────────────────────┤
+│   Modern Frontend (Recommended)              │  ← React/Vue/Angular
+│   - Component-based architecture             │
+│   - API-driven data fetching                 │
+│   - Real-time updates (SignalR)              │
+└─────────────────────────────────────────────┘</code></pre><p><strong>Technology Stack (Recommended):</strong></p>
+<ul>
+<li><strong>Framework</strong>: React 18+ with TypeScript</li>
+<li><strong>UI Library</strong>: Material-UI (MUI) or Ant Design</li>
+<li><strong>State Management</strong>: Redux Toolkit or Zustand</li>
+<li><strong>Forms</strong>: React Hook Form + Zod validation</li>
+<li><strong>Data Tables</strong>: TanStack Table (React Table v8)</li>
+<li><strong>Charts</strong>: Recharts or Apache ECharts</li>
+<li><strong>HTTP Client</strong>: Axios with interceptors</li>
+<li><strong>Real-time</strong>: SignalR for progress notifications</li>
+</ul>
+<h3>Design System</h3>
+<p><strong>Color Palette:</strong></p>
+<pre><code class="language-css">/* Primary Colors */
+--primary-main: #1976D2;      /* Blue */
+--primary-light: #42A5F5;
+--primary-dark: #1565C0;
+
+/* Secondary Colors */
+--secondary-main: #9C27B0;    /* Purple */
+--secondary-light: #BA68C8;
+--secondary-dark: #7B1FA2;
+
+/* Status Colors */
+--success: #2E7D32;           /* Green */
+--warning: #ED6C02;           /* Orange */
+--error: #D32F2F;             /* Red */
+--info: #0288D1;              /* Light Blue */
+
+/* Neutral Colors */
+--background: #FAFAFA;
+--surface: #FFFFFF;
+--text-primary: #212121;
+--text-secondary: #757575;
+--divider: #E0E0E0;</code></pre><p><strong>Typography:</strong></p>
+<pre><code class="language-css">/* Font Family */
+font-family: &#039;Roboto&#039;, &#039;Helvetica&#039;, &#039;Arial&#039;, sans-serif;
+
+/* Headings */
+h1: 2.5rem (40px) - bold
+h2: 2rem (32px) - bold
+h3: 1.75rem (28px) - semibold
+h4: 1.5rem (24px) - semibold
+h5: 1.25rem (20px) - medium
+h6: 1rem (16px) - medium
+
+/* Body Text */
+body1: 1rem (16px) - regular
+body2: 0.875rem (14px) - regular
+caption: 0.75rem (12px) - regular</code></pre><p><strong>Spacing System:</strong></p>
+<pre><code class="language-css">--spacing-1: 4px;
+--spacing-2: 8px;
+--spacing-3: 12px;
+--spacing-4: 16px;
+--spacing-5: 20px;
+--spacing-6: 24px;
+--spacing-8: 32px;
+--spacing-10: 40px;
+--spacing-12: 48px;</code></pre><hr>
+<h2>2. Component Categories</h2>
+<h3>Component Hierarchy</h3>
+<pre><code class="language-text">Application Components
+├── Layout Components (Shell, Navigation)
+├── Data Display (Tables, Lists, Cards)
+├── Form Components (Inputs, Selects, Date Pickers)
+├── Navigation (Menus, Breadcrumbs, Tabs)
+├── Feedback (Alerts, Snackbars, Dialogs)
+└── Business Components (Invoice Form, Payment Form)</code></pre><h3>Component Naming Convention</h3>
+<pre><code class="language-text">{Domain}{Entity}{ComponentType}
+
+Examples:
+- ApInvoiceForm
+- ApInvoiceTable
+- ApInvoiceDetail
+- VendorSelector
+- AccountCodePicker</code></pre><hr>
+<h2>3. Layout Components</h2>
+<h3>3.1 AppShell</h3>
+<p><strong>Purpose</strong>: Main application layout with header, sidebar, and content area</p>
+<p><strong>Props:</strong></p>
+<pre><code class="language-typescript">interface AppShellProps {
+  children: React.ReactNode;
+  user: ViewUserLogin;
+  tenant: string;
+  onLogout: () =&gt; void;
+}</code></pre><p><strong>Structure:</strong></p>
+<pre><code class="language-tsx">&lt;AppShell&gt;
+  &lt;AppHeader user={user} tenant={tenant} onLogout={onLogout} /&gt;
+  &lt;AppSidebar /&gt;
+  &lt;AppContent&gt;
+    {children}
+  &lt;/AppContent&gt;
+  &lt;AppFooter /&gt;
+&lt;/AppShell&gt;</code></pre><p><strong>Features:</strong></p>
+<ul>
+<li>Collapsible sidebar (mobile responsive)</li>
+<li>User profile dropdown</li>
+<li>Tenant switcher</li>
+<li>Global search</li>
+<li>Notification center</li>
+</ul>
+<hr>
+<h3>3.2 AppHeader</h3>
+<p><strong>Purpose</strong>: Top navigation bar with branding and user actions</p>
+<p><strong>Components:</strong></p>
+<pre><code class="language-tsx">&lt;AppHeader&gt;
+  &lt;Logo /&gt;
+  &lt;TenantSelector currentTenant={tenant} /&gt;
+  &lt;GlobalSearch /&gt;
+  &lt;NotificationBell /&gt;
+  &lt;UserMenu user={user} onLogout={onLogout} /&gt;
+&lt;/AppHeader&gt;</code></pre><p><strong>Responsive Behavior:</strong></p>
+<ul>
+<li>Desktop: Full horizontal layout</li>
+<li>Tablet: Collapsed search, hamburger menu</li>
+<li>Mobile: Minimal UI, drawer navigation</li>
+</ul>
+<hr>
+<h3>3.3 AppSidebar</h3>
+<p><strong>Purpose</strong>: Primary navigation menu</p>
+<p><strong>Menu Structure:</strong></p>
+<pre><code class="language-tsx">&lt;AppSidebar&gt;
+  &lt;NavSection title=&quot;Dashboard&quot;&gt;
+    &lt;NavItem icon={&lt;Dashboard /&gt;} label=&quot;Dashboard&quot; path=&quot;/dashboard&quot; /&gt;
+  &lt;/NavSection&gt;
+
+  &lt;NavSection title=&quot;Accounts Payable&quot;&gt;
+    &lt;NavItem icon={&lt;Invoice /&gt;} label=&quot;Invoices&quot; path=&quot;/ap/invoices&quot; /&gt;
+    &lt;NavItem icon={&lt;Payment /&gt;} label=&quot;Payments&quot; path=&quot;/ap/payments&quot; /&gt;
+    &lt;NavItem icon={&lt;Vendor /&gt;} label=&quot;Vendors&quot; path=&quot;/ap/vendors&quot; /&gt;
+  &lt;/NavSection&gt;
+
+  &lt;NavSection title=&quot;Accounts Receivable&quot;&gt;
+    &lt;NavItem icon={&lt;ReceivableInvoice /&gt;} label=&quot;Invoices&quot; path=&quot;/ar/invoices&quot; /&gt;
+    &lt;NavItem icon={&lt;Receipt /&gt;} label=&quot;Receipts&quot; path=&quot;/ar/receipts&quot; /&gt;
+    &lt;NavItem icon={&lt;Customer /&gt;} label=&quot;Customers&quot; path=&quot;/ar/customers&quot; /&gt;
+  &lt;/NavSection&gt;
+
+  &lt;NavSection title=&quot;General Ledger&quot;&gt;
+    &lt;NavItem icon={&lt;JournalVoucher /&gt;} label=&quot;Journal Vouchers&quot; path=&quot;/gl/journal-vouchers&quot; /&gt;
+    &lt;NavItem icon={&lt;ChartOfAccounts /&gt;} label=&quot;Chart of Accounts&quot; path=&quot;/gl/accounts&quot; /&gt;
+    &lt;NavItem icon={&lt;Reports /&gt;} label=&quot;Reports&quot; path=&quot;/gl/reports&quot; /&gt;
+  &lt;/NavSection&gt;
+
+  &lt;NavSection title=&quot;Administration&quot;&gt;
+    &lt;NavItem icon={&lt;Settings /&gt;} label=&quot;Settings&quot; path=&quot;/admin/settings&quot; /&gt;
+    &lt;NavItem icon={&lt;Users /&gt;} label=&quot;Users&quot; path=&quot;/admin/users&quot; /&gt;
+  &lt;/NavSection&gt;
+&lt;/AppSidebar&gt;</code></pre><hr>
+<h3>3.4 Breadcrumbs</h3>
+<p><strong>Purpose</strong>: Show current navigation path</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;Breadcrumbs&gt;
+  &lt;BreadcrumbItem href=&quot;/dashboard&quot;&gt;Dashboard&lt;/BreadcrumbItem&gt;
+  &lt;BreadcrumbItem href=&quot;/ap&quot;&gt;Accounts Payable&lt;/BreadcrumbItem&gt;
+  &lt;BreadcrumbItem href=&quot;/ap/invoices&quot;&gt;Invoices&lt;/BreadcrumbItem&gt;
+  &lt;BreadcrumbItem current&gt;INV-2025-001&lt;/BreadcrumbItem&gt;
+&lt;/Breadcrumbs&gt;</code></pre><hr>
+<h2>4. Data Display Components</h2>
+<h3>4.1 DataTable</h3>
+<p><strong>Purpose</strong>: Paginated, sortable, filterable data grid</p>
+<p><strong>Props:</strong></p>
+<pre><code class="language-typescript">interface DataTableProps&lt;T&gt; {
+  columns: ColumnDef&lt;T&gt;[];
+  data: T[];
+  loading?: boolean;
+  pagination?: PaginationState;
+  sorting?: SortingState;
+  filtering?: FilteringState;
+  onPaginationChange?: (pagination: PaginationState) =&gt; void;
+  onSortingChange?: (sorting: SortingState) =&gt; void;
+  onRowClick?: (row: T) =&gt; void;
+  actions?: RowAction&lt;T&gt;[];
+}</code></pre><p><strong>Features:</strong></p>
+<ul>
+<li>Server-side pagination</li>
+<li>Multi-column sorting</li>
+<li>Column filtering</li>
+<li>Row selection (single/multiple)</li>
+<li>Export to Excel/CSV</li>
+<li>Column visibility toggle</li>
+<li>Responsive layout (mobile stacking)</li>
+</ul>
+<p><strong>Example Usage:</strong></p>
+<pre><code class="language-tsx">&lt;DataTable
+  columns={[
+    { id: &#039;invoiceNumber&#039;, header: &#039;Invoice #&#039;, accessorKey: &#039;invoiceNumber&#039; },
+    { id: &#039;invoiceDate&#039;, header: &#039;Date&#039;, accessorKey: &#039;invoiceDate&#039;, cell: formatDate },
+    { id: &#039;vendorName&#039;, header: &#039;Vendor&#039;, accessorKey: &#039;vendorName&#039; },
+    { id: &#039;totalAmount&#039;, header: &#039;Amount&#039;, accessorKey: &#039;totalAmount&#039;, cell: formatCurrency },
+    { id: &#039;status&#039;, header: &#039;Status&#039;, accessorKey: &#039;status&#039;, cell: StatusBadge }
+  ]}
+  data={invoices}
+  loading={loading}
+  pagination={{ page: 1, pageSize: 50 }}
+  onPaginationChange={handlePaginationChange}
+  onRowClick={handleRowClick}
+  actions={[
+    { label: &#039;View&#039;, icon: &lt;Eye /&gt;, onClick: handleView },
+    { label: &#039;Edit&#039;, icon: &lt;Edit /&gt;, onClick: handleEdit },
+    { label: &#039;Delete&#039;, icon: &lt;Delete /&gt;, onClick: handleDelete, confirm: true }
+  ]}
+/&gt;</code></pre><hr>
+<h3>4.2 StatusBadge</h3>
+<p><strong>Purpose</strong>: Visual status indicator</p>
+<p><strong>Variants:</strong></p>
+<pre><code class="language-tsx">// Invoice Status
+&lt;StatusBadge status=&quot;Draft&quot; color=&quot;default&quot; /&gt;
+&lt;StatusBadge status=&quot;Pending Approval&quot; color=&quot;warning&quot; /&gt;
+&lt;StatusBadge status=&quot;Approved&quot; color=&quot;info&quot; /&gt;
+&lt;StatusBadge status=&quot;Posted&quot; color=&quot;success&quot; /&gt;
+&lt;StatusBadge status=&quot;Paid&quot; color=&quot;success&quot; /&gt;
+&lt;StatusBadge status=&quot;Void&quot; color=&quot;error&quot; /&gt;
+
+// Payment Status
+&lt;StatusBadge status=&quot;Pending&quot; color=&quot;warning&quot; /&gt;
+&lt;StatusBadge status=&quot;Cleared&quot; color=&quot;success&quot; /&gt;
+&lt;StatusBadge status=&quot;Bounced&quot; color=&quot;error&quot; /&gt;</code></pre><hr>
+<h3>4.3 AmountDisplay</h3>
+<p><strong>Purpose</strong>: Format and display monetary amounts</p>
+<p><strong>Props:</strong></p>
+<pre><code class="language-typescript">interface AmountDisplayProps {
+  amount: number;
+  currency?: string;
+  showSign?: boolean;
+  colorCode?: boolean;  // Red for negative, green for positive
+}</code></pre><p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;AmountDisplay amount={1070.50} currency=&quot;THB&quot; /&gt;
+// Output: ฿1,070.50
+
+&lt;AmountDisplay amount={-500} colorCode={true} /&gt;
+// Output: &lt;span style=&quot;color: red&quot;&gt;-$500.00&lt;/span&gt;</code></pre><hr>
+<h3>4.4 DetailCard</h3>
+<p><strong>Purpose</strong>: Display entity details in card format</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;DetailCard title=&quot;Invoice Details&quot;&gt;
+  &lt;DetailRow label=&quot;Invoice Number&quot; value=&quot;INV-2025-001&quot; /&gt;
+  &lt;DetailRow label=&quot;Invoice Date&quot; value=&quot;2025-10-06&quot; /&gt;
+  &lt;DetailRow label=&quot;Due Date&quot; value=&quot;2025-11-05&quot; /&gt;
+  &lt;DetailRow label=&quot;Vendor&quot; value=&quot;ABC Supply Co., Ltd.&quot; /&gt;
+  &lt;DetailRow label=&quot;Amount&quot; value={&lt;AmountDisplay amount={1000} /&gt;} /&gt;
+  &lt;DetailRow label=&quot;Tax&quot; value={&lt;AmountDisplay amount={70} /&gt;} /&gt;
+  &lt;DetailRow label=&quot;Total&quot; value={&lt;AmountDisplay amount={1070} /&gt;} bold /&gt;
+  &lt;DetailRow label=&quot;Status&quot; value={&lt;StatusBadge status=&quot;Approved&quot; /&gt;} /&gt;
+&lt;/DetailCard&gt;</code></pre><hr>
+<h3>4.5 Timeline</h3>
+<p><strong>Purpose</strong>: Display chronological events</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;Timeline&gt;
+  &lt;TimelineItem
+    date=&quot;2025-10-06 10:30&quot;
+    icon={&lt;Create /&gt;}
+    title=&quot;Invoice Created&quot;
+    description=&quot;Created by John Doe&quot;
+  /&gt;
+  &lt;TimelineItem
+    date=&quot;2025-10-07 14:15&quot;
+    icon={&lt;Send /&gt;}
+    title=&quot;Submitted for Approval&quot;
+    description=&quot;Submitted to Finance Manager&quot;
+  /&gt;
+  &lt;TimelineItem
+    date=&quot;2025-10-08 09:20&quot;
+    icon={&lt;Check /&gt;}
+    title=&quot;Approved&quot;
+    description=&quot;Approved by Jane Smith&quot;
+    status=&quot;success&quot;
+  /&gt;
+  &lt;TimelineItem
+    date=&quot;2025-10-08 10:00&quot;
+    icon={&lt;AccountBalance /&gt;}
+    title=&quot;Posted to GL&quot;
+    description=&quot;JV Number: JV-2025-001&quot;
+    status=&quot;success&quot;
+  /&gt;
+&lt;/Timeline&gt;</code></pre><hr>
+<h2>5. Form Components</h2>
+<h3>5.1 TextField</h3>
+<p><strong>Purpose</strong>: Single-line text input</p>
+<p><strong>Props:</strong></p>
+<pre><code class="language-typescript">interface TextFieldProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (value: string) =&gt; void;
+  error?: string;
+  required?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+  maxLength?: number;
+}</code></pre><p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;TextField
+  label=&quot;Invoice Number&quot;
+  name=&quot;invoiceNumber&quot;
+  value={formData.invoiceNumber}
+  onChange={handleChange}
+  error={errors.invoiceNumber}
+  required
+  placeholder=&quot;INV-YYYY-NNNN&quot;
+  maxLength={50}
+/&gt;</code></pre><hr>
+<h3>5.2 Select</h3>
+<p><strong>Purpose</strong>: Dropdown selection</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;Select
+  label=&quot;Vendor&quot;
+  name=&quot;vendorCode&quot;
+  value={formData.vendorCode}
+  onChange={handleChange}
+  options={vendors.map(v =&gt; ({ value: v.vnCode, label: v.vnName }))}
+  required
+  searchable
+  error={errors.vendorCode}
+/&gt;</code></pre><hr>
+<h3>5.3 DatePicker</h3>
+<p><strong>Purpose</strong>: Date selection with calendar</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;DatePicker
+  label=&quot;Invoice Date&quot;
+  name=&quot;invoiceDate&quot;
+  value={formData.invoiceDate}
+  onChange={handleDateChange}
+  maxDate={new Date()}  // Cannot be future date
+  required
+  error={errors.invoiceDate}
+/&gt;</code></pre><hr>
+<h3>5.4 AmountInput</h3>
+<p><strong>Purpose</strong>: Formatted currency input</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;AmountInput
+  label=&quot;Amount&quot;
+  name=&quot;amount&quot;
+  value={formData.amount}
+  onChange={handleAmountChange}
+  currency=&quot;THB&quot;
+  min={0.01}
+  required
+  error={errors.amount}
+/&gt;</code></pre><hr>
+<h3>5.5 AutocompleteSelect</h3>
+<p><strong>Purpose</strong>: Searchable dropdown with async data loading</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;AutocompleteSelect
+  label=&quot;GL Account&quot;
+  name=&quot;accountCode&quot;
+  value={formData.accountCode}
+  onChange={handleAccountChange}
+  loadOptions={async (query) =&gt; {
+    const response = await api.get(&#039;/api/account-code/search&#039;, { params: { q: query } });
+    return response.data.map(acc =&gt; ({
+      value: acc.accCode,
+      label: `${acc.accCode} - ${acc.accDesc}`
+    }));
+  }}
+  required
+  error={errors.accountCode}
+/&gt;</code></pre><hr>
+<h3>5.6 FileUpload</h3>
+<p><strong>Purpose</strong>: File upload with drag-and-drop</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;FileUpload
+  label=&quot;Attachments&quot;
+  accept=&quot;.pdf,.jpg,.png,.xlsx&quot;
+  maxSize={5 * 1024 * 1024}  // 5MB
+  multiple
+  onChange={handleFileUpload}
+  files={formData.attachments}
+/&gt;</code></pre><hr>
+<h2>6. Navigation Components</h2>
+<h3>6.1 Tabs</h3>
+<p><strong>Purpose</strong>: Organize content into sections</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;Tabs value={activeTab} onChange={handleTabChange}&gt;
+  &lt;Tab label=&quot;Invoice Details&quot; value=&quot;details&quot; /&gt;
+  &lt;Tab label=&quot;Line Items&quot; value=&quot;lines&quot; /&gt;
+  &lt;Tab label=&quot;Payment History&quot; value=&quot;payments&quot; /&gt;
+  &lt;Tab label=&quot;Attachments&quot; value=&quot;attachments&quot; /&gt;
+  &lt;Tab label=&quot;Audit Log&quot; value=&quot;audit&quot; /&gt;
+&lt;/Tabs&gt;
+
+&lt;TabPanel value={activeTab} index=&quot;details&quot;&gt;
+  &lt;InvoiceDetailsForm /&gt;
+&lt;/TabPanel&gt;
+&lt;TabPanel value={activeTab} index=&quot;lines&quot;&gt;
+  &lt;InvoiceLineItemsTable /&gt;
+&lt;/TabPanel&gt;</code></pre><hr>
+<h3>6.2 Stepper</h3>
+<p><strong>Purpose</strong>: Multi-step workflow indicator</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;Stepper activeStep={currentStep}&gt;
+  &lt;Step label=&quot;Invoice Details&quot; completed={currentStep &gt; 0} /&gt;
+  &lt;Step label=&quot;Line Items&quot; completed={currentStep &gt; 1} /&gt;
+  &lt;Step label=&quot;Review&quot; completed={currentStep &gt; 2} /&gt;
+  &lt;Step label=&quot;Submit&quot; completed={currentStep &gt; 3} /&gt;
+&lt;/Stepper&gt;</code></pre><hr>
+<h2>7. Feedback Components</h2>
+<h3>7.1 Alert</h3>
+<p><strong>Purpose</strong>: Display contextual feedback messages</p>
+<p><strong>Variants:</strong></p>
+<pre><code class="language-tsx">&lt;Alert severity=&quot;success&quot;&gt;Invoice created successfully!&lt;/Alert&gt;
+&lt;Alert severity=&quot;info&quot;&gt;Invoice requires approval before posting.&lt;/Alert&gt;
+&lt;Alert severity=&quot;warning&quot;&gt;This invoice is past due by 15 days.&lt;/Alert&gt;
+&lt;Alert severity=&quot;error&quot;&gt;Failed to save invoice. Please try again.&lt;/Alert&gt;</code></pre><hr>
+<h3>7.2 Snackbar</h3>
+<p><strong>Purpose</strong>: Temporary notification</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;Snackbar
+  open={showSnackbar}
+  message=&quot;Invoice saved successfully&quot;
+  severity=&quot;success&quot;
+  autoHideDuration={3000}
+  onClose={handleClose}
+  action={&lt;Button onClick={handleUndo}&gt;Undo&lt;/Button&gt;}
+/&gt;</code></pre><hr>
+<h3>7.3 ConfirmDialog</h3>
+<p><strong>Purpose</strong>: Confirmation prompt for destructive actions</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;ConfirmDialog
+  open={showConfirm}
+  title=&quot;Delete Invoice&quot;
+  message=&quot;Are you sure you want to delete invoice INV-2025-001? This action cannot be undone.&quot;
+  confirmText=&quot;Delete&quot;
+  cancelText=&quot;Cancel&quot;
+  onConfirm={handleDelete}
+  onCancel={() =&gt; setShowConfirm(false)}
+  severity=&quot;error&quot;
+/&gt;</code></pre><hr>
+<h3>7.4 LoadingOverlay</h3>
+<p><strong>Purpose</strong>: Indicate loading state</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;LoadingOverlay open={loading} message=&quot;Saving invoice...&quot; /&gt;</code></pre><hr>
+<h3>7.5 ProgressBar</h3>
+<p><strong>Purpose</strong>: Show progress for long-running operations</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;ProgressBar
+  value={progress}
+  label=&quot;Processing invoices...&quot;
+  showPercentage
+/&gt;</code></pre><hr>
+<h2>8. Business Components</h2>
+<h3>8.1 ApInvoiceForm</h3>
+<p><strong>Purpose</strong>: Create/edit AP invoices</p>
+<p><strong>Sections:</strong></p>
+<ol>
+<li><p><strong>Header Section</strong></p>
+<ul>
+<li>Invoice Number (auto-generated)</li>
+<li>Invoice Date</li>
+<li>Due Date (calculated based on payment terms)</li>
+<li>Vendor Selector</li>
+<li>Description</li>
+</ul>
+</li>
+<li><p><strong>Amount Section</strong></p>
+<ul>
+<li>Amount (before tax)</li>
+<li>Tax Amount (calculated)</li>
+<li>WHT Amount (optional)</li>
+<li>Total Amount (calculated)</li>
+</ul>
+</li>
+<li><p><strong>Line Items Section</strong></p>
+<ul>
+<li>Editable data grid</li>
+<li>Columns: Line #, Description, Account Code, Dept, Amount</li>
+<li>Add/Remove lines</li>
+<li>Line totals validation</li>
+</ul>
+</li>
+<li><p><strong>Actions</strong></p>
+<ul>
+<li>Save Draft</li>
+<li>Submit for Approval</li>
+<li>Cancel</li>
+</ul>
+</li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code class="language-tsx">&lt;ApInvoiceForm
+  mode=&quot;create&quot;
+  initialData={null}
+  onSave={handleSave}
+  onCancel={handleCancel}
+/&gt;</code></pre><hr>
+<h3>8.2 PaymentApplicationForm</h3>
+<p><strong>Purpose</strong>: Apply payments to invoices</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Select unpaid invoices</li>
+<li>Allocate payment amount across invoices</li>
+<li>FIFO application suggestion</li>
+<li>Partial payment support</li>
+</ul>
+<hr>
+<h3>8.3 GlJournalVoucherForm</h3>
+<p><strong>Purpose</strong>: Create GL journal entries</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Add DR/CR lines</li>
+<li>Auto-balance validation (DR = CR)</li>
+<li>Account code lookup</li>
+<li>Department allocation</li>
+<li>Period validation</li>
+</ul>
+<hr>
+<h2>9. Component Design Patterns</h2>
+<h3>Pattern 1: Container/Presenter</h3>
+<pre><code class="language-tsx">// Container (Smart Component)
+const ApInvoiceListContainer: React.FC = () =&gt; {
+  const [invoices, setInvoices] = useState&lt;ViewApInvoice[]&gt;([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() =&gt; {
+    loadInvoices();
+  }, []);
+
+  const loadInvoices = async () =&gt; {
+    setLoading(true);
+    const response = await api.get(&#039;/api/apInvoice&#039;);
+    setInvoices(response.data);
+    setLoading(false);
+  };
+
+  return (
+    &lt;ApInvoiceListPresenter
+      invoices={invoices}
+      loading={loading}
+      onRefresh={loadInvoices}
+    /&gt;
+  );
+};
+
+// Presenter (Dumb Component)
+interface ApInvoiceListPresenterProps {
+  invoices: ViewApInvoice[];
+  loading: boolean;
+  onRefresh: () =&gt; void;
+}
+
+const ApInvoiceListPresenter: React.FC&lt;ApInvoiceListPresenterProps&gt; = ({
+  invoices,
+  loading,
+  onRefresh
+}) =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;Button onClick={onRefresh}&gt;Refresh&lt;/Button&gt;
+      {loading ? &lt;LoadingOverlay /&gt; : &lt;DataTable data={invoices} /&gt;}
+    &lt;/div&gt;
+  );
+};</code></pre><h3>Pattern 2: Custom Hooks</h3>
+<pre><code class="language-tsx">// useApInvoice.ts
+export const useApInvoice = (invhSeq?: number) =&gt; {
+  const [invoice, setInvoice] = useState&lt;ViewApInvoice | null&gt;(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState&lt;string | null&gt;(null);
+
+  useEffect(() =&gt; {
+    if (invhSeq) {
+      loadInvoice(invhSeq);
+    }
+  }, [invhSeq]);
+
+  const loadInvoice = async (id: number) =&gt; {
+    setLoading(true);
+    try {
+      const response = await api.get(`/api/apInvoice/${id}`);
+      setInvoice(response.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateInvoice = async (data: ParamApInvoice) =&gt; {
+    const response = await api.put(`/api/apInvoice/${invhSeq}`, data);
+    setInvoice(response.data);
+  };
+
+  return { invoice, loading, error, updateInvoice };
+};
+
+// Usage
+const ApInvoiceDetail = ({ invhSeq }: { invhSeq: number }) =&gt; {
+  const { invoice, loading, error, updateInvoice } = useApInvoice(invhSeq);
+
+  if (loading) return &lt;LoadingOverlay /&gt;;
+  if (error) return &lt;Alert severity=&quot;error&quot;&gt;{error}&lt;/Alert&gt;;
+
+  return &lt;DetailCard data={invoice} onSave={updateInvoice} /&gt;;
+};</code></pre><hr>
+<h2>Summary</h2>
+<p>Carmen.NET UI Component Inventory:</p>
+<p><strong>✅ Documented:</strong></p>
+<ul>
+<li>40+ reusable UI components</li>
+<li>8 component categories</li>
+<li>Design system guidelines</li>
+<li>Component design patterns</li>
+</ul>
+<p><strong>📦 Component Categories:</strong></p>
+<ol>
+<li>Layout Components (5)</li>
+<li>Data Display Components (5)</li>
+<li>Form Components (6)</li>
+<li>Navigation Components (2)</li>
+<li>Feedback Components (5)</li>
+<li>Business Components (3)</li>
+</ol>
+<p><strong>🎨 Design System:</strong></p>
+<ul>
+<li>Color palette (primary, secondary, status)</li>
+<li>Typography scale</li>
+<li>Spacing system (4px grid)</li>
+<li>Responsive breakpoints</li>
+</ul>
+<p><strong>🔧 Recommended Stack:</strong></p>
+<ul>
+<li>React 18+ with TypeScript</li>
+<li>Material-UI or Ant Design</li>
+<li>TanStack Table for data grids</li>
+<li>React Hook Form for forms</li>
+<li>SignalR for real-time updates</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Review <a href="screen-flow-diagrams.md">Screen Flow Diagrams</a> for user journeys</li>
+<li>Study <a href="../requirements/functional-requirements.md">Functional Requirements</a> for component behavior</li>
+<li>Reference <a href="../api/api-reference.md">API Documentation</a> for data contracts</li>
+</ul>
+<hr>
+<p><strong>Document Status:</strong> ✅ Complete<br><strong>For Support:</strong> Contact UI/UX team or frontend development team</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

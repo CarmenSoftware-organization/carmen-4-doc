@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Integration Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>API Integration Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>API Integration Guide</h1>
+<h2>Overview</h2>
+<p>This guide provides comprehensive instructions for integrating with the Carmen.NET API, including common integration scenarios, code examples, best practices, and troubleshooting guidance.</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#integration-scenarios">Integration Scenarios</a></li>
+<li><a href="#code-examples">Code Examples</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+<li><a href="#performance-optimization">Performance Optimization</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ol>
+<h2>Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Carmen.NET API base URL</li>
+<li>Valid user credentials</li>
+<li>Tenant code (for multi-tenant environments)</li>
+<li>Understanding of <a href="authentication-guide.md">Authentication Guide</a></li>
+<li>Familiarity with <a href="error-handling-guide.md">Error Handling</a></li>
+</ul>
+<h3>Quick Start</h3>
+<pre><code class="language-typescript">// 1. Initialize API client
+const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+
+// 2. Authenticate
+await client.login(&#039;user@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+// 3. Make API calls
+const invoices = await client.get(&#039;/api/ap/invoice/list&#039;);</code></pre><h2>Integration Scenarios</h2>
+<h3>Scenario 1: Create AP Invoice</h3>
+<p><strong>Business Use Case</strong>: Create a new vendor invoice in the system</p>
+<p><strong>Complete Workflow</strong>:</p>
+<div class="mermaid">sequenceDiagram
+    participant App as Your Application
+    participant API as Carmen API
+    participant DB as Database
+
+    App->>API: 1. POST /api/account/login
+    API-->>App: JWT Token
+
+    App->>API: 2. GET /api/master/vendor/{vendorCode}
+    API-->>App: Vendor Details
+
+    App->>API: 3. GET /api/gl/period/current
+    API-->>App: Current GL Period
+
+    App->>API: 4. POST /api/ap/invoice/create<br/>{invoice data}
+    API->>DB: Validate & Save
+    DB-->>API: Invoice Created
+    API-->>App: Invoice ID
+
+    App->>API: 5. POST /api/ap/invoice/submit/{id}
+    API->>DB: Update Status
+    API-->>App: Success</div><p><strong>Step-by-Step Implementation</strong>:</p>
+<pre><code class="language-typescript">interface ApInvoiceCreateRequest {
+    invoiceNumber: string;
+    invoiceDate: string; // ISO 8601 format
+    dueDate: string;
+    vendorCode: string;
+    description: string;
+    amount: number;
+    taxAmount?: number;
+    whtAmount?: number;
+    lines: ApInvoiceLine[];
+}
+
+interface ApInvoiceLine {
+    lineNo: number;
+    accountCode: string;
+    description: string;
+    amount: number;
+    departmentCode?: string;
+}
+
+async function createApInvoice(): Promise&lt;string&gt; {
+    const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+
+    // Step 1: Authenticate
+    const loginSuccess = await client.login(
+        &#039;ap.clerk@company.com&#039;,
+        &#039;password&#039;,
+        &#039;TENANT001&#039;
+    );
+
+    if (!loginSuccess) {
+        throw new Error(&#039;Authentication failed&#039;);
+    }
+
+    // Step 2: Validate vendor exists and is active
+    const vendor = await client.get(`/api/master/vendor/V001`);
+    if (!vendor.isActive) {
+        throw new Error(&#039;Vendor is not active&#039;);
+    }
+
+    // Step 3: Get current GL period
+    const period = await client.get(&#039;/api/gl/period/current&#039;);
+    if (period.status !== &#039;Open&#039;) {
+        throw new Error(&#039;Current GL period is not open&#039;);
+    }
+
+    // Step 4: Prepare invoice data
+    const invoice: ApInvoiceCreateRequest = {
+        invoiceNumber: &#039;INV-2025-001&#039;,
+        invoiceDate: &#039;2025-10-06&#039;,
+        dueDate: &#039;2025-11-05&#039;, // 30 days payment terms
+        vendorCode: &#039;V001&#039;,
+        description: &#039;Professional Services - October 2025&#039;,
+        amount: 100000.00,
+        taxAmount: 7000.00, // 7% VAT
+        whtAmount: 5000.00, // 5% WHT
+        lines: [
+            {
+                lineNo: 1,
+                accountCode: &#039;5100&#039;, // Professional Expense
+                description: &#039;Consulting Services&#039;,
+                amount: 100000.00,
+                departmentCode: &#039;IT&#039;
+            }
+        ]
+    };
+
+    // Step 5: Create invoice
+    const createResponse = await client.post(
+        &#039;/api/ap/invoice/create&#039;,
+        invoice
+    );
+
+    if (!createResponse.success) {
+        throw new Error(`Failed to create invoice: ${createResponse.message}`);
+    }
+
+    const invoiceId = createResponse.data.id;
+    console.log(`Invoice created with ID: ${invoiceId}`);
+
+    // Step 6: Submit for approval (optional, based on workflow)
+    if (invoice.amount &gt; 10000) {
+        const submitResponse = await client.post(
+            `/api/ap/invoice/submit/${invoiceId}`
+        );
+
+        if (submitResponse.success) {
+            console.log(&#039;Invoice submitted for approval&#039;);
+        }
+    }
+
+    return invoiceId;
+}</code></pre><h3>Scenario 2: Process Payment</h3>
+<p><strong>Business Use Case</strong>: Create payment for approved invoices</p>
+<pre><code class="language-typescript">interface ApPaymentCreateRequest {
+    paymentDate: string;
+    bankAccountCode: string;
+    paymentMethod: &#039;Check&#039; | &#039;Wire&#039; | &#039;ACH&#039; | &#039;Cash&#039;;
+    checkNumber?: string;
+    wireReference?: string;
+    description: string;
+    invoices: PaymentInvoiceApplication[];
+}
+
+interface PaymentInvoiceApplication {
+    invoiceId: string;
+    paymentAmount: number;
+    discountAmount?: number;
+}
+
+async function processPayment(): Promise&lt;string&gt; {
+    const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+    await client.login(&#039;ap.manager@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+    // Step 1: Get invoices ready for payment
+    const invoices = await client.get(&#039;/api/ap/invoice/list&#039;, {
+        status: &#039;Posted&#039;, // Status = 1
+        dueDate_lte: &#039;2025-10-06&#039; // Due on or before today
+    });
+
+    // Step 2: Select invoices to pay
+    const invoicesToPay = invoices.data.filter(inv =&gt;
+        inv.outstandingAmount &gt; 0 &amp;&amp; inv.vendorCode === &#039;V001&#039;
+    );
+
+    // Step 3: Calculate total payment amount
+    const totalAmount = invoicesToPay.reduce((sum, inv) =&gt;
+        sum + inv.outstandingAmount, 0
+    );
+
+    // Step 4: Create payment
+    const payment: ApPaymentCreateRequest = {
+        paymentDate: &#039;2025-10-06&#039;,
+        bankAccountCode: &#039;BANK001&#039;,
+        paymentMethod: &#039;Check&#039;,
+        checkNumber: &#039;CHK-2025-100&#039;,
+        description: `Payment to Vendor V001 - ${invoicesToPay.length} invoices`,
+        invoices: invoicesToPay.map(inv =&gt; ({
+            invoiceId: inv.id,
+            paymentAmount: inv.outstandingAmount
+        }))
+    };
+
+    const response = await client.post(&#039;/api/ap/payment/create&#039;, payment);
+
+    if (response.success) {
+        const paymentId = response.data.id;
+
+        // Step 5: Submit for approval if needed
+        if (totalAmount &gt; 25000) {
+            await client.post(`/api/ap/payment/submit/${paymentId}`);
+            console.log(&#039;Payment submitted for approval&#039;);
+        } else {
+            // Step 6: Auto-post if below threshold
+            await client.post(`/api/ap/payment/post/${paymentId}`);
+            console.log(&#039;Payment posted to GL&#039;);
+        }
+
+        return paymentId;
+    }
+
+    throw new Error(`Payment failed: ${response.message}`);
+}</code></pre><h3>Scenario 3: Generate AR Invoice</h3>
+<p><strong>Business Use Case</strong>: Create customer invoice from contract</p>
+<pre><code class="language-typescript">interface ArInvoiceGenerateRequest {
+    contractId: string;
+    invoiceDate: string;
+    dueDate?: string; // Optional, calculated from payment terms
+    description?: string;
+}
+
+async function generateArInvoice(contractId: string): Promise&lt;string&gt; {
+    const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+    await client.login(&#039;ar.clerk@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+    // Step 1: Get contract details
+    const contract = await client.get(`/api/ar/contract/${contractId}`);
+
+    if (contract.status !== &#039;Active&#039;) {
+        throw new Error(&#039;Contract is not active&#039;);
+    }
+
+    // Step 2: Check customer credit limit
+    const customer = await client.get(`/api/master/customer/${contract.customerCode}`);
+
+    if (customer.creditLimit &gt; 0) {
+        // Get current outstanding balance
+        const outstanding = await client.get(
+            `/api/ar/customer/${customer.code}/outstanding`
+        );
+
+        if (outstanding.amount + contract.amount &gt; customer.creditLimit) {
+            throw new Error(&#039;Customer credit limit will be exceeded&#039;);
+        }
+    }
+
+    // Step 3: Generate invoice from contract
+    const request: ArInvoiceGenerateRequest = {
+        contractId: contractId,
+        invoiceDate: new Date().toISOString().split(&#039;T&#039;)[0],
+        description: `Invoice for Contract ${contract.contractNumber}`
+    };
+
+    const response = await client.post(&#039;/api/ar/invoice/generate-from-contract&#039;, request);
+
+    if (response.success) {
+        const invoiceId = response.data.id;
+
+        // Step 4: Submit for approval if needed
+        if (contract.amount &gt; 25000) {
+            await client.post(`/api/ar/invoice/submit/${invoiceId}`);
+            console.log(&#039;Invoice submitted for approval&#039;);
+        } else {
+            // Step 5: Auto-post and send to customer
+            await client.post(`/api/ar/invoice/post/${invoiceId}`);
+
+            // Step 6: Send invoice to customer
+            await client.post(`/api/ar/invoice/send/${invoiceId}`, {
+                method: &#039;Email&#039;,
+                recipientEmail: customer.email
+            });
+
+            console.log(`Invoice posted and sent to ${customer.email}`);
+        }
+
+        return invoiceId;
+    }
+
+    throw new Error(`Invoice generation failed: ${response.message}`);
+}</code></pre><h3>Scenario 4: Record AR Receipt</h3>
+<p><strong>Business Use Case</strong>: Record customer payment and apply to invoices</p>
+<pre><code class="language-typescript">interface ArReceiptCreateRequest {
+    receiptDate: string;
+    receiptNumber: string;
+    customerCode: string;
+    paymentMethod: &#039;Cash&#039; | &#039;Check&#039; | &#039;Wire&#039; | &#039;CreditCard&#039;;
+    amount: number;
+    checkNumber?: string;
+    checkDate?: string;
+    bankAccountCode?: string;
+    description: string;
+    applications: ReceiptApplication[];
+}
+
+interface ReceiptApplication {
+    invoiceId: string;
+    appliedAmount: number;
+}
+
+async function recordReceipt(): Promise&lt;string&gt; {
+    const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+    await client.login(&#039;ar.clerk@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+    const customerCode = &#039;C001&#039;;
+    const receiptAmount = 50000.00;
+
+    // Step 1: Get customer outstanding invoices
+    const invoices = await client.get(&#039;/api/ar/invoice/list&#039;, {
+        customerCode: customerCode,
+        status: &#039;Posted&#039;,
+        orderBy: &#039;invoiceDate&#039; // FIFO application
+    });
+
+    // Step 2: Apply receipt to invoices (FIFO)
+    const applications: ReceiptApplication[] = [];
+    let remainingAmount = receiptAmount;
+
+    for (const invoice of invoices.data) {
+        if (remainingAmount &lt;= 0) break;
+
+        const applyAmount = Math.min(invoice.outstandingAmount, remainingAmount);
+
+        applications.push({
+            invoiceId: invoice.id,
+            appliedAmount: applyAmount
+        });
+
+        remainingAmount -= applyAmount;
+    }
+
+    // Step 3: Create receipt
+    const receipt: ArReceiptCreateRequest = {
+        receiptDate: &#039;2025-10-06&#039;,
+        receiptNumber: &#039;RCP-2025-001&#039;,
+        customerCode: customerCode,
+        paymentMethod: &#039;Check&#039;,
+        amount: receiptAmount,
+        checkNumber: &#039;123456&#039;,
+        checkDate: &#039;2025-10-05&#039;,
+        bankAccountCode: &#039;BANK001&#039;,
+        description: &#039;Payment received from customer&#039;,
+        applications: applications
+    };
+
+    const response = await client.post(&#039;/api/ar/receipt/create&#039;, receipt);
+
+    if (response.success) {
+        const receiptId = response.data.id;
+
+        // Step 4: Post receipt to GL
+        await client.post(`/api/ar/receipt/post/${receiptId}`);
+
+        // Step 5: Mark as deposited
+        await client.post(`/api/ar/receipt/deposit/${receiptId}`, {
+            depositDate: &#039;2025-10-06&#039;,
+            depositSlipNumber: &#039;DEP-2025-001&#039;
+        });
+
+        console.log(`Receipt ${receiptId} created and deposited`);
+
+        // Handle overpayment if any
+        if (remainingAmount &gt; 0) {
+            console.log(`Overpayment amount: ${remainingAmount} - Created as customer credit`);
+        }
+
+        return receiptId;
+    }
+
+    throw new Error(`Receipt creation failed: ${response.message}`);
+}</code></pre><h3>Scenario 5: Period Close Workflow</h3>
+<p><strong>Business Use Case</strong>: Execute month-end GL period close</p>
+<pre><code class="language-typescript">async function executePeriodClose(periodCode: string): Promise&lt;boolean&gt; {
+    const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+    await client.login(&#039;controller@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+    // Step 1: Get period status
+    const period = await client.get(`/api/gl/period/${periodCode}`);
+
+    if (period.status !== &#039;Open&#039;) {
+        throw new Error(`Period ${periodCode} is not open (status: ${period.status})`);
+    }
+
+    // Step 2: Run pre-close validation
+    const validation = await client.post(`/api/gl/period/validate/${periodCode}`);
+
+    if (!validation.success) {
+        console.error(&#039;Validation failed:&#039;, validation.validationErrors);
+
+        // Display validation errors
+        validation.validationErrors.forEach((error: any) =&gt; {
+            console.error(`- ${error.category}: ${error.message}`);
+        });
+
+        return false;
+    }
+
+    console.log(&#039;All validation checks passed&#039;);
+
+    // Step 3: Initiate close
+    const closeResponse = await client.post(`/api/gl/period/initiate-close/${periodCode}`);
+
+    if (!closeResponse.success) {
+        throw new Error(`Failed to initiate close: ${closeResponse.message}`);
+    }
+
+    // Step 4: Execute close
+    const executeResponse = await client.post(`/api/gl/period/execute-close/${periodCode}`);
+
+    if (executeResponse.success) {
+        console.log(`Period ${periodCode} closed successfully`);
+        console.log(`Closing journal voucher: ${executeResponse.data.closingJvNumber}`);
+        console.log(`Period locked at: ${executeResponse.data.closedTimestamp}`);
+
+        return true;
+    }
+
+    throw new Error(`Period close failed: ${executeResponse.message}`);
+}</code></pre><h3>Scenario 6: Batch Import from External System</h3>
+<p><strong>Business Use Case</strong>: Import bank statement transactions</p>
+<pre><code class="language-typescript">interface BankStatementImport {
+    bankAccountCode: string;
+    statementDate: string;
+    openingBalance: number;
+    closingBalance: number;
+    transactions: BankTransaction[];
+}
+
+interface BankTransaction {
+    transactionDate: string;
+    description: string;
+    referenceNumber: string;
+    debitAmount: number;
+    creditAmount: number;
+    balance: number;
+}
+
+async function importBankStatement(csvFilePath: string): Promise&lt;void&gt; {
+    const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+    await client.login(&#039;accountant@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+    // Step 1: Parse CSV file
+    const transactions = await parseCsvFile(csvFilePath);
+
+    // Step 2: Prepare import request
+    const importRequest: BankStatementImport = {
+        bankAccountCode: &#039;BANK001&#039;,
+        statementDate: &#039;2025-10-31&#039;,
+        openingBalance: transactions[0].balance - transactions[0].debitAmount + transactions[0].creditAmount,
+        closingBalance: transactions[transactions.length - 1].balance,
+        transactions: transactions
+    };
+
+    // Step 3: Validate import
+    const validateResponse = await client.post(
+        &#039;/api/bank/statement/validate&#039;,
+        importRequest
+    );
+
+    if (!validateResponse.success) {
+        console.error(&#039;Validation failed:&#039;, validateResponse.errors);
+        return;
+    }
+
+    // Step 4: Import transactions
+    const importResponse = await client.post(
+        &#039;/api/bank/statement/import&#039;,
+        importRequest
+    );
+
+    if (importResponse.success) {
+        console.log(`Imported ${importResponse.data.transactionsImported} transactions`);
+        console.log(`Auto-matched: ${importResponse.data.autoMatched}`);
+        console.log(`Unmatched: ${importResponse.data.unmatched}`);
+
+        // Step 5: Review unmatched transactions
+        if (importResponse.data.unmatched &gt; 0) {
+            const unmatched = await client.get(
+                `/api/bank/reconciliation/unmatched?bankAccount=BANK001&amp;date=2025-10-31`
+            );
+
+            console.log(&#039;Unmatched transactions requiring manual review:&#039;);
+            unmatched.data.forEach((txn: any) =&gt; {
+                console.log(`- ${txn.date}: ${txn.description} ${txn.amount}`);
+            });
+        }
+    }
+}
+
+async function parseCsvFile(filePath: string): Promise&lt;BankTransaction[]&gt; {
+    // Implementation depends on your CSV library
+    // This is a simplified example
+    const fs = require(&#039;fs&#039;);
+    const csv = require(&#039;csv-parser&#039;);
+    const transactions: BankTransaction[] = [];
+
+    return new Promise((resolve, reject) =&gt; {
+        fs.createReadStream(filePath)
+            .pipe(csv())
+            .on(&#039;data&#039;, (row: any) =&gt; {
+                transactions.push({
+                    transactionDate: row[&#039;Date&#039;],
+                    description: row[&#039;Description&#039;],
+                    referenceNumber: row[&#039;Reference&#039;],
+                    debitAmount: parseFloat(row[&#039;Debit&#039;] || &#039;0&#039;),
+                    creditAmount: parseFloat(row[&#039;Credit&#039;] || &#039;0&#039;),
+                    balance: parseFloat(row[&#039;Balance&#039;])
+                });
+            })
+            .on(&#039;end&#039;, () =&gt; resolve(transactions))
+            .on(&#039;error&#039;, reject);
+    });
+}</code></pre><h2>Best Practices</h2>
+<h3>1. Connection Management</h3>
+<pre><code class="language-typescript">// Use connection pooling
+const clientPool = new CarmenApiClientPool({
+    maxClients: 10,
+    baseUrl: &#039;https://api.carmen.com&#039;
+});
+
+// Reuse clients
+const client = await clientPool.acquire();
+try {
+    await client.get(&#039;/api/ap/invoice/list&#039;);
+} finally {
+    clientPool.release(client);
+}</code></pre><h3>2. Batch Operations</h3>
+<pre><code class="language-typescript">// Instead of creating invoices one by one
+for (const invoice of invoices) {
+    await client.post(&#039;/api/ap/invoice/create&#039;, invoice); // Slow!
+}
+
+// Use batch create endpoint
+await client.post(&#039;/api/ap/invoice/batch-create&#039;, {
+    invoices: invoices
+}); // Fast!</code></pre><h3>3. Pagination</h3>
+<pre><code class="language-typescript">async function getAllInvoices(): Promise&lt;Invoice[]&gt; {
+    const allInvoices: Invoice[] = [];
+    let page = 1;
+    const pageSize = 100;
+
+    while (true) {
+        const response = await client.get(&#039;/api/ap/invoice/list&#039;, {
+            page: page,
+            pageSize: pageSize
+        });
+
+        allInvoices.push(...response.data);
+
+        if (response.data.length &lt; pageSize) {
+            break; // Last page
+        }
+
+        page++;
+    }
+
+    return allInvoices;
+}</code></pre><h3>4. Rate Limiting</h3>
+<pre><code class="language-typescript">class RateLimiter {
+    private requests: number[] = [];
+    private limit: number = 100; // requests per minute
+
+    async throttle() {
+        const now = Date.now();
+        const oneMinuteAgo = now - 60000;
+
+        // Remove requests older than 1 minute
+        this.requests = this.requests.filter(time =&gt; time &gt; oneMinuteAgo);
+
+        if (this.requests.length &gt;= this.limit) {
+            const oldestRequest = this.requests[0];
+            const waitTime = 60000 - (now - oldestRequest);
+            await new Promise(resolve =&gt; setTimeout(resolve, waitTime));
+            return this.throttle();
+        }
+
+        this.requests.push(now);
+    }
+}
+
+const rateLimiter = new RateLimiter();
+
+// Before each request
+await rateLimiter.throttle();
+await client.get(&#039;/api/ap/invoice/list&#039;);</code></pre><h3>5. Caching</h3>
+<pre><code class="language-typescript">class CachedApiClient {
+    private cache: Map&lt;string, {data: any, expiry: number}&gt; = new Map();
+    private cacheTtl = 5 * 60 * 1000; // 5 minutes
+
+    async get(endpoint: string, params?: any): Promise&lt;any&gt; {
+        const cacheKey = `${endpoint}:${JSON.stringify(params)}`;
+        const cached = this.cache.get(cacheKey);
+
+        if (cached &amp;&amp; cached.expiry &gt; Date.now()) {
+            return cached.data;
+        }
+
+        const data = await client.get(endpoint, params);
+
+        this.cache.set(cacheKey, {
+            data: data,
+            expiry: Date.now() + this.cacheTtl
+        });
+
+        return data;
+    }
+
+    invalidate(pattern: string) {
+        for (const key of this.cache.keys()) {
+            if (key.includes(pattern)) {
+                this.cache.delete(key);
+            }
+        }
+    }
+}
+
+// Usage
+const cachedClient = new CachedApiClient();
+
+// First call - hits API
+const vendors = await cachedClient.get(&#039;/api/master/vendor/list&#039;);
+
+// Second call within 5 minutes - returns cached data
+const vendorsAgain = await cachedClient.get(&#039;/api/master/vendor/list&#039;);
+
+// After creating a vendor, invalidate cache
+await client.post(&#039;/api/master/vendor/create&#039;, newVendor);
+cachedClient.invalidate(&#039;/api/master/vendor&#039;);</code></pre><h2>Performance Optimization</h2>
+<h3>Use Field Selection</h3>
+<pre><code class="language-typescript">// Don&#039;t fetch all fields if you don&#039;t need them
+const invoices = await client.get(&#039;/api/ap/invoice/list&#039;, {
+    fields: &#039;id,invoiceNumber,amount,status&#039; // Only fetch needed fields
+});</code></pre><h3>Use Compression</h3>
+<pre><code class="language-typescript">const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;, {
+    compression: true // Enable gzip compression
+});</code></pre><h3>Parallel Requests</h3>
+<pre><code class="language-typescript">// Execute independent requests in parallel
+const [vendors, customers, accounts] = await Promise.all([
+    client.get(&#039;/api/master/vendor/list&#039;),
+    client.get(&#039;/api/master/customer/list&#039;),
+    client.get(&#039;/api/gl/account/list&#039;)
+]);</code></pre><h2>Testing</h2>
+<h3>Unit Testing</h3>
+<pre><code class="language-typescript">import { describe, it, expect, jest } from &#039;@jest/globals&#039;;
+
+describe(&#039;AP Invoice Creation&#039;, () =&gt; {
+    it(&#039;should create invoice successfully&#039;, async () =&gt; {
+        const mockClient = {
+            post: jest.fn().mockResolvedValue({
+                success: true,
+                data: { id: &#039;12345&#039; }
+            })
+        };
+
+        const invoice = {
+            invoiceNumber: &#039;TEST-001&#039;,
+            vendorCode: &#039;V001&#039;,
+            amount: 1000
+        };
+
+        const result = await mockClient.post(&#039;/api/ap/invoice/create&#039;, invoice);
+
+        expect(result.success).toBe(true);
+        expect(result.data.id).toBe(&#039;12345&#039;);
+        expect(mockClient.post).toHaveBeenCalledWith(
+            &#039;/api/ap/invoice/create&#039;,
+            invoice
+        );
+    });
+});</code></pre><h3>Integration Testing</h3>
+<pre><code class="language-typescript">describe(&#039;End-to-End Invoice Workflow&#039;, () =&gt; {
+    let client: CarmenApiClient;
+    let invoiceId: string;
+
+    beforeAll(async () =&gt; {
+        client = new CarmenApiClient(&#039;https://test-api.carmen.com&#039;);
+        await client.login(&#039;test@test.com&#039;, &#039;password&#039;, &#039;TEST&#039;);
+    });
+
+    it(&#039;should create invoice&#039;, async () =&gt; {
+        const response = await client.post(&#039;/api/ap/invoice/create&#039;, testInvoice);
+        expect(response.success).toBe(true);
+        invoiceId = response.data.id;
+    });
+
+    it(&#039;should submit invoice for approval&#039;, async () =&gt; {
+        const response = await client.post(`/api/ap/invoice/submit/${invoiceId}`);
+        expect(response.success).toBe(true);
+    });
+
+    it(&#039;should approve invoice&#039;, async () =&gt; {
+        const response = await client.post(`/api/ap/invoice/approve/${invoiceId}`);
+        expect(response.success).toBe(true);
+    });
+
+    it(&#039;should post invoice to GL&#039;, async () =&gt; {
+        const response = await client.post(`/api/ap/invoice/post/${invoiceId}`);
+        expect(response.success).toBe(true);
+    });
+
+    afterAll(async () =&gt; {
+        // Cleanup
+        await client.delete(`/api/ap/invoice/${invoiceId}`);
+    });
+});</code></pre><h2>Troubleshooting</h2>
+<p>See <a href="error-handling-guide.md">Error Handling Guide</a> for detailed error codes and resolution steps.</p>
+<h3>Common Issues</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Timeout errors</strong></td>
+<td>Large dataset, slow network</td>
+<td>Use pagination, increase timeout</td>
+</tr>
+<tr>
+<td><strong>429 Rate Limit</strong></td>
+<td>Too many requests</td>
+<td>Implement rate limiting, use batch endpoints</td>
+</tr>
+<tr>
+<td><strong>Intermittent 401</strong></td>
+<td>Token expiring</td>
+<td>Implement proactive token refresh</td>
+</tr>
+<tr>
+<td><strong>Slow performance</strong></td>
+<td>Fetching too much data</td>
+<td>Use field selection, pagination, caching</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 4 - API &amp; Integration Documentation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

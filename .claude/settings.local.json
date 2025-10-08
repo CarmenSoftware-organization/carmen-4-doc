@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open:*)",
+      "Bash(python3:*)",
+      "Bash(npm install)",
+      "Bash(npm run convert:*)",
+      "Read(//Users/peak/Documents/GitHub/**)",
+      "Bash(for module in Ap Ar Gl Asset Income Tax Bank)",
+      "Bash(do echo \"=== $module Module ===\")",
+      "Bash(ls:*)",
+      "Bash(done)",
+      "Bash(cat:*)",
+      "Bash(for:*)",
+      "Bash(do)",
+      "Bash(echo \"=== $file ===\")",
+      "Bash(grep:*)",
+      "Bash(awk:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

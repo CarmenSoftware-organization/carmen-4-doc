@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Format Specifications - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>File Format Specifications</h1>
+        </div>
+        <div class="doc-content">
+            <h1>File Format Specifications</h1>
+<h2>Overview</h2>
+<p>This document defines the file formats supported by Carmen.NET for data import, export, and integration with external systems.</p>
+<h2>Supported Formats</h2>
+<ul>
+<li><strong>CSV</strong> (Comma-Separated Values): Data import/export</li>
+<li><strong>Excel</strong> (XLSX): Batch data entry and reporting</li>
+<li><strong>JSON</strong>: API-based integration</li>
+<li><strong>XML</strong>: Legacy system integration</li>
+<li><strong>PDF</strong>: Document generation</li>
+<li><strong>TXT</strong>: Bank statement formats</li>
+</ul>
+<hr>
+<h2>CSV Formats</h2>
+<h3>General CSV Rules</h3>
+<ul>
+<li><strong>Encoding</strong>: UTF-8 with BOM</li>
+<li><strong>Delimiter</strong>: Comma (,)</li>
+<li><strong>Text Qualifier</strong>: Double quote (&quot;)</li>
+<li><strong>Date Format</strong>: yyyy-MM-dd (ISO 8601)</li>
+<li><strong>Decimal Separator</strong>: Period (.)</li>
+<li><strong>Header Row</strong>: Required</li>
+<li><strong>Max File Size</strong>: 100 MB</li>
+<li><strong>Max Records</strong>: 100,000 per file</li>
+</ul>
+<h3>AP Invoice Import (CSV)</h3>
+<p><strong>File Name</strong>: <code>ap-invoice-import.csv</code></p>
+<p><strong>Format</strong>:</p>
+<pre><code class="language-csv">InvoiceNumber,InvoiceDate,DueDate,VendorCode,Description,Amount,TaxAmount,WHTAmount,AccountCode,LineDescription,LineAmount
+INV-2025-001,2025-10-06,2025-11-05,V001,Professional Services,100000.00,7000.00,5000.00,5100,Consulting Services,100000.00
+INV-2025-002,2025-10-07,2025-11-06,V002,Office Supplies,5000.00,350.00,0,5200,Stationery,5000.00</code></pre><p><strong>Field Specifications</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Max Length</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>InvoiceNumber</strong></td>
+<td>Text</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique invoice number</td>
+</tr>
+<tr>
+<td><strong>InvoiceDate</strong></td>
+<td>Date</td>
+<td>10</td>
+<td>Yes</td>
+<td>Invoice date (yyyy-MM-dd)</td>
+</tr>
+<tr>
+<td><strong>DueDate</strong></td>
+<td>Date</td>
+<td>10</td>
+<td>Yes</td>
+<td>Payment due date</td>
+</tr>
+<tr>
+<td><strong>VendorCode</strong></td>
+<td>Text</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist in vendor master</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Text</td>
+<td>500</td>
+<td>No</td>
+<td>Invoice description</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>Yes</td>
+<td>Total invoice amount</td>
+</tr>
+<tr>
+<td><strong>TaxAmount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>No</td>
+<td>VAT amount</td>
+</tr>
+<tr>
+<td><strong>WHTAmount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>No</td>
+<td>Withholding tax amount</td>
+</tr>
+<tr>
+<td><strong>AccountCode</strong></td>
+<td>Text</td>
+<td>20</td>
+<td>Yes</td>
+<td>GL expense account</td>
+</tr>
+<tr>
+<td><strong>LineDescription</strong></td>
+<td>Text</td>
+<td>500</td>
+<td>No</td>
+<td>Line item description</td>
+</tr>
+<tr>
+<td><strong>LineAmount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>Yes</td>
+<td>Line item amount</td>
+</tr>
+</tbody></table>
+<p><strong>Validation Rules</strong>:</p>
+<ul>
+<li>InvoiceNumber must be unique per vendor</li>
+<li>InvoiceDate &lt;= DueDate</li>
+<li>VendorCode must exist and be active</li>
+<li>Sum of LineAmount must equal Amount</li>
+<li>AccountCode must exist and allow posting</li>
+</ul>
+<p><strong>Sample Import</strong>:</p>
+<pre><code class="language-csv">InvoiceNumber,InvoiceDate,DueDate,VendorCode,Description,Amount,TaxAmount,WHTAmount,AccountCode,LineDescription,LineAmount
+&quot;INV-2025-001&quot;,&quot;2025-10-06&quot;,&quot;2025-11-05&quot;,&quot;V001&quot;,&quot;Professional Services - October&quot;,100000.00,7000.00,5000.00,&quot;5100&quot;,&quot;Consulting Services&quot;,100000.00
+&quot;INV-2025-002&quot;,&quot;2025-10-07&quot;,&quot;2025-11-06&quot;,&quot;V002&quot;,&quot;Office Supplies&quot;,5000.00,350.00,0,&quot;5200&quot;,&quot;Stationery and Paper&quot;,3000.00
+&quot;INV-2025-002&quot;,&quot;2025-10-07&quot;,&quot;2025-11-06&quot;,&quot;V002&quot;,&quot;Office Supplies&quot;,5000.00,350.00,0,&quot;5200&quot;,&quot;Printer Ink&quot;,2000.00</code></pre><h3>AR Invoice Import (CSV)</h3>
+<p><strong>File Name</strong>: <code>ar-invoice-import.csv</code></p>
+<p><strong>Format</strong>:</p>
+<pre><code class="language-csv">InvoiceNumber,InvoiceDate,DueDate,CustomerCode,Description,Amount,TaxAmount,RevenueAccountCode,LineDescription,LineAmount
+AR-2025-001,2025-10-06,2025-11-05,C001,Monthly Subscription,50000.00,3500.00,4100,Software License,50000.00</code></pre><p><strong>Field Specifications</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Max Length</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>InvoiceNumber</strong></td>
+<td>Text</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique invoice number</td>
+</tr>
+<tr>
+<td><strong>InvoiceDate</strong></td>
+<td>Date</td>
+<td>10</td>
+<td>Yes</td>
+<td>Invoice date</td>
+</tr>
+<tr>
+<td><strong>DueDate</strong></td>
+<td>Date</td>
+<td>10</td>
+<td>Yes</td>
+<td>Payment due date</td>
+</tr>
+<tr>
+<td><strong>CustomerCode</strong></td>
+<td>Text</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist in customer master</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Text</td>
+<td>500</td>
+<td>No</td>
+<td>Invoice description</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>Yes</td>
+<td>Total invoice amount</td>
+</tr>
+<tr>
+<td><strong>TaxAmount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>No</td>
+<td>VAT amount</td>
+</tr>
+<tr>
+<td><strong>RevenueAccountCode</strong></td>
+<td>Text</td>
+<td>20</td>
+<td>Yes</td>
+<td>GL revenue account</td>
+</tr>
+<tr>
+<td><strong>LineDescription</strong></td>
+<td>Text</td>
+<td>500</td>
+<td>No</td>
+<td>Line item description</td>
+</tr>
+<tr>
+<td><strong>LineAmount</strong></td>
+<td>Decimal</td>
+<td>-</td>
+<td>Yes</td>
+<td>Line item amount</td>
+</tr>
+</tbody></table>
+<h3>Bank Statement Import (CSV)</h3>
+<p><strong>File Name</strong>: <code>bank-statement-{AccountCode}-{Date}.csv</code></p>
+<p><strong>Format</strong>:</p>
+<pre><code class="language-csv">TransactionDate,ValueDate,Description,ReferenceNumber,DebitAmount,CreditAmount,Balance
+2025-10-01,2025-10-01,Opening Balance,OB-001,0,0,1000000.00
+2025-10-02,2025-10-02,Check Payment,CHK-100,50000.00,0,950000.00
+2025-10-03,2025-10-03,Wire Receipt,WIRE-001,0,100000.00,1050000.00</code></pre><p><strong>Field Specifications</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TransactionDate</strong></td>
+<td>Date</td>
+<td>Yes</td>
+<td>Transaction date</td>
+</tr>
+<tr>
+<td><strong>ValueDate</strong></td>
+<td>Date</td>
+<td>Yes</td>
+<td>Value date (for interest calculation)</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Text</td>
+<td>Yes</td>
+<td>Transaction description</td>
+</tr>
+<tr>
+<td><strong>ReferenceNumber</strong></td>
+<td>Text</td>
+<td>Yes</td>
+<td>Bank reference number</td>
+</tr>
+<tr>
+<td><strong>DebitAmount</strong></td>
+<td>Decimal</td>
+<td>Yes</td>
+<td>Debit amount (0 if credit)</td>
+</tr>
+<tr>
+<td><strong>CreditAmount</strong></td>
+<td>Decimal</td>
+<td>Yes</td>
+<td>Credit amount (0 if debit)</td>
+</tr>
+<tr>
+<td><strong>Balance</strong></td>
+<td>Decimal</td>
+<td>Yes</td>
+<td>Running balance after transaction</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Excel Formats (XLSX)</h2>
+<h3>General Excel Rules</h3>
+<ul>
+<li><strong>File Format</strong>: Excel 2007+ (.xlsx)</li>
+<li><strong>Sheet Name</strong>: Must match template name</li>
+<li><strong>Header Row</strong>: Row 1</li>
+<li><strong>Data Start</strong>: Row 2</li>
+<li><strong>Max Rows</strong>: 100,000</li>
+<li><strong>Max File Size</strong>: 100 MB</li>
+</ul>
+<h3>AP Invoice Batch Entry Template</h3>
+<p><strong>File Name</strong>: <code>AP_Invoice_Template.xlsx</code></p>
+<p><strong>Sheet 1: Invoice Header</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>InvoiceNumber</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Unique per vendor</td>
+</tr>
+<tr>
+<td>B</td>
+<td>InvoiceDate</td>
+<td>Date</td>
+<td>Yes</td>
+<td>mm/dd/yyyy</td>
+</tr>
+<tr>
+<td>C</td>
+<td>DueDate</td>
+<td>Date</td>
+<td>Yes</td>
+<td>mm/dd/yyyy</td>
+</tr>
+<tr>
+<td>D</td>
+<td>VendorCode</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Lookup from vendor list</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Description</td>
+<td>Text</td>
+<td>No</td>
+<td>Max 500 chars</td>
+</tr>
+<tr>
+<td>F</td>
+<td>TotalAmount</td>
+<td>Currency</td>
+<td>Yes</td>
+<td>Auto-calculated</td>
+</tr>
+<tr>
+<td>G</td>
+<td>TaxAmount</td>
+<td>Currency</td>
+<td>No</td>
+<td>VAT amount</td>
+</tr>
+<tr>
+<td>H</td>
+<td>WHTAmount</td>
+<td>Currency</td>
+<td>No</td>
+<td>Withholding tax</td>
+</tr>
+</tbody></table>
+<p><strong>Sheet 2: Invoice Lines</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>InvoiceNumber</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Must match header</td>
+</tr>
+<tr>
+<td>B</td>
+<td>LineNo</td>
+<td>Number</td>
+<td>Yes</td>
+<td>Sequential</td>
+</tr>
+<tr>
+<td>C</td>
+<td>AccountCode</td>
+<td>Text</td>
+<td>Yes</td>
+<td>GL account</td>
+</tr>
+<tr>
+<td>D</td>
+<td>DepartmentCode</td>
+<td>Text</td>
+<td>No</td>
+<td>Cost center</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Description</td>
+<td>Text</td>
+<td>No</td>
+<td>Line description</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Amount</td>
+<td>Currency</td>
+<td>Yes</td>
+<td>Line amount</td>
+</tr>
+</tbody></table>
+<p><strong>Data Validation</strong>:</p>
+<ul>
+<li>VendorCode: List from Master Data sheet</li>
+<li>AccountCode: List from Chart of Accounts sheet</li>
+<li>InvoiceDate: Date picker</li>
+<li>Amount: Number format with 2 decimals</li>
+</ul>
+<p><strong>Formulas</strong>:</p>
+<pre><code class="language-excel">// Total Amount (Sheet 1, Column F)
+=SUMIF(&#039;Invoice Lines&#039;!$A:$A, A2, &#039;Invoice Lines&#039;!$F:$F)
+
+// Net Payment (Sheet 1, Column I)
+=F2 + G2 - H2</code></pre><h3>GL Journal Entry Template</h3>
+<p><strong>File Name</strong>: <code>GL_JV_Template.xlsx</code></p>
+<p><strong>Format</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>JVNumber</td>
+<td>Text</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>B</td>
+<td>JVDate</td>
+<td>Date</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Description</td>
+<td>Text</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>D</td>
+<td>LineNo</td>
+<td>Number</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>E</td>
+<td>AccountCode</td>
+<td>Text</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>F</td>
+<td>DebitAmount</td>
+<td>Currency</td>
+<td>Conditional</td>
+</tr>
+<tr>
+<td>G</td>
+<td>CreditAmount</td>
+<td>Currency</td>
+<td>Conditional</td>
+</tr>
+<tr>
+<td>H</td>
+<td>LineDescription</td>
+<td>Text</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<p><strong>Validation</strong>:</p>
+<pre><code class="language-excel">// Ensure balanced entry
+=IF(SUMIF($A:$A, A2, $F:$F) = SUMIF($A:$A, A2, $G:$G), &quot;Balanced&quot;, &quot;UNBALANCED&quot;)</code></pre><hr>
+<h2>JSON Formats</h2>
+<h3>General JSON Rules</h3>
+<ul>
+<li><strong>Encoding</strong>: UTF-8</li>
+<li><strong>Date Format</strong>: ISO 8601 (yyyy-MM-ddTHH:mm:ssZ)</li>
+<li><strong>Decimal Format</strong>: Number (not string)</li>
+<li><strong>Null Values</strong>: Allowed for optional fields</li>
+<li><strong>Max File Size</strong>: 50 MB</li>
+</ul>
+<h3>AP Invoice (JSON)</h3>
+<pre><code class="language-json">{
+  &quot;invoices&quot;: [
+    {
+      &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+      &quot;invoiceDate&quot;: &quot;2025-10-06&quot;,
+      &quot;dueDate&quot;: &quot;2025-11-05&quot;,
+      &quot;vendorCode&quot;: &quot;V001&quot;,
+      &quot;description&quot;: &quot;Professional Services&quot;,
+      &quot;amount&quot;: 100000.00,
+      &quot;taxAmount&quot;: 7000.00,
+      &quot;whtAmount&quot;: 5000.00,
+      &quot;lines&quot;: [
+        {
+          &quot;lineNo&quot;: 1,
+          &quot;accountCode&quot;: &quot;5100&quot;,
+          &quot;description&quot;: &quot;Consulting Services&quot;,
+          &quot;amount&quot;: 100000.00,
+          &quot;departmentCode&quot;: &quot;IT&quot;
+        }
+      ]
+    }
+  ]
+}</code></pre><h3>Batch Import Response (JSON)</h3>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;summary&quot;: {
+    &quot;totalRecords&quot;: 100,
+    &quot;successCount&quot;: 95,
+    &quot;errorCount&quot;: 5,
+    &quot;processingTime&quot;: &quot;12.5s&quot;
+  },
+  &quot;results&quot;: [
+    {
+      &quot;recordNumber&quot;: 1,
+      &quot;success&quot;: true,
+      &quot;id&quot;: &quot;12345&quot;,
+      &quot;message&quot;: &quot;Invoice created successfully&quot;
+    },
+    {
+      &quot;recordNumber&quot;: 2,
+      &quot;success&quot;: false,
+      &quot;errors&quot;: [
+        {
+          &quot;field&quot;: &quot;vendorCode&quot;,
+          &quot;code&quot;: &quot;VENDOR_NOT_FOUND&quot;,
+          &quot;message&quot;: &quot;Vendor V999 does not exist&quot;
+        }
+      ]
+    }
+  ]
+}</code></pre><hr>
+<h2>XML Formats</h2>
+<h3>General XML Rules</h3>
+<ul>
+<li><strong>Encoding</strong>: UTF-8</li>
+<li><strong>Schema</strong>: XSD validation supported</li>
+<li><strong>Namespace</strong>: <code>http://schemas.carmen.com/erp/v1</code></li>
+<li><strong>Max File Size</strong>: 50 MB</li>
+</ul>
+<h3>AP Invoice (XML)</h3>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;invoices xmlns=&quot;http://schemas.carmen.com/erp/v1&quot;&gt;
+  &lt;invoice&gt;
+    &lt;invoiceNumber&gt;INV-2025-001&lt;/invoiceNumber&gt;
+    &lt;invoiceDate&gt;2025-10-06&lt;/invoiceDate&gt;
+    &lt;dueDate&gt;2025-11-05&lt;/dueDate&gt;
+    &lt;vendor&gt;
+      &lt;vendorCode&gt;V001&lt;/vendorCode&gt;
+    &lt;/vendor&gt;
+    &lt;description&gt;Professional Services&lt;/description&gt;
+    &lt;amounts&gt;
+      &lt;amount&gt;100000.00&lt;/amount&gt;
+      &lt;taxAmount&gt;7000.00&lt;/taxAmount&gt;
+      &lt;whtAmount&gt;5000.00&lt;/whtAmount&gt;
+    &lt;/amounts&gt;
+    &lt;lines&gt;
+      &lt;line&gt;
+        &lt;lineNo&gt;1&lt;/lineNo&gt;
+        &lt;accountCode&gt;5100&lt;/accountCode&gt;
+        &lt;description&gt;Consulting Services&lt;/description&gt;
+        &lt;amount&gt;100000.00&lt;/amount&gt;
+        &lt;departmentCode&gt;IT&lt;/departmentCode&gt;
+      &lt;/line&gt;
+    &lt;/lines&gt;
+  &lt;/invoice&gt;
+&lt;/invoices&gt;</code></pre><hr>
+<h2>Bank File Formats</h2>
+<h3>MT940 (SWIFT Bank Statement)</h3>
+<p><strong>Format</strong>: Fixed-width text file</p>
+<p><strong>Sample</strong>:</p>
+<pre><code class="language-text">:20:STATEMENT001
+:25:BANK001/1234567890
+:28C:00001/001
+:60F:C251001THB1000000,00
+:61:251002C50000,00NCHKCHK-100//REF001
+:86:Check Payment
+:62F:C251002THB950000,00</code></pre><p><strong>Field Mapping</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:20:</td>
+<td>Reference</td>
+<td>Statement reference</td>
+</tr>
+<tr>
+<td>:25:</td>
+<td>Account</td>
+<td>Bank account number</td>
+</tr>
+<tr>
+<td>:28C:</td>
+<td>Number</td>
+<td>Statement number</td>
+</tr>
+<tr>
+<td>:60F:</td>
+<td>Opening Balance</td>
+<td>Opening balance</td>
+</tr>
+<tr>
+<td>:61:</td>
+<td>Transaction</td>
+<td>Transaction details</td>
+</tr>
+<tr>
+<td>:86:</td>
+<td>Description</td>
+<td>Transaction description</td>
+</tr>
+<tr>
+<td>:62F:</td>
+<td>Closing Balance</td>
+<td>Closing balance</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>PDF Generation</h2>
+<h3>Invoice PDF Template</h3>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li><strong>Page Size</strong>: A4</li>
+<li><strong>Margins</strong>: 1 inch all sides</li>
+<li><strong>Font</strong>: Arial 10pt</li>
+<li><strong>Logo</strong>: Top left (max 200x80px)</li>
+<li><strong>Barcode</strong>: Bottom right (Code 128)</li>
+</ul>
+<p><strong>Sections</strong>:</p>
+<ol>
+<li>Company Header</li>
+<li>Invoice Details</li>
+<li>Bill To / Ship To</li>
+<li>Line Items Table</li>
+<li>Totals</li>
+<li>Payment Terms</li>
+<li>Footer with Tax Information</li>
+</ol>
+<p><strong>File Naming</strong>: <code>{InvoiceType}-{InvoiceNumber}-{Date}.pdf</code></p>
+<p>Example: <code>AP-INV-2025-001-20251006.pdf</code></p>
+<hr>
+<h2>Import/Export API Endpoints</h2>
+<h3>Import Data</h3>
+<p><strong>Endpoint</strong>: <code>POST /api/import/{module}/{entity}</code></p>
+<p><strong>Request (Multipart)</strong>:</p>
+<pre><code class="language-http">POST /api/import/ap/invoice HTTP/1.1
+Content-Type: multipart/form-data; boundary=----Boundary
+
+------Boundary
+Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;invoices.csv&quot;
+Content-Type: text/csv
+
+[CSV content here]
+------Boundary
+Content-Disposition: form-data; name=&quot;options&quot;
+Content-Type: application/json
+
+{
+  &quot;validateOnly&quot;: false,
+  &quot;skipErrors&quot;: true,
+  &quot;batchSize&quot;: 100
+}
+------Boundary--</code></pre><p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;jobId&quot;: &quot;import-12345&quot;,
+  &quot;status&quot;: &quot;Processing&quot;,
+  &quot;totalRecords&quot;: 1000,
+  &quot;processedRecords&quot;: 0
+}</code></pre><h3>Check Import Status</h3>
+<p><strong>Endpoint</strong>: <code>GET /api/import/status/{jobId}</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;jobId&quot;: &quot;import-12345&quot;,
+  &quot;status&quot;: &quot;Completed&quot;,
+  &quot;totalRecords&quot;: 1000,
+  &quot;successCount&quot;: 995,
+  &quot;errorCount&quot;: 5,
+  &quot;startTime&quot;: &quot;2025-10-06T10:00:00Z&quot;,
+  &quot;endTime&quot;: &quot;2025-10-06T10:05:30Z&quot;,
+  &quot;errorFile&quot;: &quot;/downloads/import-12345-errors.csv&quot;
+}</code></pre><h3>Export Data</h3>
+<p><strong>Endpoint</strong>: <code>GET /api/export/{module}/{entity}</code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul>
+<li><code>format</code>: csv, excel, json, xml</li>
+<li><code>fromDate</code>, <code>toDate</code>: Date range</li>
+<li><code>status</code>: Filter by status</li>
+<li>Additional filters as query parameters</li>
+</ul>
+<p><strong>Response Headers</strong>:</p>
+<pre><code class="language-http">Content-Type: text/csv
+Content-Disposition: attachment; filename=&quot;ap-invoices-20251006.csv&quot;</code></pre><hr>
+<h2>Error File Format</h2>
+<p>When imports fail, an error file is generated with the original data plus error columns.</p>
+<p><strong>Error CSV Format</strong>:</p>
+<pre><code class="language-csv">RowNumber,ErrorCode,ErrorMessage,[Original Columns...]
+2,VENDOR_NOT_FOUND,Vendor V999 does not exist,INV-2025-001,2025-10-06,...
+5,DUPLICATE_INVOICE,Invoice number already exists,INV-2025-001,2025-10-06,...</code></pre><hr>
+<h2>Best Practices</h2>
+<h3>Data Preparation</h3>
+<ol>
+<li><strong>Clean Data</strong>: Remove duplicates, validate formats</li>
+<li><strong>Test Import</strong>: Use validateOnly=true first</li>
+<li><strong>Batch Size</strong>: Use batches of 100-1000 records</li>
+<li><strong>Encoding</strong>: Always use UTF-8 with BOM for CSV</li>
+<li><strong>Backup</strong>: Backup data before import</li>
+</ol>
+<h3>Performance</h3>
+<ol>
+<li><strong>File Size</strong>: Keep files under 50 MB</li>
+<li><strong>Record Count</strong>: Max 100,000 per file</li>
+<li><strong>Compression</strong>: Use ZIP for large files</li>
+<li><strong>Async Processing</strong>: Use async import for &gt; 1000 records</li>
+</ol>
+<h3>Error Handling</h3>
+<ol>
+<li><strong>Validation</strong>: Validate data before import</li>
+<li><strong>Skip Errors</strong>: Use skipErrors=true for partial success</li>
+<li><strong>Error Review</strong>: Review error files thoroughly</li>
+<li><strong>Retry</strong>: Retry failed records after correction</li>
+</ol>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 4 - API &amp; Integration Documentation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

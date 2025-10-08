@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income/Revenue Module - Entity Relationship Diagram - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Income/Revenue Module - Entity Relationship Diagram</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Income/Revenue Module - Entity Relationship Diagram</h1>
+<div class="mermaid">erDiagram
+    %% Income Source Relationships
+    INCOME_SOURCE ||--o{ INCOME_INVOICE_H : "generates"
+    INCOME_SOURCE ||--o{ INCOME_REVENUE : "generates"
+
+    %% Category Hierarchy
+    INCOME_CATEGORY ||--o{ INCOME_CATEGORY : "parent category"
+    INCOME_CATEGORY ||--o{ INCOME_PRODUCT : "classifies"
+
+    %% Invoice Relationships
+    INCOME_INVOICE_H ||--|{ INCOME_INVOICE_D : "contains"
+    INCOME_PRODUCT ||--o{ INCOME_INVOICE_D : "sold in"
+
+    %% GL Posting
+    INCOME_INVOICE_H ||--o{ GL_JV_H : "posts to"
+    INCOME_REVENUE ||--o{ GL_JV_H : "posts to"
+
+    %% Lookups
+    ACCOUNT_CODE ||--o{ INCOME_SOURCE : "revenue account"
+    ACCOUNT_CODE ||--o{ INCOME_PRODUCT : "revenue account"
+    ACCOUNT_CODE ||--o{ INCOME_PAY_CODE : "revenue account"
+    INCOME_PAY_TYPE ||--o{ INCOME_INVOICE_H : "payment type"
+
+    %% Entities
+    INCOME_SOURCE {
+        bigint SourceId PK
+        varchar SourceCode "Source Code"
+        varchar SourceName "Source Name"
+        varchar SourceType "Source Type"
+        varchar SourceDesc "Description"
+        varchar AccCode FK "Revenue Account Code"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+    }
+
+    INCOME_CATEGORY {
+        bigint CategoryId PK
+        bigint ParentCategoryId FK "Parent Category"
+        varchar CategoryCode "Category Code"
+        varchar CategoryName "Category Name"
+        int CategoryLevel "Hierarchy Level"
+        varchar CategoryDesc "Description"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    INCOME_PRODUCT {
+        bigint ProductId PK
+        bigint CategoryId FK "Product Category"
+        varchar ProductCode "Product Code"
+        varchar ProductName "Product Name"
+        varchar ProductDesc "Description"
+        decimal ProductPrice "Standard Price"
+        varchar UnitOfMeasure "Unit of Measure"
+        varchar AccCode FK "Revenue Account Code"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+    }
+
+    INCOME_INVOICE_H {
+        bigint InvoiceId PK
+        varchar InvoiceNo "Invoice Number"
+        datetime InvoiceDate "Invoice Date"
+        datetime InvoiceDueDate "Due Date"
+        bigint SourceId FK "Income Source ID"
+        varchar CustomerRef "Customer Reference"
+        varchar CustomerName "Customer Name"
+        int InvoiceStatus "Status (0=Draft,1=Posted)"
+        decimal TotalAmt "Total Amount"
+        decimal TaxAmt "Tax Amount"
+        decimal DiscountAmt "Discount Amount"
+        decimal NetAmt "Net Amount"
+        varchar PaymentTypeId FK "Payment Type"
+        varchar InvoiceDesc "Description"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+        bigint CreatedBy FK "Created By"
+    }
+
+    INCOME_INVOICE_D {
+        bigint InvoicedId PK
+        bigint InvoiceId FK "Invoice Header ID"
+        bigint ProductId FK "Product ID"
+        int InvoicedSeq "Line Sequence"
+        varchar InvoicedDesc "Line Description"
+        decimal InvoicedQty "Quantity"
+        decimal InvoicedPrice "Unit Price"
+        decimal InvoicedAmt "Line Amount"
+        decimal InvoicedTax "Tax Amount"
+        decimal InvoicedDiscount "Discount Amount"
+        varchar AccCode FK "Revenue Account"
+    }
+
+    INCOME_REVENUE {
+        bigint RevenueId PK
+        varchar RevenueNo "Revenue Number"
+        datetime RevenueDate "Revenue Date"
+        bigint SourceId FK "Income Source ID"
+        decimal RevenueAmt "Revenue Amount"
+        varchar AccCode FK "Revenue Account Code"
+        varchar RevenueType "Revenue Type"
+        varchar RevenueDesc "Description"
+        int RevenueStatus "Status"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+    }
+
+    INCOME_PAY_CODE {
+        bigint PayCodeId PK
+        varchar PayCode "Payment Code"
+        varchar PayCodeName "Payment Code Name"
+        varchar PayCodeDesc "Description"
+        varchar AccCode FK "GL Account Code"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    INCOME_PAY_TYPE {
+        bigint PayTypeId PK
+        varchar PayType "Payment Type Code"
+        varchar PayTypeName "Payment Type Name"
+        varchar PayTypeDesc "Description"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_JV_H {
+        bigint JvhId PK
+        varchar JvhNo "JV Number"
+        datetime JvhDate "JV Date"
+        varchar JvhSource "Source (Income)"
+        bigint SourceId FK "Income Invoice/Revenue ID"
+    }
+
+    ACCOUNT_CODE {
+        varchar AccCode PK
+        varchar AccName "Account Name"
+    }</div><h2>Income Module Workflow</h2>
+<h3>1. Product Setup Flow</h3>
+<pre><code class="language-text">Define Category Hierarchy → Create Products → Set Prices → Assign Revenue Accounts</code></pre><h3>2. Invoice Flow</h3>
+<pre><code class="language-text">Create Invoice → Add Line Items (Products) → Calculate Tax → Approve → Post to GL</code></pre><h3>3. Revenue Recognition Flow</h3>
+<pre><code class="language-text">Revenue Event → Create Revenue Record → Post to GL</code></pre><h3>4. Payment Flow</h3>
+<pre><code class="language-text">Invoice Generated → Payment Received → Record Receipt → Post to GL</code></pre><h2>Income Source Types</h2>
+<p><strong>Source Type Examples</strong>:</p>
+<ul>
+<li>RENTAL = Rental income</li>
+<li>SERVICE = Service fees</li>
+<li>SUBSCRIPTION = Subscription revenue</li>
+<li>INTEREST = Interest income</li>
+<li>ROYALTY = Royalty income</li>
+<li>OTHER = Other income sources</li>
+</ul>
+<h2>GL Posting Examples</h2>
+<h3>Income Invoice Posting</h3>
+<pre><code class="language-text">DR: Cash/AR Receivable                               $1070
+CR: Revenue Account (from INCOME_INVOICE_D.AccCode)  $1000
+CR: Tax Payable                                      $  70</code></pre><h3>Revenue Recognition Posting</h3>
+<pre><code class="language-text">DR: Receivable/Unearned Revenue                      $1000
+CR: Revenue Account (from INCOME_REVENUE.AccCode)    $1000</code></pre><h3>Deferred Revenue (Subscription Example)</h3>
+<pre><code class="language-text">Initial Receipt:
+DR: Cash                                             $1200
+CR: Unearned Revenue                                 $1200
+
+Monthly Recognition (12 months):
+DR: Unearned Revenue                                 $ 100
+CR: Revenue Account                                  $ 100</code></pre><h2>Key Tables</h2>
+<p><strong>INCOME_SOURCE</strong>: Revenue stream sources and categories<br><strong>INCOME_CATEGORY</strong>: Hierarchical product/service categories<br><strong>INCOME_PRODUCT</strong>: Product/service master with pricing<br><strong>INCOME_INVOICE_H/D</strong>: Invoice header and line items<br><strong>INCOME_REVENUE</strong>: Direct revenue recognition records<br><strong>INCOME_PAY_CODE</strong>: Payment codes for revenue tracking<br><strong>INCOME_PAY_TYPE</strong>: Payment type classification</p>
+<h2>Status Codes</h2>
+<p><strong>Invoice Status</strong> (<code>InvoiceStatus</code>):</p>
+<ul>
+<li>0 = Draft</li>
+<li>1 = Posted to GL</li>
+<li>2 = Pending Approval</li>
+<li>3 = Approved</li>
+<li>4 = Paid</li>
+<li>9 = Cancelled</li>
+</ul>
+<p><strong>Revenue Status</strong> (<code>RevenueStatus</code>):</p>
+<ul>
+<li>0 = Draft</li>
+<li>1 = Recognized (Posted)</li>
+<li>2 = Deferred</li>
+<li>3 = Accrued</li>
+<li>9 = Reversed</li>
+</ul>
+<h2>Revenue Recognition Patterns</h2>
+<h3>1. Point-in-Time Recognition</h3>
+<pre><code class="language-text">Service Completed → Invoice Generated → Revenue Recognized Immediately</code></pre><h3>2. Over-Time Recognition</h3>
+<pre><code class="language-text">Contract Start → Monthly Recognition → Complete over Contract Period</code></pre><h3>3. Milestone-Based Recognition</h3>
+<pre><code class="language-text">Milestone 1 Complete (30%) → Recognize 30% Revenue
+Milestone 2 Complete (40%) → Recognize 40% Revenue
+Milestone 3 Complete (30%) → Recognize 30% Revenue</code></pre><h3>4. Subscription Revenue</h3>
+<pre><code class="language-text">Annual Payment Received → Recognize 1/12 Monthly for 12 Months</code></pre><h2>Product Category Hierarchy</h2>
+<p><strong>Example Structure</strong>:</p>
+<pre><code class="language-text">Services (Level 1)
+  ├─ Consulting (Level 2)
+  │   ├─ IT Consulting (Level 3)
+  │   └─ Management Consulting (Level 3)
+  └─ Training (Level 2)
+      ├─ Technical Training (Level 3)
+      └─ Soft Skills Training (Level 3)
+
+Products (Level 1)
+  ├─ Software (Level 2)
+  │   ├─ Licenses (Level 3)
+  │   └─ Subscriptions (Level 3)
+  └─ Hardware (Level 2)</code></pre><h2>Income Reports</h2>
+<ul>
+<li><strong>Revenue by Source</strong>: Revenue breakdown by income source</li>
+<li><strong>Revenue by Product</strong>: Revenue by product/service</li>
+<li><strong>Revenue by Category</strong>: Hierarchical revenue analysis</li>
+<li><strong>Revenue Recognition Schedule</strong>: Deferred revenue tracking</li>
+<li><strong>Invoice Aging</strong>: Outstanding invoice analysis</li>
+<li><strong>Revenue Forecast</strong>: Projected revenue based on contracts</li>
+</ul>
+<h2>Multi-Tenant</h2>
+<p>All tables include <code>TenantId</code> for data isolation.<br>Enforced via <code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> in all controllers.</p>
+<h2>Use Cases</h2>
+<h3>1. Rental Income</h3>
+<ul>
+<li><strong>Income Source</strong>: Property rentals</li>
+<li><strong>Products</strong>: Unit A, Unit B, Parking Space</li>
+<li><strong>Invoicing</strong>: Monthly rental invoices</li>
+<li><strong>Revenue Recognition</strong>: Monthly over lease term</li>
+</ul>
+<h3>2. Subscription SaaS</h3>
+<ul>
+<li><strong>Income Source</strong>: Software subscriptions</li>
+<li><strong>Products</strong>: Basic Plan, Pro Plan, Enterprise Plan</li>
+<li><strong>Invoicing</strong>: Annual/monthly subscription invoices</li>
+<li><strong>Revenue Recognition</strong>: Ratably over subscription period</li>
+</ul>
+<h3>3. Professional Services</h3>
+<ul>
+<li><strong>Income Source</strong>: Consulting services</li>
+<li><strong>Products</strong>: Hourly consulting, Project-based consulting</li>
+<li><strong>Invoicing</strong>: Time &amp; materials or fixed-price invoices</li>
+<li><strong>Revenue Recognition</strong>: Upon completion or milestone-based</li>
+</ul>
+<h3>4. Educational Institution</h3>
+<ul>
+<li><strong>Income Source</strong>: Tuition fees</li>
+<li><strong>Products</strong>: Course A, Course B, Program C</li>
+<li><strong>Invoicing</strong>: Semester invoices</li>
+<li><strong>Revenue Recognition</strong>: Over academic term</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

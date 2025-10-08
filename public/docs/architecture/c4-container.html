@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET - Container Diagram (C4 Level 2) - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET - Container Diagram (C4 Level 2)</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET - Container Diagram (C4 Level 2)</h1>
+<div class="mermaid">graph TB
+    subgraph "Users & Clients"
+        WEB_USER[Web Browser<br/>HTTPS]
+        EXCEL_USER[Excel User<br/>Office Add-in]
+        MOBILE_USER[Mobile User<br/>iOS/Android App]
+        API_USER[API Client<br/>Third-party System]
+    end
+
+    subgraph "Carmen.NET ERP System"
+        subgraph "Application Layer"
+            WEBAPI[Web API Application<br/>ASP.NET Web API<br/>.NET Framework 4.x<br/>351+ REST Endpoints<br/>60 Controllers]
+        end
+
+        subgraph "Data Layer"
+            DATABASE[(SQL Server Database<br/>Multi-tenant Data<br/>Encrypted Sensitive Fields<br/>Audit Trail Tables)]
+        end
+
+        subgraph "Integration Layer"
+            EXCEL_ADDIN[Excel Add-in<br/>VSTO/Office API<br/>Import/Export]
+            MOBILE_APP[Mobile App<br/>Xamarin/React Native<br/>REST Client]
+        end
+
+        subgraph "External Services"
+            EMAIL_SVC[Email Service<br/>SMTP<br/>Notifications & Alerts]
+        end
+    end
+
+    subgraph "External Systems"
+        BANK_SYS[Banking System]
+        TAX_SYS[Tax Authority]
+    end
+
+    %% User to application connections
+    WEB_USER -->|HTTPS/JSON| WEBAPI
+    EXCEL_USER -->|Uses| EXCEL_ADDIN
+    MOBILE_USER -->|Uses| MOBILE_APP
+    API_USER -->|HTTPS/JSON API| WEBAPI
+
+    %% Integration layer to API
+    EXCEL_ADDIN -->|REST API Calls| WEBAPI
+    MOBILE_APP -->|REST API Calls| WEBAPI
+
+    %% API to database
+    WEBAPI -->|Entity Framework<br/>LINQ Queries| DATABASE
+
+    %% API to external services
+    WEBAPI -->|SMTP Protocol| EMAIL_SVC
+    WEBAPI -->|Payment Files| BANK_SYS
+    BANK_SYS -->|Bank Statements| WEBAPI
+    WEBAPI -->|WHT Files| TAX_SYS
+
+    %% Email service interactions
+    EMAIL_SVC -->|Sends emails to| WEB_USER
+    EMAIL_SVC -->|Sends notifications to| MOBILE_USER
+
+    classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
+    classDef database fill:#438dd5,stroke:#2e6295,color:#ffffff
+    classDef external fill:#999999,stroke:#666666,color:#ffffff
+    classDef user fill:#08427b,stroke:#052e56,color:#ffffff
+
+    class WEBAPI,EXCEL_ADDIN,MOBILE_APP,EMAIL_SVC container
+    class DATABASE database
+    class BANK_SYS,TAX_SYS external
+    class WEB_USER,EXCEL_USER,MOBILE_USER,API_USER user</div><h2>Container Overview</h2>
+<p>Carmen.NET consists of several containers that work together to provide comprehensive financial ERP functionality.</p>
+<h3>Application Containers</h3>
+<p><strong>Web API Application</strong></p>
+<ul>
+<li><strong>Technology</strong>: ASP.NET Web API, .NET Framework 4.x</li>
+<li><strong>Purpose</strong>: Core business logic and REST API endpoints</li>
+<li><strong>Scale</strong>: 351+ endpoints across 60 controllers</li>
+<li><strong>Features</strong>:<ul>
+<li>Token-based authentication (JWT)</li>
+<li>Role-based access control (RBAC)</li>
+<li>Multi-tenant context management</li>
+<li>Comprehensive error handling and logging</li>
+</ul>
+</li>
+</ul>
+<p><strong>Excel Add-in</strong></p>
+<ul>
+<li><strong>Technology</strong>: VSTO (Visual Studio Tools for Office), Office JavaScript API</li>
+<li><strong>Purpose</strong>: Batch data import/export via Excel</li>
+<li><strong>Features</strong>:<ul>
+<li>Template-based data entry</li>
+<li>Bulk upload capabilities</li>
+<li>Data validation before import</li>
+</ul>
+</li>
+</ul>
+<p><strong>Mobile App</strong></p>
+<ul>
+<li><strong>Technology</strong>: Xamarin or React Native (inferred)</li>
+<li><strong>Purpose</strong>: Mobile access to core functionality</li>
+<li><strong>Features</strong>:<ul>
+<li>Transaction approval workflows</li>
+<li>Report viewing</li>
+<li>Real-time notifications</li>
+</ul>
+</li>
+</ul>
+<h3>Data Container</h3>
+<p><strong>SQL Server Database</strong></p>
+<ul>
+<li><strong>Technology</strong>: SQL Server 2014+</li>
+<li><strong>Purpose</strong>: Multi-tenant data storage</li>
+<li><strong>Features</strong>:<ul>
+<li>Tenant-isolated data</li>
+<li>Encrypted sensitive fields</li>
+<li>Complete audit trail</li>
+<li>Transaction support (ACID)</li>
+</ul>
+</li>
+</ul>
+<h3>External Services</h3>
+<p><strong>Email Service</strong></p>
+<ul>
+<li><strong>Technology</strong>: SMTP</li>
+<li><strong>Purpose</strong>: Notifications and alerts</li>
+<li><strong>Features</strong>:<ul>
+<li>Workflow notifications</li>
+<li>System alerts</li>
+<li>User communications</li>
+</ul>
+</li>
+</ul>
+<h2>Integration Patterns</h2>
+<ul>
+<li><strong>Web Browser</strong>: HTTPS/JSON REST API</li>
+<li><strong>Excel Add-in</strong>: REST API via Office API</li>
+<li><strong>Mobile App</strong>: REST API via native HTTP client</li>
+<li><strong>Third-party Systems</strong>: REST API with token authentication</li>
+<li><strong>Database</strong>: Entity Framework ORM with LINQ</li>
+<li><strong>Banking</strong>: File-based integration (payment files, statements)</li>
+<li><strong>Tax Authority</strong>: File-based WHT submissions</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

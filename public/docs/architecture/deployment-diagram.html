@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET - Deployment Diagram - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET - Deployment Diagram</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET - Deployment Diagram</h1>
+<div class="mermaid">graph TB
+    subgraph "Client Tier"
+        WEB[Web Browser]
+        EXCEL[Excel with Add-in]
+        MOBILE[Mobile App]
+        API_CLIENT[Third-party API Client]
+    end
+
+    subgraph "Load Balancer / Reverse Proxy"
+        LB[Load Balancer<br/>- SSL Termination<br/>- HTTPS Offloading<br/>- Session Affinity]
+    end
+
+    subgraph "Web Server Tier"
+        subgraph "Web Server 1"
+            IIS1[IIS 8.0+<br/>Windows Server]
+            WEBAPP1[Carmen.WebApi<br/>.NET Framework 4.x<br/>ASP.NET Web API]
+        end
+
+        subgraph "Web Server 2"
+            IIS2[IIS 8.0+<br/>Windows Server]
+            WEBAPP2[Carmen.WebApi<br/>.NET Framework 4.x<br/>ASP.NET Web API]
+        end
+    end
+
+    subgraph "Application Server Tier"
+        APPSERVER[Application Server<br/>- Business Logic<br/>- Service Layer<br/>- Carmen.Business<br/>- Carmen.Common<br/>- Carmen.Crypto]
+    end
+
+    subgraph "Database Tier"
+        subgraph "SQL Server Cluster"
+            DBPRIMARY[(SQL Server Primary<br/>Read/Write<br/>Multi-tenant Database)]
+            DBREPLICA[(SQL Server Replica<br/>Read-only<br/>Backup & Reporting)]
+        end
+    end
+
+    subgraph "External Integration"
+        BANK[Banking System<br/>Payment Files]
+        TAX[Tax Authority<br/>WHT Files]
+        EMAIL[Email Server<br/>SMTP]
+    end
+
+    %% Client connections
+    WEB -->|HTTPS| LB
+    EXCEL -->|HTTPS| LB
+    MOBILE -->|HTTPS| LB
+    API_CLIENT -->|HTTPS| LB
+
+    %% Load balancer to web servers
+    LB -->|HTTP| IIS1
+    LB -->|HTTP| IIS2
+
+    %% IIS to web app
+    IIS1 --> WEBAPP1
+    IIS2 --> WEBAPP2
+
+    %% Web app to application server
+    WEBAPP1 -->|In-process or<br/>Service calls| APPSERVER
+    WEBAPP2 -->|In-process or<br/>Service calls| APPSERVER
+
+    %% Application server to database
+    APPSERVER -->|Entity Framework<br/>SQL Connection<br/>Encrypted| DBPRIMARY
+    APPSERVER -->|Read queries<br/>Reports| DBREPLICA
+
+    %% Database replication
+    DBPRIMARY -.->|Replication| DBREPLICA
+
+    %% External integrations
+    APPSERVER -->|Payment Files<br/>SFTP/API| BANK
+    BANK -->|Bank Statements<br/>SFTP/API| APPSERVER
+    APPSERVER -->|WHT Files<br/>SFTP| TAX
+    APPSERVER -->|SMTP| EMAIL
+
+    classDef client fill:#08427b,stroke:#052e56,color:#ffffff
+    classDef lb fill:#ff6b6b,stroke:#c92a2a,color:#ffffff
+    classDef web fill:#1168bd,stroke:#0b4884,color:#ffffff
+    classDef app fill:#20c997,stroke:#087f5b,color:#ffffff
+    classDef db fill:#845ef7,stroke:#5f3dc4,color:#ffffff
+    classDef external fill:#999999,stroke:#666666,color:#ffffff
+
+    class WEB,EXCEL,MOBILE,API_CLIENT client
+    class LB lb
+    class IIS1,IIS2,WEBAPP1,WEBAPP2 web
+    class APPSERVER app
+    class DBPRIMARY,DBREPLICA db
+    class BANK,TAX,EMAIL external</div><h2>Deployment Architecture</h2>
+<h3>Client Tier</h3>
+<p><strong>Web Browser</strong></p>
+<ul>
+<li>Modern browsers (Chrome, Firefox, Edge, Safari)</li>
+<li>HTTPS connection to load balancer</li>
+<li>Token stored in browser storage/cookies</li>
+</ul>
+<p><strong>Excel with Add-in</strong></p>
+<ul>
+<li>Microsoft Excel 2013+ with Carmen.NET Add-in</li>
+<li>VSTO or Office JavaScript API</li>
+<li>REST API communication</li>
+</ul>
+<p><strong>Mobile App</strong></p>
+<ul>
+<li>iOS/Android native apps</li>
+<li>REST API consumption</li>
+<li>Local data caching</li>
+</ul>
+<p><strong>Third-party API Client</strong></p>
+<ul>
+<li>External systems integration</li>
+<li>REST API with token authentication</li>
+<li>JSON request/response</li>
+</ul>
+<h3>Load Balancer / Reverse Proxy Tier</h3>
+<p><strong>Load Balancer</strong></p>
+<ul>
+<li><strong>SSL Termination</strong>: HTTPS to HTTP conversion</li>
+<li><strong>Session Affinity</strong>: Sticky sessions if needed (stateless design may not require)</li>
+<li><strong>Health Checks</strong>: Monitor web server availability</li>
+<li><strong>Load Distribution</strong>: Round-robin or least connections</li>
+<li><strong>Technologies</strong>: Nginx, HAProxy, F5, or cloud load balancer (Azure Load Balancer, AWS ELB)</li>
+</ul>
+<h3>Web Server Tier</h3>
+<p><strong>Web Server 1 &amp; 2</strong> (Redundant configuration)</p>
+<ul>
+<li><strong>Operating System</strong>: Windows Server 2012 R2+ or Linux (if using Kestrel)</li>
+<li><strong>Web Server</strong>: IIS 8.0+ or Kestrel</li>
+<li><strong>Runtime</strong>: .NET Framework 4.x runtime</li>
+<li><strong>Application</strong>: Carmen.WebApi deployed</li>
+<li><strong>Configuration</strong>: Machine-specific settings, connection strings</li>
+</ul>
+<p><strong>Scaling</strong>:</p>
+<ul>
+<li>Horizontal scaling by adding more web server instances</li>
+<li>Stateless API design allows any server to handle any request</li>
+<li>No session affinity required</li>
+</ul>
+<h3>Application Server Tier</h3>
+<p><strong>Application Server</strong></p>
+<ul>
+<li><strong>Components</strong>: Business logic, service layer, validation</li>
+<li><strong>Libraries</strong>: Carmen.Business, Carmen.Common, Carmen.Crypto</li>
+<li><strong>Purpose</strong>: Centralized business logic execution</li>
+<li><strong>Communication</strong>: In-process (same server) or service calls (separate server)</li>
+</ul>
+<p><strong>Note</strong>: In many deployments, application server logic may be co-located with web servers for simplicity.</p>
+<h3>Database Tier</h3>
+<p><strong>SQL Server Cluster</strong></p>
+<p><strong>Primary Database</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Read/write operations</li>
+<li><strong>Technology</strong>: SQL Server 2014+ (Standard or Enterprise)</li>
+<li><strong>Features</strong>:<ul>
+<li>Multi-tenant data with tenant isolation</li>
+<li>Encrypted sensitive fields</li>
+<li>Full audit trail</li>
+<li>ACID transactions</li>
+</ul>
+</li>
+<li><strong>Backup</strong>: Daily full backup, hourly incremental</li>
+<li><strong>High Availability</strong>: Clustering or Always On Availability Groups</li>
+</ul>
+<p><strong>Replica Database</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Read-only queries, reporting, backup</li>
+<li><strong>Replication</strong>: Synchronous or asynchronous from primary</li>
+<li><strong>Use Cases</strong>:<ul>
+<li>Financial reports (offload from primary)</li>
+<li>Business intelligence queries</li>
+<li>Disaster recovery failover</li>
+</ul>
+</li>
+</ul>
+<h3>External Integration</h3>
+<p><strong>Banking System</strong></p>
+<ul>
+<li><strong>Protocol</strong>: SFTP or API</li>
+<li><strong>Direction</strong>: Bidirectional</li>
+<li><strong>Files</strong>: Payment files (outbound), bank statements (inbound)</li>
+</ul>
+<p><strong>Tax Authority</strong></p>
+<ul>
+<li><strong>Protocol</strong>: SFTP or secure file upload</li>
+<li><strong>Direction</strong>: Outbound</li>
+<li><strong>Files</strong>: WHT (Withholding Tax) files</li>
+</ul>
+<p><strong>Email Server</strong></p>
+<ul>
+<li><strong>Protocol</strong>: SMTP</li>
+<li><strong>Purpose</strong>: Notifications, alerts, workflow emails</li>
+<li><strong>Security</strong>: TLS encryption</li>
+</ul>
+<h2>Deployment Specifications</h2>
+<h3>Infrastructure Requirements</h3>
+<p><strong>Load Balancer</strong></p>
+<ul>
+<li>CPU: 2-4 cores</li>
+<li>RAM: 4-8 GB</li>
+<li>Network: 1 Gbps+</li>
+<li>SSL certificate installed</li>
+</ul>
+<p><strong>Web Servers</strong> (per server)</p>
+<ul>
+<li>CPU: 4-8 cores</li>
+<li>RAM: 8-16 GB</li>
+<li>Disk: 50 GB SSD (OS + application)</li>
+<li>Network: 1 Gbps</li>
+<li>OS: Windows Server 2012 R2+ or Linux</li>
+</ul>
+<p><strong>Application Server</strong> (if separate)</p>
+<ul>
+<li>CPU: 8-16 cores</li>
+<li>RAM: 16-32 GB</li>
+<li>Disk: 100 GB SSD</li>
+<li>Network: 1 Gbps</li>
+</ul>
+<p><strong>Database Server</strong></p>
+<ul>
+<li>CPU: 16-32 cores</li>
+<li>RAM: 64-128 GB</li>
+<li>Disk: 500 GB - 2 TB SSD (database files)</li>
+<li>Network: 10 Gbps</li>
+<li>OS: Windows Server 2012 R2+</li>
+<li>SQL Server: 2014+ Standard or Enterprise</li>
+</ul>
+<h3>Network Configuration</h3>
+<p><strong>Firewall Rules</strong></p>
+<ul>
+<li>Port 443 (HTTPS): Internet → Load Balancer</li>
+<li>Port 80 (HTTP): Load Balancer → Web Servers</li>
+<li>Port 1433 (SQL): Web Servers → Database</li>
+<li>Port 22 (SSH): Admin access (restricted IPs)</li>
+<li>Port 3389 (RDP): Admin access (restricted IPs)</li>
+</ul>
+<p><strong>Security Zones</strong></p>
+<ul>
+<li><strong>DMZ</strong>: Load balancer</li>
+<li><strong>Application Zone</strong>: Web servers, application servers</li>
+<li><strong>Data Zone</strong>: Database servers (most restricted)</li>
+</ul>
+<h2>Deployment Strategies</h2>
+<h3>Single-Server Deployment (Development/Small)</h3>
+<pre><code class="language-text">Single Server:
+  - IIS + Carmen.WebApi
+  - SQL Server Express
+  - All components co-located</code></pre><h3>Multi-Server Deployment (Production/Standard)</h3>
+<pre><code class="language-text">Load Balancer (1)
+  ↓
+Web Servers (2+)
+  ↓
+Database Cluster (1 Primary + 1 Replica)</code></pre><h3>High-Availability Deployment (Enterprise)</h3>
+<pre><code class="language-text">Load Balancer (2, active-passive)
+  ↓
+Web Servers (4+, auto-scaling)
+  ↓
+Application Servers (2+)
+  ↓
+Database Cluster (3+ nodes with Always On)</code></pre><h2>Scalability &amp; Performance</h2>
+<h3>Horizontal Scaling</h3>
+<ul>
+<li>Add more web server instances behind load balancer</li>
+<li>Stateless API design enables linear scaling</li>
+<li>Database read replicas for reporting queries</li>
+</ul>
+<h3>Vertical Scaling</h3>
+<ul>
+<li>Increase CPU/RAM on web servers</li>
+<li>Increase database server resources</li>
+<li>SSD for database storage</li>
+</ul>
+<h3>Performance Targets</h3>
+<ul>
+<li><strong>API Response</strong>: &lt;200ms average, &lt;500ms P95</li>
+<li><strong>Concurrent Users</strong>: 100+ per web server</li>
+<li><strong>Throughput</strong>: 1000+ requests/minute per server</li>
+<li><strong>Database</strong>: &lt;100ms for simple queries, &lt;500ms for complex</li>
+</ul>
+<h2>High Availability &amp; Disaster Recovery</h2>
+<h3>Web Tier HA</h3>
+<ul>
+<li>Multiple web servers behind load balancer</li>
+<li>Health checks and automatic failover</li>
+<li>Zero-downtime deployments (rolling updates)</li>
+</ul>
+<h3>Database HA</h3>
+<ul>
+<li>SQL Server Always On Availability Groups</li>
+<li>Automatic failover to replica</li>
+<li>RPO (Recovery Point Objective): &lt;5 minutes</li>
+<li>RTO (Recovery Time Objective): &lt;15 minutes</li>
+</ul>
+<h3>Backup Strategy</h3>
+<ul>
+<li><strong>Database</strong>: Daily full, hourly incremental</li>
+<li><strong>Application</strong>: Git repository + artifact storage</li>
+<li><strong>Configuration</strong>: Backed up daily</li>
+<li><strong>Retention</strong>: 30 days online, 1 year archive</li>
+</ul>
+<h2>Monitoring &amp; Logging</h2>
+<h3>Application Monitoring</h3>
+<ul>
+<li>IIS logs</li>
+<li>Application logs (LogHttpRequest, LogHttpResult)</li>
+<li>Performance counters (CPU, memory, requests/sec)</li>
+<li>Custom metrics (API response times, error rates)</li>
+</ul>
+<h3>Database Monitoring</h3>
+<ul>
+<li>SQL Server performance monitoring</li>
+<li>Query performance tracking</li>
+<li>Blocking and deadlock detection</li>
+<li>Storage and backup monitoring</li>
+</ul>
+<h3>Infrastructure Monitoring</h3>
+<ul>
+<li>Server health (CPU, RAM, disk, network)</li>
+<li>Load balancer health and traffic</li>
+<li>Alert thresholds and notifications</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

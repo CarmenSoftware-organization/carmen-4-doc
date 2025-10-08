@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Developer Code Structure Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Developer Code Structure Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Developer Code Structure Guide</h1>
+<p><strong>Document Version:</strong> 1.0<br><strong>Last Updated:</strong> October 6, 2025<br><strong>Target Audience:</strong> Backend Developers, Solution Architects<br><strong>Prerequisites:</strong> Developer Onboarding Guide, .NET Framework 4.x knowledge</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#solution-architecture">Solution Architecture</a></li>
+<li><a href="#project-organization">Project Organization</a></li>
+<li><a href="#naming-conventions">Naming Conventions</a></li>
+<li><a href="#directory-structure">Directory Structure</a></li>
+<li><a href="#module-boundaries">Module Boundaries</a></li>
+<li><a href="#dependency-management">Dependency Management</a></li>
+<li><a href="#code-organization-patterns">Code Organization Patterns</a></li>
+<li><a href="#common-code-locations">Common Code Locations</a></li>
+<li><a href="#file-naming-standards">File Naming Standards</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+</ol>
+<hr>
+<h2>1. Solution Architecture</h2>
+<h3>Overview</h3>
+<p>Carmen.NET uses a <strong>modular monolith architecture</strong> organized into 17+ C# projects within a single solution. The architecture separates concerns into distinct layers while maintaining clear module boundaries.</p>
+<div class="mermaid">graph TD
+    Root["Carmen4/"]
+
+    Root --> WebApi["Carmen.WebApi/<br/>Main Web API Entry Point"]
+    Root --> Models["Carmen.Models/<br/>Domain Models & DTOs"]
+    Root --> Enum["Carmen.Enum/<br/>Enumerations"]
+    Root --> Query["Carmen.Query/<br/>Query Builder SqlKata"]
+    Root --> Utils["Carmen.Utils/<br/>Utilities & Helpers"]
+    Root --> Exception["Carmen.Exception/<br/>Custom Exceptions"]
+    Root --> Crypto["Carmen.Crypto/<br/>Encryption Services"]
+    Root --> ApiClient["Carmen.Api.Client/<br/>API Client SDK"]
+    Root --> WebSupport["Carmen.WebSupport/<br/>Support Portal"]
+    Root --> LicenseApi["Carmen.LicenseApi/<br/>License Server"]
+    Root --> Tests["Test Projects/<br/>Unit & Integration Tests"]
+
+    subgraph Plugins["Src-Plugin/"]
+        MainModule["Carmen.MainModule/<br/>Core Plugin"]
+        Opera["Carmen.Posting.Opera/<br/>Opera Integration"]
+        HMS["Carmen.Posting.HMS/<br/>HMS Integration"]
+        BlueLedgers["Carmen.Posting.BlueLedgers/<br/>BlueLedgers Integration"]
+    end
+
+    Root --> Plugins
+
+    style Root fill:#e1f5ff,stroke:#0288d1
+    style WebApi fill:#e8f5e9,stroke:#4caf50
+    style Models fill:#fff3e0,stroke:#ff9800
+    style Plugins fill:#f3e5f5,stroke:#9c27b0</div><h3>Solution File</h3>
+<p><strong>Location:</strong> <code>Carmen4/Carmen.sln</code> (if exists) or individual <code>.csproj</code> files</p>
+<p><strong>Target Framework:</strong></p>
+<ul>
+<li><strong>Core Libraries:</strong> .NET Standard 2.0 (Carmen.Models, Carmen.Enum, Carmen.Utils)</li>
+<li><strong>Web API:</strong> .NET Framework 4.6.2+ (Carmen.WebApi)</li>
+<li><strong>Modern Migration Path:</strong> Targeting .NET 8 in modernization roadmap</li>
+</ul>
+<hr>
+<h2>2. Project Organization</h2>
+<h3>Core Projects (Alphabetical Order)</h3>
+<h4><strong>Carmen.Api.Client</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> Client SDK for external integrations</li>
+<li><strong>Dependencies:</strong> Carmen.Models, Carmen.Enum</li>
+<li><strong>Key Files:</strong> API client wrappers, HTTP helpers</li>
+</ul>
+<h4><strong>Carmen.Crypto</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> Encryption/decryption services</li>
+<li><strong>Sub-Projects:</strong><ul>
+<li><code>Carmen.Crypto.Encryption</code> - Encryption logic</li>
+<li><code>Carmen.Crypto.Decryption</code> - Decryption logic</li>
+</ul>
+</li>
+<li><strong>Usage:</strong> Secure data storage, password hashing</li>
+</ul>
+<h4><strong>Carmen.Enum</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> System-wide enumerations</li>
+<li><strong>Dependencies:</strong> None (base library)</li>
+<li><strong>Target Framework:</strong> .NET Standard 2.0</li>
+<li><strong>Key Enums:</strong><ul>
+<li><code>PaymentTerms</code> (NET15, NET30, NET60, NET90, COD, Prepaid)</li>
+<li><code>PaymentMethod</code> (Cash, Check, Wire, ACH, CreditCard)</li>
+<li><code>ApInvoiceStatus</code> (Draft, PendingApproval, Approved, etc.)</li>
+<li><code>AccountType</code> (Asset, Liability, Equity, Revenue, Expense)</li>
+</ul>
+</li>
+</ul>
+<h4><strong>Carmen.Exception</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> Custom exception types</li>
+<li><strong>Dependencies:</strong> Minimal</li>
+<li><strong>Usage:</strong> Domain-specific error handling</li>
+</ul>
+<h4><strong>Carmen.Models</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> Domain entities, DTOs, view models</li>
+<li><strong>Dependencies:</strong> Carmen.Enum, Carmen.Utils, Carmen.Models.Version</li>
+<li><strong>Target Framework:</strong> .NET Standard 2.0</li>
+<li><strong>File Types:</strong><ul>
+<li><code>I*.cs</code> - Interfaces (e.g., <code>IPermissionStore.cs</code>)</li>
+<li><code>View*.cs</code> - View models (e.g., <code>ViewApInvoice.cs</code>)</li>
+<li><code>Param*.cs</code> - Parameter objects (e.g., <code>ParamDashboard.cs</code>)</li>
+<li>Entity classes (e.g., <code>GlAJvH.cs</code> - GL Auto JV Header)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Sub-Projects:</strong></p>
+<ul>
+<li><code>Carmen.Models.Interface</code> - External integration models</li>
+<li><code>Carmen.Models.InterfaceList</code> - Interface configuration</li>
+<li><code>Carmen.Models.Version</code> - Version information</li>
+</ul>
+<h4><strong>Carmen.Query</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> SQL query builder (SqlKata wrapper)</li>
+<li><strong>Dependencies:</strong> SqlKata, Dapper</li>
+<li><strong>Usage:</strong> Dynamic query construction</li>
+</ul>
+<h4><strong>Carmen.Utils</strong></h4>
+<ul>
+<li><strong>Purpose:</strong> Shared utilities and helpers</li>
+<li><strong>Dependencies:</strong> Carmen.Enum, Newtonsoft.Json</li>
+<li><strong>Target Framework:</strong> .NET Standard 2.0</li>
+<li><strong>NuGet Packages:</strong><ul>
+<li><code>Newtonsoft.Json</code> 12.0.3</li>
+<li><code>Json.Net.DataSetConverters</code> 1.0.1</li>
+<li><code>System.Data.DataSetExtensions</code> 4.5.0</li>
+<li><code>System.Drawing.Common</code> 5.0.2</li>
+</ul>
+</li>
+</ul>
+<h4><strong>Carmen.WebApi</strong> ⭐ (Main Entry Point)</h4>
+<ul>
+<li><strong>Purpose:</strong> RESTful Web API, business logic, data access</li>
+<li><strong>Dependencies:</strong> All Carmen.* projects</li>
+<li><strong>Target Framework:</strong> .NET Framework 4.6.2+</li>
+<li><strong>Key Technologies:</strong><ul>
+<li>ASP.NET Web API 2</li>
+<li>Entity Framework 6.x</li>
+<li>Swashbuckle (Swagger documentation)</li>
+<li>SignalR (real-time notifications)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>3. Naming Conventions</h2>
+<h3>Project Naming</h3>
+<pre><code class="language-text">Carmen.&lt;Domain&gt;                 # Core projects
+Carmen.&lt;Domain&gt;.&lt;Subdomain&gt;     # Sub-projects</code></pre><p><strong>Examples:</strong></p>
+<ul>
+<li><code>Carmen.Models</code> - Main models</li>
+<li><code>Carmen.Models.Interface</code> - Interface-specific models</li>
+<li><code>Carmen.Posting.Opera</code> - Opera integration plugin</li>
+</ul>
+<h3>Namespace Naming</h3>
+<p><strong>Convention:</strong> Match project structure exactly</p>
+<pre><code class="language-csharp">namespace Carmen.WebApi.Controllers        // Controllers folder
+namespace Carmen.WebApi.Functions          // Functions folder
+namespace Carmen.Models                    // Root namespace
+namespace Carmen.WebApi.Connection         // Connection folder</code></pre><h3>Class Naming</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Convention</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Controllers</strong></td>
+<td><code>{Entity}Controller</code></td>
+<td><code>ApInvoiceController</code></td>
+</tr>
+<tr>
+<td><strong>Functions</strong></td>
+<td><code>Fnc{Entity}</code></td>
+<td><code>FncApInvoice</code></td>
+</tr>
+<tr>
+<td><strong>Models (View)</strong></td>
+<td><code>View{Entity}</code></td>
+<td><code>ViewApInvoice</code></td>
+</tr>
+<tr>
+<td><strong>Models (Interface)</strong></td>
+<td><code>I{Entity}</code></td>
+<td><code>IPermissionStore</code></td>
+</tr>
+<tr>
+<td><strong>Models (Param)</strong></td>
+<td><code>Param{Entity}</code></td>
+<td><code>ParamDashboard</code></td>
+</tr>
+<tr>
+<td><strong>Enums</strong></td>
+<td>PascalCase</td>
+<td><code>PaymentTerms</code></td>
+</tr>
+<tr>
+<td><strong>Helpers</strong></td>
+<td><code>{Domain}Helper</code></td>
+<td><code>StringHelper</code></td>
+</tr>
+</tbody></table>
+<h3>Variable Naming</h3>
+<pre><code class="language-csharp">// Public properties - PascalCase
+public string InvoiceNumber { get; set; }
+public decimal TotalAmount { get; set; }
+
+// Private fields - _camelCase
+private readonly IDbFactory _dbFactory;
+private string _tenantCode;
+
+// Local variables - camelCase
+var dbFac = DbFactory.CarmenDbFactory();
+var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync();
+
+// Constants - UPPER_CASE or PascalCase
+private const int MAX_RETRY_COUNT = 3;
+public const string DefaultCurrency = &quot;THB&quot;;
+
+// Method parameters - camelCase
+public async Task&lt;IHttpActionResult&gt; GetById(int invhSeq, string useTenant = &quot;&quot;)</code></pre><h3>Method Naming</h3>
+<pre><code class="language-csharp">// Controllers - HTTP verb pattern
+public async Task&lt;IHttpActionResult&gt; GetList()
+public async Task&lt;IHttpActionResult&gt; GetById(int id)
+public async Task&lt;IHttpActionResult&gt; Create(ParamApInvoice param)
+public async Task&lt;IHttpActionResult&gt; Update(int id, ParamApInvoice param)
+public async Task&lt;IHttpActionResult&gt; Delete(int id)
+public async Task&lt;IHttpActionResult&gt; Search(UriQueryString qs)
+
+// Functions - descriptive action
+public static async Task&lt;ViewPagedResult&lt;ViewApInvoice&gt;&gt; GetListAsync()
+public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(int id)
+public static async Task&lt;int&gt; CreateAsync(ParamApInvoice param)
+public static async Task&lt;bool&gt; UpdateAsync(int id, ParamApInvoice param)
+public static async Task&lt;bool&gt; DeleteAsync(int id)
+
+// Helpers - verb + noun
+public static string FormatCurrency(decimal amount)
+public static bool ValidateEmail(string email)
+public static DateTime ConvertToThaiDate(DateTime date)</code></pre><hr>
+<h2>4. Directory Structure</h2>
+<h3>Carmen.WebApi Project Structure</h3>
+<div class="mermaid">graph TD
+    Root["Carmen.WebApi/"]
+
+    Root --> AppData["App_Data/<br/>DB scripts & migrations"]
+    Root --> AppStart["App_Start/<br/>Startup config"]
+    Root --> Areas["Areas/<br/>Management & Support"]
+    Root --> Config["Config/<br/>Language & settings"]
+    Root --> Connection["Connection/<br/>DB factory & contexts"]
+    Root --> Controllers["Controllers/ ⭐<br/>60+ API Controllers"]
+    Root --> Functions["Functions/ ⭐<br/>90+ Business Logic"]
+    Root --> Helper["Helper/<br/>Exception & utilities"]
+    Root --> Hubs["Hubs/<br/>SignalR real-time"]
+    Root --> InterfaceCtrl["InterfaceControllers/<br/>External integrations"]
+    Root --> Models["Models/<br/>Request/Response DTOs"]
+    Root --> Plugins["Plugins/<br/>Plugin assemblies"]
+    Root --> Scripts["Scripts/<br/>JavaScript files"]
+    Root --> Views["Views/<br/>MVC views"]
+    Root --> GlobalAsax["Global.asax.cs<br/>App startup"]
+    Root --> Startup["Startup.cs<br/>OWIN startup"]
+    Root --> WebConfig["Web.config<br/>Configuration"]
+
+    AppData --> InstallAdmin["InstallScriptAdmin/"]
+    AppData --> InstallCarmen["InstallScriptCarmen/"]
+
+    AppStart --> WebApiConfig["WebApiConfig.cs"]
+    AppStart --> SwaggerConfig["SwaggerConfig.cs"]
+
+    Connection --> DbFactory["DbFactory.cs"]
+    Connection --> DatabaseCarmen["DatabaseCarmen.cs"]
+    Connection --> DatabaseAdmin["DatabaseAdmin.cs"]
+
+    Controllers --> ApInvoiceCtrl["ApInvoiceController.cs"]
+    Controllers --> ArInvoiceCtrl["ArInvoiceController.cs"]
+    Controllers --> GlJvCtrl["GlJvController.cs"]
+    Controllers --> More60["... 60+ controllers"]
+
+    Functions --> FncApInvoice["FncApInvoice.cs"]
+    Functions --> FncArInvoice["FncArInvoice.cs"]
+    Functions --> FncGlJv["FncGlJv.cs"]
+    Functions --> FncPermission["FncPermission.cs"]
+    Functions --> More90["... 90+ functions"]
+
+    InterfaceCtrl --> AP_Interface["AP/"]
+    InterfaceCtrl --> AR_Interface["AR/"]
+    InterfaceCtrl --> GL_Interface["GL/"]
+    InterfaceCtrl --> Opera["Opera/"]
+    InterfaceCtrl --> BlueLedgers["BlueLedgers/"]
+
+    style Root fill:#e1f5ff,stroke:#0288d1
+    style Controllers fill:#e8f5e9,stroke:#4caf50
+    style Functions fill:#fff3e0,stroke:#ff9800
+    style Connection fill:#f3e5f5,stroke:#9c27b0
+    style InterfaceCtrl fill:#fce4ec,stroke:#c2185b</div><h3>Key Folder Purposes</h3>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Purpose</th>
+<th>Example Files</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Controllers/</strong></td>
+<td>API endpoints, HTTP request handling</td>
+<td><code>ApInvoiceController.cs</code></td>
+</tr>
+<tr>
+<td><strong>Functions/</strong></td>
+<td>Business logic, data access, calculations</td>
+<td><code>FncApInvoice.cs</code></td>
+</tr>
+<tr>
+<td><strong>Connection/</strong></td>
+<td>Database factory, connection management</td>
+<td><code>DbFactory.cs</code></td>
+</tr>
+<tr>
+<td><strong>Models/</strong></td>
+<td>Request/response DTOs (WebApi-specific)</td>
+<td><code>GblParamsObj.cs</code></td>
+</tr>
+<tr>
+<td><strong>Helper/</strong></td>
+<td>Cross-cutting utilities</td>
+<td><code>StringHelper.cs</code></td>
+</tr>
+<tr>
+<td><strong>InterfaceControllers/</strong></td>
+<td>External system integrations</td>
+<td><code>OperaController.cs</code></td>
+</tr>
+<tr>
+<td><strong>App_Start/</strong></td>
+<td>Application configuration</td>
+<td><code>WebApiConfig.cs</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>5. Module Boundaries</h2>
+<h3>Business Module Organization</h3>
+<p>Carmen.NET organizes code by <strong>functional modules</strong>, not technical layers:</p>
+<div class="mermaid">graph TD
+    subgraph AP["AP Module - Accounts Payable"]
+        AP_Ctrl["Controllers:<br/>ApInvoiceController<br/>ApPaymentController<br/>ApWhtController"]
+        AP_Fnc["Functions:<br/>FncApInvoice<br/>FncApPayment<br/>FncApWht"]
+        AP_Model["Models:<br/>ViewApInvoice<br/>ParamApInvoice"]
+        AP_Enum["Enums:<br/>ApInvoiceStatus<br/>PaymentTerms"]
+    end
+
+    subgraph AR["AR Module - Accounts Receivable"]
+        AR_Ctrl["Controllers:<br/>ArInvoiceController<br/>ArReceiptController<br/>ArContractController"]
+        AR_Fnc["Functions:<br/>FncArInvoice<br/>FncArReceipt<br/>FncArContract"]
+        AR_Model["Models:<br/>ViewArInvoice<br/>ParamArReceipt"]
+        AR_Enum["Enums:<br/>ArInvoiceStatus<br/>ArContractStatus"]
+    end
+
+    subgraph GL["GL Module - General Ledger"]
+        GL_Ctrl["Controllers:<br/>GlJvController<br/>GlAllocationJvController<br/>GlAmortizeController"]
+        GL_Fnc["Functions:<br/>FncGlJv<br/>FncGlAllocationJv<br/>FncGlAmortize"]
+        GL_Model["Models:<br/>ViewGlJv<br/>ParamGlJv"]
+        GL_Enum["Enums:<br/>AccountType<br/>JvStatus"]
+    end
+
+    subgraph Asset["Asset Module"]
+        Asset_Ctrl["Controllers:<br/>AssetRegisterController<br/>AssetDisposalController"]
+        Asset_Fnc["Functions:<br/>FncAstRegister<br/>FncAstDisposal<br/>FncAstCalculation"]
+        Asset_Model["Models:<br/>ViewAssetRegister<br/>ParamAssetDisposal"]
+        Asset_Enum["Enums:<br/>DepreciationMethod<br/>AssetStatus"]
+    end
+
+    subgraph Income["Income Module"]
+        Inc_Ctrl["Controllers:<br/>IncomeInvoiceController<br/>IncomeRevenueController"]
+        Inc_Fnc["Functions:<br/>FncIncInvoice<br/>FncIncRevenue"]
+        Inc_Model["Models:<br/>ViewIncInvoice<br/>ParamIncRevenue"]
+    end
+
+    style AP fill:#e8f5e9,stroke:#4caf50,color:#000000
+    style AR fill:#e3f2fd,stroke:#2196f3,color:#000000
+    style GL fill:#fff3e0,stroke:#ff9800,color:#000000
+    style Asset fill:#f3e5f5,stroke:#9c27b0,color:#000000
+    style Income fill:#fce4ec,stroke:#c2185b,color:#000000</div><h3>Cross-Module Dependencies</h3>
+<div class="mermaid">graph LR
+    AP[AP Module]
+    AR[AR Module]
+    Asset[Asset Module]
+    Income[Income Module]
+    GL[GL Module]
+    Master[Master Data]
+    Auth[Account/Auth]
+
+    AP -->|GL posting from<br/>AP invoices| GL
+    AR -->|GL posting from<br/>AR invoices| GL
+    Asset -->|Depreciation<br/>GL entries| GL
+    Income -->|Revenue<br/>recognition| GL
+
+    Master -->|Vendors, Customers,<br/>Accounts| AP
+    Master -->|Vendors, Customers,<br/>Accounts| AR
+    Master -->|Vendors, Customers,<br/>Accounts| Asset
+    Master -->|Vendors, Customers,<br/>Accounts| Income
+
+    Auth -->|User authentication,<br/>permissions| AP
+    Auth -->|User authentication,<br/>permissions| AR
+    Auth -->|User authentication,<br/>permissions| GL
+    Auth -->|User authentication,<br/>permissions| Asset
+    Auth -->|User authentication,<br/>permissions| Income
+
+    style GL fill:#fff3e0,stroke:#ff9800,color:#000000
+    style Master fill:#e0f2f1,stroke:#00796b,color:#000000
+    style Auth fill:#fce4ec,stroke:#c2185b,color:#000000</div><p><strong>Forbidden Dependencies:</strong></p>
+<ul>
+<li>❌ <strong>AP ↛ AR</strong> - No direct dependency between modules</li>
+<li>❌ <strong>AR ↛ Asset</strong> - Use GL as intermediary</li>
+</ul>
+<h3>Module Communication Pattern</h3>
+<p><strong>Correct Pattern:</strong></p>
+<pre><code class="language-csharp">// ApInvoiceController.cs - AP Module
+public async Task&lt;IHttpActionResult&gt; Post(ParamApInvoice param)
+{
+    // 1. AP business logic
+    var invhSeq = await FncApInvoice.CreateAsync(dbFac, param);
+
+    // 2. GL posting (cross-module via FncGlJv)
+    if (param.IsPosted)
+    {
+        var glParam = MapApInvoiceToGlJv(param);
+        await FncGlJv.CreateAsync(dbFac, glParam);  // ✅ Via shared function
+    }
+
+    return JsonResultOk(invhSeq);
+}</code></pre><p><strong>Anti-Pattern (Avoid):</strong></p>
+<pre><code class="language-csharp">// ❌ BAD: Direct controller-to-controller calls
+var arController = new ArInvoiceController();
+var result = await arController.GetById(123);  // NEVER DO THIS</code></pre><hr>
+<h2>6. Dependency Management</h2>
+<h3>Project Reference Graph</h3>
+<div class="mermaid">graph TD
+    WebApi["Carmen.WebApi<br/>Root"]
+
+    WebApi --> Models["Carmen.Models"]
+    WebApi --> Query["Carmen.Query"]
+    WebApi --> Exception["Carmen.Exception"]
+    WebApi --> Crypto["Carmen.Crypto"]
+    WebApi --> ApiClient["Carmen.Api.Client"]
+    WebApi --> Plugin["Src-Plugin/<br/>Carmen.MainModule"]
+
+    Models --> Enum1["Carmen.Enum"]
+    Models --> Utils["Carmen.Utils"]
+    Models --> ModelsVer["Carmen.Models.Version"]
+
+    Utils --> Enum2["Carmen.Enum"]
+
+    Crypto --> CryptoEnc["Carmen.Crypto.Encryption"]
+    Crypto --> CryptoDec["Carmen.Crypto.Decryption"]
+
+    ApiClient --> Models2["Carmen.Models"]
+    ApiClient --> Enum3["Carmen.Enum"]
+
+    style WebApi fill:#e8f5e9,stroke:#4caf50
+    style Models fill:#fff3e0,stroke:#ff9800
+    style Crypto fill:#f3e5f5,stroke:#9c27b0
+    style ApiClient fill:#e3f2fd,stroke:#2196f3</div><h3>NuGet Package Strategy</h3>
+<p><strong>Core Packages (All Projects):</strong></p>
+<pre><code class="language-xml">&lt;PackageReference Include=&quot;Newtonsoft.Json&quot; Version=&quot;12.0.3&quot; /&gt;</code></pre><p><strong>Web API Packages (Carmen.WebApi):</strong></p>
+<pre><code class="language-xml">&lt;!-- Web Framework --&gt;
+&lt;PackageReference Include=&quot;Microsoft.AspNet.WebApi&quot; Version=&quot;5.2.7&quot; /&gt;
+&lt;PackageReference Include=&quot;Microsoft.AspNet.WebApi.Owin&quot; Version=&quot;5.2.7&quot; /&gt;
+
+&lt;!-- ORM &amp; Database --&gt;
+&lt;PackageReference Include=&quot;EntityFramework&quot; Version=&quot;6.4.4&quot; /&gt;
+&lt;PackageReference Include=&quot;Dapper&quot; Version=&quot;2.0.123&quot; /&gt;
+&lt;PackageReference Include=&quot;SqlKata&quot; Version=&quot;2.3.7&quot; /&gt;
+
+&lt;!-- Authentication --&gt;
+&lt;PackageReference Include=&quot;Microsoft.Owin.Security.Jwt&quot; Version=&quot;4.2.0&quot; /&gt;
+&lt;PackageReference Include=&quot;Microsoft.AspNet.Identity.Owin&quot; Version=&quot;2.2.3&quot; /&gt;
+
+&lt;!-- Documentation --&gt;
+&lt;PackageReference Include=&quot;Swashbuckle&quot; Version=&quot;5.6.0&quot; /&gt;
+
+&lt;!-- Real-time --&gt;
+&lt;PackageReference Include=&quot;Microsoft.AspNet.SignalR&quot; Version=&quot;2.4.3&quot; /&gt;</code></pre><p><strong>Utility Packages (Carmen.Utils):</strong></p>
+<pre><code class="language-xml">&lt;PackageReference Include=&quot;Json.Net.DataSetConverters&quot; Version=&quot;1.0.1&quot; /&gt;
+&lt;PackageReference Include=&quot;System.Data.DataSetExtensions&quot; Version=&quot;4.5.0&quot; /&gt;
+&lt;PackageReference Include=&quot;System.Drawing.Common&quot; Version=&quot;5.0.2&quot; /&gt;</code></pre><h3>Dependency Rules</h3>
+<p><strong>✅ DO:</strong></p>
+<ul>
+<li>Reference Carmen.Enum from any project (base library, no dependencies)</li>
+<li>Reference Carmen.Utils for shared utilities</li>
+<li>Reference Carmen.Models for domain entities</li>
+<li>Use NuGet packages for third-party libraries</li>
+<li>Keep .NET Standard projects dependency-free</li>
+</ul>
+<p><strong>❌ DON&#39;T:</strong></p>
+<ul>
+<li>Create circular dependencies between projects</li>
+<li>Reference Carmen.WebApi from library projects</li>
+<li>Duplicate code instead of creating shared utilities</li>
+<li>Use different versions of Newtonsoft.Json across projects</li>
+</ul>
+<hr>
+<h2>7. Code Organization Patterns</h2>
+<h3>Controller Pattern</h3>
+<p><strong>File Location:</strong> <code>Carmen.WebApi/Controllers/{Entity}Controller.cs</code></p>
+<p><strong>Structure:</strong></p>
+<pre><code class="language-csharp">namespace Carmen.WebApi.Controllers
+{
+    using Carmen.Models;
+    using Carmen.WebApi.Connection;
+    using Functions;
+    using Swashbuckle.Swagger.Annotations;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+
+    [SwaggerControllerOrder(201)]
+    public class ApInvoiceController : BaseApiController
+    {
+        // GET: api/apInvoice
+        [HttpGet]
+        [Authorize]
+        [Route(&quot;api/apInvoice&quot;)]
+        public async Task&lt;IHttpActionResult&gt; GetList([FromUri] string q = &quot;&quot;, string useTenant = &quot;&quot;)
+        {
+            try
+            {
+                LogHttpRequest.Info($&quot;{this.GetType().Name} : GetList&quot;);
+                FncBase.ApplyTenantIfUseTenant(useTenant);
+
+                var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+                if (!permission.View) return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;View&quot;);
+
+                var dbFac = DbFactory.CarmenDbFactory();
+                dbFac.Qs = GetUriQuery(q, true);
+
+                var result = await FncApInvoice.GetListAsync(dbFac, dbFac.Qs);
+                return JsonResultOk(JObject.FromObject(result));
+            }
+            catch (Exception e)
+            {
+                LogHttpResult.Error(e);
+                return JsonResultInternalError(e);
+            }
+        }
+
+        // GET: api/apInvoice/{id}
+        [HttpGet]
+        [Authorize]
+        [Route(&quot;api/apInvoice/{invhSeq}&quot;)]
+        public async Task&lt;IHttpActionResult&gt; GetById(int invhSeq, string useTenant = &quot;&quot;)
+        {
+            // Similar structure...
+        }
+
+        // POST: api/apInvoice
+        [HttpPost]
+        [Authorize]
+        [Route(&quot;api/apInvoice&quot;)]
+        public async Task&lt;IHttpActionResult&gt; Create(ParamApInvoice param)
+        {
+            // Create logic...
+        }
+
+        // PUT: api/apInvoice/{id}
+        [HttpPut]
+        [Authorize]
+        [Route(&quot;api/apInvoice/{invhSeq}&quot;)]
+        public async Task&lt;IHttpActionResult&gt; Update(int invhSeq, ParamApInvoice param)
+        {
+            // Update logic...
+        }
+
+        // DELETE: api/apInvoice/{id}
+        [HttpDelete]
+        [Authorize]
+        [Route(&quot;api/apInvoice/{invhSeq}&quot;)]
+        public async Task&lt;IHttpActionResult&gt; Delete(int invhSeq)
+        {
+            // Delete logic...
+        }
+    }
+}</code></pre><p><strong>Key Patterns:</strong></p>
+<ol>
+<li><strong>Inherit from BaseApiController</strong> - Provides <code>JsonResultOk()</code>, <code>JsonResultForbidden()</code>, etc.</li>
+<li><strong>Try-Catch-Log</strong> - Every action wrapped in try-catch with logging</li>
+<li><strong>Permission Check</strong> - Use <code>FncPermission.GetPermissionInfoByPermissionNameAsync()</code></li>
+<li><strong>Tenant Isolation</strong> - Call <code>FncBase.ApplyTenantIfUseTenant(useTenant)</code></li>
+<li><strong>Async/Await</strong> - All database operations use async pattern</li>
+<li><strong>Swagger Attributes</strong> - Document with <code>[SwaggerResponse]</code>, <code>[SwaggerControllerOrder]</code></li>
+</ol>
+<h3>Function Pattern</h3>
+<p><strong>File Location:</strong> <code>Carmen.WebApi/Functions/Fnc{Entity}.cs</code></p>
+<p><strong>Structure:</strong></p>
+<pre><code class="language-csharp">namespace Carmen.WebApi.Functions
+{
+    using Carmen.Models;
+    using Carmen.WebApi.Connection;
+    using Dapper;
+    using SqlKata;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    public static class FncApInvoice
+    {
+        // Read operations
+        public static async Task&lt;ViewPagedResult&lt;ViewApInvoice&gt;&gt; GetListAsync(
+            IDbFactory dbFac,
+            UriQueryString qs)
+        {
+            using (var db = dbFac.GetConnection())
+            {
+                var query = new Query(&quot;AP_INVOICE_H AS H&quot;)
+                    .LeftJoin(&quot;VENDOR AS V&quot;, &quot;V.VendorCode&quot;, &quot;H.VendorCode&quot;)
+                    .Select(&quot;H.*&quot;, &quot;V.VendorName&quot;)
+                    .Where(&quot;H.TenantCode&quot;, FncBase.CurrentTenantCode);
+
+                // Apply filters from query string
+                if (!string.IsNullOrEmpty(qs.Filter))
+                {
+                    query.WhereContains(&quot;H.InvoiceNumber&quot;, qs.Filter)
+                         .OrWhereContains(&quot;V.VendorName&quot;, qs.Filter);
+                }
+
+                var totalRows = await db.ExecuteScalarAsync&lt;int&gt;(
+                    dbFac.Compiler.Compile(query.AsCount()).Sql);
+
+                var sql = dbFac.Compiler.Compile(query.Paginate(qs.Page, qs.PageSize));
+                var data = await db.QueryAsync&lt;ViewApInvoice&gt;(sql.Sql, sql.NamedBindings);
+
+                return new ViewPagedResult&lt;ViewApInvoice&gt;
+                {
+                    Data = data.ToList(),
+                    TotalRows = totalRows,
+                    Page = qs.Page,
+                    PageSize = qs.PageSize
+                };
+            }
+        }
+
+        public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(IDbFactory dbFac, int invhSeq)
+        {
+            using (var db = dbFac.GetConnection())
+            {
+                var query = new Query(&quot;AP_INVOICE_H AS H&quot;)
+                    .LeftJoin(&quot;VENDOR AS V&quot;, &quot;V.VendorCode&quot;, &quot;H.VendorCode&quot;)
+                    .Select(&quot;H.*&quot;, &quot;V.VendorName&quot;)
+                    .Where(&quot;H.InvhSeq&quot;, invhSeq)
+                    .Where(&quot;H.TenantCode&quot;, FncBase.CurrentTenantCode);
+
+                var sql = dbFac.Compiler.Compile(query);
+                return await db.QueryFirstOrDefaultAsync&lt;ViewApInvoice&gt;(sql.Sql, sql.NamedBindings);
+            }
+        }
+
+        // Write operations
+        public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param)
+        {
+            using (var db = dbFac.GetConnection())
+            {
+                // Validation
+                await ValidateApInvoiceAsync(dbFac, param);
+
+                // Insert header
+                var headerSql = @&quot;
+                    INSERT INTO AP_INVOICE_H (
+                        TenantCode, InvoiceNumber, InvoiceDate, VendorCode,
+                        Amount, TaxAmount, WhtAmount, TotalAmount, Status
+                    ) VALUES (
+                        @TenantCode, @InvoiceNumber, @InvoiceDate, @VendorCode,
+                        @Amount, @TaxAmount, @WhtAmount, @TotalAmount, @Status
+                    );
+                    SELECT CAST(SCOPE_IDENTITY() as int);&quot;;
+
+                var invhSeq = await db.ExecuteScalarAsync&lt;int&gt;(headerSql, new
+                {
+                    TenantCode = FncBase.CurrentTenantCode,
+                    param.InvoiceNumber,
+                    param.InvoiceDate,
+                    param.VendorCode,
+                    param.Amount,
+                    param.TaxAmount,
+                    param.WhtAmount,
+                    TotalAmount = param.Amount + param.TaxAmount - param.WhtAmount,
+                    Status = &quot;Draft&quot;
+                });
+
+                // Insert lines
+                foreach (var line in param.Lines)
+                {
+                    await CreateLineAsync(dbFac, invhSeq, line);
+                }
+
+                return invhSeq;
+            }
+        }
+
+        // Validation
+        private static async Task ValidateApInvoiceAsync(IDbFactory dbFac, ParamApInvoice param)
+        {
+            // Check vendor exists
+            var vendorExists = await FncVendor.ExistsAsync(dbFac, param.VendorCode);
+            if (!vendorExists)
+                throw new BusinessException(&quot;VENDOR_NOT_FOUND&quot;, $&quot;Vendor {param.VendorCode} not found&quot;);
+
+            // Check duplicate invoice number
+            var duplicate = await CheckDuplicateInvoiceAsync(dbFac, param.VendorCode, param.InvoiceNumber);
+            if (duplicate)
+                throw new BusinessException(&quot;DUPLICATE_INVOICE&quot;, &quot;Invoice number already exists for this vendor&quot;);
+
+            // Validate amounts
+            if (param.Amount &lt;= 0)
+                throw new BusinessException(&quot;INVALID_AMOUNT&quot;, &quot;Invoice amount must be greater than zero&quot;);
+        }
+    }
+}</code></pre><p><strong>Key Patterns:</strong></p>
+<ol>
+<li><strong>Static class</strong> - Functions are stateless static methods</li>
+<li><strong>Async suffix</strong> - All async methods end with <code>Async</code></li>
+<li><strong>Using statements</strong> - Proper disposal of database connections</li>
+<li><strong>Tenant filtering</strong> - Always apply <code>FncBase.CurrentTenantCode</code> in WHERE clauses</li>
+<li><strong>SqlKata queries</strong> - Use query builder for type safety</li>
+<li><strong>Validation first</strong> - Validate before any database modifications</li>
+<li><strong>Transaction management</strong> - Use transactions for multi-table operations</li>
+</ol>
+<h3>Model Organization</h3>
+<p><strong>Carmen.Models Project:</strong></p>
+<pre><code class="language-csharp">// Interfaces (IPermissionStore.cs)
+namespace Carmen.Models
+{
+    public interface IPermissionStore
+    {
+        string PermissionName { get; set; }
+        bool View { get; set; }
+        bool Create { get; set; }
+        bool Update { get; set; }
+        bool Delete { get; set; }
+        bool Approve { get; set; }
+    }
+}
+
+// View Models (ViewApInvoice.cs)
+namespace Carmen.Models
+{
+    public class ViewApInvoice
+    {
+        public int InvhSeq { get; set; }
+        public string TenantCode { get; set; }
+        public string InvoiceNumber { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public string VendorCode { get; set; }
+        public string VendorName { get; set; }  // Joined from VENDOR table
+        public decimal Amount { get; set; }
+        public decimal TaxAmount { get; set; }
+        public decimal WhtAmount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+    }
+}
+
+// Parameter Models (ParamApInvoice.cs)
+namespace Carmen.Models
+{
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    public class ParamApInvoice
+    {
+        [Required]
+        [MaxLength(50)]
+        public string InvoiceNumber { get; set; }
+
+        [Required]
+        public DateTime InvoiceDate { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string VendorCode { get; set; }
+
+        [Range(0.01, double.MaxValue)]
+        public decimal Amount { get; set; }
+
+        public decimal TaxAmount { get; set; }
+        public decimal WhtAmount { get; set; }
+
+        public List&lt;ParamApInvoiceLine&gt; Lines { get; set; } = new List&lt;ParamApInvoiceLine&gt;();
+    }
+
+    public class ParamApInvoiceLine
+    {
+        public int LineNum { get; set; }
+        public string Description { get; set; }
+        public decimal Amount { get; set; }
+        public string AccountCode { get; set; }
+    }
+}</code></pre><hr>
+<h2>8. Common Code Locations</h2>
+<h3>Finding Code by Feature</h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Location</th>
+<th>Example File</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Add new API endpoint</strong></td>
+<td><code>Carmen.WebApi/Controllers/</code></td>
+<td><code>ApInvoiceController.cs</code></td>
+</tr>
+<tr>
+<td><strong>Implement business logic</strong></td>
+<td><code>Carmen.WebApi/Functions/</code></td>
+<td><code>FncApInvoice.cs</code></td>
+</tr>
+<tr>
+<td><strong>Define data model</strong></td>
+<td><code>Carmen.Models/</code></td>
+<td><code>ViewApInvoice.cs</code></td>
+</tr>
+<tr>
+<td><strong>Add enumeration</strong></td>
+<td><code>Carmen.Enum/</code></td>
+<td><code>PaymentTerms.cs</code></td>
+</tr>
+<tr>
+<td><strong>Database connection</strong></td>
+<td><code>Carmen.WebApi/Connection/</code></td>
+<td><code>DbFactory.cs</code></td>
+</tr>
+<tr>
+<td><strong>Permission checks</strong></td>
+<td><code>Carmen.WebApi/Functions/</code></td>
+<td><code>FncPermission.cs</code></td>
+</tr>
+<tr>
+<td><strong>External integration</strong></td>
+<td><code>Carmen.WebApi/InterfaceControllers/</code></td>
+<td><code>OperaController.cs</code></td>
+</tr>
+<tr>
+<td><strong>Utility functions</strong></td>
+<td><code>Carmen.Utils/</code></td>
+<td><code>StringHelper.cs</code></td>
+</tr>
+<tr>
+<td><strong>Custom exceptions</strong></td>
+<td><code>Carmen.Exception/</code></td>
+<td><code>BusinessException.cs</code></td>
+</tr>
+<tr>
+<td><strong>API configuration</strong></td>
+<td><code>Carmen.WebApi/App_Start/</code></td>
+<td><code>WebApiConfig.cs</code></td>
+</tr>
+<tr>
+<td><strong>Swagger setup</strong></td>
+<td><code>Carmen.WebApi/App_Start/</code></td>
+<td><code>SwaggerConfig.cs</code></td>
+</tr>
+<tr>
+<td><strong>Database scripts</strong></td>
+<td><code>Carmen.WebApi/App_Data/</code></td>
+<td><code>InstallScriptCarmen/</code></td>
+</tr>
+</tbody></table>
+<h3>Quick Reference: Common Base Classes</h3>
+<pre><code class="language-csharp">// Controllers
+public class ApInvoiceController : BaseApiController { }
+
+// Functions (all static, no base class)
+public static class FncApInvoice { }
+
+// Models (no inheritance for DTOs)
+public class ViewApInvoice { }
+public class ParamApInvoice { }
+
+// Custom Exceptions
+public class BusinessException : ApplicationException { }</code></pre><hr>
+<h2>9. File Naming Standards</h2>
+<h3>File Name = Class Name</h3>
+<p><strong>Rule:</strong> One class per file, file name matches class name exactly</p>
+<pre><code class="language-text">✅ ApInvoiceController.cs      → class ApInvoiceController
+✅ FncApInvoice.cs             → class FncApInvoice
+✅ ViewApInvoice.cs            → class ViewApInvoice
+✅ PaymentTerms.cs             → enum PaymentTerms
+
+❌ ApInvoice.cs                → contains ApInvoiceController (confusing)
+❌ Helpers.cs                  → contains StringHelper, DateHelper (multiple classes)</code></pre><h3>Exception: Multiple Related Enums</h3>
+<p><strong>Allowed</strong> when enums are tightly coupled:</p>
+<pre><code class="language-csharp">// File: ApInvoiceEnums.cs
+namespace Carmen.Enum
+{
+    public enum ApInvoiceStatus
+    {
+        Draft,
+        PendingApproval,
+        Approved,
+        Posted
+    }
+
+    public enum ApInvoiceType
+    {
+        Invoice,
+        CreditNote,
+        DebitNote
+    }
+}</code></pre><h3>Test Files</h3>
+<p><strong>Convention:</strong> <code>{ClassUnderTest}Tests.cs</code> or <code>{ClassUnderTest}Test.cs</code></p>
+<pre><code class="language-text">ApInvoiceControllerTests.cs    # Tests for ApInvoiceController
+FncApInvoiceTests.cs           # Tests for FncApInvoice</code></pre><hr>
+<h2>10. Best Practices</h2>
+<h3>✅ DO</h3>
+<p><strong>Separation of Concerns:</strong></p>
+<pre><code class="language-csharp">// ✅ Controller handles HTTP, Functions handle business logic
+public async Task&lt;IHttpActionResult&gt; GetList()
+{
+    var result = await FncApInvoice.GetListAsync(dbFac, qs);  // Delegate to function
+    return JsonResultOk(result);
+}</code></pre><p><strong>Async/Await Consistently:</strong></p>
+<pre><code class="language-csharp">// ✅ Use async/await for all I/O operations
+public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(int id)
+{
+    var result = await db.QueryFirstOrDefaultAsync&lt;ViewApInvoice&gt;(sql);
+    return result;
+}</code></pre><p><strong>Dependency Injection (where supported):</strong></p>
+<pre><code class="language-csharp">// ✅ Use DI for testability (newer code)
+private readonly IDbFactory _dbFactory;
+
+public ApInvoiceController(IDbFactory dbFactory)
+{
+    _dbFactory = dbFactory;
+}</code></pre><p><strong>Explicit null checks:</strong></p>
+<pre><code class="language-csharp">// ✅ Check for null before using
+var invoice = await FncApInvoice.GetByIdAsync(id);
+if (invoice == null)
+    return JsonResultNullObject();
+
+return JsonResultOk(invoice);</code></pre><p><strong>Validate early:</strong></p>
+<pre><code class="language-csharp">// ✅ Validate at the start of the function
+public static async Task CreateAsync(ParamApInvoice param)
+{
+    if (param == null) throw new ArgumentNullException(nameof(param));
+    if (string.IsNullOrEmpty(param.InvoiceNumber))
+        throw new BusinessException(&quot;INVALID_INVOICE&quot;, &quot;Invoice number required&quot;);
+
+    // Proceed with creation...
+}</code></pre><h3>❌ DON&#39;T</h3>
+<p><strong>Don&#39;t mix concerns:</strong></p>
+<pre><code class="language-csharp">// ❌ BAD: Database logic in controller
+public async Task&lt;IHttpActionResult&gt; GetList()
+{
+    using (var db = dbFac.GetConnection())  // DON&#039;T
+    {
+        var sql = &quot;SELECT * FROM AP_INVOICE_H&quot;;  // DON&#039;T
+        var result = await db.QueryAsync(sql);
+        return JsonResultOk(result);
+    }
+}
+
+// ✅ GOOD: Delegate to function layer
+public async Task&lt;IHttpActionResult&gt; GetList()
+{
+    var result = await FncApInvoice.GetListAsync(dbFac, qs);
+    return JsonResultOk(result);
+}</code></pre><p><strong>Don&#39;t use blocking calls in async methods:</strong></p>
+<pre><code class="language-csharp">// ❌ BAD: .Result blocks the thread
+var result = FncApInvoice.GetListAsync(dbFac, qs).Result;  // DON&#039;T
+
+// ✅ GOOD: Await properly
+var result = await FncApInvoice.GetListAsync(dbFac, qs);</code></pre><p><strong>Don&#39;t skip permission checks:</strong></p>
+<pre><code class="language-csharp">// ❌ BAD: No permission check
+public async Task&lt;IHttpActionResult&gt; Delete(int id)
+{
+    await FncApInvoice.DeleteAsync(dbFac, id);  // SECURITY RISK
+    return JsonResultOk();
+}
+
+// ✅ GOOD: Check permission first
+public async Task&lt;IHttpActionResult&gt; Delete(int id)
+{
+    var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+    if (!permission.Delete)
+        return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Delete&quot;);
+
+    await FncApInvoice.DeleteAsync(dbFac, id);
+    return JsonResultOk();
+}</code></pre><p><strong>Don&#39;t hardcode tenant code:</strong></p>
+<pre><code class="language-csharp">// ❌ BAD: Hardcoded tenant
+var query = new Query(&quot;AP_INVOICE_H&quot;)
+    .Where(&quot;TenantCode&quot;, &quot;TENANT001&quot;);  // DON&#039;T
+
+// ✅ GOOD: Use FncBase.CurrentTenantCode
+var query = new Query(&quot;AP_INVOICE_H&quot;)
+    .Where(&quot;TenantCode&quot;, FncBase.CurrentTenantCode);</code></pre><p><strong>Don&#39;t swallow exceptions:</strong></p>
+<pre><code class="language-csharp">// ❌ BAD: Silent failure
+try
+{
+    await FncApInvoice.CreateAsync(dbFac, param);
+}
+catch
+{
+    // Silent failure - nobody knows what went wrong
+}
+
+// ✅ GOOD: Log and return proper error
+try
+{
+    await FncApInvoice.CreateAsync(dbFac, param);
+}
+catch (Exception e)
+{
+    LogHttpResult.Error(e);
+    return JsonResultInternalError(e);
+}</code></pre><h3>Code Review Checklist</h3>
+<p>Before submitting code for review:</p>
+<ul>
+<li><input disabled="" type="checkbox"> File name matches class name</li>
+<li><input disabled="" type="checkbox"> Namespace matches folder structure</li>
+<li><input disabled="" type="checkbox"> Async methods have <code>Async</code> suffix</li>
+<li><input disabled="" type="checkbox"> All database operations use async/await</li>
+<li><input disabled="" type="checkbox"> Permission checks present in controllers</li>
+<li><input disabled="" type="checkbox"> Tenant code applied to all queries (<code>FncBase.CurrentTenantCode</code>)</li>
+<li><input disabled="" type="checkbox"> Proper error handling with logging</li>
+<li><input disabled="" type="checkbox"> No hardcoded values (use configuration)</li>
+<li><input disabled="" type="checkbox"> Swagger documentation attributes added</li>
+<li><input disabled="" type="checkbox"> Unit tests written (if applicable)</li>
+<li><input disabled="" type="checkbox"> No compiler warnings</li>
+<li><input disabled="" type="checkbox"> Follows existing code patterns in the module</li>
+</ul>
+<hr>
+<h2>Summary</h2>
+<p>This guide covers the Carmen.NET codebase structure and organization:</p>
+<ol>
+<li><strong>Solution Architecture</strong> - 17+ projects in modular monolith</li>
+<li><strong>Project Organization</strong> - Core libraries (Models, Enum, Utils) + Web API</li>
+<li><strong>Naming Conventions</strong> - PascalCase classes, _camelCase private fields</li>
+<li><strong>Directory Structure</strong> - Controllers, Functions, Models, Connection folders</li>
+<li><strong>Module Boundaries</strong> - 11 business modules (AP, AR, GL, Asset, Income, etc.)</li>
+<li><strong>Dependency Management</strong> - Project references, NuGet packages</li>
+<li><strong>Code Organization</strong> - Controller → Function → Database pattern</li>
+<li><strong>Common Code Locations</strong> - Quick reference for where to add code</li>
+<li><strong>File Naming</strong> - One class per file, file name = class name</li>
+<li><strong>Best Practices</strong> - DOs and DON&#39;Ts with examples</li>
+</ol>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Review <a href="design-patterns-guide.md">Design Patterns Documentation</a> for implementation patterns</li>
+<li>Study <a href="database-schema-guide.md">Database Schema Documentation</a> for data model</li>
+<li>Consult <a href="testing-guide.md">Testing Guide</a> for writing tests</li>
+<li>Reference <a href="developer-onboarding-guide.md">Developer Onboarding Guide</a> for setup</li>
+</ul>
+<hr>
+<p><strong>Document Status:</strong> ✅ Complete<br><strong>For Support:</strong> Contact development team or refer to architecture decision records</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

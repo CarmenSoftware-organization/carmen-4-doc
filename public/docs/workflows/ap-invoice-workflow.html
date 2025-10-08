@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP Invoice Workflow - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>AP Invoice Workflow</h1>
+        </div>
+        <div class="doc-content">
+            <h1>AP Invoice Workflow</h1>
+<h2>Overview</h2>
+<p>The AP Invoice workflow manages the complete lifecycle of vendor invoices from manual entry through payment, including approval workflows and GL posting.</p>
+<p><strong>IMPORTANT</strong>: This workflow is based on manual invoice entry for direct expense invoices.</p>
+<h3>What IS Implemented (Verified)</h3>
+<ul>
+<li>Manual invoice data entry with line items</li>
+<li>Vendor validation against vendor master</li>
+<li>Multi-line invoice support with GL account distribution</li>
+<li>VAT calculation and tracking</li>
+<li>WHT (Withholding Tax) calculation and tracking</li>
+<li>Approval workflow (Submit → Approve/Reject → Post)</li>
+<li>GL posting with automatic journal voucher creation</li>
+<li>Payment tracking (Partial/Full payment status)</li>
+<li>Multi-tenant isolation</li>
+<li>Permission-based access control</li>
+</ul>
+<h3>What is NOT Implemented</h3>
+<p>The system does NOT currently support:</p>
+<ul>
+<li>Purchase Order (PO) matching</li>
+<li>Three-way matching (PO-Receipt-Invoice)</li>
+<li>Goods receipt validation</li>
+<li>Automated PO-to-Invoice conversion</li>
+<li>Budget checking or encumbrance</li>
+<li>Contract reference or compliance</li>
+<li>Automated approval routing based on amount thresholds</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: This documentation reflects the ACTUAL source code implementation as verified during Phase 3 analysis (2025-10-06). Some features mentioned in other documentation may not be implemented.</p>
+</blockquote>
+<h2>Workflow States</h2>
+<div class="mermaid">stateDiagram-v2
+    [*] --> Draft
+    Draft --> PendingApproval: Submit for Approval
+    Draft --> Draft: Save
+    Draft --> Cancelled: Cancel
+
+    PendingApproval --> Approved: Approve
+    PendingApproval --> Rejected: Reject
+    PendingApproval --> Draft: Return for Revision
+
+    Rejected --> Draft: Revise
+    Rejected --> Cancelled: Cancel
+
+    Approved --> Posted: Post to GL
+
+    Posted --> PartiallyPaid: Partial Payment
+    Posted --> FullyPaid: Full Payment
+
+    PartiallyPaid --> FullyPaid: Final Payment
+
+    FullyPaid --> [*]
+    Cancelled --> [*]</div><h2>Status Codes</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Value</th>
+<th>Description</th>
+<th>Allowed Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Draft</strong></td>
+<td>0</td>
+<td>Initial creation, data entry in progress</td>
+<td>Edit, Submit, Delete, Cancel</td>
+</tr>
+<tr>
+<td><strong>Pending Approval</strong></td>
+<td>2</td>
+<td>Submitted for approval</td>
+<td>Approve, Reject, Return</td>
+</tr>
+<tr>
+<td><strong>Approved</strong></td>
+<td>3</td>
+<td>Approved by authorized user</td>
+<td>Post to GL</td>
+</tr>
+<tr>
+<td><strong>Rejected</strong></td>
+<td>4</td>
+<td>Rejected during approval</td>
+<td>Revise, Cancel</td>
+</tr>
+<tr>
+<td><strong>Posted</strong></td>
+<td>1</td>
+<td>Posted to General Ledger</td>
+<td>Create Payment</td>
+</tr>
+<tr>
+<td><strong>Partially Paid</strong></td>
+<td>5</td>
+<td>Some payment applied</td>
+<td>Create Payment</td>
+</tr>
+<tr>
+<td><strong>Fully Paid</strong></td>
+<td>6</td>
+<td>Completely paid</td>
+<td>View Only</td>
+</tr>
+<tr>
+<td><strong>Cancelled</strong></td>
+<td>9</td>
+<td>Cancelled/Voided</td>
+<td>View Only</td>
+</tr>
+</tbody></table>
+<h2>Workflow Diagram</h2>
+<div class="mermaid">flowchart TD
+    Start([Start: Create Invoice]) --> EnterData[Enter Invoice Data]
+    EnterData --> ValidateData{Validation<br/>Passed?}
+
+    ValidateData -->|No| ShowErrors[Show Validation Errors]
+    ShowErrors --> EnterData
+
+    ValidateData -->|Yes| SaveDraft[Save as Draft<br/>Status = 0]
+    SaveDraft --> CheckSubmit{User Action?}
+
+    CheckSubmit -->|Save| SaveDraft
+    CheckSubmit -->|Submit| CheckPermission{Has Submit<br/>Permission?}
+    CheckSubmit -->|Cancel| CancelInvoice[Cancel Invoice<br/>Status = 9]
+
+    CheckPermission -->|No| Forbidden[Permission Denied]
+    CheckPermission -->|Yes| SubmitApproval[Submit for Approval<br/>Status = 2]
+
+    SubmitApproval --> NotifyApprover[Notify Approver]
+    NotifyApprover --> WaitApproval[Wait for Approval]
+
+    WaitApproval --> ApproverAction{Approver<br/>Decision?}
+
+    ApproverAction -->|Approve| CheckApprovePermission{Has Approve<br/>Permission?}
+    ApproverAction -->|Reject| RejectInvoice[Reject Invoice<br/>Status = 4]
+    ApproverAction -->|Return| ReturnDraft[Return to Draft<br/>Status = 0]
+
+    CheckApprovePermission -->|No| Forbidden
+    CheckApprovePermission -->|Yes| ApproveInvoice[Approve Invoice<br/>Status = 3]
+
+    ApproveInvoice --> ReadyPost[Ready for GL Posting]
+    ReadyPost --> PostAction{User Action?}
+
+    PostAction -->|Post to GL| CheckPostPermission{Has Post<br/>Permission?}
+
+    CheckPostPermission -->|No| Forbidden
+    CheckPostPermission -->|Yes| ValidateAccounts{GL Accounts<br/>Valid?}
+
+    ValidateAccounts -->|No| ShowAccountError[Show Account Errors]
+    ValidateAccounts -->|Yes| CreateGLJV[Create GL Journal Voucher]
+
+    CreateGLJV --> PostGLEntries[Post GL Entries:<br/>DR: Expense<br/>DR: WHT Receivable<br/>CR: AP Payable]
+
+    PostGLEntries --> UpdateStatus[Update Status<br/>Status = 1 Posted]
+    UpdateStatus --> WaitPayment[Wait for Payment]
+
+    WaitPayment --> PaymentAction{Payment<br/>Created?}
+
+    PaymentAction -->|Partial| PartialPay[Partially Paid<br/>Status = 5]
+    PaymentAction -->|Full| FullPay[Fully Paid<br/>Status = 6]
+
+    PartialPay --> WaitPayment
+
+    FullPay --> End([End])
+    CancelInvoice --> End
+    RejectInvoice --> End</div><h2>Business Rules</h2>
+<h3>Validation Rules</h3>
+<ol>
+<li><p><strong>Required Fields</strong>:</p>
+<ul>
+<li>Invoice Number</li>
+<li>Invoice Date</li>
+<li>Vendor Code</li>
+<li>Invoice Amount &gt; 0</li>
+<li>At least one invoice line item</li>
+<li>GL Account Code for each line item</li>
+</ul>
+</li>
+<li><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Invoice Date cannot be in the future</li>
+<li>Invoice Amount must equal sum of line items</li>
+<li>Vendor must be active</li>
+<li>GL Period must be open for invoice date</li>
+<li>Duplicate invoice numbers not allowed (per vendor)</li>
+<li>All amounts manually entered (no PO or receipt matching)</li>
+</ul>
+</li>
+<li><p><strong>Line Item Rules</strong>:</p>
+<ul>
+<li>Each line must have valid GL Account Code</li>
+<li>Line amount must be &gt; 0</li>
+<li>Total of all lines must equal header amount</li>
+<li>Manual description and amount entry required</li>
+</ul>
+</li>
+</ol>
+<h3>Permission Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Permission</th>
+<th>Permission Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>View</strong></td>
+<td>View permission</td>
+<td><code>AP.Invoice.View</code></td>
+</tr>
+<tr>
+<td><strong>Create</strong></td>
+<td>Create permission</td>
+<td><code>AP.Invoice.Create</code></td>
+</tr>
+<tr>
+<td><strong>Update</strong></td>
+<td>Update permission</td>
+<td><code>AP.Invoice.Update</code></td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td>Delete permission</td>
+<td><code>AP.Invoice.Delete</code></td>
+</tr>
+<tr>
+<td><strong>Submit</strong></td>
+<td>Create permission</td>
+<td><code>AP.Invoice.Create</code></td>
+</tr>
+<tr>
+<td><strong>Approve</strong></td>
+<td>Approve permission</td>
+<td><code>AP.Invoice.Approve</code></td>
+</tr>
+<tr>
+<td><strong>Reject</strong></td>
+<td>Approve permission</td>
+<td><code>AP.Invoice.Approve</code></td>
+</tr>
+<tr>
+<td><strong>Post</strong></td>
+<td>Post permission</td>
+<td><code>AP.Invoice.Post</code></td>
+</tr>
+</tbody></table>
+<h3>WHT (Withholding Tax) Handling</h3>
+<p>If invoice has WHT:</p>
+<ol>
+<li>Calculate WHT amount based on WHT rate and type</li>
+<li>Create WHT record linked to invoice</li>
+<li>GL posting includes WHT receivable (tax credit)</li>
+<li>WHT file generation for tax authority submission</li>
+</ol>
+<p><strong>GL Posting with WHT</strong>:</p>
+<pre><code class="language-text">DR: Expense Account                   10,000.00
+DR: WHT Receivable (3%)                  300.00
+CR: AP Payable (net amount)          10,300.00</code></pre><h2>Multi-Tenant Isolation</h2>
+<p>All invoice operations enforce tenant isolation:</p>
+<ul>
+<li><code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> applied to all queries</li>
+<li>Users can only see invoices for their assigned tenant(s)</li>
+<li>Cross-tenant data leakage prevented at database level</li>
+</ul>
+<h2>Approval Workflow</h2>
+<h3>Approval Hierarchy</h3>
+<p>Configurable approval rules based on:</p>
+<ul>
+<li>Invoice amount thresholds</li>
+<li>Vendor category</li>
+<li>GL account category</li>
+<li>Department</li>
+</ul>
+<p><strong>Example Approval Matrix</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $1,000</td>
+<td>Supervisor</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$1,001 - $10,000</td>
+<td>Manager</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$10,001 - $50,000</td>
+<td>Director</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$50,001+</td>
+<td>CFO/VP Finance</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<h3>Approval Notifications</h3>
+<ul>
+<li>Email notification to approver when submitted</li>
+<li>Reminder emails for pending approvals (configurable)</li>
+<li>Notification to creator when approved/rejected</li>
+</ul>
+<h2>GL Posting</h2>
+<h3>Standard GL Entry</h3>
+<pre><code class="language-text">DR: Expense Account (from invoice lines)    XXX.XX
+CR: AP Payable Account                      XXX.XX</code></pre><h3>With WHT</h3>
+<pre><code class="language-text">DR: Expense Account                          XXX.XX
+DR: WHT Receivable                           XX.XX
+CR: AP Payable (net after WHT)              XXX.XX</code></pre><h3>Multiple Departments</h3>
+<pre><code class="language-text">DR: Dept A Expense                          XXX.XX
+DR: Dept B Expense                          XXX.XX
+DR: WHT Receivable                          XX.XX
+CR: AP Payable                              XXX.XX</code></pre><h2>Integration Points</h2>
+<h3>Upstream</h3>
+<ul>
+<li><strong>Vendor Master</strong>: Validates vendor exists and is active</li>
+<li><strong>GL Chart of Accounts</strong>: Validates GL account codes for expense posting</li>
+</ul>
+<h3>Downstream</h3>
+<ul>
+<li><strong>AP Payment</strong>: Invoice available for payment after posting</li>
+<li><strong>WHT Processing</strong>: WHT records for tax filing and submission</li>
+<li><strong>GL</strong>: Journal vouchers posted to General Ledger</li>
+<li><strong>Reporting</strong>: Available in AP reports and aging</li>
+</ul>
+<h3>NOT Integrated (Future Enhancement)</h3>
+<p>The following integrations are NOT currently available:</p>
+<ul>
+<li><strong>Purchase Order</strong>: No PO matching or reference capability</li>
+<li><strong>Receiving</strong>: No goods receipt validation</li>
+<li><strong>Contract Management</strong>: No contract reference or compliance checking</li>
+<li><strong>Budget</strong>: No budget checking or encumbrance</li>
+</ul>
+<h2>Error Handling</h2>
+<h3>Common Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Period Closed</strong></td>
+<td>GL period is closed</td>
+<td>Change invoice date or reopen period</td>
+</tr>
+<tr>
+<td><strong>Duplicate Invoice</strong></td>
+<td>Invoice number exists for vendor</td>
+<td>Use different invoice number</td>
+</tr>
+<tr>
+<td><strong>Invalid Account</strong></td>
+<td>GL account code invalid</td>
+<td>Use valid account code</td>
+</tr>
+<tr>
+<td><strong>Inactive Vendor</strong></td>
+<td>Vendor is inactive</td>
+<td>Activate vendor or select different vendor</td>
+</tr>
+<tr>
+<td><strong>Validation Failed</strong></td>
+<td>Required data missing</td>
+<td>Complete all required fields</td>
+</tr>
+<tr>
+<td><strong>Permission Denied</strong></td>
+<td>User lacks permission</td>
+<td>Request permission from administrator</td>
+</tr>
+</tbody></table>
+<h2>API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/ap/invoice/list</code></td>
+<td>GET</td>
+<td>List invoices</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/{id}</code></td>
+<td>GET</td>
+<td>Get invoice details</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/create</code></td>
+<td>POST</td>
+<td>Create new invoice</td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/update</code></td>
+<td>PUT</td>
+<td>Update invoice</td>
+<td>Update</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/delete/{id}</code></td>
+<td>DELETE</td>
+<td>Delete invoice</td>
+<td>Delete</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/submit/{id}</code></td>
+<td>POST</td>
+<td>Submit for approval</td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/approve/{id}</code></td>
+<td>POST</td>
+<td>Approve invoice</td>
+<td>Approve</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/reject/{id}</code></td>
+<td>POST</td>
+<td>Reject invoice</td>
+<td>Approve</td>
+</tr>
+<tr>
+<td><code>/api/ap/invoice/post/{id}</code></td>
+<td>POST</td>
+<td>Post to GL</td>
+<td>Post</td>
+</tr>
+</tbody></table>
+<h2>Reporting</h2>
+<h3>Available Reports</h3>
+<ol>
+<li><strong>AP Invoice Register</strong>: All invoices with details</li>
+<li><strong>AP Aging</strong>: Aging by due date (30/60/90/90+ days)</li>
+<li><strong>Approval Status Report</strong>: Pending approvals by approver</li>
+<li><strong>Posted Invoices Report</strong>: GL posting details</li>
+<li><strong>Vendor Invoice Summary</strong>: Summary by vendor</li>
+<li><strong>WHT Report</strong>: WHT tax details for filing</li>
+</ol>
+<h2>Best Practices</h2>
+<ol>
+<li><p><strong>Data Entry</strong>:</p>
+<ul>
+<li>Enter invoices promptly upon receipt</li>
+<li>Manually verify all amounts against physical/electronic invoice</li>
+<li>Double-check vendor code and invoice number</li>
+<li>Ensure GL account codes are correct for expense type</li>
+<li>Attach scanned invoice image for reference</li>
+<li>Verify VAT/WHT calculations if applicable</li>
+</ul>
+</li>
+<li><p><strong>Approval</strong>:</p>
+<ul>
+<li>Review invoices within SLA (e.g., 2 business days)</li>
+<li>Verify vendor is authorized and invoice is legitimate</li>
+<li>Check if expense is reasonable and properly categorized</li>
+<li>Document rejection reasons clearly</li>
+<li>Note: Budget checking is manual (system does not enforce)</li>
+</ul>
+</li>
+<li><p><strong>GL Posting</strong>:</p>
+<ul>
+<li>Post invoices in correct accounting period</li>
+<li>Verify GL accounts before posting (cannot change after posting)</li>
+<li>Review GL entries after posting</li>
+<li>Ensure period is open before attempting to post</li>
+</ul>
+</li>
+<li><p><strong>Payment</strong>:</p>
+<ul>
+<li>Schedule payments based on vendor payment terms</li>
+<li>Verify payment details match invoice</li>
+<li>Track payment status</li>
+<li>Consider WHT deductions when scheduling payment amount</li>
+</ul>
+</li>
+</ol>
+<h2>Current Limitations &amp; Future Enhancements</h2>
+<h3>Current Limitations</h3>
+<ol>
+<li><strong>Manual Entry Only</strong>: All invoice data must be manually entered</li>
+<li><strong>No PO Integration</strong>: Cannot reference or match against purchase orders</li>
+<li><strong>No Receipt Validation</strong>: Cannot validate against goods receipts</li>
+<li><strong>No Budget Checking</strong>: Budget verification is manual process</li>
+<li><strong>No Contract Reference</strong>: Cannot link invoices to contracts</li>
+<li><strong>No Automated Matching</strong>: All three-way matching must be done manually outside system</li>
+</ol>
+<h3>Planned Enhancements</h3>
+<p>Future versions may include:</p>
+<ul>
+<li>Purchase Order matching and three-way matching capability</li>
+<li>Goods receipt validation</li>
+<li>Automated budget checking and encumbrance</li>
+<li>Contract reference and compliance checking</li>
+<li>OCR for automated invoice data extraction</li>
+<li>Electronic invoice (e-Invoice) integration</li>
+<li>Automated approval routing based on complex rules</li>
+</ul>
+<hr>
+<p><strong>Document Version</strong>: 1.1<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis (Source Code Verified)<br><strong>Verification</strong>: Actual implementation verified against source code - documentation now reflects ACTUAL capabilities</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

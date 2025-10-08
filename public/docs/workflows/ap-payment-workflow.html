@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP Payment Workflow - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>AP Payment Workflow</h1>
+        </div>
+        <div class="doc-content">
+            <h1>AP Payment Workflow</h1>
+<h2>Overview</h2>
+<p>The AP Payment workflow manages the payment process for vendor invoices, from payment creation through bank reconciliation, including payment approval workflows and GL posting.</p>
+<h2>Workflow States</h2>
+<div class="mermaid">stateDiagram-v2
+    [*] --> Draft
+    Draft --> PendingApproval: Submit for Approval
+    Draft --> Draft: Save
+    Draft --> Cancelled: Cancel
+
+    PendingApproval --> Approved: Approve
+    PendingApproval --> Rejected: Reject
+    PendingApproval --> Draft: Return for Revision
+
+    Rejected --> Draft: Revise
+    Rejected --> Cancelled: Cancel
+
+    Approved --> Posted: Post to GL
+
+    Posted --> Cleared: Bank Reconciliation
+    Posted --> Voided: Void Payment
+
+    Cleared --> [*]
+    Voided --> [*]
+    Cancelled --> [*]</div><h2>Status Codes</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Value</th>
+<th>Description</th>
+<th>Allowed Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Draft</strong></td>
+<td>0</td>
+<td>Initial creation, data entry in progress</td>
+<td>Edit, Submit, Delete, Cancel</td>
+</tr>
+<tr>
+<td><strong>Pending Approval</strong></td>
+<td>2</td>
+<td>Submitted for approval</td>
+<td>Approve, Reject, Return</td>
+</tr>
+<tr>
+<td><strong>Approved</strong></td>
+<td>3</td>
+<td>Approved by authorized user</td>
+<td>Post to GL</td>
+</tr>
+<tr>
+<td><strong>Rejected</strong></td>
+<td>4</td>
+<td>Rejected during approval</td>
+<td>Revise, Cancel</td>
+</tr>
+<tr>
+<td><strong>Posted</strong></td>
+<td>1</td>
+<td>Posted to General Ledger</td>
+<td>Clear, Void</td>
+</tr>
+<tr>
+<td><strong>Cleared</strong></td>
+<td>5</td>
+<td>Reconciled with bank statement</td>
+<td>View Only</td>
+</tr>
+<tr>
+<td><strong>Voided</strong></td>
+<td>8</td>
+<td>Payment voided/cancelled</td>
+<td>View Only</td>
+</tr>
+<tr>
+<td><strong>Cancelled</strong></td>
+<td>9</td>
+<td>Cancelled before posting</td>
+<td>View Only</td>
+</tr>
+</tbody></table>
+<h2>Workflow Diagram</h2>
+<div class="mermaid">flowchart TD
+    Start([Start: Create Payment]) --> SelectInvoices[Select Invoices to Pay]
+    SelectInvoices --> ValidateInvoices{Invoices<br/>Valid?}
+
+    ValidateInvoices -->|No| ShowErrors[Show Validation Errors]
+    ShowErrors --> SelectInvoices
+
+    ValidateInvoices -->|Yes| EnterPayment[Enter Payment Details]
+    EnterPayment --> SelectMethod{Payment<br/>Method?}
+
+    SelectMethod -->|Check| EnterCheck[Enter Check Number]
+    SelectMethod -->|Wire| EnterWire[Enter Wire Details]
+    SelectMethod -->|ACH| EnterACH[Enter ACH Details]
+
+    EnterCheck --> CalculateAmounts
+    EnterWire --> CalculateAmounts
+    EnterACH --> CalculateAmounts
+
+    CalculateAmounts[Calculate Total Amount<br/>Apply Discounts/WHT] --> ValidatePayment{Validation<br/>Passed?}
+
+    ValidatePayment -->|No| ShowPaymentErrors[Show Validation Errors]
+    ShowPaymentErrors --> EnterPayment
+
+    ValidatePayment -->|Yes| SaveDraft[Save as Draft<br/>Status = 0]
+    SaveDraft --> CheckSubmit{User Action?}
+
+    CheckSubmit -->|Save| SaveDraft
+    CheckSubmit -->|Submit| CheckPermission{Has Submit<br/>Permission?}
+    CheckSubmit -->|Cancel| CancelPayment[Cancel Payment<br/>Status = 9]
+
+    CheckPermission -->|No| Forbidden[Permission Denied]
+    CheckPermission -->|Yes| SubmitApproval[Submit for Approval<br/>Status = 2]
+
+    SubmitApproval --> NotifyApprover[Notify Approver]
+    NotifyApprover --> WaitApproval[Wait for Approval]
+
+    WaitApproval --> ApproverAction{Approver<br/>Decision?}
+
+    ApproverAction -->|Approve| CheckApprovePermission{Has Approve<br/>Permission?}
+    ApproverAction -->|Reject| RejectPayment[Reject Payment<br/>Status = 4]
+    ApproverAction -->|Return| ReturnDraft[Return to Draft<br/>Status = 0]
+
+    CheckApprovePermission -->|No| Forbidden
+    CheckApprovePermission -->|Yes| ApprovePayment[Approve Payment<br/>Status = 3]
+
+    ApprovePayment --> ReadyPost[Ready for GL Posting]
+    ReadyPost --> PostAction{User Action?}
+
+    PostAction -->|Post to GL| CheckPostPermission{Has Post<br/>Permission?}
+
+    CheckPostPermission -->|No| Forbidden
+    CheckPostPermission -->|Yes| ValidateBankAccount{Bank Account<br/>Valid?}
+
+    ValidateBankAccount -->|No| ShowAccountError[Show Account Errors]
+    ValidateBankAccount -->|Yes| CreateGLJV[Create GL Journal Voucher]
+
+    CreateGLJV --> PostGLEntries[Post GL Entries:<br/>DR: AP Payable<br/>CR: Bank Account<br/>CR: WHT Payable if applicable]
+
+    PostGLEntries --> UpdateInvoices[Update Invoice Status<br/>to Paid/Partially Paid]
+    UpdateInvoices --> UpdateStatus[Update Payment Status<br/>Status = 1 Posted]
+
+    UpdateStatus --> GenerateDoc[Generate Payment Document:<br/>Check/Wire/ACH]
+
+    GenerateDoc --> WaitClearing[Wait for Bank Reconciliation]
+
+    WaitClearing --> BankAction{Bank<br/>Action?}
+
+    BankAction -->|Reconcile| MarkCleared[Mark as Cleared<br/>Status = 5]
+    BankAction -->|Void| VoidPayment[Void Payment<br/>Status = 8]
+
+    MarkCleared --> End([End])
+    VoidPayment --> ReverseGL[Reverse GL Entries]
+    ReverseGL --> UpdateInvoicesVoid[Revert Invoice Status]
+    UpdateInvoicesVoid --> End
+    CancelPayment --> End
+    RejectPayment --> End</div><h2>Business Rules</h2>
+<h3>Validation Rules</h3>
+<ol>
+<li><p><strong>Required Fields</strong>:</p>
+<ul>
+<li>Payment Date</li>
+<li>Bank Account</li>
+<li>Payment Method</li>
+<li>At least one invoice selected</li>
+<li>Payment Amount &gt; 0</li>
+</ul>
+</li>
+<li><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Payment Date cannot be in the future</li>
+<li>Bank Account must be active</li>
+<li>GL Period must be open for payment date</li>
+<li>Selected invoices must be posted (Status = 1, 5)</li>
+<li>Payment amount cannot exceed total invoice balances</li>
+<li>Check numbers must be unique per bank account</li>
+<li>Vendor bank details required for Wire/ACH</li>
+</ul>
+</li>
+<li><p><strong>Payment Calculation Rules</strong>:</p>
+<ul>
+<li>Payment Amount = Sum of Invoice Amounts</li>
+<li>Apply early payment discounts if applicable</li>
+<li>Calculate WHT if not already withheld on invoice</li>
+<li>Net Payment = Gross Amount - Discounts - WHT</li>
+</ul>
+</li>
+</ol>
+<h3>Permission Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Permission</th>
+<th>Permission Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>View</strong></td>
+<td>View permission</td>
+<td><code>AP.Payment.View</code></td>
+</tr>
+<tr>
+<td><strong>Create</strong></td>
+<td>Create permission</td>
+<td><code>AP.Payment.Create</code></td>
+</tr>
+<tr>
+<td><strong>Update</strong></td>
+<td>Update permission</td>
+<td><code>AP.Payment.Update</code></td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td>Delete permission</td>
+<td><code>AP.Payment.Delete</code></td>
+</tr>
+<tr>
+<td><strong>Submit</strong></td>
+<td>Create permission</td>
+<td><code>AP.Payment.Create</code></td>
+</tr>
+<tr>
+<td><strong>Approve</strong></td>
+<td>Approve permission</td>
+<td><code>AP.Payment.Approve</code></td>
+</tr>
+<tr>
+<td><strong>Reject</strong></td>
+<td>Approve permission</td>
+<td><code>AP.Payment.Approve</code></td>
+</tr>
+<tr>
+<td><strong>Post</strong></td>
+<td>Post permission</td>
+<td><code>AP.Payment.Post</code></td>
+</tr>
+<tr>
+<td><strong>Void</strong></td>
+<td>Void permission</td>
+<td><code>AP.Payment.Void</code></td>
+</tr>
+<tr>
+<td><strong>Reconcile</strong></td>
+<td>Reconcile permission</td>
+<td><code>AP.Payment.Reconcile</code></td>
+</tr>
+</tbody></table>
+<h3>Payment Methods</h3>
+<h4>Check Payment</h4>
+<ul>
+<li>Check number assignment (manual or auto-generated)</li>
+<li>Check printing integration</li>
+<li>Check void tracking</li>
+<li>Stop payment capabilities</li>
+</ul>
+<h4>Wire Transfer</h4>
+<ul>
+<li>Beneficiary bank details (SWIFT/BIC, IBAN)</li>
+<li>Wire reference number</li>
+<li>Wire fee handling</li>
+<li>International wire support</li>
+</ul>
+<h4>ACH/EFT</h4>
+<ul>
+<li>Routing number validation</li>
+<li>Account number encryption</li>
+<li>ACH batch file generation</li>
+<li>Settlement date tracking</li>
+</ul>
+<h2>Multi-Tenant Isolation</h2>
+<p>All payment operations enforce tenant isolation:</p>
+<ul>
+<li><code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> applied to all queries</li>
+<li>Users can only see payments for their assigned tenant(s)</li>
+<li>Cross-tenant data leakage prevented at database level</li>
+</ul>
+<h2>Approval Workflow</h2>
+<h3>Approval Hierarchy</h3>
+<p>Configurable approval rules based on:</p>
+<ul>
+<li>Payment amount thresholds</li>
+<li>Vendor category</li>
+<li>Payment method</li>
+<li>Bank account</li>
+</ul>
+<p><strong>Example Approval Matrix</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>AP Supervisor</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>AP Manager</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Controller</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001+</td>
+<td>CFO</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<h3>Approval Notifications</h3>
+<ul>
+<li>Email notification to approver when submitted</li>
+<li>Reminder emails for pending approvals (configurable)</li>
+<li>Notification to creator when approved/rejected</li>
+<li>Alert to Finance when high-value payment approved</li>
+</ul>
+<h2>GL Posting</h2>
+<h3>Standard Payment Entry</h3>
+<pre><code class="language-text">DR: AP Payable Account                      XXX.XX
+CR: Bank Account                            XXX.XX</code></pre><h3>Payment with WHT Withholding</h3>
+<pre><code class="language-text">DR: AP Payable Account                      XXX.XX
+CR: Bank Account (net payment)              XXX.XX
+CR: WHT Payable Account                      XX.XX</code></pre><h3>Payment with Early Payment Discount</h3>
+<pre><code class="language-text">DR: AP Payable Account                      XXX.XX
+CR: Bank Account (discounted amount)        XXX.XX
+CR: Purchase Discount Received               XX.XX</code></pre><h3>Multiple Invoices Payment</h3>
+<pre><code class="language-text">DR: AP Payable (Invoice 1)                  XXX.XX
+DR: AP Payable (Invoice 2)                  XXX.XX
+DR: AP Payable (Invoice 3)                  XXX.XX
+CR: Bank Account                            XXX.XX</code></pre><h2>Integration Points</h2>
+<h3>Upstream</h3>
+<ul>
+<li><strong>AP Invoice</strong>: Payment references posted invoices</li>
+<li><strong>Vendor Master</strong>: Validates vendor and bank details</li>
+<li><strong>Bank Account Master</strong>: Validates bank account and balance</li>
+<li><strong>GL Period</strong>: Validates period is open</li>
+</ul>
+<h3>Downstream</h3>
+<ul>
+<li><strong>Bank Reconciliation</strong>: Payments cleared against bank statements</li>
+<li><strong>Cash Flow Reporting</strong>: Payment data for cash forecasting</li>
+<li><strong>GL</strong>: Journal vouchers posted to General Ledger</li>
+<li><strong>Vendor Reporting</strong>: Payment history and aging</li>
+</ul>
+<h2>Error Handling</h2>
+<h3>Common Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Period Closed</strong></td>
+<td>GL period is closed</td>
+<td>Change payment date or reopen period</td>
+</tr>
+<tr>
+<td><strong>Insufficient Balance</strong></td>
+<td>Bank account balance too low</td>
+<td>Select different bank account or split payment</td>
+</tr>
+<tr>
+<td><strong>Invoice Already Paid</strong></td>
+<td>Invoice fully paid</td>
+<td>Remove invoice from payment</td>
+</tr>
+<tr>
+<td><strong>Invalid Bank Account</strong></td>
+<td>Bank account inactive/invalid</td>
+<td>Select valid bank account</td>
+</tr>
+<tr>
+<td><strong>Duplicate Check Number</strong></td>
+<td>Check number already used</td>
+<td>Use different check number</td>
+</tr>
+<tr>
+<td><strong>Permission Denied</strong></td>
+<td>User lacks permission</td>
+<td>Request permission from administrator</td>
+</tr>
+<tr>
+<td><strong>Void Not Allowed</strong></td>
+<td>Payment already cleared</td>
+<td>Cannot void cleared payment</td>
+</tr>
+</tbody></table>
+<h2>API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/ap/payment/list</code></td>
+<td>GET</td>
+<td>List payments</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/{id}</code></td>
+<td>GET</td>
+<td>Get payment details</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/create</code></td>
+<td>POST</td>
+<td>Create new payment</td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/update</code></td>
+<td>PUT</td>
+<td>Update payment</td>
+<td>Update</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/delete/{id}</code></td>
+<td>DELETE</td>
+<td>Delete payment</td>
+<td>Delete</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/submit/{id}</code></td>
+<td>POST</td>
+<td>Submit for approval</td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/approve/{id}</code></td>
+<td>POST</td>
+<td>Approve payment</td>
+<td>Approve</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/reject/{id}</code></td>
+<td>POST</td>
+<td>Reject payment</td>
+<td>Approve</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/post/{id}</code></td>
+<td>POST</td>
+<td>Post to GL</td>
+<td>Post</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/void/{id}</code></td>
+<td>POST</td>
+<td>Void payment</td>
+<td>Void</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/reconcile/{id}</code></td>
+<td>POST</td>
+<td>Mark as cleared</td>
+<td>Reconcile</td>
+</tr>
+<tr>
+<td><code>/api/ap/payment/print-check/{id}</code></td>
+<td>GET</td>
+<td>Print check</td>
+<td>View</td>
+</tr>
+</tbody></table>
+<h2>Bank Reconciliation</h2>
+<h3>Reconciliation Process</h3>
+<ol>
+<li><strong>Import Bank Statement</strong>: Import transactions from bank</li>
+<li><strong>Match Payments</strong>: Auto-match payments by amount/date/reference</li>
+<li><strong>Manual Matching</strong>: Review and manually match unmatched items</li>
+<li><strong>Mark Cleared</strong>: Update payment status to Cleared (Status = 5)</li>
+<li><strong>Generate Report</strong>: Bank reconciliation report with outstanding items</li>
+</ol>
+<h3>Clearing Rules</h3>
+<ul>
+<li>Payment date within bank statement date range</li>
+<li>Payment amount matches bank transaction amount</li>
+<li>Reference number matches (check number, wire reference)</li>
+<li>Bank account matches statement account</li>
+<li>Payment must be Posted (Status = 1)</li>
+</ul>
+<h2>Payment Void/Reversal</h2>
+<h3>Void Conditions</h3>
+<ul>
+<li>Payment must be Posted (Status = 1), not yet cleared</li>
+<li>Must have Void permission</li>
+<li>GL period must be open</li>
+<li>Cannot void if part of closed period</li>
+</ul>
+<h3>Void Process</h3>
+<ol>
+<li>Change payment status to Voided (Status = 8)</li>
+<li>Create reversing GL journal voucher</li>
+<li>Update invoice payment status (revert to unpaid/partially paid)</li>
+<li>Create audit trail record</li>
+<li>Notify stakeholders of void</li>
+</ol>
+<h2>Reporting</h2>
+<h3>Available Reports</h3>
+<ol>
+<li><strong>Payment Register</strong>: All payments with details</li>
+<li><strong>Cash Disbursement Journal</strong>: Daily/weekly/monthly cash outflows</li>
+<li><strong>Check Register</strong>: All check payments with status</li>
+<li><strong>Payment by Vendor</strong>: Payment history by vendor</li>
+<li><strong>Bank Account Activity</strong>: Payments by bank account</li>
+<li><strong>Pending Approvals</strong>: Payments awaiting approval</li>
+<li><strong>Uncleared Payments</strong>: Posted but not yet cleared</li>
+</ol>
+<h2>Best Practices</h2>
+<ol>
+<li><p><strong>Payment Processing</strong>:</p>
+<ul>
+<li>Process payments in batches for efficiency</li>
+<li>Verify vendor bank details before processing</li>
+<li>Apply early payment discounts when available</li>
+<li>Maintain check number sequence</li>
+</ul>
+</li>
+<li><p><strong>Approval</strong>:</p>
+<ul>
+<li>Review payments within SLA (e.g., 1 business day)</li>
+<li>Verify budget availability before approval</li>
+<li>Document rejection reasons clearly</li>
+<li>Monitor high-value payments closely</li>
+</ul>
+</li>
+<li><p><strong>GL Posting</strong>:</p>
+<ul>
+<li>Post payments in correct accounting period</li>
+<li>Verify GL accounts before posting</li>
+<li>Review GL entries after posting</li>
+<li>Reconcile bank accounts monthly</li>
+</ul>
+</li>
+<li><p><strong>Bank Reconciliation</strong>:</p>
+<ul>
+<li>Reconcile bank accounts within 5 business days of statement</li>
+<li>Investigate and resolve outstanding items promptly</li>
+<li>Document reconciliation adjustments</li>
+<li>Maintain audit trail</li>
+</ul>
+</li>
+<li><p><strong>Security</strong>:</p>
+<ul>
+<li>Segregate duties (creator vs. approver)</li>
+<li>Restrict void permission to supervisors</li>
+<li>Monitor duplicate payments</li>
+<li>Encrypt bank account details</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

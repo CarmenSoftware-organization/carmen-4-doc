@@ -1,0 +1,54 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component Diagram - Carmen.NET Web API
+
+Container(webapp, "Web Application", "ASP.NET MVC")
+Container(excel, "Excel Add-in", "VSTO")
+
+Container_Boundary(webapi, "Carmen.WebApi") {
+    Component(auth, "Authentication", "Controllers", "Login, Token management\nUser authentication")
+    Component(ap, "AP Module", "Controllers", "Invoice, Payment, WHT\n7 controllers")
+    Component(ar, "AR Module", "Controllers", "Contract, Invoice, Receipt\n9 controllers")
+    Component(gl, "GL Module", "Controllers", "Journal, Period, Amortize\n5 controllers")
+    Component(asset, "Asset Module", "Controllers", "Register, Category, Disposal\n6 controllers")
+    Component(income, "Income Module", "Controllers", "Invoice, Revenue\n5 controllers")
+    Component(system, "System Admin", "Controllers", "User, Permission, Config\n15+ controllers")
+    Component(base, "Base Controller", "BaseApiController", "Common utilities\nError handling\nJSON helpers")
+}
+
+Container_Boundary(functions, "Business Logic") {
+    Component(fnc_ap, "AP Functions", "FncApInvoice, etc.", "AP business logic")
+    Component(fnc_ar, "AR Functions", "FncArInvoice, etc.", "AR business logic")
+    Component(fnc_gl, "GL Functions", "FncGlJv, etc.", "GL business logic")
+    Component(fnc_perm, "Permission Mgmt", "FncPermission", "RBAC logic")
+    Component(workflow, "Workflow Engine", "Workflow", "Approval processes")
+}
+
+ContainerDb(db, "Database", "SQL Server")
+
+Rel(webapp, auth, "Authenticates", "HTTPS")
+Rel(webapp, ap, "AP operations", "HTTPS/JSON")
+Rel(webapp, ar, "AR operations", "HTTPS/JSON")
+Rel(excel, auth, "Authenticates", "REST API")
+Rel(excel, system, "Bulk operations", "REST API")
+
+Rel(ap, base, "Inherits from")
+Rel(ar, base, "Inherits from")
+Rel(gl, base, "Inherits from")
+
+Rel(ap, fnc_ap, "Uses")
+Rel(ar, fnc_ar, "Uses")
+Rel(gl, fnc_gl, "Uses")
+Rel(ap, fnc_perm, "Checks permissions")
+Rel(ar, fnc_perm, "Checks permissions")
+Rel(ap, workflow, "Triggers approvals")
+
+Rel(fnc_ap, db, "CRUD", "ADO.NET")
+Rel(fnc_ar, db, "CRUD", "ADO.NET")
+Rel(fnc_gl, db, "CRUD", "ADO.NET")
+
+SHOW_LEGEND()
+@enduml

@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Authentication Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>API Authentication Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>API Authentication Guide</h1>
+<h2>Overview</h2>
+<p>Carmen.NET uses JWT (JSON Web Token) based authentication for all API endpoints. This guide provides comprehensive information on authentication flows, token management, and security best practices.</p>
+<h2>Authentication Architecture</h2>
+<div class="mermaid">sequenceDiagram
+    participant Client
+    participant API as Carmen.NET API
+    participant Auth as Authentication Service
+    participant DB as Database
+
+    Client->>API: POST /api/account/login<br/>{username, password}
+    API->>Auth: Validate Credentials
+    Auth->>DB: Check User + Password Hash
+    DB-->>Auth: User Record + Permissions
+    Auth->>Auth: Generate JWT Token
+    Auth-->>API: JWT Token + User Info
+    API-->>Client: 200 OK<br/>{token, refreshToken, user}
+
+    Note over Client: Store tokens securely
+
+    Client->>API: GET /api/ap/invoice/list<br/>Authorization: Bearer {token}
+    API->>API: Validate JWT
+    API->>API: Check Permissions
+    API->>DB: Query Data (with tenant filter)
+    DB-->>API: Invoice Data
+    API-->>Client: 200 OK<br/>{invoices}
+
+    Note over Client: Token expires after 60 minutes
+
+    Client->>API: POST /api/account/refresh-token<br/>{refreshToken}
+    API->>Auth: Validate Refresh Token
+    Auth->>Auth: Generate New JWT
+    Auth-->>API: New JWT Token
+    API-->>Client: 200 OK<br/>{token}</div><h2>Authentication Flow</h2>
+<h3>Step 1: User Login</h3>
+<p><strong>Endpoint</strong>: <code>POST /api/account/login</code></p>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-json">{
+  &quot;userName&quot;: &quot;john.doe@company.com&quot;,
+  &quot;password&quot;: &quot;SecurePassword123!&quot;,
+  &quot;useTenant&quot;: &quot;TENANT001&quot;
+}</code></pre><p><strong>Response (Success - 200 OK)</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;,
+  &quot;refreshToken&quot;: &quot;refresh_token_here&quot;,
+  &quot;tokenExpiration&quot;: &quot;2025-10-06T11:30:00Z&quot;,
+  &quot;user&quot;: {
+    &quot;userId&quot;: &quot;12345&quot;,
+    &quot;userName&quot;: &quot;john.doe@company.com&quot;,
+    &quot;fullName&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john.doe@company.com&quot;,
+    &quot;roles&quot;: [&quot;AP.Manager&quot;, &quot;AR.Clerk&quot;],
+    &quot;tenantCode&quot;: &quot;TENANT001&quot;,
+    &quot;tenantName&quot;: &quot;ABC Corporation&quot;,
+    &quot;permissions&quot;: {
+      &quot;AP.Invoice.View&quot;: true,
+      &quot;AP.Invoice.Create&quot;: true,
+      &quot;AP.Invoice.Approve&quot;: true
+    }
+  }
+}</code></pre><p><strong>Response (Error - 401 Unauthorized)</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;INVALID_CREDENTIALS&quot;,
+  &quot;message&quot;: &quot;Invalid username or password&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;
+}</code></pre><h3>Step 2: Using Access Token</h3>
+<p>Include the JWT token in the <code>Authorization</code> header for all subsequent API requests:</p>
+<pre><code class="language-http">GET /api/ap/invoice/list HTTP/1.1
+Host: api.carmen.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json</code></pre><h3>Step 3: Token Refresh</h3>
+<p>Tokens expire after 60 minutes. Use the refresh token to obtain a new access token without requiring the user to log in again.</p>
+<p><strong>Endpoint</strong>: <code>POST /api/account/refresh-token</code></p>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-json">{
+  &quot;refreshToken&quot;: &quot;refresh_token_here&quot;
+}</code></pre><p><strong>Response (Success - 200 OK)</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;,
+  &quot;tokenExpiration&quot;: &quot;2025-10-06T12:30:00Z&quot;
+}</code></pre><h3>Step 4: Logout</h3>
+<p><strong>Endpoint</strong>: <code>POST /api/account/logout</code></p>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-http">POST /api/account/logout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></pre><p><strong>Response (Success - 200 OK)</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Logged out successfully&quot;
+}</code></pre><h2>JWT Token Structure</h2>
+<h3>Token Claims</h3>
+<p>Carmen.NET JWT tokens include the following claims:</p>
+<pre><code class="language-json">{
+  &quot;sub&quot;: &quot;12345&quot;,
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;email&quot;: &quot;john.doe@company.com&quot;,
+  &quot;tenant&quot;: &quot;TENANT001&quot;,
+  &quot;roles&quot;: [&quot;AP.Manager&quot;, &quot;AR.Clerk&quot;],
+  &quot;permissions&quot;: [
+    &quot;AP.Invoice.View&quot;,
+    &quot;AP.Invoice.Create&quot;,
+    &quot;AP.Invoice.Approve&quot;
+  ],
+  &quot;iat&quot;: 1696596600,
+  &quot;exp&quot;: 1696600200,
+  &quot;iss&quot;: &quot;Carmen.NET&quot;,
+  &quot;aud&quot;: &quot;Carmen.API&quot;
+}</code></pre><h3>Claim Descriptions</h3>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>sub</strong></td>
+<td>User ID (subject)</td>
+<td><code>&quot;12345&quot;</code></td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>Full name of user</td>
+<td><code>&quot;John Doe&quot;</code></td>
+</tr>
+<tr>
+<td><strong>email</strong></td>
+<td>User email address</td>
+<td><code>&quot;john.doe@company.com&quot;</code></td>
+</tr>
+<tr>
+<td><strong>tenant</strong></td>
+<td>Tenant code for multi-tenancy</td>
+<td><code>&quot;TENANT001&quot;</code></td>
+</tr>
+<tr>
+<td><strong>roles</strong></td>
+<td>User roles array</td>
+<td><code>[&quot;AP.Manager&quot;]</code></td>
+</tr>
+<tr>
+<td><strong>permissions</strong></td>
+<td>User permissions array</td>
+<td><code>[&quot;AP.Invoice.View&quot;]</code></td>
+</tr>
+<tr>
+<td><strong>iat</strong></td>
+<td>Issued at (Unix timestamp)</td>
+<td><code>1696596600</code></td>
+</tr>
+<tr>
+<td><strong>exp</strong></td>
+<td>Expiration time (Unix timestamp)</td>
+<td><code>1696600200</code></td>
+</tr>
+<tr>
+<td><strong>iss</strong></td>
+<td>Token issuer</td>
+<td><code>&quot;Carmen.NET&quot;</code></td>
+</tr>
+<tr>
+<td><strong>aud</strong></td>
+<td>Token audience</td>
+<td><code>&quot;Carmen.API&quot;</code></td>
+</tr>
+</tbody></table>
+<h2>Multi-Tenant Authentication</h2>
+<h3>Tenant Selection</h3>
+<p>Carmen.NET supports multi-tenant architecture. Users may have access to multiple tenants.</p>
+<p><strong>Login with Tenant</strong>:</p>
+<pre><code class="language-json">{
+  &quot;userName&quot;: &quot;john.doe@company.com&quot;,
+  &quot;password&quot;: &quot;SecurePassword123!&quot;,
+  &quot;useTenant&quot;: &quot;TENANT001&quot;
+}</code></pre><p><strong>Get Available Tenants</strong>:</p>
+<p><strong>Endpoint</strong>: <code>GET /api/account/tenants</code></p>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;tenants&quot;: [
+    {
+      &quot;tenantCode&quot;: &quot;TENANT001&quot;,
+      &quot;tenantName&quot;: &quot;ABC Corporation&quot;,
+      &quot;isActive&quot;: true
+    },
+    {
+      &quot;tenantCode&quot;: &quot;TENANT002&quot;,
+      &quot;tenantName&quot;: &quot;XYZ Limited&quot;,
+      &quot;isActive&quot;: true
+    }
+  ]
+}</code></pre><p><strong>Switch Tenant</strong>:</p>
+<p><strong>Endpoint</strong>: <code>POST /api/account/switch-tenant</code></p>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-json">{
+  &quot;tenantCode&quot;: &quot;TENANT002&quot;
+}</code></pre><p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;token&quot;: &quot;new_jwt_token_here&quot;,
+  &quot;tenant&quot;: {
+    &quot;tenantCode&quot;: &quot;TENANT002&quot;,
+    &quot;tenantName&quot;: &quot;XYZ Limited&quot;
+  }
+}</code></pre><h2>Permission-Based Authorization</h2>
+<h3>Permission Model</h3>
+<p>Every API endpoint is protected by specific permissions. The JWT token includes all user permissions.</p>
+<p><strong>Permission Naming Convention</strong>: <code>{Module}.{Entity}.{Action}</code></p>
+<p>Examples:</p>
+<ul>
+<li><code>AP.Invoice.View</code></li>
+<li><code>AP.Invoice.Create</code></li>
+<li><code>AP.Invoice.Update</code></li>
+<li><code>AP.Invoice.Delete</code></li>
+<li><code>AP.Invoice.Approve</code></li>
+<li><code>AP.Invoice.Post</code></li>
+</ul>
+<h3>Permission Check Flow</h3>
+<div class="mermaid">flowchart TD
+    Request[API Request] --> ValidateToken{Valid JWT<br/>Token?}
+    ValidateToken -->|No| Unauthorized[401 Unauthorized]
+    ValidateToken -->|Yes| CheckExpired{Token<br/>Expired?}
+
+    CheckExpired -->|Yes| Unauthorized
+    CheckExpired -->|No| ExtractPermissions[Extract Permissions<br/>from Token]
+
+    ExtractPermissions --> CheckPermission{Has Required<br/>Permission?}
+    CheckPermission -->|No| Forbidden[403 Forbidden]
+    CheckPermission -->|Yes| CheckTenant{Tenant<br/>Match?}
+
+    CheckTenant -->|No| Forbidden
+    CheckTenant -->|Yes| AllowRequest[Process Request]</div><h3>Common Permission Patterns</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Required Permission</th>
+<th>Example Endpoint</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>View List</strong></td>
+<td><code>{Module}.{Entity}.View</code></td>
+<td><code>GET /api/ap/invoice/list</code></td>
+</tr>
+<tr>
+<td><strong>View Details</strong></td>
+<td><code>{Module}.{Entity}.View</code></td>
+<td><code>GET /api/ap/invoice/{id}</code></td>
+</tr>
+<tr>
+<td><strong>Create</strong></td>
+<td><code>{Module}.{Entity}.Create</code></td>
+<td><code>POST /api/ap/invoice/create</code></td>
+</tr>
+<tr>
+<td><strong>Update</strong></td>
+<td><code>{Module}.{Entity}.Update</code></td>
+<td><code>PUT /api/ap/invoice/update</code></td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td><code>{Module}.{Entity}.Delete</code></td>
+<td><code>DELETE /api/ap/invoice/{id}</code></td>
+</tr>
+<tr>
+<td><strong>Approve</strong></td>
+<td><code>{Module}.{Entity}.Approve</code></td>
+<td><code>POST /api/ap/invoice/approve/{id}</code></td>
+</tr>
+<tr>
+<td><strong>Post to GL</strong></td>
+<td><code>{Module}.{Entity}.Post</code></td>
+<td><code>POST /api/ap/invoice/post/{id}</code></td>
+</tr>
+</tbody></table>
+<h2>Error Responses</h2>
+<h3>401 Unauthorized</h3>
+<p><strong>Causes</strong>:</p>
+<ul>
+<li>Missing <code>Authorization</code> header</li>
+<li>Invalid JWT token</li>
+<li>Expired JWT token</li>
+<li>Malformed token</li>
+</ul>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;UNAUTHORIZED&quot;,
+  &quot;message&quot;: &quot;Authentication required. Please provide a valid token.&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;
+}</code></pre><h3>403 Forbidden</h3>
+<p><strong>Causes</strong>:</p>
+<ul>
+<li>User lacks required permission</li>
+<li>Tenant mismatch</li>
+<li>Account locked or disabled</li>
+</ul>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;FORBIDDEN&quot;,
+  &quot;message&quot;: &quot;You do not have permission to perform this action. Required permission: AP.Invoice.Approve&quot;,
+  &quot;requiredPermission&quot;: &quot;AP.Invoice.Approve&quot;,
+  &quot;timestamp&quot;: &quot;2025-10-06T10:30:00Z&quot;
+}</code></pre><h2>Security Best Practices</h2>
+<h3>Token Storage</h3>
+<p><strong>Web Applications</strong>:</p>
+<ul>
+<li>Store access token in memory (not localStorage)</li>
+<li>Store refresh token in httpOnly cookie</li>
+<li>Implement token refresh on page load</li>
+</ul>
+<p><strong>Mobile Applications</strong>:</p>
+<ul>
+<li>Use secure storage (Keychain on iOS, Keystore on Android)</li>
+<li>Never store tokens in plain text</li>
+<li>Clear tokens on logout</li>
+</ul>
+<p><strong>Desktop Applications</strong>:</p>
+<ul>
+<li>Use OS credential storage</li>
+<li>Encrypt tokens before storage</li>
+<li>Clear tokens on application exit</li>
+</ul>
+<h3>Token Transmission</h3>
+<ul>
+<li>Always use HTTPS for API communication</li>
+<li>Never log tokens in console or logs</li>
+<li>Never include tokens in URL query parameters</li>
+<li>Use <code>Authorization</code> header for all requests</li>
+</ul>
+<h3>Token Lifecycle</h3>
+<div class="mermaid">flowchart LR
+    Login[Login] --> Issued[Token Issued<br/>60 min lifetime]
+    Issued --> Use[Use Token<br/>in API calls]
+    Use --> CheckExpiry{Token<br/>Expiring Soon?}
+
+    CheckExpiry -->|< 5 min| Refresh[Refresh Token]
+    CheckExpiry -->|> 5 min| Use
+
+    Refresh --> Issued
+
+    Use --> Logout[Logout]
+    Logout --> Revoked[Token Revoked]</div><p><strong>Token Expiration</strong>:</p>
+<ul>
+<li>Access token: 60 minutes</li>
+<li>Refresh token: 7 days</li>
+<li>Implement proactive token refresh (5 minutes before expiry)</li>
+</ul>
+<p><strong>Token Revocation</strong>:</p>
+<ul>
+<li>Logout revokes both access and refresh tokens</li>
+<li>Password change revokes all user tokens</li>
+<li>Account disable revokes all user tokens</li>
+</ul>
+<h2>Code Examples</h2>
+<h3>C# / .NET</h3>
+<pre><code class="language-csharp">using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+public class CarmenApiClient
+{
+    private readonly HttpClient _httpClient;
+    private string _accessToken;
+    private string _refreshToken;
+
+    public CarmenApiClient(string baseUrl)
+    {
+        _httpClient = new HttpClient { BaseAddress = new Uri(baseUrl) };
+    }
+
+    public async Task&lt;bool&gt; LoginAsync(string userName, string password, string tenantCode)
+    {
+        var loginRequest = new
+        {
+            userName,
+            password,
+            useTenant = tenantCode
+        };
+
+        var content = new StringContent(
+            JsonSerializer.Serialize(loginRequest),
+            Encoding.UTF8,
+            &quot;application/json&quot;
+        );
+
+        var response = await _httpClient.PostAsync(&quot;/api/account/login&quot;, content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var result = await JsonSerializer.DeserializeAsync&lt;LoginResponse&gt;(
+                await response.Content.ReadAsStreamAsync()
+            );
+
+            _accessToken = result.Token;
+            _refreshToken = result.RefreshToken;
+
+            // Set default authorization header
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(&quot;Bearer&quot;, _accessToken);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public async Task&lt;T&gt; GetAsync&lt;T&gt;(string endpoint)
+    {
+        var response = await _httpClient.GetAsync(endpoint);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            // Token expired, try to refresh
+            if (await RefreshTokenAsync())
+            {
+                // Retry request with new token
+                response = await _httpClient.GetAsync(endpoint);
+            }
+        }
+
+        response.EnsureSuccessStatusCode();
+
+        return await JsonSerializer.DeserializeAsync&lt;T&gt;(
+            await response.Content.ReadAsStreamAsync()
+        );
+    }
+
+    private async Task&lt;bool&gt; RefreshTokenAsync()
+    {
+        var refreshRequest = new { refreshToken = _refreshToken };
+        var content = new StringContent(
+            JsonSerializer.Serialize(refreshRequest),
+            Encoding.UTF8,
+            &quot;application/json&quot;
+        );
+
+        var response = await _httpClient.PostAsync(&quot;/api/account/refresh-token&quot;, content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var result = await JsonSerializer.DeserializeAsync&lt;RefreshResponse&gt;(
+                await response.Content.ReadAsStreamAsync()
+            );
+
+            _accessToken = result.Token;
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(&quot;Bearer&quot;, _accessToken);
+
+            return true;
+        }
+
+        return false;
+    }
+}
+
+// Usage
+var client = new CarmenApiClient(&quot;https://api.carmen.com&quot;);
+await client.LoginAsync(&quot;john.doe@company.com&quot;, &quot;password&quot;, &quot;TENANT001&quot;);
+
+var invoices = await client.GetAsync&lt;InvoiceListResponse&gt;(&quot;/api/ap/invoice/list&quot;);</code></pre><h3>JavaScript / TypeScript</h3>
+<pre><code class="language-typescript">class CarmenApiClient {
+    private baseUrl: string;
+    private accessToken: string | null = null;
+    private refreshToken: string | null = null;
+
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
+
+    async login(userName: string, password: string, tenantCode: string): Promise&lt;boolean&gt; {
+        const response = await fetch(`${this.baseUrl}/api/account/login`, {
+            method: &#039;POST&#039;,
+            headers: {
+                &#039;Content-Type&#039;: &#039;application/json&#039;,
+            },
+            body: JSON.stringify({
+                userName,
+                password,
+                useTenant: tenantCode,
+            }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            this.accessToken = result.token;
+            this.refreshToken = result.refreshToken;
+
+            // Store refresh token securely
+            this.storeRefreshToken(result.refreshToken);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    async get&lt;T&gt;(endpoint: string): Promise&lt;T&gt; {
+        let response = await fetch(`${this.baseUrl}${endpoint}`, {
+            headers: {
+                &#039;Authorization&#039;: `Bearer ${this.accessToken}`,
+                &#039;Content-Type&#039;: &#039;application/json&#039;,
+            },
+        });
+
+        if (response.status === 401) {
+            // Token expired, try to refresh
+            if (await this.refreshAccessToken()) {
+                // Retry request with new token
+                response = await fetch(`${this.baseUrl}${endpoint}`, {
+                    headers: {
+                        &#039;Authorization&#039;: `Bearer ${this.accessToken}`,
+                        &#039;Content-Type&#039;: &#039;application/json&#039;,
+                    },
+                });
+            }
+        }
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.statusText}`);
+        }
+
+        return await response.json();
+    }
+
+    private async refreshAccessToken(): Promise&lt;boolean&gt; {
+        const response = await fetch(`${this.baseUrl}/api/account/refresh-token`, {
+            method: &#039;POST&#039;,
+            headers: {
+                &#039;Content-Type&#039;: &#039;application/json&#039;,
+            },
+            body: JSON.stringify({
+                refreshToken: this.refreshToken,
+            }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            this.accessToken = result.token;
+            return true;
+        }
+
+        return false;
+    }
+
+    private storeRefreshToken(token: string): void {
+        // Store in httpOnly cookie or secure storage
+        // Never store in localStorage
+        document.cookie = `refreshToken=${token}; Secure; HttpOnly; SameSite=Strict; Max-Age=604800`;
+    }
+}
+
+// Usage
+const client = new CarmenApiClient(&#039;https://api.carmen.com&#039;);
+await client.login(&#039;john.doe@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;);
+
+const invoices = await client.get(&#039;/api/ap/invoice/list&#039;);</code></pre><h3>Python</h3>
+<pre><code class="language-python">import requests
+from typing import Optional, Dict, Any
+from datetime import datetime, timedelta
+
+class CarmenApiClient:
+    def __init__(self, base_url: str):
+        self.base_url = base_url
+        self.access_token: Optional[str] = None
+        self.refresh_token: Optional[str] = None
+        self.token_expiry: Optional[datetime] = None
+
+    def login(self, user_name: str, password: str, tenant_code: str) -&gt; bool:
+        response = requests.post(
+            f&quot;{self.base_url}/api/account/login&quot;,
+            json={
+                &quot;userName&quot;: user_name,
+                &quot;password&quot;: password,
+                &quot;useTenant&quot;: tenant_code
+            }
+        )
+
+        if response.status_code == 200:
+            result = response.json()
+            self.access_token = result[&#039;token&#039;]
+            self.refresh_token = result[&#039;refreshToken&#039;]
+            self.token_expiry = datetime.fromisoformat(
+                result[&#039;tokenExpiration&#039;].replace(&#039;Z&#039;, &#039;+00:00&#039;)
+            )
+            return True
+
+        return False
+
+    def get(self, endpoint: str) -&gt; Dict[str, Any]:
+        # Check if token needs refresh
+        if self.token_expiry and datetime.now() &gt;= self.token_expiry - timedelta(minutes=5):
+            self._refresh_token()
+
+        headers = {
+            &quot;Authorization&quot;: f&quot;Bearer {self.access_token}&quot;,
+            &quot;Content-Type&quot;: &quot;application/json&quot;
+        }
+
+        response = requests.get(f&quot;{self.base_url}{endpoint}&quot;, headers=headers)
+
+        if response.status_code == 401:
+            # Token expired, try to refresh
+            if self._refresh_token():
+                # Retry request with new token
+                headers[&quot;Authorization&quot;] = f&quot;Bearer {self.access_token}&quot;
+                response = requests.get(f&quot;{self.base_url}{endpoint}&quot;, headers=headers)
+
+        response.raise_for_status()
+        return response.json()
+
+    def _refresh_token(self) -&gt; bool:
+        response = requests.post(
+            f&quot;{self.base_url}/api/account/refresh-token&quot;,
+            json={&quot;refreshToken&quot;: self.refresh_token}
+        )
+
+        if response.status_code == 200:
+            result = response.json()
+            self.access_token = result[&#039;token&#039;]
+            self.token_expiry = datetime.fromisoformat(
+                result[&#039;tokenExpiration&#039;].replace(&#039;Z&#039;, &#039;+00:00&#039;)
+            )
+            return True
+
+        return False
+
+# Usage
+client = CarmenApiClient(&#039;https://api.carmen.com&#039;)
+client.login(&#039;john.doe@company.com&#039;, &#039;password&#039;, &#039;TENANT001&#039;)
+
+invoices = client.get(&#039;/api/ap/invoice/list&#039;)</code></pre><h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Symptom</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Token Expired</strong></td>
+<td>401 Unauthorized</td>
+<td>Use refresh token to obtain new access token</td>
+</tr>
+<tr>
+<td><strong>Invalid Signature</strong></td>
+<td>401 Unauthorized</td>
+<td>Token tampered, obtain new token via login</td>
+</tr>
+<tr>
+<td><strong>Permission Denied</strong></td>
+<td>403 Forbidden</td>
+<td>Contact administrator to grant required permission</td>
+</tr>
+<tr>
+<td><strong>Tenant Mismatch</strong></td>
+<td>403 Forbidden</td>
+<td>Login with correct tenant or switch tenant</td>
+</tr>
+<tr>
+<td><strong>Token Missing</strong></td>
+<td>401 Unauthorized</td>
+<td>Include <code>Authorization: Bearer {token}</code> header</td>
+</tr>
+</tbody></table>
+<h3>Testing Authentication</h3>
+<p>Use Postman or curl to test authentication:</p>
+<pre><code class="language-bash"># Login
+curl -X POST https://api.carmen.com/api/account/login \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#039;{
+    &quot;userName&quot;: &quot;john.doe@company.com&quot;,
+    &quot;password&quot;: &quot;password&quot;,
+    &quot;useTenant&quot;: &quot;TENANT001&quot;
+  }&#039;
+
+# Use token
+TOKEN=&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;
+
+curl -X GET https://api.carmen.com/api/ap/invoice/list \
+  -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre><hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 4 - API &amp; Integration Documentation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

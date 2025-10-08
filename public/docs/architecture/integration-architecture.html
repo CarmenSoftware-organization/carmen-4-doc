@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Integration Architecture - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Integration Architecture</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Integration Architecture</h1>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 2 Analysis</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>Carmen.NET implements a comprehensive multi-layered integration architecture supporting REST APIs, file-based imports/exports, financial system integration, and multi-tenant data exchange. The system provides 351+ REST API endpoints across 60 controllers with standardized JSON responses, Excel integration capabilities, and financial data interchange formats.</p>
+<hr>
+<h2>1. Integration Overview</h2>
+<h3>1.1 Integration Layers</h3>
+<div class="mermaid">graph TD
+    Client["CLIENT INTEGRATION LAYER<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>• Web Browser REST API<br/>• Excel Add-in Office Integration<br/>• Mobile Apps REST API<br/>• Third-party Systems REST API"]
+
+    Gateway["API GATEWAY LAYER<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>• Authentication/Authorization<br/>• Request Validation<br/>• Response Formatting<br/>• Error Handling"]
+
+    Business["BUSINESS LOGIC LAYER<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>• 60 Controllers 351+ endpoints<br/>• Service Layer<br/>• Validation & Processing"]
+
+    Data["DATA ACCESS LAYER<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>• Entity Framework<br/>• Multi-tenant Data Isolation<br/>• Transaction Management"]
+
+    External["EXTERNAL INTEGRATION LAYER<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>• Banking File Formats<br/>• Financial System Connectors<br/>• File Import/Export CSV, Excel<br/>• Email/Notification Services"]
+
+    Client --> Gateway
+    Gateway --> Business
+    Business --> Data
+    Data --> External
+
+    style Client fill:#e3f2fd,stroke:#1976d2,color:#000000
+    style Gateway fill:#fff3e0,stroke:#f57c00,color:#000000
+    style Business fill:#e8f5e9,stroke:#388e3c,color:#000000
+    style Data fill:#f3e5f5,stroke:#7b1fa2,color:#000000
+    style External fill:#fce4ec,stroke:#c2185b,color:#000000</div><h3>1.2 Integration Patterns</h3>
+<p><strong>Supported Integration Types</strong>:</p>
+<ol>
+<li><strong>Synchronous REST API</strong>: Real-time request/response</li>
+<li><strong>File-Based Integration</strong>: Batch import/export (CSV, Excel)</li>
+<li><strong>Database Integration</strong>: Direct database access (multi-tenant aware)</li>
+<li><strong>Financial Interchange</strong>: Banking file formats (WHT, payment files)</li>
+</ol>
+<hr>
+<h2>2. REST API Integration</h2>
+<h3>2.1 API Architecture</h3>
+<p><strong>API Endpoint Structure</strong>:</p>
+<pre><code class="language-text">https://{domain}/api/{module}/{entity}/{action}</code></pre><p><strong>Example Endpoints</strong>:</p>
+<ul>
+<li><code>POST /api/login</code> - Authentication</li>
+<li><code>GET /api/ap/invoice/list</code> - List AP invoices</li>
+<li><code>POST /api/ap/invoice/create</code> - Create AP invoice</li>
+<li><code>PUT /api/ap/invoice/update</code> - Update AP invoice</li>
+<li><code>DELETE /api/ap/invoice/delete/{id}</code> - Delete AP invoice</li>
+</ul>
+<h3>2.2 API Endpoint Inventory</h3>
+<p><strong>Total Endpoints</strong>: 351+<br><strong>Controllers</strong>: 60</p>
+<p><strong>Endpoint Distribution by Module</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Controllers</th>
+<th>Estimated Endpoints</th>
+<th>Order Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Authentication</strong></td>
+<td>2</td>
+<td>5-10</td>
+<td>0, 4</td>
+</tr>
+<tr>
+<td><strong>System Admin</strong></td>
+<td>15+</td>
+<td>80-100</td>
+<td>1-20</td>
+</tr>
+<tr>
+<td><strong>Accounts Payable</strong></td>
+<td>7</td>
+<td>40-50</td>
+<td>200-299</td>
+</tr>
+<tr>
+<td><strong>Accounts Receivable</strong></td>
+<td>9</td>
+<td>50-60</td>
+<td>300-399</td>
+</tr>
+<tr>
+<td><strong>General Ledger</strong></td>
+<td>5</td>
+<td>30-40</td>
+<td>400-499</td>
+</tr>
+<tr>
+<td><strong>Asset Management</strong></td>
+<td>6</td>
+<td>35-45</td>
+<td>500-599</td>
+</tr>
+<tr>
+<td><strong>Income/Revenue</strong></td>
+<td>5</td>
+<td>30-40</td>
+<td>600-699</td>
+</tr>
+<tr>
+<td><strong>Tax &amp; Compliance</strong></td>
+<td>3+</td>
+<td>20-30</td>
+<td>Various</td>
+</tr>
+</tbody></table>
+<h3>2.3 Request/Response Patterns</h3>
+<p><strong>Standard Request Headers</strong>:</p>
+<pre><code class="language-http">POST /api/ap/invoice/create HTTP/1.1
+Host: example.com
+Content-Type: application/json
+Authorization: Bearer {token}
+Accept: application/json</code></pre><p><strong>Request Body Pattern</strong> (Create/Update):</p>
+<pre><code class="language-json">{
+  &quot;useTenant&quot;: true,
+  &quot;data&quot;: {
+    &quot;invhInvNo&quot;: &quot;INV-2025-001&quot;,
+    &quot;invhDate&quot;: &quot;2025-10-06&quot;,
+    &quot;vnCode&quot;: &quot;VN001&quot;,
+    &quot;invhAmt&quot;: 10000.00,
+    &quot;invhTaxAmt&quot;: 700.00,
+    &quot;invhDesc&quot;: &quot;Invoice description&quot;
+  }
+}</code></pre><p><strong>Success Response Pattern</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;code&quot;: &quot;OK&quot;,
+  &quot;message&quot;: &quot;Operation completed successfully&quot;,
+  &quot;data&quot;: {
+    &quot;invhId&quot;: 12345,
+    &quot;invhInvNo&quot;: &quot;INV-2025-001&quot;,
+    &quot;invhStatus&quot;: 0
+  }
+}</code></pre><p><strong>Error Response Pattern</strong>:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;VALIDATION_ERROR&quot;,
+  &quot;message&quot;: &quot;Validation failed&quot;,
+  &quot;errors&quot;: [
+    {
+      &quot;field&quot;: &quot;invhAmt&quot;,
+      &quot;message&quot;: &quot;Amount must be greater than zero&quot;
+    }
+  ]
+}</code></pre><p><strong>Forbidden Response Pattern</strong> (Permission denied):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;code&quot;: &quot;FORBIDDEN&quot;,
+  &quot;message&quot;: &quot;You do not have permission to perform this action&quot;,
+  &quot;module&quot;: &quot;AP.Invoice&quot;,
+  &quot;action&quot;: &quot;Create&quot;
+}</code></pre><h3>2.4 API Authentication Flow</h3>
+<pre><code class="language-text">┌─────────┐                           ┌──────────────┐
+│ Client  │                           │   Server     │
+└────┬────┘                           └──────┬───────┘
+     │                                       │
+     │  1. POST /api/login                  │
+     │  { username, password }              │
+     ├──────────────────────────────────────▶│
+     │                                       │
+     │  2. Validate credentials              │
+     │     Generate JWT token                │
+     │                                       │
+     │  3. Return token                      │
+     │◀──────────────────────────────────────┤
+     │  { token: &quot;eyJ...&quot; }                  │
+     │                                       │
+     │  4. Subsequent requests               │
+     │  Authorization: Bearer eyJ...         │
+     ├──────────────────────────────────────▶│
+     │                                       │
+     │  5. Validate token                    │
+     │     Check permissions                 │
+     │     Apply tenant context              │
+     │                                       │
+     │  6. Return response                   │
+     │◀──────────────────────────────────────┤
+     │                                       │</code></pre><h3>2.5 Multi-Tenant API Routing</h3>
+<p><strong>Tenant Context Handling</strong>:</p>
+<pre><code class="language-csharp">// All API requests include tenant context
+public async Task&lt;IHttpActionResult&gt; GetInvoices(bool useTenant)
+{
+    // Apply tenant filter
+    FncBase.ApplyTenantIfUseTenant(useTenant);
+
+    // Data automatically filtered by tenant
+    var invoices = await GetInvoicesFromDatabase();
+
+    return this.JsonResultOk(invoices);
+}</code></pre><p><strong>Tenant Isolation Pattern</strong>:</p>
+<ul>
+<li>Every API call accepts <code>useTenant</code> parameter</li>
+<li>Tenant context extracted from authentication token</li>
+<li>Database queries automatically filtered by tenant</li>
+<li>No cross-tenant data leakage</li>
+</ul>
+<hr>
+<h2>3. File-Based Integration</h2>
+<h3>3.1 Excel Integration</h3>
+<p><strong>ExcelController</strong> (Order: 1000):</p>
+<ul>
+<li>Excel file import/export</li>
+<li>Template generation</li>
+<li>Data validation</li>
+<li>Multi-sheet support</li>
+</ul>
+<p><strong>Excel Import Pattern</strong>:</p>
+<div class="mermaid">flowchart TD
+    A[User uploads Excel file] --> B[Server validates format<br/>and structure]
+    B --> C[Parse Excel data<br/>into models]
+    C --> D[Validate business rules]
+    D --> E[Import into database<br/>with transaction]
+    E --> F[Return success/error report]
+
+    style A fill:#e3f2fd,stroke:#1976d2
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#f3e5f5,stroke:#7b1fa2
+    style E fill:#fce4ec,stroke:#c2185b
+    style F fill:#e0f2f1,stroke:#00796b</div><p><strong>Excel Export Pattern</strong>:</p>
+<div class="mermaid">flowchart TD
+    A[User requests data export] --> B[Query database<br/>with filters]
+    B --> C[Apply permissions<br/>and tenant filter]
+    C --> D[Generate Excel file<br/>with formatting]
+    D --> E[Return download link<br/>or stream]
+
+    style A fill:#e3f2fd,stroke:#1976d2
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#f3e5f5,stroke:#7b1fa2
+    style E fill:#fce4ec,stroke:#c2185b</div><p><strong>Supported Excel Operations</strong>:</p>
+<ul>
+<li><strong>Import</strong>: Vendors, customers, invoices, receipts, GL accounts</li>
+<li><strong>Export</strong>: Reports, transaction lists, master data</li>
+<li><strong>Templates</strong>: Pre-formatted templates for batch data entry</li>
+</ul>
+<h3>3.2 CSV Import/Export</h3>
+<p><strong>CSV Import Controller Pattern</strong> (inferred):</p>
+<pre><code class="language-csharp">[HttpPost]
+[Route(&quot;api/import/csv&quot;)]
+public async Task&lt;IHttpActionResult&gt; ImportCsv(CsvImportRequest request)
+{
+    // 1. Validate file format
+    // 2. Parse CSV data
+    // 3. Validate each row
+    // 4. Import with transaction
+    // 5. Return import summary
+}</code></pre><p><strong>CSV Export Controller Pattern</strong> (inferred):</p>
+<pre><code class="language-csharp">[HttpGet]
+[Route(&quot;api/export/csv&quot;)]
+public async Task&lt;IHttpActionResult&gt; ExportCsv(CsvExportRequest request)
+{
+    // 1. Apply filters and permissions
+    // 2. Query data
+    // 3. Format as CSV
+    // 4. Return CSV file
+}</code></pre><h3>3.3 File Upload/Download</h3>
+<p><strong>FileController</strong> (Order: 1010):</p>
+<ul>
+<li>File upload handling</li>
+<li>File storage management</li>
+<li>Download link generation</li>
+<li>File type validation</li>
+</ul>
+<p><strong>Upload Flow</strong>:</p>
+<div class="mermaid">sequenceDiagram
+    participant Client
+    participant FileController
+    participant Storage
+
+    Client->>FileController: Upload File
+    FileController->>FileController: Validate file type<br/>Check file size<br/>Scan for viruses (inferred)
+    FileController->>FileController: Generate unique filename<br/>Store metadata in DB
+    FileController->>Storage: Save File
+    FileController-->>Client: Return file ID</div><hr>
+<h2>4. Financial System Integration</h2>
+<h3>4.1 Banking Integration</h3>
+<p><strong>Withholding Tax (WHT) File Generation</strong>:</p>
+<ul>
+<li><strong>ApWhtController</strong> (Order: 220)</li>
+<li>Generate WHT file formats for tax authorities</li>
+<li>Support multiple WHT file formats</li>
+<li>Compliance with local tax regulations</li>
+</ul>
+<p><strong>WHT File Format Pattern</strong> (inferred):</p>
+<pre><code class="language-text">Header Record
+  - Company information
+  - Tax period
+  - Total WHT amount
+
+Detail Records (for each vendor)
+  - Vendor tax ID
+  - Invoice reference
+  - WHT amount
+  - WHT rate
+  - Income type
+
+Trailer Record
+  - Total records
+  - Total amount
+  - Checksum</code></pre><p><strong>Payment File Integration</strong>:</p>
+<ul>
+<li><strong>ApPaymentController</strong> (Order: 210)</li>
+<li>Generate bank payment files</li>
+<li>Support multiple bank formats</li>
+<li>Payment reconciliation</li>
+</ul>
+<p><strong>Payment File Format Pattern</strong> (inferred):</p>
+<pre><code class="language-text">Header
+  - Company bank account
+  - Payment date
+  - Total payment amount
+
+Payment Details
+  - Vendor bank account
+  - Payment amount
+  - Payment reference
+  - Vendor name
+
+Trailer
+  - Total payments
+  - Total amount
+  - File checksum</code></pre><h3>4.2 Financial Reporting Integration</h3>
+<p><strong>ReportController</strong> (Order: 800-899 range):</p>
+<ul>
+<li>Financial statement generation</li>
+<li>Custom report generation</li>
+<li>Report scheduling</li>
+<li>Export to PDF/Excel</li>
+</ul>
+<p><strong>Report Types</strong> (inferred from module structure):</p>
+<ul>
+<li>Trial Balance</li>
+<li>Profit &amp; Loss Statement</li>
+<li>Balance Sheet</li>
+<li>Cash Flow Statement</li>
+<li>Aged Payables/Receivables</li>
+<li>Tax Reports</li>
+<li>Management Reports</li>
+</ul>
+<h3>4.3 General Ledger Integration</h3>
+<p><strong>GL Posting Pattern</strong>:</p>
+<div class="mermaid">flowchart TD
+    A[Transaction occurs in module<br/>AP, AR, Asset, Income] --> B[Generate GL journal voucher<br/>GL_JV_H]
+    B --> C[Create debit/credit entries<br/>GL_JV_D]
+    C --> D[Post to GL accounts<br/>ACCOUNT_CODE]
+    D --> E[Update account balances]
+    E --> F[Link source transaction<br/>to GL entry]
+
+    style A fill:#e3f2fd,stroke:#1976d2
+    style B fill:#fff3e0,stroke:#f57c00
+    style C fill:#e8f5e9,stroke:#388e3c
+    style D fill:#f3e5f5,stroke:#7b1fa2
+    style E fill:#fce4ec,stroke:#c2185b
+    style F fill:#e0f2f1,stroke:#00796b</div><p><strong>GL Integration Points</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Source Module</th>
+<th>Transaction Type</th>
+<th>GL Impact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AP</strong></td>
+<td>Invoice</td>
+<td>DR: Expense/Asset, CR: AP Payable</td>
+</tr>
+<tr>
+<td><strong>AP</strong></td>
+<td>Payment</td>
+<td>DR: AP Payable, CR: Cash/Bank</td>
+</tr>
+<tr>
+<td><strong>AP</strong></td>
+<td>WHT</td>
+<td>DR: WHT Receivable, CR: Expense</td>
+</tr>
+<tr>
+<td><strong>AR</strong></td>
+<td>Invoice</td>
+<td>DR: AR Receivable, CR: Revenue</td>
+</tr>
+<tr>
+<td><strong>AR</strong></td>
+<td>Receipt</td>
+<td>DR: Cash/Bank, CR: AR Receivable</td>
+</tr>
+<tr>
+<td><strong>Asset</strong></td>
+<td>Purchase</td>
+<td>DR: Asset, CR: Cash/AP</td>
+</tr>
+<tr>
+<td><strong>Asset</strong></td>
+<td>Depreciation</td>
+<td>DR: Depreciation Expense, CR: Accumulated Depreciation</td>
+</tr>
+<tr>
+<td><strong>Income</strong></td>
+<td>Revenue</td>
+<td>DR: Cash/AR, CR: Revenue</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>5. Database Integration</h2>
+<h3>5.1 Multi-Tenant Database Architecture</h3>
+<p><strong>Database Isolation Patterns</strong> (inferred):</p>
+<p><strong>Pattern 1: Shared Database with Tenant Column</strong>:</p>
+<pre><code class="language-sql">-- All tables include TenantId column
+SELECT * FROM AP_INVOICE_H
+WHERE TenantId = @CurrentTenantId
+  AND InvhStatus = @Status</code></pre><p><strong>Pattern 2: Tenant-Specific Schema</strong>:</p>
+<pre><code class="language-sql">-- Each tenant has separate schema
+SELECT * FROM [Tenant001].AP_INVOICE_H
+WHERE InvhStatus = @Status</code></pre><p><strong>Pattern 3: Separate Database per Tenant</strong>:</p>
+<pre><code class="language-sql">-- Each tenant has separate database
+-- Connection string switched based on tenant context
+USE Carmen_Tenant001
+SELECT * FROM AP_INVOICE_H
+WHERE InvhStatus = @Status</code></pre><h3>5.2 Database Access Patterns</h3>
+<p><strong>Entity Framework Pattern</strong>:</p>
+<pre><code class="language-csharp">public async Task&lt;List&lt;ApInvoiceH&gt;&gt; GetInvoices(bool useTenant)
+{
+    // Apply tenant context
+    FncBase.ApplyTenantIfUseTenant(useTenant);
+
+    // EF query automatically filtered by tenant
+    using (var context = new CarmenDbContext())
+    {
+        return await context.ApInvoiceH
+            .Where(x =&gt; x.InvhStatus == status)
+            .ToListAsync();
+    }
+}</code></pre><h3>5.3 Database Integration Security</h3>
+<p><strong>Security Measures</strong>:</p>
+<ul>
+<li>✅ Parameterized queries (SQL injection prevention)</li>
+<li>✅ Tenant isolation at query level</li>
+<li>✅ Row-level security enforcement</li>
+<li>✅ Encrypted connections (TLS/SSL)</li>
+<li>✅ Minimal privilege database accounts</li>
+</ul>
+<hr>
+<h2>6. Integration Patterns &amp; Best Practices</h2>
+<h3>6.1 RESTful Design Principles</h3>
+<p><strong>Resource-Based URLs</strong>:</p>
+<pre><code class="language-text">✅ Good: /api/ap/invoice/{id}
+❌ Bad:  /api/getInvoice?id=123
+
+✅ Good: POST /api/ap/invoice
+❌ Bad:  GET /api/createInvoice
+
+✅ Good: PUT /api/ap/invoice/{id}
+❌ Bad:  POST /api/updateInvoice</code></pre><p><strong>HTTP Method Usage</strong>:</p>
+<ul>
+<li><code>GET</code> - Retrieve resources (list, detail)</li>
+<li><code>POST</code> - Create new resources</li>
+<li><code>PUT</code> - Update existing resources</li>
+<li><code>DELETE</code> - Delete resources</li>
+<li><code>PATCH</code> - Partial update (if implemented)</li>
+</ul>
+<h3>6.2 Error Handling Patterns</h3>
+<p><strong>Standardized Error Responses</strong>:</p>
+<pre><code class="language-csharp">// BaseApiController pattern (858 lines)
+try {
+    // Business logic
+    return this.JsonResultOk(data);
+}
+catch (ValidationException vex) {
+    return this.JsonResultBadRequest(vex.Message);
+}
+catch (UnauthorizedException uex) {
+    return this.JsonResultUnauthorized(uex.Message);
+}
+catch (ForbiddenException fex) {
+    return this.JsonResultForbidden(message, module, action);
+}
+catch (Exception ex) {
+    LogHttpResult.Error(ex);
+    return this.JsonResultInternalError(ex);
+}</code></pre><p><strong>HTTP Status Code Usage</strong>:</p>
+<ul>
+<li><code>200 OK</code> - Success</li>
+<li><code>201 Created</code> - Resource created</li>
+<li><code>400 Bad Request</code> - Validation error</li>
+<li><code>401 Unauthorized</code> - Authentication required</li>
+<li><code>403 Forbidden</code> - Permission denied</li>
+<li><code>404 Not Found</code> - Resource not found</li>
+<li><code>500 Internal Server Error</code> - Server error</li>
+</ul>
+<h3>6.3 Data Validation Patterns</h3>
+<p><strong>Model Validation</strong> (597 models):</p>
+<pre><code class="language-csharp">// Request model with validation attributes
+public class CreateInvoiceRequest
+{
+    [Required]
+    [StringLength(50)]
+    public string InvhInvNo { get; set; }
+
+    [Required]
+    public DateTime InvhDate { get; set; }
+
+    [Required]
+    [Range(0.01, double.MaxValue)]
+    public decimal InvhAmt { get; set; }
+}</code></pre><p><strong>Business Rule Validation</strong>:</p>
+<pre><code class="language-csharp">// Controller-level validation
+public async Task&lt;IHttpActionResult&gt; CreateInvoice(CreateInvoiceRequest request)
+{
+    // 1. Model validation (automatic)
+    if (!ModelState.IsValid)
+        return this.JsonResultBadRequest(ModelState);
+
+    // 2. Permission check
+    var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+    if (!permission.Create)
+        return this.JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Create&quot;);
+
+    // 3. Business rule validation
+    if (await InvoiceAlreadyExists(request.InvhInvNo))
+        return this.JsonResultBadRequest(&quot;Invoice number already exists&quot;);
+
+    // 4. Create invoice
+    var result = await CreateInvoiceInDatabase(request);
+    return this.JsonResultOk(result);
+}</code></pre><h3>6.4 Transaction Management</h3>
+<p><strong>Transaction Pattern</strong> (inferred):</p>
+<pre><code class="language-csharp">public async Task&lt;IHttpActionResult&gt; CreateInvoiceWithDetails(InvoiceRequest request)
+{
+    using (var transaction = context.Database.BeginTransaction())
+    {
+        try
+        {
+            // 1. Create invoice header
+            var header = await CreateInvoiceHeader(request.Header);
+
+            // 2. Create invoice details
+            foreach (var detail in request.Details)
+            {
+                detail.InvhId = header.InvhId;
+                await CreateInvoiceDetail(detail);
+            }
+
+            // 3. Create GL journal voucher
+            await CreateGLJournal(header);
+
+            // 4. Commit transaction
+            transaction.Commit();
+
+            return this.JsonResultOk(header);
+        }
+        catch (Exception ex)
+        {
+            transaction.Rollback();
+            LogHttpResult.Error(ex);
+            return this.JsonResultInternalError(ex);
+        }
+    }
+}</code></pre><hr>
+<h2>7. API Documentation &amp; Discovery</h2>
+<h3>7.1 Swagger/NSwag Integration</h3>
+<p><strong>Swagger Configuration</strong>:</p>
+<ul>
+<li>All controllers documented with Swagger attributes</li>
+<li>SwaggerControllerOrder attribute for organization</li>
+<li>Automatic API documentation generation</li>
+<li>Interactive API testing UI</li>
+</ul>
+<p><strong>Swagger UI Access</strong> (inferred):</p>
+<pre><code class="language-text">https://{domain}/swagger</code></pre><p><strong>Swagger Annotations Example</strong>:</p>
+<pre><code class="language-csharp">[SwaggerControllerOrder(200)]
+[Route(&quot;api/ap/invoice&quot;)]
+public class ApInvoiceController : BaseApiController
+{
+    [HttpGet]
+    [Route(&quot;list&quot;)]
+    [SwaggerOperation(&quot;GetInvoiceList&quot;)]
+    [SwaggerResponse(200, &quot;Success&quot;, typeof(List&lt;ViewApInvoice&gt;))]
+    [SwaggerResponse(403, &quot;Forbidden&quot;)]
+    public async Task&lt;IHttpActionResult&gt; GetList(bool useTenant)
+    {
+        // Implementation
+    }
+}</code></pre><h3>7.2 API Versioning</h3>
+<p><strong>Versioning Strategy</strong> (inferred):</p>
+<ul>
+<li>Version in URL: <code>/api/v1/ap/invoice</code></li>
+<li>Version in header: <code>Api-Version: 1.0</code></li>
+<li>Backward compatibility maintained</li>
+</ul>
+<h3>7.3 API Discovery</h3>
+<p><strong>Controller Discovery by Order</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Order Range</th>
+<th>Module</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0-10</td>
+<td>Authentication</td>
+<td>Login, tokens, session</td>
+</tr>
+<tr>
+<td>11-99</td>
+<td>System Admin</td>
+<td>Users, roles, permissions, tenants</td>
+</tr>
+<tr>
+<td>100-199</td>
+<td>Configuration</td>
+<td>Settings, preferences</td>
+</tr>
+<tr>
+<td>200-299</td>
+<td>Accounts Payable</td>
+<td>AP workflows</td>
+</tr>
+<tr>
+<td>300-399</td>
+<td>Accounts Receivable</td>
+<td>AR workflows</td>
+</tr>
+<tr>
+<td>400-499</td>
+<td>General Ledger</td>
+<td>GL operations</td>
+</tr>
+<tr>
+<td>500-599</td>
+<td>Asset Management</td>
+<td>Asset tracking</td>
+</tr>
+<tr>
+<td>600-699</td>
+<td>Income/Revenue</td>
+<td>Revenue management</td>
+</tr>
+<tr>
+<td>800-899</td>
+<td>Reporting</td>
+<td>Financial reports</td>
+</tr>
+<tr>
+<td>1000+</td>
+<td>Utilities</td>
+<td>Excel, files, utilities</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>8. Integration Security</h2>
+<h3>8.1 API Security Layers</h3>
+<p><strong>Layer 1: Network Security</strong>:</p>
+<ul>
+<li>HTTPS/TLS encryption (inferred)</li>
+<li>Firewall rules</li>
+<li>DDoS protection</li>
+</ul>
+<p><strong>Layer 2: Authentication</strong>:</p>
+<ul>
+<li>Token-based authentication (JWT)</li>
+<li>Token expiration and refresh</li>
+<li>Secure token storage</li>
+</ul>
+<p><strong>Layer 3: Authorization</strong>:</p>
+<ul>
+<li>RBAC permission checks</li>
+<li>Resource-level access control</li>
+<li>Tenant isolation</li>
+</ul>
+<p><strong>Layer 4: Input Validation</strong>:</p>
+<ul>
+<li>Model validation</li>
+<li>SQL injection prevention</li>
+<li>XSS prevention</li>
+<li>Request size limits</li>
+</ul>
+<p><strong>Layer 5: Output Security</strong>:</p>
+<ul>
+<li>Sensitive data filtering</li>
+<li>Error message sanitization</li>
+<li>No stack traces in production</li>
+</ul>
+<h3>8.2 Rate Limiting &amp; Throttling</h3>
+<p><strong>Recommended Implementation</strong> (not currently detected):</p>
+<pre><code class="language-csharp">// Rate limiting pattern
+[RateLimit(MaxRequests = 100, TimeWindow = 60)] // 100 requests per minute
+public class ApInvoiceController : BaseApiController
+{
+    // Controllers
+}</code></pre><h3>8.3 CORS Configuration</h3>
+<p><strong>CORS Policy</strong> (inferred):</p>
+<pre><code class="language-csharp">// Allow specific origins
+services.AddCors(options =&gt;
+{
+    options.AddPolicy(&quot;CarmenPolicy&quot;, builder =&gt;
+    {
+        builder.WithOrigins(&quot;https://carmen-client.com&quot;)
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowCredentials();
+    });
+});</code></pre><hr>
+<h2>9. Integration Monitoring &amp; Logging</h2>
+<h3>9.1 Request/Response Logging</h3>
+<p><strong>Logging Pattern</strong> (found in all controllers):</p>
+<pre><code class="language-csharp">try
+{
+    LogHttpRequest.Info($&quot;{this.GetType().Name} : GetInvoiceList&quot;);
+
+    // Business logic
+    var result = await GetInvoices(useTenant);
+
+    return this.JsonResultOk(result);
+}
+catch (Exception e)
+{
+    LogHttpResult.Error(e);
+    return this.JsonResultInternalError(e);
+}</code></pre><p><strong>Logged Information</strong>:</p>
+<ul>
+<li>Request timestamp</li>
+<li>Controller and method name</li>
+<li>User/tenant context</li>
+<li>Request parameters</li>
+<li>Response status</li>
+<li>Error details (if any)</li>
+<li>Execution time (inferred)</li>
+</ul>
+<h3>9.2 Integration Metrics</h3>
+<p><strong>Recommended Metrics</strong> (for monitoring):</p>
+<ul>
+<li>API response time (P50, P95, P99)</li>
+<li>API error rate</li>
+<li>Request volume per endpoint</li>
+<li>Authentication failure rate</li>
+<li>Permission denial rate</li>
+<li>File upload/download success rate</li>
+<li>Database query performance</li>
+</ul>
+<h3>9.3 Process Logging</h3>
+<p><strong>ProcessLogController</strong> (Order: 1020):</p>
+<ul>
+<li>Action logging (<code>EnumLogAction</code>)</li>
+<li>User activity tracking</li>
+<li>Integration event logging</li>
+<li>Audit trail</li>
+</ul>
+<hr>
+<h2>10. Integration Points Summary</h2>
+<h3>10.1 Inbound Integrations</h3>
+<p><strong>Client Applications → Carmen.NET</strong>:</p>
+<ul>
+<li>Web browser via REST API</li>
+<li>Excel Add-in via REST API</li>
+<li>Mobile apps via REST API</li>
+<li>Third-party systems via REST API</li>
+</ul>
+<p><strong>File Uploads → Carmen.NET</strong>:</p>
+<ul>
+<li>Excel files (vendors, invoices, etc.)</li>
+<li>CSV files (batch import)</li>
+<li>Banking files (payment reconciliation)</li>
+</ul>
+<p><strong>External Systems → Carmen.NET</strong>:</p>
+<ul>
+<li>Banking systems (payment files, bank statements)</li>
+<li>Tax systems (WHT file submission)</li>
+</ul>
+<h3>10.2 Outbound Integrations</h3>
+<p><strong>Carmen.NET → Client Applications</strong>:</p>
+<ul>
+<li>JSON responses via REST API</li>
+<li>Excel file downloads</li>
+<li>CSV file exports</li>
+<li>PDF reports</li>
+</ul>
+<p><strong>Carmen.NET → External Systems</strong>:</p>
+<ul>
+<li>Banking payment files</li>
+<li>WHT tax files</li>
+<li>Financial reports</li>
+<li>Email notifications (inferred)</li>
+</ul>
+<p><strong>Carmen.NET → General Ledger</strong>:</p>
+<ul>
+<li>GL journal vouchers from all modules</li>
+<li>Automatic GL posting</li>
+</ul>
+<hr>
+<h2>11. Integration Architecture Patterns</h2>
+<h3>11.1 Design Patterns Observed</h3>
+<p><strong>1. API Gateway Pattern</strong>:</p>
+<ul>
+<li>Single entry point for all API requests</li>
+<li>Centralized authentication/authorization</li>
+<li>Request routing to appropriate controllers</li>
+</ul>
+<p><strong>2. Repository Pattern</strong> (inferred):</p>
+<ul>
+<li>Data access abstraction</li>
+<li>Entity Framework as ORM</li>
+<li>Separation of data logic from business logic</li>
+</ul>
+<p><strong>3. DTO (Data Transfer Object) Pattern</strong>:</p>
+<ul>
+<li>View models for responses (View*)</li>
+<li>Parameter models for requests (Param*)</li>
+<li>Separation of internal models from API contracts</li>
+</ul>
+<p><strong>4. Unit of Work Pattern</strong> (inferred):</p>
+<ul>
+<li>Transaction management</li>
+<li>Coordinated database operations</li>
+<li>Rollback on failure</li>
+</ul>
+<p><strong>5. Request-Response Pattern</strong>:</p>
+<ul>
+<li>Standardized JSON responses</li>
+<li>Consistent error handling</li>
+<li>HTTP status code conventions</li>
+</ul>
+<h3>11.2 Integration Anti-Patterns to Avoid</h3>
+<p><strong>❌ Tight Coupling</strong>:</p>
+<ul>
+<li>Direct database access from clients</li>
+<li>Hard-coded connection strings in clients</li>
+<li>Client-side business logic</li>
+</ul>
+<p><strong>❌ Chatty APIs</strong>:</p>
+<ul>
+<li>Multiple requests to fetch related data</li>
+<li>N+1 query problems</li>
+<li>Inefficient data transfer</li>
+</ul>
+<p><strong>❌ Security Issues</strong>:</p>
+<ul>
+<li>Sensitive data in URLs</li>
+<li>Authentication tokens in query strings</li>
+<li>Unencrypted data transmission</li>
+</ul>
+<hr>
+<h2>12. Integration Best Practices</h2>
+<h3>12.1 API Design Best Practices</h3>
+<p>✅ <strong>Implemented</strong>:</p>
+<ul>
+<li>RESTful resource naming</li>
+<li>HTTP method semantics</li>
+<li>Consistent response format</li>
+<li>Comprehensive error handling</li>
+<li>Authentication/authorization</li>
+<li>Multi-tenant isolation</li>
+</ul>
+<p>⚠️ <strong>Recommended Enhancements</strong>:</p>
+<ul>
+<li>API versioning strategy</li>
+<li>Rate limiting implementation</li>
+<li>Request/response compression</li>
+<li>Caching headers</li>
+<li>HATEOAS (Hypermedia links)</li>
+<li>Pagination for large datasets</li>
+</ul>
+<h3>12.2 File Integration Best Practices</h3>
+<p>✅ <strong>Implemented</strong>:</p>
+<ul>
+<li>File type validation</li>
+<li>File upload handling</li>
+<li>Excel import/export</li>
+</ul>
+<p>⚠️ <strong>Recommended Enhancements</strong>:</p>
+<ul>
+<li>File size limits</li>
+<li>Virus scanning</li>
+<li>Asynchronous file processing</li>
+<li>Progress tracking for large files</li>
+<li>File retention policies</li>
+</ul>
+<h3>12.3 Database Integration Best Practices</h3>
+<p>✅ <strong>Implemented</strong>:</p>
+<ul>
+<li>Parameterized queries</li>
+<li>Multi-tenant isolation</li>
+<li>Transaction management</li>
+<li>Connection pooling (EF default)</li>
+</ul>
+<p>⚠️ <strong>Recommended Enhancements</strong>:</p>
+<ul>
+<li>Database connection retry logic</li>
+<li>Query performance monitoring</li>
+<li>Slow query logging</li>
+<li>Database migration versioning</li>
+</ul>
+<hr>
+<h2>13. Integration Testing Strategy</h2>
+<h3>13.1 API Testing Levels</h3>
+<p><strong>Unit Testing</strong>:</p>
+<ul>
+<li>Controller action methods</li>
+<li>Request/response models</li>
+<li>Validation logic</li>
+</ul>
+<p><strong>Integration Testing</strong>:</p>
+<ul>
+<li>API endpoint end-to-end</li>
+<li>Database interactions</li>
+<li>Multi-tenant isolation</li>
+<li>Permission checks</li>
+</ul>
+<p><strong>Contract Testing</strong>:</p>
+<ul>
+<li>API contract validation</li>
+<li>Request/response schema validation</li>
+<li>Backward compatibility</li>
+</ul>
+<p><strong>Load Testing</strong>:</p>
+<ul>
+<li>Concurrent user simulation</li>
+<li>Performance benchmarking</li>
+<li>Scalability testing</li>
+</ul>
+<h3>13.2 Testing Tools (Recommended)</h3>
+<p><strong>API Testing</strong>:</p>
+<ul>
+<li>Postman collections</li>
+<li>Swagger UI</li>
+<li>RestSharp (C#)</li>
+<li>xUnit/NUnit</li>
+</ul>
+<p><strong>File Integration Testing</strong>:</p>
+<ul>
+<li>Sample Excel files</li>
+<li>CSV test data</li>
+<li>File format validators</li>
+</ul>
+<p><strong>Database Testing</strong>:</p>
+<ul>
+<li>Entity Framework test utilities</li>
+<li>In-memory database (testing)</li>
+<li>Transaction rollback (cleanup)</li>
+</ul>
+<hr>
+<h2>14. Integration Performance Optimization</h2>
+<h3>14.1 API Performance Patterns</h3>
+<p><strong>Caching Strategies</strong>:</p>
+<ul>
+<li>Response caching for read-heavy endpoints</li>
+<li>ETags for conditional requests</li>
+<li>Client-side caching headers</li>
+</ul>
+<p><strong>Query Optimization</strong>:</p>
+<ul>
+<li>Eager loading vs. lazy loading</li>
+<li>Pagination for large datasets</li>
+<li>Filtering at database level</li>
+<li>Index optimization</li>
+</ul>
+<p><strong>Async/Await Pattern</strong> (already implemented):</p>
+<pre><code class="language-csharp">public async Task&lt;IHttpActionResult&gt; GetInvoices(bool useTenant)
+{
+    var invoices = await GetInvoicesAsync(useTenant);
+    return this.JsonResultOk(invoices);
+}</code></pre><h3>14.2 File Processing Optimization</h3>
+<p><strong>Batch Processing</strong>:</p>
+<ul>
+<li>Asynchronous file import for large files</li>
+<li>Progress tracking and reporting</li>
+<li>Chunk-based processing</li>
+</ul>
+<p><strong>Streaming</strong>:</p>
+<ul>
+<li>Stream large file downloads</li>
+<li>Avoid loading entire file in memory</li>
+<li>Resume capability for large files</li>
+</ul>
+<hr>
+<h2>15. Compliance &amp; Standards</h2>
+<h3>15.1 API Standards Compliance</h3>
+<p><strong>REST Maturity Model</strong>:</p>
+<ul>
+<li>✅ Level 0: HTTP as transport (Basic)</li>
+<li>✅ Level 1: Resources (Resource URIs)</li>
+<li>✅ Level 2: HTTP Methods (GET, POST, PUT, DELETE)</li>
+<li>⚠️ Level 3: HATEOAS (Hypermedia controls) - Not implemented</li>
+</ul>
+<p><strong>JSON API Specification</strong>:</p>
+<ul>
+<li>✅ Consistent JSON structure</li>
+<li>✅ Error response format</li>
+<li>✅ Resource identification</li>
+</ul>
+<h3>15.2 Financial Integration Standards</h3>
+<p><strong>Banking File Formats</strong>:</p>
+<ul>
+<li>Support for local banking standards</li>
+<li>Payment file format compliance</li>
+<li>Bank reconciliation standards</li>
+</ul>
+<p><strong>Tax Compliance</strong>:</p>
+<ul>
+<li>WHT file format compliance</li>
+<li>Tax reporting standards</li>
+<li>Regulatory requirement adherence</li>
+</ul>
+<hr>
+<h2>Conclusion</h2>
+<p>Carmen.NET implements a <strong>comprehensive integration architecture</strong> with:</p>
+<p>✅ <strong>REST API</strong>: 351+ endpoints across 60 controllers with standardized JSON responses<br>✅ <strong>File Integration</strong>: Excel and CSV import/export with validation<br>✅ <strong>Financial Integration</strong>: Banking payment files, WHT files, GL posting<br>✅ <strong>Multi-Tenant Support</strong>: Tenant isolation across all integration points<br>✅ <strong>Security</strong>: Token-based authentication, RBAC, input validation<br>✅ <strong>Database Integration</strong>: Entity Framework with multi-tenant awareness<br>✅ <strong>Logging &amp; Monitoring</strong>: Comprehensive request/response logging</p>
+<p><strong>Integration Maturity</strong>: <strong>STRONG</strong> with opportunities for enhancement in rate limiting, caching, asynchronous processing, and API versioning.</p>
+<hr>
+<p><strong>Document Generated</strong>: 2025-10-06<br><strong>Analysis Phase</strong>: Phase 2 - Architecture &amp; Data Modeling<br><strong>Next</strong>: System Architecture Documentation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET - System Context Diagram (C4 Level 1) - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET - System Context Diagram (C4 Level 1)</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET - System Context Diagram (C4 Level 1)</h1>
+<div class="mermaid">graph TB
+    subgraph "External Systems"
+        BANK[Banking System<br/>Payment Processing]
+        TAX[Tax Authority<br/>WHT Submission]
+        EMAIL[Email Service<br/>Notifications]
+        REPORT[Reporting Service<br/>BI & Analytics]
+        OFFICE[Office/Excel<br/>Data Import/Export]
+    end
+
+    subgraph "Carmen.NET ERP System"
+        CARMEN[Carmen.NET<br/>Multi-Tenant Financial ERP<br/>.NET Framework, ASP.NET Web API]
+    end
+
+    subgraph "Users"
+        ACC[Accountants<br/>Daily Operations]
+        FM[Finance Managers<br/>Reporting & Analysis]
+        ADMIN[System Administrators<br/>Configuration]
+        AUDIT[Auditors<br/>Compliance Review]
+    end
+
+    %% User interactions
+    ACC -->|Manages transactions| CARMEN
+    FM -->|Views reports| CARMEN
+    ADMIN -->|Configures system| CARMEN
+    AUDIT -->|Reviews audit trail| CARMEN
+
+    %% External system interactions
+    CARMEN -->|Generates payment files| BANK
+    BANK -->|Sends bank statements| CARMEN
+    CARMEN -->|Submits WHT files| TAX
+    CARMEN -->|Sends notifications| EMAIL
+    CARMEN -->|Provides data| REPORT
+    CARMEN <-->|Imports/Exports data| OFFICE
+
+    classDef system fill:#1168bd,stroke:#0b4884,color:#ffffff
+    classDef external fill:#999999,stroke:#666666,color:#ffffff
+    classDef user fill:#08427b,stroke:#052e56,color:#ffffff
+
+    class CARMEN system
+    class BANK,TAX,EMAIL,REPORT,OFFICE external
+    class ACC,FM,ADMIN,AUDIT user</div><h2>System Context</h2>
+<p><strong>Carmen.NET</strong> is a comprehensive multi-tenant financial ERP system that serves multiple user types and integrates with various external systems.</p>
+<h3>Users</h3>
+<ul>
+<li><strong>Accountants</strong>: Daily transaction management (AP, AR, GL entries)</li>
+<li><strong>Finance Managers</strong>: Financial reporting, analysis, and decision support</li>
+<li><strong>System Administrators</strong>: User management, permissions, system configuration</li>
+<li><strong>Auditors</strong>: Compliance review, audit trail examination</li>
+</ul>
+<h3>External Systems</h3>
+<ul>
+<li><strong>Banking System</strong>: Payment file generation, bank statement reconciliation</li>
+<li><strong>Tax Authority</strong>: WHT (Withholding Tax) file submission, tax compliance</li>
+<li><strong>Email Service</strong>: Notifications, alerts, workflow notifications</li>
+<li><strong>Reporting Service</strong>: Business intelligence, advanced analytics</li>
+<li><strong>Office/Excel</strong>: Batch data import/export, template-based entry</li>
+</ul>
+<h3>Key Capabilities</h3>
+<ul>
+<li>Multi-tenant operations with complete data isolation</li>
+<li>11 core financial modules (AP, AR, GL, Asset, Income, Tax, etc.)</li>
+<li>351+ REST API endpoints</li>
+<li>Role-based access control</li>
+<li>Comprehensive audit trail</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

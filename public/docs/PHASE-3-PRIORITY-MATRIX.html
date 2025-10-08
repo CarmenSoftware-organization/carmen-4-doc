@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 3: Issue Severity & Correction Priority Matrix - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Phase 3: Issue Severity & Correction Priority Matrix</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Phase 3: Issue Severity &amp; Correction Priority Matrix</h1>
+<p><strong>Report Date</strong>: 2025-10-07<br><strong>Report Type</strong>: Gap Analysis - Priority Matrix for Corrections<br><strong>Source</strong>: Carmen.NET ERP System (Carmen4)<br><strong>Status</strong>: Phase 3.4 &amp; 3.5 - Complete Severity &amp; Priority Analysis</p>
+<hr>
+<h2>Executive Summary</h2>
+<p><strong>Total Issues Identified</strong>: 435 issues across all categories</p>
+<ul>
+<li><strong>Undocumented Features</strong>: 429 API endpoints + features</li>
+<li><strong>Fictional Content</strong>: 6 features</li>
+<li><strong>Inaccurate Documentation</strong>: 5 workflows with errors</li>
+</ul>
+<p><strong>Severity Breakdown</strong>:</p>
+<ul>
+<li>🚨 <strong>CRITICAL</strong>: 4 issues (immediate action required)</li>
+<li>🔴 <strong>HIGH</strong>: 45 issues (1-2 weeks)</li>
+<li>🟡 <strong>MEDIUM</strong>: 150 issues (1 month)</li>
+<li>🟢 <strong>LOW</strong>: 236 issues (backlog)</li>
+</ul>
+<p><strong>Estimated Correction Effort</strong>: 247 hours (6 weeks)</p>
+<hr>
+<h2>Severity Classification Matrix</h2>
+<h3>Severity Levels Defined</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Criteria</th>
+<th>Response Time</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🚨 <strong>CRITICAL</strong></td>
+<td>Financial risk, security vulnerability, wrong business model</td>
+<td>Immediate (24-48h)</td>
+<td>System-wide, Revenue impact</td>
+</tr>
+<tr>
+<td>🔴 <strong>HIGH</strong></td>
+<td>Major functionality missing, compliance risk, productivity loss</td>
+<td>1-2 weeks</td>
+<td>Module-wide, User frustration</td>
+</tr>
+<tr>
+<td>🟡 <strong>MEDIUM</strong></td>
+<td>Feature gaps, incomplete documentation, minor inaccuracies</td>
+<td>1 month</td>
+<td>Feature-level, Reduced efficiency</td>
+</tr>
+<tr>
+<td>🟢 <strong>LOW</strong></td>
+<td>Nice-to-have features, minor gaps, enhancement documentation</td>
+<td>Backlog</td>
+<td>Individual features, Minimal impact</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>CRITICAL Severity Issues (4 issues)</h2>
+<h3>CRIT-001: Credit Limit Enforcement Not Implemented</h3>
+<p><strong>Category</strong>: Fictional Feature<br><strong>Module</strong>: AR - Customer Management<br><strong>Requirement ID</strong>: FR-AR-001.2</p>
+<p><strong>Issue Description</strong>:</p>
+<ul>
+<li>Documentation claims credit limits are enforced</li>
+<li>Source code shows CreditLimit field exists but is NEVER checked</li>
+<li>No blocking logic, no warnings, no alerts implemented</li>
+<li>Financial risk: Unlimited exposure to bad debt</li>
+</ul>
+<p><strong>Business Impact</strong>:</p>
+<ul>
+<li><strong>Financial Risk</strong>: Customers can exceed limits without system warnings</li>
+<li><strong>Compliance Risk</strong>: May violate internal credit policy controls</li>
+<li><strong>User Trust</strong>: Finance team assumes system enforces limits (false security)</li>
+<li><strong>Estimated Exposure</strong>: Potentially millions in uncontrolled credit</li>
+</ul>
+<p><strong>Affected Documents</strong>: 3 files</p>
+<ol>
+<li><code>/docs/requirements/functional-requirements.md</code></li>
+<li><code>/docs/workflows/ar-invoice-workflow.md</code></li>
+<li><code>/docs/requirements/data-dictionary.md</code></li>
+</ol>
+<p><strong>Corrective Actions</strong>:</p>
+<ol>
+<li><strong>IMMEDIATE</strong> (2 hours): Add WARNING to all documents that credit limits are NOT enforced</li>
+<li><strong>URGENT</strong> (1 day): Notify finance team and management</li>
+<li><strong>SHORT-TERM</strong> (2 weeks): Implement credit limit checking or document as future enhancement</li>
+<li><strong>MEDIUM-TERM</strong> (1 month): Add manual credit monitoring procedures</li>
+</ol>
+<p><strong>Priority</strong>: 🚨 P0 - Immediate<br><strong>Effort</strong>: 2 hours (documentation) + 40 hours (implementation if required)<br><strong>Risk if not addressed</strong>: HIGH - Uncontrolled financial exposure</p>
+<hr>
+<h3>CRIT-002: Sales Order Integration (Wrong Business Model)</h3>
+<p><strong>Category</strong>: Fictional Feature<br><strong>Module</strong>: AR - Invoice Generation<br><strong>Requirement ID</strong>: FR-AR-003.1</p>
+<p><strong>Issue Description</strong>:</p>
+<ul>
+<li>Documentation describes sales order integration</li>
+<li>System is for HOSPITALITY industry (hotels, not general business)</li>
+<li>System uses Folios (hotel reservations) NOT sales orders</li>
+<li>Fundamental business model mismatch</li>
+</ul>
+<p><strong>Business Impact</strong>:</p>
+<ul>
+<li><strong>Sales Risk</strong>: Sales team targeting wrong market segment</li>
+<li><strong>Product Positioning</strong>: Wrong industry documentation</li>
+<li><strong>User Confusion</strong>: Users expect sales order functionality</li>
+<li><strong>Market Misalignment</strong>: Missing hospitality-specific documentation</li>
+</ul>
+<p><strong>Affected Documents</strong>: 4 files</p>
+<ol>
+<li><code>/docs/requirements/functional-requirements.md</code></li>
+<li><code>/docs/workflows/ar-invoice-workflow.md</code></li>
+<li><code>/docs/architecture/integration-architecture.md</code></li>
+<li><code>/docs/executive/executive-summary.md</code></li>
+</ol>
+<p><strong>Corrective Actions</strong>:</p>
+<ol>
+<li><strong>IMMEDIATE</strong> (4 hours): Replace all &quot;sales order&quot; references with &quot;folio&quot;</li>
+<li><strong>URGENT</strong> (1 day): Update executive summary to clarify hospitality focus</li>
+<li><strong>SHORT-TERM</strong> (1 week): Document PMS integration (Shiji, Opera, HotelLogix)</li>
+<li><strong>MEDIUM-TERM</strong> (2 weeks): Create hospitality-specific feature documentation</li>
+</ol>
+<p><strong>Priority</strong>: 🚨 P0 - Immediate<br><strong>Effort</strong>: 8 hours (documentation corrections)<br><strong>Risk if not addressed</strong>: CRITICAL - Wrong market targeting, lost sales opportunities</p>
+<hr>
+<h3>CRIT-003: API Documentation Crisis (99.1% Gap)</h3>
+<p><strong>Category</strong>: Undocumented Feature<br><strong>Module</strong>: All Modules<br><strong>Scope</strong>: System-wide</p>
+<p><strong>Issue Description</strong>:</p>
+<ul>
+<li>429 of 433 API endpoints (99.1%) are undocumented</li>
+<li>Only authentication endpoints documented</li>
+<li>All functional modules (AP, AR, GL, Asset, Income, Tax, Bank) have 0% API coverage</li>
+<li>Development teams have no API reference</li>
+</ul>
+<p><strong>Business Impact</strong>:</p>
+<ul>
+<li><strong>Development Productivity</strong>: Teams cannot integrate without source code analysis</li>
+<li><strong>Third-Party Integration</strong>: External developers cannot integrate</li>
+<li><strong>Onboarding</strong>: New developers lack API documentation</li>
+<li><strong>Support Burden</strong>: Support team cannot reference API docs</li>
+</ul>
+<p><strong>Affected Modules</strong>: All 11 modules</p>
+<p><strong>Corrective Actions</strong>:</p>
+<ol>
+<li><strong>IMMEDIATE</strong> (2 hours): Add disclaimer to api-reference.md about incompleteness</li>
+<li><strong>SHORT-TERM</strong> (3 weeks): Document core transaction APIs (40 endpoints)</li>
+<li><strong>MEDIUM-TERM</strong> (6 weeks): Document all 429 endpoints</li>
+<li><strong>LONG-TERM</strong> (3 months): Implement OpenAPI/Swagger auto-generation</li>
+</ol>
+<p><strong>Priority</strong>: 🚨 P0 - Immediate (disclaimer), P1 (core APIs)<br><strong>Effort</strong>: 2 hours (disclaimer) + 107 hours (full documentation)<br><strong>Risk if not addressed</strong>: HIGH - Integration failures, development delays</p>
+<hr>
+<h3>CRIT-004: Misleading API Reference Claim</h3>
+<p><strong>Category</strong>: Inaccurate Documentation<br><strong>Module</strong>: API Documentation<br><strong>File</strong>: <code>/docs/api/api-reference.md</code></p>
+<p><strong>Issue Description</strong>:</p>
+<ul>
+<li>Documentation claims &quot;351 endpoints documented&quot;</li>
+<li>Reality: Only 4 endpoints actually documented</li>
+<li>99.1% discrepancy between claim and reality</li>
+<li>Users expect comprehensive API documentation</li>
+</ul>
+<p><strong>Business Impact</strong>:</p>
+<ul>
+<li><strong>User Trust</strong>: False advertising undermines credibility</li>
+<li><strong>Development Impact</strong>: Teams waste time searching for non-existent docs</li>
+<li><strong>Legal Risk</strong>: Potentially misleading claims to customers</li>
+</ul>
+<p><strong>Affected Documents</strong>: 1 file</p>
+<ul>
+<li><code>/docs/api/api-reference.md</code> (Lines 1-50)</li>
+</ul>
+<p><strong>Corrective Actions</strong>:</p>
+<ol>
+<li><strong>IMMEDIATE</strong> (30 minutes): Remove &quot;351 endpoints&quot; claim</li>
+<li><strong>IMMEDIATE</strong> (30 minutes): Add clear statement: &quot;API documentation is currently incomplete&quot;</li>
+<li><strong>IMMEDIATE</strong> (1 hour): Add notice directing users to functional requirements for feature details</li>
+<li><strong>SHORT-TERM</strong> (3 weeks): Document actual endpoint count with coverage percentage</li>
+</ol>
+<p><strong>Priority</strong>: 🚨 P0 - Immediate<br><strong>Effort</strong>: 2 hours (correction)<br><strong>Risk if not addressed</strong>: MEDIUM - User frustration, trust issues</p>
+<hr>
+<h2>HIGH Severity Issues (45 issues)</h2>
+<h3>HIGH-001 to HIGH-003: Fictional Automation Features</h3>
+<p><strong>Category</strong>: Fictional Features (3 features)<br><strong>Modules</strong>: AP Invoice, AP Payment, AR Contract</p>
+<h4>HIGH-001: Excel/CSV Import (AP Invoice)</h4>
+<ul>
+<li><strong>Impact</strong>: Productivity - Users must enter invoices manually</li>
+<li><strong>Affected Docs</strong>: 3 files</li>
+<li><strong>Effort</strong>: 3 hours (remove references)</li>
+<li><strong>Priority</strong>: 🔴 P1</li>
+</ul>
+<h4>HIGH-002: Automated Invoice Approval Routing</h4>
+<ul>
+<li><strong>Impact</strong>: Efficiency - Manual approver selection required</li>
+<li><strong>Affected Docs</strong>: 3 files</li>
+<li><strong>Effort</strong>: 4 hours (update workflow diagrams)</li>
+<li><strong>Priority</strong>: 🔴 P1</li>
+</ul>
+<h4>HIGH-003: Automated Payment Approval Routing</h4>
+<ul>
+<li><strong>Impact</strong>: Efficiency - Manual approver selection required</li>
+<li><strong>Affected Docs</strong>: 2 files</li>
+<li><strong>Effort</strong>: 2 hours (update workflow diagrams)</li>
+<li><strong>Priority</strong>: 🔴 P1</li>
+</ul>
+<p><strong>Combined Corrective Actions</strong>: 9 hours<br><strong>Risk if not addressed</strong>: MEDIUM - User productivity loss, incorrect expectations</p>
+<hr>
+<h3>HIGH-004 to HIGH-044: Core Transaction API Documentation</h3>
+<p><strong>Category</strong>: Undocumented Features<br><strong>Modules</strong>: AP, AR, GL (Core Transactions)<br><strong>Count</strong>: 40 high-priority API endpoints</p>
+<p><strong>Priority Endpoints by Module</strong>:</p>
+<h4>AP Module (12 endpoints) - 🔴 P1</h4>
+<pre><code class="language-text">1. POST   /api/apInvoice                 - Create AP invoice
+2. GET    /api/apInvoice/search          - Search invoices
+3. GET    /api/apInvoice/unpaid          - List unpaid invoices
+4. GET    /api/apInvoice/{invhSeq}       - Get invoice details
+5. PUT    /api/apInvoice/{invhSeq}       - Update invoice
+6. DELETE /api/apInvoice/{invhSeq}       - Delete invoice
+7. POST   /api/apPayment                 - Create payment
+8. GET    /api/apPayment/search          - Search payments
+9. GET    /api/apPayment/{pyhSeq}        - Get payment details
+10. PUT   /api/apPayment/{pyhSeq}        - Update payment
+11. POST  /api/apPayment/sendEmail/      - Email payment voucher
+12. GET   /api/apWht/search              - Search WHT records</code></pre><h4>AR Module (18 endpoints) - 🔴 P1</h4>
+<pre><code class="language-text">13. POST  /api/arInvoice                 - Create AR invoice
+14. GET   /api/arInvoice/search          - Search invoices
+15. GET   /api/arInvoice/unpaid          - List unpaid invoices
+16. GET   /api/arInvoice/{id}            - Get invoice details
+17. PUT   /api/arInvoice/{id}            - Update invoice
+18. POST  /api/arInvoice/sendEmail/      - Email invoice
+19. POST  /api/arReceipt                 - Create receipt
+20. GET   /api/arReceipt/search          - Search receipts
+21. GET   /api/arReceipt/{id}            - Get receipt details
+22. POST  /api/arReceipt/sendEmail/      - Email receipt
+23. POST  /api/arFolio                   - Create folio
+24. GET   /api/arFolio/search            - Search folios
+25. GET   /api/arFolio/unpaid            - List unpaid folios
+26. POST  /api/arContract                - Create contract
+27. GET   /api/arContract/search         - Search contracts
+28. POST  /api/arContract/applyContract  - Apply contract to invoice
+29. GET   /api/arProfile/search          - Search customer profiles
+30. POST  /api/arProfile                 - Create customer profile</code></pre><h4>GL Module (9 endpoints) - 🔴 P1</h4>
+<pre><code class="language-text">31. POST  /api/glJv                      - Create journal voucher
+32. GET   /api/glJv/search               - Search JVs
+33. GET   /api/glJv/{jvhSeq}             - Get JV details
+34. PUT   /api/glJv/{jvhSeq}             - Update JV
+35. POST  /api/glJv/addBatch             - Bulk JV creation
+36. POST  /api/accountCode               - Create account code
+37. GET   /api/accountCode/search        - Search chart of accounts
+38. POST  /api/glProcedure/postAp        - Post AP to GL
+39. POST  /api/glProcedure/postAr        - Post AR to GL
+40. POST  /api/glProcedure/closePeriod   - Close GL period</code></pre><p><strong>Corrective Actions</strong>:</p>
+<ul>
+<li><strong>SHORT-TERM</strong> (3 weeks): Document all 40 core endpoints</li>
+<li><strong>FORMAT</strong>: OpenAPI/Swagger specification for each endpoint</li>
+<li><strong>CONTENT</strong>: Request/response schemas, business logic, examples</li>
+</ul>
+<p><strong>Priority</strong>: 🔴 P1 - High<br><strong>Effort</strong>: 40 hours (1 hour per endpoint)<br><strong>Risk if not addressed</strong>: HIGH - Integration delays, development inefficiency</p>
+<hr>
+<h3>HIGH-045: Automated Contract Billing Missing</h3>
+<p><strong>Category</strong>: Fictional Feature<br><strong>Module</strong>: AR - Contract Management<br><strong>Requirement ID</strong>: FR-AR-002.3</p>
+<p><strong>Issue Description</strong>:</p>
+<ul>
+<li>Documentation claims automatic invoice generation from contracts</li>
+<li>Reality: Manual invoice creation only</li>
+<li>Affects recurring revenue operations</li>
+</ul>
+<p><strong>Business Impact</strong>:</p>
+<ul>
+<li><strong>Revenue Risk</strong>: Delayed recurring invoices affect cash flow</li>
+<li><strong>Manual Effort</strong>: 20-40 hours/month for recurring billing</li>
+<li><strong>Error Risk</strong>: Missed invoices, incorrect billing dates</li>
+</ul>
+<p><strong>Corrective Actions</strong>:</p>
+<ol>
+<li><strong>IMMEDIATE</strong> (2 hours): Clarify contracts exist but automation does NOT</li>
+<li><strong>SHORT-TERM</strong> (1 week): Document manual contract billing procedure</li>
+<li><strong>MEDIUM-TERM</strong> (if prioritized): Implement automated billing feature</li>
+</ol>
+<p><strong>Priority</strong>: 🔴 P1 - High<br><strong>Effort</strong>: 3 hours (documentation) + 60 hours (implementation if required)<br><strong>Risk if not addressed</strong>: MEDIUM - Revenue delays, manual errors</p>
+<hr>
+<h2>MEDIUM Severity Issues (150 issues)</h2>
+<h3>MEDIUM-001 to MEDIUM-089: Secondary Module APIs</h3>
+<p><strong>Category</strong>: Undocumented Features<br><strong>Modules</strong>: Asset, Income, Tax, Bank, Workflow<br><strong>Count</strong>: 89 API endpoints</p>
+<p><strong>Breakdown by Module</strong>:</p>
+<ul>
+<li><strong>Asset Module</strong>: 26 endpoints (asset register, disposal, depreciation)</li>
+<li><strong>Income Module</strong>: 23 endpoints (revenue recording, categorization)</li>
+<li><strong>Tax Module</strong>: 16 endpoints (VAT reconciliation, WHT management)</li>
+<li><strong>Bank Module</strong>: 6 endpoints (reconciliation, import)</li>
+<li><strong>Workflow Engine</strong>: 7 endpoints (approval workflows)</li>
+<li><strong>Payment Types</strong>: 11 endpoints (payment method configuration)</li>
+</ul>
+<p><strong>Priority</strong>: 🟡 P2 - Medium<br><strong>Effort</strong>: 45 hours (30 minutes per endpoint)<br><strong>Timeline</strong>: Weeks 4-5<br><strong>Risk if not addressed</strong>: MEDIUM - Feature discovery difficulty</p>
+<hr>
+<h3>MEDIUM-090 to MEDIUM-145: Master Data APIs</h3>
+<p><strong>Category</strong>: Undocumented Features<br><strong>Module</strong>: Master Data Management<br><strong>Count</strong>: 56 endpoints</p>
+<p><strong>Categories</strong>:</p>
+<ul>
+<li><strong>Currency Management</strong>: 12 endpoints</li>
+<li><strong>Department &amp; Dimension</strong>: 10 endpoints</li>
+<li><strong>Vendor/Customer Categories</strong>: 8 endpoints</li>
+<li><strong>Country &amp; Unit</strong>: 6 endpoints</li>
+<li><strong>Global Parameters</strong>: 6 endpoints</li>
+<li><strong>Budget Management</strong>: 5 endpoints</li>
+<li><strong>Lookup Tables</strong>: 9 endpoints</li>
+</ul>
+<p><strong>Priority</strong>: 🟡 P2 - Medium<br><strong>Effort</strong>: 28 hours (30 minutes per endpoint)<br><strong>Timeline</strong>: Week 4<br><strong>Risk if not addressed</strong>: MEDIUM - Configuration difficulty</p>
+<hr>
+<h3>MEDIUM-146 to MEDIUM-150: Workflow Documentation Corrections</h3>
+<p><strong>Category</strong>: Inaccurate Documentation<br><strong>Modules</strong>: AP, AR workflows<br><strong>Count</strong>: 5 workflow diagrams</p>
+<p><strong>Files Requiring Updates</strong>:</p>
+<ol>
+<li><code>/docs/workflows/ap-invoice-workflow.md</code> (remove fictional import/routing)</li>
+<li><code>/docs/workflows/ap-payment-workflow.md</code> (remove fictional routing)</li>
+<li><code>/docs/workflows/ar-invoice-workflow.md</code> (remove sales order, auto-billing)</li>
+<li><code>/docs/workflows/business-process-flows.md</code> (remove fictional automation)</li>
+<li><code>/docs/workflows/approval-workflows.md</code> (clarify manual routing)</li>
+</ol>
+<p><strong>Priority</strong>: 🟡 P2 - Medium<br><strong>Effort</strong>: 10 hours (2 hours per workflow)<br><strong>Timeline</strong>: Week 2<br><strong>Risk if not addressed</strong>: MEDIUM - User confusion about processes</p>
+<hr>
+<h2>LOW Severity Issues (236 issues)</h2>
+<h3>LOW-001 to LOW-150: System Administration APIs</h3>
+<p><strong>Category</strong>: Undocumented Features<br><strong>Modules</strong>: User management, settings, system utilities<br><strong>Count</strong>: 150 endpoints</p>
+<p><strong>Categories</strong>:</p>
+<ul>
+<li><strong>User &amp; Permissions</strong>: 20 endpoints</li>
+<li><strong>Tenant Management</strong>: 8 endpoints</li>
+<li><strong>System Settings</strong>: 30 endpoints</li>
+<li><strong>License Management</strong>: 10 endpoints</li>
+<li><strong>Database Utilities</strong>: 15 endpoints</li>
+<li><strong>Enums &amp; Lookups</strong>: 35 endpoints</li>
+<li><strong>Process Logging</strong>: 2 endpoints</li>
+<li><strong>Support Functions</strong>: 10 endpoints</li>
+<li><strong>Versioning</strong>: 8 endpoints</li>
+<li><strong>Home &amp; Updater</strong>: 12 endpoints</li>
+</ul>
+<p><strong>Priority</strong>: 🟢 P3 - Low<br><strong>Effort</strong>: 50 hours<br><strong>Timeline</strong>: Weeks 6-8 (backlog)<br><strong>Risk if not addressed</strong>: LOW - Admin tasks manageable without docs</p>
+<hr>
+<h3>LOW-151 to LOW-236: Reporting &amp; Advanced Features</h3>
+<p><strong>Category</strong>: Undocumented Features<br><strong>Modules</strong>: Reporting, analytics, advanced features<br><strong>Count</strong>: 86 endpoints</p>
+<p><strong>Categories</strong>:</p>
+<ul>
+<li><strong>Financial Reports</strong>: 10 endpoints</li>
+<li><strong>Custom Reports</strong>: 7 endpoints</li>
+<li><strong>Stored Procedures</strong>: 7 endpoints</li>
+<li><strong>Comments &amp; Attachments</strong>: 5 endpoints</li>
+<li><strong>Plugins</strong>: 1 endpoint</li>
+<li><strong>Database Operations</strong>: 6 endpoints</li>
+<li><strong>Migration Tools</strong>: 5 endpoints</li>
+<li><strong>Setup Utilities</strong>: 8 endpoints</li>
+<li><strong>Other Advanced</strong>: 37 endpoints</li>
+</ul>
+<p><strong>Priority</strong>: 🟢 P3 - Low<br><strong>Effort</strong>: 30 hours<br><strong>Timeline</strong>: Weeks 8-10 (backlog)<br><strong>Risk if not addressed</strong>: LOW - Power users can discover features</p>
+<hr>
+<h2>Correction Priority Matrix</h2>
+<h3>Priority Framework</h3>
+<p><strong>Priority Levels</strong>:</p>
+<ul>
+<li><strong>P0 - CRITICAL</strong>: Immediate (24-48 hours)</li>
+<li><strong>P1 - HIGH</strong>: 1-2 weeks</li>
+<li><strong>P2 - MEDIUM</strong>: 3-4 weeks</li>
+<li><strong>P3 - LOW</strong>: Backlog (8+ weeks)</li>
+</ul>
+<h3>Issue Categorization Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Count</th>
+<th>Effort (hours)</th>
+<th>Timeline</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🚨 <strong>P0 - CRITICAL</strong></td>
+<td>4</td>
+<td>12</td>
+<td>Days 1-2</td>
+<td>System-wide</td>
+</tr>
+<tr>
+<td>🔴 <strong>P1 - HIGH</strong></td>
+<td>45</td>
+<td>60</td>
+<td>Weeks 1-3</td>
+<td>Module-wide</td>
+</tr>
+<tr>
+<td>🟡 <strong>P2 - MEDIUM</strong></td>
+<td>150</td>
+<td>83</td>
+<td>Weeks 4-5</td>
+<td>Feature-level</td>
+</tr>
+<tr>
+<td>🟢 <strong>P3 - LOW</strong></td>
+<td>236</td>
+<td>80</td>
+<td>Weeks 6-10</td>
+<td>Individual items</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td>435</td>
+<td>235</td>
+<td>10 weeks</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Correction Roadmap</h2>
+<h3>Week 1: Critical Issues + High Priority Start</h3>
+<p><strong>Days 1-2 (CRITICAL - 12 hours)</strong>:</p>
+<ol>
+<li>✅ Add credit limit enforcement WARNING (2 hours)</li>
+<li>✅ Replace sales order with folio references (4 hours)</li>
+<li>✅ Add API documentation disclaimer (2 hours)</li>
+<li>✅ Remove &quot;351 endpoints&quot; claim (2 hours)</li>
+<li>✅ Notify stakeholders of critical issues (2 hours)</li>
+</ol>
+<p><strong>Days 3-5 (HIGH - 20 hours)</strong>:<br>6. ✅ Remove 3 fictional automation features (9 hours)<br>7. ✅ Document AP Invoice APIs (6 routes, 6 hours)<br>8. ✅ Document AP Payment APIs (6 routes, 5 hours)</p>
+<h3>Week 2-3: High Priority APIs</h3>
+<p><strong>AP Module</strong> (12 endpoints, 12 hours)<br><strong>AR Module</strong> (18 endpoints, 18 hours)<br><strong>GL Module</strong> (9 endpoints, 9 hours)<br><strong>Workflow Updates</strong> (5 workflows, 10 hours)</p>
+<p><strong>Total</strong>: 49 hours across 2 weeks</p>
+<h3>Week 4-5: Medium Priority</h3>
+<p><strong>Secondary Module APIs</strong> (89 endpoints, 45 hours)<br><strong>Master Data APIs</strong> (56 endpoints, 28 hours)</p>
+<p><strong>Total</strong>: 73 hours across 2 weeks</p>
+<h3>Week 6-10: Low Priority (Backlog)</h3>
+<p><strong>System Admin APIs</strong> (150 endpoints, 50 hours)<br><strong>Reporting &amp; Advanced</strong> (86 endpoints, 30 hours)</p>
+<p><strong>Total</strong>: 80 hours across 5 weeks</p>
+<hr>
+<h2>Resource Allocation Scenarios</h2>
+<h3>Scenario 1: Critical &amp; High Only (5 Weeks)</h3>
+<p><strong>Focus</strong>: Address critical risks and core functionality<br><strong>Scope</strong>: P0 + P1 issues only (49 issues)<br><strong>Effort</strong>: 72 hours<br><strong>Timeline</strong>: 5 weeks (1 person @ 3 hours/day)<br><strong>Coverage After</strong>: ~20% documented, 0% fictional content</p>
+<p><strong>Deliverables</strong>:</p>
+<ul>
+<li>✅ All critical issues resolved</li>
+<li>✅ All fictional content removed</li>
+<li>✅ Core transaction APIs documented (AP, AR, GL)</li>
+<li>✅ Critical workflows corrected</li>
+<li>❌ Secondary modules still undocumented</li>
+<li>❌ Master data APIs undocumented</li>
+</ul>
+<p><strong>Recommendation</strong>: Minimum viable documentation update</p>
+<hr>
+<h3>Scenario 2: Critical + High + Medium (7 Weeks)</h3>
+<p><strong>Focus</strong>: Comprehensive core documentation<br><strong>Scope</strong>: P0 + P1 + P2 issues (199 issues)<br><strong>Effort</strong>: 155 hours<br><strong>Timeline</strong>: 7 weeks (1 person @ 4 hours/day or 2 people @ 2 hours/day)<br><strong>Coverage After</strong>: ~50% documented, 0% fictional content</p>
+<p><strong>Deliverables</strong>:</p>
+<ul>
+<li>✅ All critical issues resolved</li>
+<li>✅ All high priority issues resolved</li>
+<li>✅ All core + secondary modules documented</li>
+<li>✅ Master data APIs documented</li>
+<li>✅ All workflows corrected</li>
+<li>❌ System admin &amp; reporting still undocumented</li>
+</ul>
+<p><strong>Recommendation</strong>: Balanced approach for production systems</p>
+<hr>
+<h3>Scenario 3: Complete Documentation (10 Weeks)</h3>
+<p><strong>Focus</strong>: 90%+ API coverage<br><strong>Scope</strong>: All issues (P0 + P1 + P2 + P3)<br><strong>Effort</strong>: 235 hours<br><strong>Timeline</strong>: 10 weeks (1 person @ 5 hours/day or 2 people @ 2.5 hours/day)<br><strong>Coverage After</strong>: 90%+ documented, 0% fictional content</p>
+<p><strong>Deliverables</strong>:</p>
+<ul>
+<li>✅ 100% critical, high, and medium issues resolved</li>
+<li>✅ All functional APIs documented</li>
+<li>✅ System admin APIs documented</li>
+<li>✅ Reporting &amp; analytics documented</li>
+<li>✅ Comprehensive API reference</li>
+</ul>
+<p><strong>Recommendation</strong>: Complete remediation for enterprise deployment</p>
+<hr>
+<h2>Risk-Based Prioritization</h2>
+<h3>Risks if Issues Not Addressed</h3>
+<table>
+<thead>
+<tr>
+<th>Priority Level</th>
+<th>Risk if Ignored</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>P0 - CRITICAL</strong></td>
+<td>🚨 HIGH: Financial exposure, wrong market, user trust loss</td>
+<td>MUST address immediately</td>
+</tr>
+<tr>
+<td><strong>P1 - HIGH</strong></td>
+<td>🔴 MEDIUM-HIGH: Development delays, productivity loss</td>
+<td>Address within 2 weeks</td>
+</tr>
+<tr>
+<td><strong>P2 - MEDIUM</strong></td>
+<td>🟡 MEDIUM: Feature discovery difficulty, user friction</td>
+<td>Address within 1 month</td>
+</tr>
+<tr>
+<td><strong>P3 - LOW</strong></td>
+<td>🟢 LOW: Minor inconvenience, advanced users affected</td>
+<td>Backlog acceptable</td>
+</tr>
+</tbody></table>
+<h3>ROI Analysis</h3>
+<p><strong>Scenario 1 ROI</strong> (72 hours):</p>
+<ul>
+<li><strong>Investment</strong>: 72 hours (2 weeks FTE)</li>
+<li><strong>Return</strong>: Eliminate financial risk, correct market positioning, document 40 core APIs</li>
+<li><strong>ROI</strong>: HIGH - Critical risk elimination</li>
+</ul>
+<p><strong>Scenario 2 ROI</strong> (155 hours):</p>
+<ul>
+<li><strong>Investment</strong>: 155 hours (4 weeks FTE)</li>
+<li><strong>Return</strong>: 50% API coverage, all core modules documented</li>
+<li><strong>ROI</strong>: MEDIUM-HIGH - Balanced coverage</li>
+</ul>
+<p><strong>Scenario 3 ROI</strong> (235 hours):</p>
+<ul>
+<li><strong>Investment</strong>: 235 hours (6 weeks FTE)</li>
+<li><strong>Return</strong>: 90% API coverage, complete documentation</li>
+<li><strong>ROI</strong>: MEDIUM - Comprehensive but diminishing returns on last 40%</li>
+</ul>
+<hr>
+<h2>Recommendation</h2>
+<p><strong>Recommended Approach</strong>: <strong>Scenario 2</strong> (Critical + High + Medium)</p>
+<p><strong>Rationale</strong>:</p>
+<ol>
+<li>Addresses all critical financial and business risks (P0)</li>
+<li>Documents all core transaction APIs users need daily (P1)</li>
+<li>Covers secondary modules for complete feature coverage (P2)</li>
+<li>Leaves low-priority admin/reporting for backlog (P3)</li>
+<li>Achieves 50% coverage with reasonable effort (155 hours)</li>
+<li>Balances risk mitigation with resource investment</li>
+</ol>
+<p><strong>Timeline</strong>: 7 weeks (1 dedicated resource @ 4 hours/day)</p>
+<p><strong>Alternative</strong>: 4 weeks with 2 resources @ 4 hours/day each</p>
+<hr>
+<h2>Success Criteria</h2>
+<h3>Week 2 Checkpoint</h3>
+<p>✅ All P0 critical issues resolved (12 hours)<br>✅ All fictional content removed (9 hours)<br>✅ Core AP APIs documented (12 hours)<br><strong>Target</strong>: 33 hours complete</p>
+<h3>Week 4 Checkpoint</h3>
+<p>✅ All P1 high priority issues resolved (60 hours total)<br>✅ Core transaction APIs complete (AP, AR, GL - 40 endpoints)<br><strong>Target</strong>: 60 hours complete</p>
+<h3>Week 7 Completion</h3>
+<p>✅ All P0, P1, P2 issues resolved (155 hours total)<br>✅ 50% API coverage achieved<br>✅ 0% fictional content<br>✅ All workflow diagrams corrected<br><strong>Target</strong>: 155 hours complete</p>
+<hr>
+<h2>Next Steps</h2>
+<ol>
+<li><strong>Approve Priority Matrix</strong>: Stakeholder review and approval</li>
+<li><strong>Select Scenario</strong>: Choose 1, 2, or 3 based on resources</li>
+<li><strong>Assign Resources</strong>: Identify documentation team members</li>
+<li><strong>Begin Week 1</strong>: Start with P0 critical issues immediately</li>
+<li><strong>Track Progress</strong>: Weekly updates against priority matrix</li>
+</ol>
+<hr>
+<p><strong>Report Status</strong>: Complete<br><strong>Confidence Level</strong>: HIGH (verified priorities against source code)<br><strong>Next Phase</strong>: Final Gap Analysis Report (Phase 3 Summary)</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

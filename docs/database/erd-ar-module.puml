@@ -1,0 +1,89 @@
+@startuml
+title Accounts Receivable (AR) Module - Entity Relationship Diagram
+
+entity "AR_CONTRACT" as ar_contract {
+  * ContractId : bigint <<PK>>
+  --
+  ContractNo : varchar(50)
+  ContractDate : datetime
+  CustomerCode : varchar(20)
+  ContractStatus : int
+  ContractAmt : decimal(18,2)
+}
+
+entity "AR_CONTRACT_D" as ar_contract_d {
+  * ContractdId : bigint <<PK>>
+  * ContractId : bigint <<FK>>
+  --
+  ContractdSeq : int
+  ContractdDesc : varchar(500)
+  ContractdAmt : decimal(18,2)
+}
+
+entity "AR_INVOICE_H" as ar_invoice {
+  * InvhId : bigint <<PK>>
+  * CustomerCode : varchar(20) <<FK>>
+  --
+  InvhNo : varchar(50)
+  InvhDate : datetime
+  InvhDueDate : datetime
+  InvhStatus : int
+  CurCode : varchar(3)
+  CurRate : decimal(18,6)
+  InvhTaxType : int
+}
+
+entity "AR_INVOICE_D" as ar_invoice_d {
+  * InvdId : bigint <<PK>>
+  * InvhId : bigint <<FK>>
+  --
+  InvdSeq : int
+  AccCode : varchar(50)
+  InvdDesc : varchar(500)
+  InvdAmt : decimal(18,2)
+  InvdTaxAmt : decimal(18,2)
+}
+
+entity "AR_RECEIPT_H" as ar_receipt {
+  * RcpthId : bigint <<PK>>
+  --
+  RcpthNo : varchar(50)
+  RcpthDate : datetime
+  CustomerCode : varchar(20)
+  RcpthStatus : int
+  BankCode : varchar(20)
+}
+
+entity "AR_RECEIPT_D" as ar_receipt_d {
+  * RcptdId : bigint <<PK>>
+  * RcpthId : bigint <<FK>>
+  * InvhId : bigint <<FK>>
+  --
+  RcptdSeq : int
+  RcptdAmt : decimal(18,2)
+}
+
+entity "AR_FOLIO" as ar_folio {
+  * FolioId : bigint <<PK>>
+  * CustomerCode : varchar(20) <<FK>>
+  --
+  FolioNo : varchar(50)
+  FolioStatus : int
+  FolioBalance : decimal(18,2)
+}
+
+entity "AR_PROFILE" as ar_profile {
+  * ProfileId : bigint <<PK>>
+  * CustomerCode : varchar(20) <<FK>>
+  --
+  ProfileName : varchar(200)
+  CreditLimit : decimal(18,2)
+  CreditTerm : int
+}
+
+ar_contract ||--|{ ar_contract_d : "contains"
+ar_invoice ||--|{ ar_invoice_d : "contains"
+ar_receipt ||--|{ ar_receipt_d : "contains"
+ar_invoice ||--o{ ar_receipt_d : "paid by"
+
+@enduml

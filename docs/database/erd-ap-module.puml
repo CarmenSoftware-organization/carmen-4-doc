@@ -1,0 +1,107 @@
+@startuml
+title Accounts Payable (AP) Module - Entity Relationship Diagram
+
+entity "VENDOR" as vendor {
+  * VnCode : varchar(20) <<PK>>
+  --
+  VnName : varchar(200)
+  VnStatus : int
+  VnCategory : varchar(50)
+  VnTaxId : varchar(50)
+  VnAddress : text
+  VnCreditTerm : int
+}
+
+entity "AP_INVOICE_H" as ap_invoice {
+  * InvhId : bigint <<PK>>
+  * VnCode : varchar(20) <<FK>>
+  --
+  InvhDate : datetime
+  InvhInvNo : varchar(50)
+  InvhInvDate : datetime
+  InvhDueDate : datetime
+  InvhCredit : int
+  CurCode : varchar(3)
+  CurRate : decimal(18,6)
+  InvhTaxT1 : int
+  InvhStatus : int
+}
+
+entity "AP_INVOICE_D" as ap_invoice_d {
+  * InvdId : bigint <<PK>>
+  * InvhId : bigint <<FK>>
+  --
+  InvdSeq : int
+  AccCode : varchar(50)
+  InvdDesc : varchar(500)
+  InvdAmt : decimal(18,2)
+  InvdTaxAmt : decimal(18,2)
+}
+
+entity "AP_INV_WHT" as ap_inv_wht {
+  * InvhId : bigint <<PK,FK>>
+  --
+  WhtTypeCode : varchar(20)
+  WhtTotalAmt : decimal(18,2)
+  WhtDeptCode : varchar(20)
+  WhtNo : varchar(50)
+  WhtTaxCr : varchar(50)
+}
+
+entity "AP_INV_WHT_ITEM" as ap_inv_wht_item {
+  * WhtItemId : bigint <<PK>>
+  * InvhId : bigint <<FK>>
+  --
+  WhtItemSeq : int
+  WhtItemAmt : decimal(18,2)
+  WhtItemRate : decimal(5,2)
+  WhtItemTax : decimal(18,2)
+}
+
+entity "AP_PAYMENT_H" as ap_payment {
+  * PayhId : bigint <<PK>>
+  --
+  PayhDate : datetime
+  PayhNo : varchar(50)
+  PayhType : varchar(20)
+  PayhStatus : int
+  BankCode : varchar(20)
+  CurCode : varchar(3)
+}
+
+entity "AP_PAYMENT_D" as ap_payment_d {
+  * PaydId : bigint <<PK>>
+  * PayhId : bigint <<FK>>
+  * InvhId : bigint <<FK>>
+  --
+  PaydSeq : int
+  PaydAmt : decimal(18,2)
+  PaydWhtAmt : decimal(18,2)
+}
+
+entity "AP_PAY_WHT" as ap_pay_wht {
+  * PayhId : bigint <<PK,FK>>
+  --
+  WhtTypeCode : varchar(20)
+  WhtTotalAmt : decimal(18,2)
+  WhtNo : varchar(50)
+}
+
+entity "AP_WHT_CONDITION" as wht_condition {
+  * WhtCondId : bigint <<PK>>
+  --
+  WhtTypeCode : varchar(20)
+  WhtRate : decimal(5,2)
+  WhtMinAmt : decimal(18,2)
+  WhtMaxAmt : decimal(18,2)
+}
+
+vendor ||--o{ ap_invoice : "has"
+ap_invoice ||--|| ap_inv_wht : "includes"
+ap_invoice ||--|{ ap_invoice_d : "contains"
+ap_inv_wht ||--|{ ap_inv_wht_item : "contains"
+ap_invoice ||--o{ ap_payment_d : "paid by"
+ap_payment ||--|{ ap_payment_d : "contains"
+ap_payment ||--|| ap_pay_wht : "includes"
+
+@enduml

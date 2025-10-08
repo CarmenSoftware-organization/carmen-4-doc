@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Management and Income Module Functional Requirements - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Asset Management and Income Module Functional Requirements</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Asset Management and Income Module Functional Requirements</h1>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-07<br><strong>Status</strong>: Verified Against Source Code<br><strong>Target Audience</strong>: Business Analysts, Product Owners, QA Team</p>
+<hr>
+<h2>Asset Management</h2>
+<p><strong>Module Purpose</strong>: Track fixed assets, depreciation, location changes, and disposal processes.</p>
+<h3>FR-ASSET-001: Asset Registration</h3>
+<p><strong>User Story</strong>: As an Asset Manager, I want to register fixed assets so that I can track asset value and depreciation.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Asset</strong> (FR-ASSET-001.1)</p>
+<ul>
+<li>System shall allow creating new asset records with required fields</li>
+<li>System shall auto-generate asset code if not provided</li>
+<li>System shall validate unique asset code within tenant</li>
+<li>System shall support asset categories, departments, and locations</li>
+<li>System shall record acquisition date, cost, and depreciation method</li>
+</ul>
+</li>
+<li><p><strong>Update Asset</strong> (FR-ASSET-001.2)</p>
+<ul>
+<li>System shall allow updating asset information</li>
+<li>System shall maintain audit history of all changes</li>
+<li>System shall recalculate depreciation upon asset value changes</li>
+</ul>
+</li>
+<li><p><strong>Asset Status</strong> (FR-ASSET-001.3)</p>
+<ul>
+<li>System shall support asset statuses: Active, In Use, Under Maintenance, Disposed</li>
+<li>System shall prevent disposal of assets not marked for disposal</li>
+<li>System shall track asset location changes</li>
+</ul>
+</li>
+<li><p><strong>Copy Asset</strong> (FR-ASSET-001.4)</p>
+<ul>
+<li>System shall allow copying existing asset records</li>
+<li>System shall auto-generate new asset code for copied asset</li>
+<li>System shall preserve asset category, department, and depreciation settings</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am an Asset Manager with &quot;Ast.Register&quot; permission
+When I submit a new asset with all required fields
+Then the asset is created successfully
+And the asset code is auto-generated if not provided
+And depreciation history is initialized</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-ASSET-001: Asset code must be unique within tenant</li>
+<li>BR-ASSET-002: Asset name is required (max 200 characters)</li>
+<li>BR-ASSET-003: Acquisition cost must be greater than 0</li>
+<li>BR-ASSET-004: Depreciation method: Straight-Line, Declining Balance, or None</li>
+<li>BR-ASSET-005: Asset category and department are required</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/assetRegister/search
+GET    /api/assetRegister
+GET    /api/assetRegister/{id}
+GET    /api/assetRegister/remain/{id}/{date}
+GET    /api/assetRegister/isDisposal/{id}
+GET    /api/assetRegister/endDate/{id}/{no}
+POST   /api/assetRegister
+POST   /api/assetRegister/copy
+PUT    /api/assetRegister/{id}
+PUT    /api/assetRegister/changeLocation
+DELETE /api/assetRegister/{id}</code></pre><p><strong>Data Model</strong>:</p>
+<pre><code class="language-typescript">interface AssetRegister {
+  id: number;
+  tenantCode: string;
+  assetCode: string;
+  assetName: string;
+  categoryId: number;
+  categoryCode: string;
+  departmentId: number;
+  locationId: number;
+  acquisitionDate: Date;
+  acquisitionCost: number;
+  salvageValue: number;
+  usefulLife: number;  // months
+  depreciationMethod: &#039;SL&#039; | &#039;DB&#039; | &#039;NONE&#039;;  // Straight-Line, Declining Balance
+  accumulatedDepreciation: number;
+  netBookValue: number;
+  status: &#039;Active&#039; | &#039;InUse&#039; | &#039;Maintenance&#039; | &#039;Disposed&#039;;
+  createdBy: string;
+  createdDate: Date;
+  modifiedBy: string;
+  modifiedDate: Date;
+}</code></pre><hr>
+<h3>FR-ASSET-002: Asset Depreciation</h3>
+<p><strong>User Story</strong>: As an Accountant, I want to calculate and post asset depreciation so that financial statements reflect accurate asset values.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Calculate Depreciation</strong> (FR-ASSET-002.1)</p>
+<ul>
+<li>System shall calculate monthly depreciation based on method</li>
+<li>System shall support Straight-Line depreciation: (Cost - Salvage) / Life</li>
+<li>System shall support Declining Balance depreciation</li>
+<li>System shall not depreciate below salvage value</li>
+</ul>
+</li>
+<li><p><strong>Depreciation History</strong> (FR-ASSET-002.2)</p>
+<ul>
+<li>System shall maintain complete depreciation history</li>
+<li>System shall track depreciation per period</li>
+<li>System shall calculate accumulated depreciation</li>
+<li>System shall calculate net book value (NBV)</li>
+</ul>
+</li>
+<li><p><strong>Period Close</strong> (FR-ASSET-002.3)</p>
+<ul>
+<li>System shall process depreciation for all active assets</li>
+<li>System shall post depreciation journals to GL</li>
+<li>System shall prevent duplicate depreciation for same period</li>
+<li>System shall allow period close only once per period</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given there are active assets with depreciation enabled
+When the month-end close procedure runs
+Then depreciation is calculated for all assets
+And depreciation journals are posted to GL
+And asset history is updated with current period depreciation</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-ASSET-006: Depreciation starts in month following acquisition</li>
+<li>BR-ASSET-007: Depreciation continues until NBV = Salvage Value</li>
+<li>BR-ASSET-008: Disposed assets do not depreciate</li>
+<li>BR-ASSET-009: Depreciation expense posts to category-specific GL account</li>
+<li>BR-ASSET-010: Period close requires &quot;Ast.Procedure&quot; permission</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/assetProcedure/closePeriod
+POST   /api/assetProcedure/postAp
+GET    /api/assetHistory/
+GET    /api/assetHistory/LocLog/</code></pre><hr>
+<h3>FR-ASSET-003: Asset Disposal</h3>
+<p><strong>User Story</strong>: As an Asset Manager, I want to record asset disposal so that disposed assets are removed from active tracking.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Disposal</strong> (FR-ASSET-003.1)</p>
+<ul>
+<li>System shall allow creating disposal records for registered assets</li>
+<li>System shall validate asset exists and is not already disposed</li>
+<li>System shall record disposal date, method, and proceeds</li>
+<li>System shall calculate gain/loss on disposal</li>
+</ul>
+</li>
+<li><p><strong>Disposal Methods</strong> (FR-ASSET-003.2)</p>
+<ul>
+<li>System shall support disposal methods: Sale, Scrap, Trade-In, Donation, Lost</li>
+<li>System shall require approval for disposals above threshold</li>
+<li>System shall generate GL journals for disposal transactions</li>
+</ul>
+</li>
+<li><p><strong>Disposal Query</strong> (FR-ASSET-003.3)</p>
+<ul>
+<li>System shall provide disposal information lookup by asset</li>
+<li>System shall calculate accumulated depreciation at disposal date</li>
+<li>System shall show NBV at disposal date</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I have an active asset
+When I create a disposal record with valid data
+Then the disposal is recorded successfully
+And the asset status changes to &quot;Disposed&quot;
+And gain/loss on disposal is calculated
+And GL journals are generated for disposal</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-ASSET-011: Disposal date must be &gt;= acquisition date</li>
+<li>BR-ASSET-012: Gain/Loss = Proceeds - (Cost - Accumulated Depreciation)</li>
+<li>BR-ASSET-013: Disposed assets cannot be updated or reactivated</li>
+<li>BR-ASSET-014: Disposal requires &quot;Ast.Disposal&quot; permission</li>
+<li>BR-ASSET-015: Disposal above 50,000 THB requires approval</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/assetDisposal/search
+GET    /api/assetDisposal
+GET    /api/assetDisposal/{id}
+POST   /api/assetDisposalQuery
+POST   /api/assetDisposalAccuDepre
+POST   /api/assetDisposal
+PUT    /api/assetDisposal/{id}
+DELETE /api/assetDisposal/{id}</code></pre><p><strong>Data Model</strong>:</p>
+<pre><code class="language-typescript">interface AssetDisposal {
+  id: number;
+  tenantCode: string;
+  assetRegisterId: number;
+  disposalDate: Date;
+  disposalMethod: &#039;Sale&#039; | &#039;Scrap&#039; | &#039;TradeIn&#039; | &#039;Donation&#039; | &#039;Lost&#039;;
+  proceeds: number;
+  originalCost: number;
+  accumulatedDepreciation: number;
+  netBookValue: number;
+  gainLoss: number;  // Proceeds - NBV
+  reason: string;
+  approvedBy: string;
+  approvedDate: Date;
+  glJournalId: number;
+  createdBy: string;
+  createdDate: Date;
+}</code></pre><hr>
+<h3>FR-ASSET-004: Asset Master Data</h3>
+<p><strong>User Story</strong>: As a System Administrator, I want to maintain asset master data so that assets can be properly categorized and tracked.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Asset Categories</strong> (FR-ASSET-004.1)</p>
+<ul>
+<li>System shall allow managing asset categories</li>
+<li>System shall assign GL accounts per category</li>
+<li>System shall support hierarchical category structure</li>
+<li>System shall validate unique category codes</li>
+</ul>
+</li>
+<li><p><strong>Asset Departments</strong> (FR-ASSET-004.2)</p>
+<ul>
+<li>System shall allow managing departments</li>
+<li>System shall assign cost centers per department</li>
+<li>System shall validate unique department codes</li>
+</ul>
+</li>
+<li><p><strong>Asset Locations</strong> (FR-ASSET-004.3)</p>
+<ul>
+<li>System shall allow managing physical locations</li>
+<li>System shall track asset location history</li>
+<li>System shall support location transfers</li>
+<li>System shall validate unique location codes</li>
+</ul>
+</li>
+</ol>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text"># Categories
+POST   /api/assetCategory/search
+GET    /api/assetCategory
+GET    /api/assetCategory/{id}
+POST   /api/assetCategory
+PUT    /api/assetCategory/{id}
+DELETE /api/assetCategory/{id}
+
+# Departments
+POST   /api/assetDepartment/search
+GET    /api/assetDepartment
+GET    /api/assetDepartment/{id}
+POST   /api/assetDepartment
+PUT    /api/assetDepartment/{id}
+DELETE /api/assetDepartment/{id}
+
+# Locations
+POST   /api/assetLocation/search
+GET    /api/assetLocation
+GET    /api/assetLocation/{id}
+POST   /api/assetLocation
+PUT    /api/assetLocation/{id}
+DELETE /api/assetLocation/{id}</code></pre><hr>
+<h2>Income Module</h2>
+<p><strong>Module Purpose</strong>: Manage income recognition, revenue codes, and hotel/hospitality-specific income tracking (PMS integration).</p>
+<h3>FR-INCOME-001: Income Invoice Management</h3>
+<p><strong>User Story</strong>: As a Revenue Clerk, I want to create income invoices so that revenue is properly recorded and tracked.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Income Invoice</strong> (FR-INCOME-001.1)</p>
+<ul>
+<li>System shall allow creating income invoices with line items</li>
+<li>System shall auto-generate invoice numbers</li>
+<li>System shall validate unique invoice numbers within tenant</li>
+<li>System shall support multiple revenue codes per invoice</li>
+<li>System shall calculate totals, taxes, and discounts</li>
+</ul>
+</li>
+<li><p><strong>Update Income Invoice</strong> (FR-INCOME-001.2)</p>
+<ul>
+<li>System shall allow updating invoice information</li>
+<li>System shall maintain audit history of all changes</li>
+<li>System shall prevent changes to posted invoices</li>
+</ul>
+</li>
+<li><p><strong>Invoice Status</strong> (FR-INCOME-001.3)</p>
+<ul>
+<li>System shall support invoice statuses: Draft, Posted, Void</li>
+<li>System shall prevent deletion of posted invoices</li>
+<li>System shall allow voiding posted invoices with reason</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given I am a Revenue Clerk with &quot;Inc.Invoice&quot; permission
+When I submit a new income invoice with all required fields
+Then the invoice is created successfully
+And the invoice number is auto-generated
+And invoice status is set to &quot;Draft&quot;</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-INCOME-001: Invoice number must be unique within tenant</li>
+<li>BR-INCOME-002: Invoice date is required and must be within open period</li>
+<li>BR-INCOME-003: At least one line item is required</li>
+<li>BR-INCOME-004: Total amount must equal sum of line items</li>
+<li>BR-INCOME-005: Posted invoices cannot be edited, only voided</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/incomeInvoice/search
+GET    /api/incomeInvoice
+GET    /api/incomeInvoice/{id}
+POST   /api/incomeInvoice
+PUT    /api/incomeInvoice/{id}
+DELETE /api/incomeInvoice/{id}</code></pre><p><strong>Data Model</strong>:</p>
+<pre><code class="language-typescript">interface IncomeInvoice {
+  id: number;
+  tenantCode: string;
+  invoiceNo: string;
+  invoiceDate: Date;
+  customerId: number;
+  customerName: string;
+  sourceId: number;  // Income source (HMS, PMS, Manual)
+  categoryId: number;
+  subtotal: number;
+  vatAmount: number;
+  totalAmount: number;
+  status: &#039;Draft&#039; | &#039;Posted&#039; | &#039;Void&#039;;
+  postedBy: string;
+  postedDate: Date;
+  voidReason: string;
+  glJournalId: number;
+  lineItems: IncomeInvoiceLine[];
+  createdBy: string;
+  createdDate: Date;
+  modifiedBy: string;
+  modifiedDate: Date;
+}
+
+interface IncomeInvoiceLine {
+  id: number;
+  incomeInvoiceId: number;
+  lineNo: number;
+  revenueCodeId: number;
+  productId: number;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  amount: number;
+  vatRate: number;
+  vatAmount: number;
+}</code></pre><hr>
+<h3>FR-INCOME-002: Revenue Code Management</h3>
+<p><strong>User Story</strong>: As a Finance Manager, I want to maintain revenue codes so that income is classified correctly for reporting.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Create Revenue Code</strong> (FR-INCOME-002.1)</p>
+<ul>
+<li>System shall allow creating revenue codes</li>
+<li>System shall assign GL accounts per revenue code</li>
+<li>System shall validate unique revenue codes</li>
+<li>System shall support active/inactive status</li>
+</ul>
+</li>
+<li><p><strong>Revenue Code Mapping</strong> (FR-INCOME-002.2)</p>
+<ul>
+<li>System shall map revenue codes to GL accounts</li>
+<li>System shall support department-specific revenue codes</li>
+<li>System shall validate GL account exists before mapping</li>
+</ul>
+</li>
+</ol>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/incomeRevenue/search
+GET    /api/incomeRevenue
+GET    /api/incomeRevenue/{id}
+POST   /api/incomeRevenue
+PUT    /api/incomeRevenue/{id}
+DELETE /api/incomeRevenue/{id}</code></pre><hr>
+<h3>FR-INCOME-003: Income Master Data</h3>
+<p><strong>User Story</strong>: As a System Administrator, I want to maintain income master data so that income transactions can be properly categorized.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Income Categories</strong> (FR-INCOME-003.1)</p>
+<ul>
+<li>System shall allow managing income categories</li>
+<li>System shall validate unique category codes</li>
+<li>System shall support hierarchical category structure</li>
+</ul>
+</li>
+<li><p><strong>Income Sources</strong> (FR-INCOME-003.2)</p>
+<ul>
+<li>System shall allow managing income sources (HMS, PMS, Manual, API)</li>
+<li>System shall track income by source for reconciliation</li>
+<li>System shall validate unique source codes</li>
+</ul>
+</li>
+<li><p><strong>Payment Codes</strong> (FR-INCOME-003.3)</p>
+<ul>
+<li>System shall allow managing payment codes</li>
+<li>System shall map payment codes to bank accounts</li>
+<li>System shall validate unique payment codes</li>
+</ul>
+</li>
+<li><p><strong>Payment Types</strong> (FR-INCOME-003.4)</p>
+<ul>
+<li>System shall allow managing payment types (Cash, Card, Transfer, Check)</li>
+<li>System shall validate unique payment type codes</li>
+</ul>
+</li>
+<li><p><strong>Income Products</strong> (FR-INCOME-003.5)</p>
+<ul>
+<li>System shall allow managing income products/services</li>
+<li>System shall assign default revenue codes per product</li>
+<li>System shall support product pricing</li>
+</ul>
+</li>
+</ol>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text"># Categories
+POST   /api/incomeCategory/search
+GET    /api/incomeCategory
+GET    /api/incomeCategory/{id}
+POST   /api/incomeCategory
+PUT    /api/incomeCategory/{id}
+DELETE /api/incomeCategory/{id}
+
+# Sources
+POST   /api/incomeSource/search
+GET    /api/incomeSource
+GET    /api/incomeSource/{id}
+POST   /api/incomeSource
+PUT    /api/incomeSource/{id}
+DELETE /api/incomeSource/{id}
+
+# Payment Codes
+POST   /api/incomePayCode/search
+GET    /api/incomePayCode
+GET    /api/incomePayCode/{id}
+POST   /api/incomePayCode
+PUT    /api/incomePayCode/{id}
+DELETE /api/incomePayCode/{id}
+
+# Payment Types
+POST   /api/incomePayType/search
+GET    /api/incomePayType
+GET    /api/incomePayType/{id}
+POST   /api/incomePayType
+PUT    /api/incomePayType/{id}
+DELETE /api/incomePayType/{id}
+
+# Products
+POST   /api/incomeProduct/search
+GET    /api/incomeProduct
+GET    /api/incomeProduct/{id}
+POST   /api/incomeProduct
+PUT    /api/incomeProduct/{id}
+DELETE /api/incomeProduct/{id}</code></pre><hr>
+<h3>FR-INCOME-004: Income Period Close</h3>
+<p><strong>User Story</strong>: As an Accountant, I want to close income periods so that revenue is properly posted to the general ledger.</p>
+<p><strong>Functional Requirements</strong>:</p>
+<ol>
+<li><p><strong>Period Close</strong> (FR-INCOME-004.1)</p>
+<ul>
+<li>System shall process all posted income invoices for the period</li>
+<li>System shall generate GL journals for revenue recognition</li>
+<li>System shall post revenue to appropriate GL accounts</li>
+<li>System shall prevent duplicate posting for same period</li>
+</ul>
+</li>
+<li><p><strong>HMS/PMS Integration</strong> (FR-INCOME-004.2)</p>
+<ul>
+<li>System shall integrate with Hotel Management System (HMS)</li>
+<li>System shall post HMS revenue to income module</li>
+<li>System shall reconcile HMS transactions with income records</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance Criteria</strong>:</p>
+<pre><code class="language-gherkin">Given there are posted income invoices for the period
+When the period close procedure runs
+Then all income is posted to GL
+And revenue is recognized per revenue code
+And period status changes to &quot;Closed&quot;</code></pre><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>BR-INCOME-006: Period close requires &quot;Inc.Procedure&quot; permission</li>
+<li>BR-INCOME-007: All invoices must be in &quot;Posted&quot; status before close</li>
+<li>BR-INCOME-008: Closed periods cannot be reopened without approval</li>
+<li>BR-INCOME-009: HMS revenue posts daily, manual invoices post at period close</li>
+</ul>
+<p><strong>API Endpoints</strong>:</p>
+<pre><code class="language-text">POST   /api/incomeProcedure/closePeriod
+POST   /api/incomeProcedure/postHmsRevenue</code></pre><hr>
+<h2>Validation Summary</h2>
+<h3>Asset Management Module</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>API Endpoints</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Asset Registration</td>
+<td>✅ Implemented</td>
+<td>11 endpoints</td>
+<td>AssetRegisterController.cs</td>
+</tr>
+<tr>
+<td>Asset Depreciation</td>
+<td>✅ Implemented</td>
+<td>4 endpoints</td>
+<td>AssetProcedureController.cs, AssetHistoryController.cs</td>
+</tr>
+<tr>
+<td>Asset Disposal</td>
+<td>✅ Implemented</td>
+<td>8 endpoints</td>
+<td>AssetDisposalController.cs</td>
+</tr>
+<tr>
+<td>Master Data</td>
+<td>✅ Implemented</td>
+<td>18 endpoints</td>
+<td>Category, Department, Location Controllers</td>
+</tr>
+</tbody></table>
+<p><strong>Total API Endpoints</strong>: 41<br><strong>Overall Status</strong>: ✅ 100% Implemented</p>
+<h3>Income Module</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>API Endpoints</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Income Invoices</td>
+<td>✅ Implemented</td>
+<td>6 endpoints</td>
+<td>IncomeInvoiceController.cs</td>
+</tr>
+<tr>
+<td>Revenue Codes</td>
+<td>✅ Implemented</td>
+<td>6 endpoints</td>
+<td>IncomeRevenueController.cs</td>
+</tr>
+<tr>
+<td>Master Data</td>
+<td>✅ Implemented</td>
+<td>30 endpoints</td>
+<td>Category, Source, PayCode, PayType, Product Controllers</td>
+</tr>
+<tr>
+<td>Period Close</td>
+<td>✅ Implemented</td>
+<td>2 endpoints</td>
+<td>IncomeProcedureController.cs</td>
+</tr>
+</tbody></table>
+<p><strong>Total API Endpoints</strong>: 44<br><strong>Overall Status</strong>: ✅ 100% Implemented</p>
+<hr>
+<p><strong>Document Owner</strong>: Business Analyst Team<br><strong>Review Cycle</strong>: Quarterly<br><strong>Last Updated</strong>: 2025-10-07<br><strong>Next Review</strong>: 2026-01-07<br><strong>Related Documents</strong>:</p>
+<ul>
+<li>Main Functional Requirements: <code>/docs/requirements/functional-requirements.md</code></li>
+<li>API Reference: <code>/docs/api/api-reference.md</code></li>
+<li>Permission Matrix: <code>/docs/requirements/permission-matrix.md</code></li>
+<li>Data Dictionary: <code>/docs/requirements/data-dictionary.md</code></li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

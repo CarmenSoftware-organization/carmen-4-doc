@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Screen Flow Diagrams - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Screen Flow Diagrams</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Screen Flow Diagrams</h1>
+<p><strong>Document Version:</strong> 1.0<br><strong>Last Updated:</strong> October 6, 2025<br><strong>Target Audience:</strong> UI/UX Designers, Product Managers, Business Analysts<br><strong>Prerequisites:</strong> Functional Requirements, UI Component Inventory</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#core-user-journeys">Core User Journeys</a></li>
+<li><a href="#ap-module-flows">AP Module Flows</a></li>
+<li><a href="#ar-module-flows">AR Module Flows</a></li>
+<li><a href="#gl-module-flows">GL Module Flows</a></li>
+<li><a href="#asset-module-flows">Asset Module Flows</a></li>
+<li><a href="#admin-flows">Admin Flows</a></li>
+</ol>
+<hr>
+<h2>1. Overview</h2>
+<h3>Navigation Architecture</h3>
+<div class="mermaid">graph TD
+    Login[Login Screen] --> Dashboard[Dashboard]
+
+    Dashboard --> AP[AP Module]
+    Dashboard --> AR[AR Module]
+    Dashboard --> GL[GL Module]
+    Dashboard --> Asset[Asset Module]
+    Dashboard --> Admin[Administration]
+
+    AP --> APInvoice[AP Invoices]
+    AP --> APPayment[AP Payments]
+    AP --> APVendor[Vendors]
+
+    AR --> ARInvoice[AR Invoices]
+    AR --> ARReceipt[AR Receipts]
+    AR --> ARCustomer[Customers]
+
+    GL --> GLJournal[Journal Vouchers]
+    GL --> GLAccount[Chart of Accounts]
+    GL --> GLReport[Reports]
+
+    Asset --> AssetRegister[Asset Register]
+    Asset --> AssetDisposal[Disposals]
+
+    Admin --> Users[Users]
+    Admin --> Settings[Settings]</div><h3>Screen Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>List Screen</strong></td>
+<td>Browse, search, filter entities</td>
+<td>AP Invoice List</td>
+</tr>
+<tr>
+<td><strong>Detail Screen</strong></td>
+<td>View entity details</td>
+<td>Invoice Detail</td>
+</tr>
+<tr>
+<td><strong>Form Screen</strong></td>
+<td>Create/edit entities</td>
+<td>New Invoice Form</td>
+</tr>
+<tr>
+<td><strong>Wizard Screen</strong></td>
+<td>Multi-step process</td>
+<td>Invoice Approval Workflow</td>
+</tr>
+<tr>
+<td><strong>Report Screen</strong></td>
+<td>View reports and analytics</td>
+<td>AP Aging Report</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>2. Core User Journeys</h2>
+<h3>2.1 Login Flow</h3>
+<div class="mermaid">graph TD
+    Start[Login Page] --> EnterCreds[Enter Credentials]
+    EnterCreds --> SelectTenant[Select Tenant]
+    SelectTenant --> Authenticate{Authenticate}
+
+    Authenticate -->|Success| Dashboard[Dashboard]
+    Authenticate -->|Invalid Credentials| ErrorMsg[Show Error Message]
+    ErrorMsg --> EnterCreds
+
+    Authenticate -->|Account Locked| LockedMsg[Account Locked Message]
+    LockedMsg --> ContactAdmin[Contact Administrator]
+
+    Dashboard --> CheckPermissions{Check Permissions}
+    CheckPermissions --> LoadModules[Load Accessible Modules]
+    LoadModules --> ShowDashboard[Display Dashboard Widgets]</div><p><strong>Screens:</strong></p>
+<ol>
+<li><p><strong>Login Screen</strong></p>
+<ul>
+<li>Username/Email input</li>
+<li>Password input</li>
+<li>Tenant selector (dropdown)</li>
+<li>Remember me checkbox</li>
+<li>Login button</li>
+<li>Forgot password link</li>
+</ul>
+</li>
+<li><p><strong>Dashboard Screen</strong></p>
+<ul>
+<li>Welcome message with user name</li>
+<li>Tenant display</li>
+<li>Quick access cards (AP, AR, GL, Asset)</li>
+<li>Recent activity widget</li>
+<li>Pending approvals widget</li>
+<li>Key metrics (outstanding invoices, overdue payments)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>2.2 Dashboard Navigation</h3>
+<div class="mermaid">graph LR
+    Dashboard[Dashboard] --> QuickActions[Quick Actions]
+    Dashboard --> Widgets[Dashboard Widgets]
+    Dashboard --> ModuleMenu[Module Menu]
+
+    QuickActions --> NewInvoice[New AP Invoice]
+    QuickActions --> NewPayment[New Payment]
+    QuickActions --> NewJV[New Journal Voucher]
+
+    Widgets --> PendingApprovals[Pending Approvals]
+    Widgets --> RecentActivity[Recent Activity]
+    Widgets --> KeyMetrics[Key Metrics]
+
+    ModuleMenu --> APMenu[AP Module]
+    ModuleMenu --> ARMenu[AR Module]
+    ModuleMenu --> GLMenu[GL Module]</div><hr>
+<h2>3. AP Module Flows</h2>
+<h3>3.1 AP Invoice Creation Flow</h3>
+<div class="mermaid">graph TD
+    Start[AP Invoice List] --> ClickNew[Click 'New Invoice']
+    ClickNew --> Form[Invoice Form]
+
+    Form --> EnterHeader[Enter Header Info]
+    EnterHeader --> SelectVendor[Select Vendor]
+    SelectVendor --> EnterAmounts[Enter Amounts]
+    EnterAmounts --> AddLines[Add Line Items]
+
+    AddLines --> Validate{Validation}
+    Validate -->|Errors| ShowErrors[Show Error Messages]
+    ShowErrors --> Form
+
+    Validate -->|Success| SaveOptions{Save Options}
+
+    SaveOptions -->|Save Draft| SaveDraft[Save as Draft]
+    SaveOptions -->|Submit for Approval| SubmitApproval[Submit for Approval]
+
+    SaveDraft --> SuccessMsg[Success Message]
+    SuccessMsg --> BackToList[Return to List]
+
+    SubmitApproval --> CheckApprovalRules{Check Approval Rules}
+    CheckApprovalRules -->|Auto-Approve| Approved[Mark as Approved]
+    CheckApprovalRules -->|Requires Approval| PendingApproval[Mark as Pending]
+
+    Approved --> NotifyUser[Notify User]
+    PendingApproval --> NotifyApprover[Notify Approver]
+
+    NotifyUser --> BackToList
+    NotifyApprover --> BackToList</div><p><strong>Screens:</strong></p>
+<ol>
+<li><p><strong>AP Invoice List Screen</strong></p>
+<ul>
+<li>Header: &quot;Accounts Payable &gt; Invoices&quot;</li>
+<li>Search bar</li>
+<li>Filters: Status, Date Range, Vendor</li>
+<li>Action buttons: New Invoice, Import, Export</li>
+<li>Data table with columns:<ul>
+<li>Invoice Number</li>
+<li>Invoice Date</li>
+<li>Vendor Name</li>
+<li>Amount</li>
+<li>Status Badge</li>
+<li>Actions (View, Edit, Delete)</li>
+</ul>
+</li>
+<li>Pagination controls</li>
+</ul>
+</li>
+<li><p><strong>AP Invoice Form Screen</strong></p>
+<ul>
+<li>Header: &quot;New AP Invoice&quot; or &quot;Edit Invoice: INV-2025-001&quot;</li>
+<li>Breadcrumbs: Dashboard &gt; AP &gt; Invoices &gt; New</li>
+</ul>
+<p><strong>Section 1: Invoice Details</strong></p>
+<ul>
+<li>Invoice Number (auto-generated or manual)</li>
+<li>Invoice Date (date picker)</li>
+<li>Due Date (calculated or manual)</li>
+<li>Vendor Selector (autocomplete)</li>
+<li>Description (textarea)</li>
+</ul>
+<p><strong>Section 2: Amounts</strong></p>
+<ul>
+<li>Amount (currency input)</li>
+<li>Tax Type Selector (VAT, WHT)</li>
+<li>Tax Amount (calculated or manual)</li>
+<li>WHT Amount (calculated or manual)</li>
+<li>Total Amount (calculated, readonly)</li>
+</ul>
+<p><strong>Section 3: Line Items</strong></p>
+<ul>
+<li>Editable data grid</li>
+<li>Columns: Line #, Description, GL Account, Department, Amount</li>
+<li>Add Line button</li>
+<li>Delete Line action</li>
+<li>Line totals validation message</li>
+</ul>
+<p><strong>Section 4: Attachments</strong> (tab or accordion)</p>
+<ul>
+<li>File upload area (drag-and-drop)</li>
+<li>Uploaded files list</li>
+</ul>
+<p><strong>Action Buttons:</strong></p>
+<ul>
+<li>Save Draft (outlined button)</li>
+<li>Submit for Approval (primary button)</li>
+<li>Cancel (text button)</li>
+</ul>
+</li>
+<li><p><strong>AP Invoice Detail Screen</strong></p>
+<ul>
+<li>Header: &quot;Invoice: INV-2025-001&quot;</li>
+<li>Status Badge (prominent)</li>
+<li>Tabs:<ul>
+<li>Details (invoice information)</li>
+<li>Line Items (read-only table)</li>
+<li>Payment History (linked payments)</li>
+<li>Attachments (download links)</li>
+<li>Audit Log (timeline)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Actions:</strong></p>
+<ul>
+<li>Edit (if status = Draft)</li>
+<li>Approve (if pending + permission)</li>
+<li>Reject (if pending + permission)</li>
+<li>Post to GL (if approved + permission)</li>
+<li>Print (PDF generation)</li>
+<li>Delete (if draft)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>3.2 AP Invoice Approval Flow</h3>
+<div class="mermaid">graph TD
+    Start[Pending Approvals List] --> SelectInvoice[Select Invoice]
+    SelectInvoice --> ViewDetails[View Invoice Details]
+
+    ViewDetails --> ApprovalDecision{Approval Decision}
+
+    ApprovalDecision -->|Approve| EnterApprovalComments[Enter Approval Comments]
+    EnterApprovalComments --> ConfirmApprove{Confirm Approval}
+    ConfirmApprove -->|Yes| MarkApproved[Mark as Approved]
+    ConfirmApprove -->|No| ViewDetails
+
+    ApprovalDecision -->|Reject| EnterRejectionReason[Enter Rejection Reason]
+    EnterRejectionReason --> ConfirmReject{Confirm Rejection}
+    ConfirmReject -->|Yes| MarkRejected[Mark as Rejected]
+    ConfirmReject -->|No| ViewDetails
+
+    ApprovalDecision -->|Request Changes| EnterChangeRequest[Enter Change Request]
+    EnterChangeRequest --> SendBackToCreator[Send Back to Creator]
+
+    MarkApproved --> NotifyCreator[Notify Creator]
+    MarkRejected --> NotifyCreatorRejection[Notify Creator with Reason]
+    SendBackToCreator --> NotifyCreatorChanges[Notify Creator of Changes Needed]
+
+    NotifyCreator --> BackToApprovalsList[Return to Approvals List]
+    NotifyCreatorRejection --> BackToApprovalsList
+    NotifyCreatorChanges --> BackToApprovalsList</div><p><strong>Screens:</strong></p>
+<p><strong>Pending Approvals Screen</strong></p>
+<ul>
+<li>Filtered list showing only pending items</li>
+<li>Approval amount thresholds display</li>
+<li>Quick actions: Approve All, Reject All</li>
+</ul>
+<hr>
+<h3>3.3 AP Payment Processing Flow</h3>
+<div class="mermaid">graph TD
+    Start[Payment List] --> NewPayment[Click 'New Payment']
+    NewPayment --> SelectVendor[Select Vendor]
+    SelectVendor --> LoadUnpaidInvoices[Load Unpaid Invoices]
+
+    LoadUnpaidInvoices --> SelectInvoices[Select Invoices to Pay]
+    SelectInvoices --> EnterPaymentDetails[Enter Payment Details]
+
+    EnterPaymentDetails --> PaymentMethod{Payment Method}
+
+    PaymentMethod -->|Check| EnterCheckNumber[Enter Check Number]
+    PaymentMethod -->|Wire Transfer| EnterTransferRef[Enter Transfer Reference]
+    PaymentMethod -->|ACH| EnterACHDetails[Enter ACH Details]
+
+    EnterCheckNumber --> AllocateAmounts[Allocate Payment Amounts]
+    EnterTransferRef --> AllocateAmounts
+    EnterACHDetails --> AllocateAmounts
+
+    AllocateAmounts --> ReviewPayment[Review Payment Summary]
+    ReviewPayment --> ValidatePayment{Validate}
+
+    ValidatePayment -->|Errors| ShowPaymentErrors[Show Error Messages]
+    ShowPaymentErrors --> EnterPaymentDetails
+
+    ValidatePayment -->|Success| SavePayment[Save Payment]
+    SavePayment --> PostToGL[Post to GL]
+    PostToGL --> UpdateInvoiceStatus[Update Invoice Outstanding]
+    UpdateInvoiceStatus --> SuccessPaymentMsg[Success Message]
+    SuccessPaymentMsg --> BackToPaymentList[Return to List]</div><hr>
+<h2>4. AR Module Flows</h2>
+<h3>4.1 AR Invoice Creation Flow</h3>
+<div class="mermaid">graph TD
+    Start[AR Invoice List] --> CheckContract{Has Contract?}
+
+    CheckContract -->|Yes| SelectContract[Select Contract]
+    SelectContract --> LoadContractTerms[Load Contract Terms]
+    LoadContractTerms --> PreFillInvoice[Pre-fill Invoice from Contract]
+
+    CheckContract -->|No| NewInvoice[New Invoice Form]
+
+    PreFillInvoice --> InvoiceForm[Invoice Form]
+    NewInvoice --> InvoiceForm
+
+    InvoiceForm --> EnterDetails[Enter Invoice Details]
+    EnterDetails --> SelectCustomer[Select Customer]
+    SelectCustomer --> CheckCreditLimit{Check Credit Limit}
+
+    CheckCreditLimit -->|Exceeds Limit| CreditWarning[Show Credit Limit Warning]
+    CreditWarning --> OverrideCreditLimit{Override?}
+    OverrideCreditLimit -->|No| SelectCustomer
+    OverrideCreditLimit -->|Yes| ContinueInvoice[Continue with Warning]
+
+    CheckCreditLimit -->|Within Limit| ContinueInvoice
+
+    ContinueInvoice --> AddLineItems[Add Line Items]
+    AddLineItems --> CalculateVAT[Calculate VAT]
+    CalculateVAT --> ReviewInvoice[Review Invoice]
+
+    ReviewInvoice --> ValidateInvoice{Validate}
+    ValidateInvoice -->|Errors| ShowInvoiceErrors[Show Errors]
+    ShowInvoiceErrors --> InvoiceForm
+
+    ValidateInvoice -->|Success| SaveARInvoice[Save Invoice]
+    SaveARInvoice --> PostToGLAR[Post to GL]
+    PostToGLAR --> UpdateContractBalance[Update Contract Balance]
+    UpdateContractBalance --> SuccessARMsg[Success Message]
+    SuccessARMsg --> BackToARList[Return to List]</div><hr>
+<h3>4.2 AR Receipt Application Flow</h3>
+<div class="mermaid">graph TD
+    Start[Receipt List] --> NewReceipt[Click 'New Receipt']
+    NewReceipt --> SelectCustomer[Select Customer]
+    SelectCustomer --> LoadOutstandingInvoices[Load Outstanding Invoices]
+
+    LoadOutstandingInvoices --> DisplayInvoices[Display Invoices with Outstanding Amounts]
+    DisplayInvoices --> EnterReceiptAmount[Enter Receipt Amount]
+    EnterReceiptAmount --> SelectPaymentMethod[Select Payment Method]
+
+    SelectPaymentMethod --> CheckMethod{Payment Method}
+
+    CheckMethod -->|Cash| EnterReceiptDetails[Enter Receipt Details]
+    CheckMethod -->|Check| EnterCheckDetails[Enter Check Number & Date]
+    CheckMethod -->|Bank Transfer| EnterTransferDetails[Enter Transfer Details]
+
+    EnterReceiptDetails --> ApplicationMethod{Application Method}
+    EnterCheckDetails --> ApplicationMethod
+    EnterTransferDetails --> ApplicationMethod
+
+    ApplicationMethod -->|FIFO| ApplyFIFO[Apply FIFO Automatically]
+    ApplicationMethod -->|Manual| ManualAllocation[Manual Allocation]
+
+    ApplyFIFO --> ReviewApplication[Review Application]
+    ManualAllocation --> ReviewApplication
+
+    ReviewApplication --> ValidateReceipt{Validate}
+
+    ValidateReceipt -->|Errors| ShowReceiptErrors[Show Errors]
+    ShowReceiptErrors --> ApplicationMethod
+
+    ValidateReceipt -->|Success| SaveReceipt[Save Receipt]
+    SaveReceipt --> PostReceiptToGL[Post to GL]
+    PostReceiptToGL --> UpdateInvoiceOutstanding[Update Invoice Outstanding]
+    UpdateInvoiceOutstanding --> UpdateCustomerBalance[Update Customer Balance]
+    UpdateCustomerBalance --> SuccessReceiptMsg[Success Message]
+    SuccessReceiptMsg --> BackToReceiptList[Return to List]</div><hr>
+<h2>5. GL Module Flows</h2>
+<h3>5.1 Journal Voucher Creation Flow</h3>
+<div class="mermaid">graph TD
+    Start[Journal Voucher List] --> NewJV[Click 'New JV']
+    NewJV --> JVForm[JV Form]
+
+    JVForm --> EnterJVHeader[Enter Header Info]
+    EnterJVHeader --> SelectPeriod[Select GL Period]
+    SelectPeriod --> CheckPeriodStatus{Period Open?}
+
+    CheckPeriodStatus -->|Closed| PeriodClosedError[Show Period Closed Error]
+    PeriodClosedError --> SelectPeriod
+
+    CheckPeriodStatus -->|Open| AddJVLines[Add JV Lines]
+
+    AddJVLines --> EnterLine[Enter Line Details]
+    EnterLine --> SelectAccount[Select GL Account]
+    SelectAccount --> SelectDRorCR{Debit or Credit?}
+
+    SelectDRorCR -->|Debit| EnterDebitAmount[Enter Debit Amount]
+    SelectDRorCR -->|Credit| EnterCreditAmount[Enter Credit Amount]
+
+    EnterDebitAmount --> AddMoreLines{Add More Lines?}
+    EnterCreditAmount --> AddMoreLines
+
+    AddMoreLines -->|Yes| EnterLine
+    AddMoreLines -->|No| CheckBalance{DR = CR?}
+
+    CheckBalance -->|Not Balanced| BalanceError[Show Balance Error]
+    BalanceError --> AddJVLines
+
+    CheckBalance -->|Balanced| ReviewJV[Review JV]
+    ReviewJV --> ValidateJV{Validate}
+
+    ValidateJV -->|Errors| ShowJVErrors[Show Errors]
+    ShowJVErrors --> JVForm
+
+    ValidateJV -->|Success| SaveJV[Save JV]
+    SaveJV --> PostJV[Post JV]
+    PostJV --> UpdateGLBalances[Update GL Account Balances]
+    UpdateGLBalances --> SuccessJVMsg[Success Message]
+    SuccessJVMsg --> BackToJVList[Return to List]</div><p><strong>Screens:</strong></p>
+<p><strong>Journal Voucher Form Screen</strong></p>
+<ul>
+<li>Header: &quot;New Journal Voucher&quot;</li>
+</ul>
+<p><strong>Section 1: JV Header</strong></p>
+<ul>
+<li>JV Number (auto-generated)</li>
+<li>JV Date (date picker with period validation)</li>
+<li>Period Selector (FY 2025 - Period 10)</li>
+<li>Description (textarea)</li>
+<li>JV Type (Manual, Recurring, Reversing)</li>
+</ul>
+<p><strong>Section 2: JV Lines</strong></p>
+<ul>
+<li>Editable data grid with running totals</li>
+<li>Columns:<ul>
+<li>Line # (auto)</li>
+<li>GL Account (autocomplete)</li>
+<li>Description</li>
+<li>Department (optional)</li>
+<li>Debit Amount</li>
+<li>Credit Amount</li>
+</ul>
+</li>
+</ul>
+<p><strong>Summary:</strong></p>
+<ul>
+<li>Total Debit: THB 10,000.00</li>
+<li>Total Credit: THB 10,000.00</li>
+<li>Difference: THB 0.00 ✓ (Balanced)</li>
+</ul>
+<p><strong>Action Buttons:</strong></p>
+<ul>
+<li>Save Draft</li>
+<li>Save &amp; Post (primary)</li>
+<li>Cancel</li>
+</ul>
+<hr>
+<h3>5.2 GL Period Close Flow</h3>
+<div class="mermaid">graph TD
+    Start[Period Management] --> SelectPeriod[Select Period to Close]
+    SelectPeriod --> CheckStatus{Period Status?}
+
+    CheckStatus -->|Already Closed| AlreadyClosedMsg[Show Already Closed Message]
+    AlreadyClosedMsg --> SelectPeriod
+
+    CheckStatus -->|Open| RunValidations[Run Pre-Close Validations]
+
+    RunValidations --> CheckUnpostedTxns{Unposted Transactions?}
+    CheckUnpostedTxns -->|Yes| ListUnposted[List Unposted Transactions]
+    ListUnposted --> UserDecision{User Decision}
+    UserDecision -->|Post Now| PostUnposted[Post Transactions]
+    PostUnposted --> RunValidations
+    UserDecision -->|Cancel Close| SelectPeriod
+
+    CheckUnpostedTxns -->|No| CheckUnbalancedJVs{Unbalanced JVs?}
+
+    CheckUnbalancedJVs -->|Yes| ListUnbalanced[List Unbalanced JVs]
+    ListUnbalanced --> UserFixDecision{User Decision}
+    UserFixDecision -->|Fix Now| FixJVs[Fix Journal Vouchers]
+    FixJVs --> RunValidations
+    UserFixDecision -->|Cancel Close| SelectPeriod
+
+    CheckUnbalancedJVs -->|No| GenerateTrialBalance[Generate Trial Balance]
+
+    GenerateTrialBalance --> ReviewTrialBalance[Review Trial Balance]
+    ReviewTrialBalance --> ConfirmClose{Confirm Close?}
+
+    ConfirmClose -->|No| SelectPeriod
+    ConfirmClose -->|Yes| ClosePeriod[Close Period]
+
+    ClosePeriod --> LockPeriod[Lock Period]
+    LockPeriod --> GenerateClosingReports[Generate Closing Reports]
+    GenerateClosingReports --> NotifyUsers[Notify Users]
+    NotifyUsers --> SuccessCloseMsg[Period Closed Successfully]
+    SuccessCloseMsg --> BackToPeriodMgmt[Return to Period Management]</div><hr>
+<h2>6. Asset Module Flows</h2>
+<h3>6.1 Asset Registration Flow</h3>
+<div class="mermaid">graph TD
+    Start[Asset Register] --> NewAsset[Click 'New Asset']
+    NewAsset --> AssetForm[Asset Form]
+
+    AssetForm --> EnterAssetInfo[Enter Asset Information]
+    EnterAssetInfo --> SelectCategory[Select Asset Category]
+    SelectCategory --> LoadCategoryDefaults[Load Category Defaults]
+
+    LoadCategoryDefaults --> EnterAcquisitionDetails[Enter Acquisition Details]
+    EnterAcquisitionDetails --> EnterAcquisitionCost[Enter Acquisition Cost]
+    EnterAcquisitionCost --> SelectDepreciationMethod[Select Depreciation Method]
+
+    SelectDepreciationMethod --> EnterUsefulLife[Enter Useful Life Years]
+    EnterUsefulLife --> CalculateDepreciation[Calculate Depreciation Schedule]
+
+    CalculateDepreciation --> ReviewAssetInfo[Review Asset Information]
+    ReviewAssetInfo --> ValidateAsset{Validate}
+
+    ValidateAsset -->|Errors| ShowAssetErrors[Show Errors]
+    ShowAssetErrors --> AssetForm
+
+    ValidateAsset -->|Success| SaveAsset[Save Asset]
+    SaveAsset --> GenerateAssetTag[Generate Asset Tag]
+    GenerateAssetTag --> PostAcquisitionJV[Post Acquisition JV to GL]
+    PostAcquisitionJV --> SuccessAssetMsg[Success Message]
+    SuccessAssetMsg --> PrintAssetTag{Print Asset Tag?}
+
+    PrintAssetTag -->|Yes| GenerateAssetTag_PDF[Generate Asset Tag PDF]
+    PrintAssetTag -->|No| BackToAssetList[Return to Asset List]
+    GenerateAssetTag_PDF --> BackToAssetList</div><hr>
+<h3>6.2 Monthly Depreciation Flow</h3>
+<div class="mermaid">graph TD
+    Start[Asset Reports] --> SelectDepreciationReport[Select 'Monthly Depreciation']
+    SelectDepreciationReport --> SelectMonth[Select Period Month]
+    SelectMonth --> LoadAssets[Load Active Assets]
+
+    LoadAssets --> FilterAssets[Filter Assets for Depreciation]
+    FilterAssets --> CalculateMonthlyDep[Calculate Monthly Depreciation]
+
+    CalculateMonthlyDep --> DisplayDepSchedule[Display Depreciation Schedule]
+    DisplayDepSchedule --> ReviewSchedule[Review Schedule]
+
+    ReviewSchedule --> UserAction{User Action}
+
+    UserAction -->|Preview JV| GeneratePreviewJV[Generate Preview JV]
+    GeneratePreviewJV --> DisplayJVPreview[Display JV Preview]
+    DisplayJVPreview --> ReviewSchedule
+
+    UserAction -->|Post Depreciation| ConfirmPost{Confirm Post?}
+
+    ConfirmPost -->|No| ReviewSchedule
+    ConfirmPost -->|Yes| RunDepreciation[Run Depreciation Process]
+
+    RunDepreciation --> UpdateAssetNBV[Update Asset Net Book Values]
+    UpdateAssetNBV --> CreateDepreciationJV[Create Depreciation JV]
+    CreateDepreciationJV --> PostDepJVToGL[Post JV to GL]
+    PostDepJVToGL --> UpdateAssetHistory[Update Asset History]
+    UpdateAssetHistory --> GenerateDepReport[Generate Depreciation Report]
+    GenerateDepReport --> SuccessDepMsg[Depreciation Posted Successfully]
+    SuccessDepMsg --> BackToAssetReports[Return to Reports]</div><hr>
+<h2>7. Admin Flows</h2>
+<h3>7.1 User Management Flow</h3>
+<div class="mermaid">graph TD
+    Start[User Management] --> UserList[User List]
+    UserList --> ActionChoice{User Action}
+
+    ActionChoice -->|New User| NewUserForm[New User Form]
+    ActionChoice -->|Edit User| EditUserForm[Edit User Form]
+    ActionChoice -->|Deactivate| DeactivateUser[Deactivate User]
+
+    NewUserForm --> EnterUserDetails[Enter User Details]
+    EnterUserDetails --> AssignRoles[Assign Roles]
+    AssignRoles --> AssignPermissions[Assign Permissions]
+    AssignPermissions --> SetPassword[Set Initial Password]
+    SetPassword --> ValidateUserInfo{Validate}
+
+    ValidateUserInfo -->|Errors| ShowUserErrors[Show Errors]
+    ShowUserErrors --> NewUserForm
+
+    ValidateUserInfo -->|Success| SaveUser[Save User]
+    SaveUser --> SendWelcomeEmail[Send Welcome Email]
+    SendWelcomeEmail --> SuccessUserMsg[User Created Successfully]
+    SuccessUserMsg --> BackToUserList[Return to User List]
+
+    EditUserForm --> UpdateUserDetails[Update User Details]
+    UpdateUserDetails --> UpdateRoles[Update Roles]
+    UpdateRoles --> UpdatePermissions[Update Permissions]
+    UpdatePermissions --> SaveUserChanges[Save Changes]
+    SaveUserChanges --> SuccessUpdateMsg[User Updated Successfully]
+    SuccessUpdateMsg --> BackToUserList
+
+    DeactivateUser --> ConfirmDeactivate{Confirm Deactivate?}
+    ConfirmDeactivate -->|No| UserList
+    ConfirmDeactivate -->|Yes| SetUserInactive[Set User Inactive]
+    SetUserInactive --> RevokeAccess[Revoke Access Tokens]
+    RevokeAccess --> NotifyUserDeactivation[Notify User]
+    NotifyUserDeactivation --> SuccessDeactivateMsg[User Deactivated]
+    SuccessDeactivateMsg --> BackToUserList</div><hr>
+<h3>7.2 System Settings Flow</h3>
+<div class="mermaid">graph TD
+    Start[Administration] --> Settings[System Settings]
+    Settings --> SettingsTabs{Settings Category}
+
+    SettingsTabs -->|General| GeneralSettings[General Settings]
+    SettingsTabs -->|Financial| FinancialSettings[Financial Settings]
+    SettingsTabs -->|Tax| TaxSettings[Tax Settings]
+    SettingsTabs -->|Integration| IntegrationSettings[Integration Settings]
+
+    GeneralSettings --> EditGeneralSettings[Edit General Settings]
+    EditGeneralSettings --> SaveGeneralSettings[Save Changes]
+    SaveGeneralSettings --> SuccessGeneralMsg[Settings Saved]
+    SuccessGeneralMsg --> Settings
+
+    FinancialSettings --> EditFinancialSettings[Edit Financial Settings]
+    EditFinancialSettings --> ConfigurePeriods[Configure GL Periods]
+    ConfigurePeriods --> SetFiscalYear[Set Fiscal Year]
+    SetFiscalYear --> SaveFinancialSettings[Save Changes]
+    SaveFinancialSettings --> SuccessFinancialMsg[Settings Saved]
+    SuccessFinancialMsg --> Settings
+
+    TaxSettings --> EditTaxSettings[Edit Tax Settings]
+    EditTaxSettings --> ConfigureVAT[Configure VAT Rates]
+    ConfigureVAT --> ConfigureWHT[Configure WHT Rates]
+    ConfigureWHT --> SaveTaxSettings[Save Changes]
+    SaveTaxSettings --> SuccessTaxMsg[Settings Saved]
+    SuccessTaxMsg --> Settings
+
+    IntegrationSettings --> EditIntegrationSettings[Edit Integration Settings]
+    EditIntegrationSettings --> ConfigureAPIs[Configure API Keys]
+    ConfigureAPIs --> TestConnection[Test Connection]
+    TestConnection --> SaveIntegrationSettings[Save Changes]
+    SaveIntegrationSettings --> SuccessIntegrationMsg[Settings Saved]
+    SuccessIntegrationMsg --> Settings</div><hr>
+<h2>Summary</h2>
+<p>Carmen.NET Screen Flow Documentation:</p>
+<p><strong>✅ Documented:</strong></p>
+<ul>
+<li>15+ user journey flows</li>
+<li>7 module-specific workflows</li>
+<li>30+ screen definitions</li>
+<li>Navigation architecture</li>
+</ul>
+<p><strong>📊 Key Flows:</strong></p>
+<ol>
+<li><strong>AP Module</strong> (3 flows): Invoice Creation, Approval, Payment Processing</li>
+<li><strong>AR Module</strong> (2 flows): Invoice Creation, Receipt Application</li>
+<li><strong>GL Module</strong> (2 flows): Journal Voucher Creation, Period Close</li>
+<li><strong>Asset Module</strong> (2 flows): Asset Registration, Depreciation</li>
+<li><strong>Admin</strong> (2 flows): User Management, System Settings</li>
+</ol>
+<p><strong>🎯 Design Patterns:</strong></p>
+<ul>
+<li>List → Detail → Form pattern</li>
+<li>Multi-step wizards for complex processes</li>
+<li>Approval workflows with status transitions</li>
+<li>Validation checkpoints at critical steps</li>
+<li>Success/error feedback loops</li>
+</ul>
+<p><strong>📱 Responsive Considerations:</strong></p>
+<ul>
+<li>Desktop: Full multi-column layouts</li>
+<li>Tablet: Adaptive 2-column layouts</li>
+<li>Mobile: Single-column stacked layouts</li>
+<li>Touch-friendly targets (44x44px minimum)</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Implement flows in frontend framework</li>
+<li>Conduct usability testing</li>
+<li>Gather user feedback</li>
+<li>Iterate on design based on analytics</li>
+</ul>
+<hr>
+<p><strong>Document Status:</strong> ✅ Complete<br><strong>For Support:</strong> Contact UI/UX team or product management</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

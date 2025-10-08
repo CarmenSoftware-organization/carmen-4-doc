@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Database Schema Documentation - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Database Schema Documentation</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Database Schema Documentation</h1>
+<p><strong>Document Version:</strong> 1.0<br><strong>Last Updated:</strong> October 6, 2025<br><strong>Target Audience:</strong> Database Administrators, Backend Developers, Data Analysts<br><strong>Prerequisites:</strong> Data Dictionary, SQL knowledge</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#database-overview">Database Overview</a></li>
+<li><a href="#schema-architecture">Schema Architecture</a></li>
+<li><a href="#module-schemas">Module Schemas</a></li>
+<li><a href="#entity-relationship-diagrams">Entity Relationship Diagrams</a></li>
+<li><a href="#table-reference">Table Reference</a></li>
+<li><a href="#indexes--performance">Indexes &amp; Performance</a></li>
+<li><a href="#stored-procedures--functions">Stored Procedures &amp; Functions</a></li>
+<li><a href="#views">Views</a></li>
+<li><a href="#data-migration">Data Migration</a></li>
+</ol>
+<hr>
+<h2>1. Database Overview</h2>
+<h3>Database Configuration</h3>
+<p><strong>Primary Database:</strong> <code>Carmen</code> (Tenant-specific)<br><strong>Admin Database:</strong> <code>CarmenAdmin</code> (Multi-tenant management)<br><strong>Database Engine:</strong> MySQL 5.7+ / MariaDB 10.3+<br><strong>Character Set:</strong> UTF-8<br><strong>Storage Engine:</strong> InnoDB (ACID compliance, transactions, foreign keys)<br><strong>Collation:</strong> <code>utf8_general_ci</code></p>
+<h3>Multi-Tenancy Architecture</h3>
+<p>Carmen.NET implements <strong>row-level multi-tenancy</strong> with data isolation at the application layer:</p>
+<pre><code class="language-sql">-- Example: Every transactional table includes TenantCode
+CREATE TABLE apinvh (
+  InvhSeq INT PRIMARY KEY AUTO_INCREMENT,
+  TenantCode VARCHAR(20) NOT NULL,  -- ← Multi-tenant isolation
+  InvhDate DATE,
+  VnCode VARCHAR(20),
+  -- ... other fields
+  KEY TenantCode_I (TenantCode)      -- ← Index for filtering
+) ENGINE=InnoDB;
+
+-- All queries must filter by TenantCode
+SELECT * FROM apinvh WHERE TenantCode = &#039;TENANT001&#039; AND InvhSeq = 123;</code></pre><p><strong>Benefits:</strong></p>
+<ul>
+<li>✅ Single database simplifies backups and migrations</li>
+<li>✅ Shared infrastructure reduces operational costs</li>
+<li>✅ Schema changes apply to all tenants simultaneously</li>
+</ul>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>⚠️ Application must enforce tenant filtering on ALL queries</li>
+<li>⚠️ No database-level tenant isolation (rely on application layer)</li>
+<li>⚠️ Requires careful index design for multi-tenant queries</li>
+</ul>
+<h3>Database Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Total Tables</strong></td>
+<td>80+</td>
+</tr>
+<tr>
+<td><strong>AP Module Tables</strong></td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>AR Module Tables</strong></td>
+<td>15</td>
+</tr>
+<tr>
+<td><strong>GL Module Tables</strong></td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>Asset Module Tables</strong></td>
+<td>7</td>
+</tr>
+<tr>
+<td><strong>Master Data Tables</strong></td>
+<td>20</td>
+</tr>
+<tr>
+<td><strong>System Tables</strong></td>
+<td>18</td>
+</tr>
+<tr>
+<td><strong>Stored Procedures</strong></td>
+<td>75+</td>
+</tr>
+<tr>
+<td><strong>Views</strong></td>
+<td>65+</td>
+</tr>
+<tr>
+<td><strong>Functions</strong></td>
+<td>15+</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>2. Schema Architecture</h2>
+<h3>Naming Conventions</h3>
+<p><strong>Table Naming:</strong></p>
+<pre><code class="language-text">{module}{entity}{type}
+
+module: ap, ar, gl, ast (asset), inc (income)
+entity: inv (invoice), py (payment), jv (journal voucher)
+type: h (header), d (detail/lines)</code></pre><p><strong>Examples:</strong></p>
+<ul>
+<li><code>apinvh</code> - <strong>A</strong>ccounts <strong>P</strong>ayable <strong>Inv</strong>oice <strong>H</strong>eader</li>
+<li><code>apinvd</code> - <strong>A</strong>ccounts <strong>P</strong>ayable <strong>Inv</strong>oice <strong>D</strong>etail</li>
+<li><code>appyh</code> - <strong>A</strong>ccounts <strong>P</strong>ayable <strong>P</strong>a<strong>y</strong>ment <strong>H</strong>eader</li>
+<li><code>arinvh</code> - <strong>A</strong>ccounts <strong>R</strong>eceivable <strong>Inv</strong>oice <strong>H</strong>eader</li>
+<li><code>gljvh</code> - <strong>G</strong>eneral <strong>L</strong>edger <strong>J</strong>ournal <strong>V</strong>oucher <strong>H</strong>eader</li>
+</ul>
+<p><strong>Column Naming:</strong></p>
+<pre><code class="language-text">{prefix}{PropertyName}
+
+prefix: Module-specific (Invh, Pyd, AccCode, VnCode)
+PropertyName: CamelCase descriptor</code></pre><p><strong>Examples:</strong></p>
+<ul>
+<li><code>InvhSeq</code> - Invoice Header Sequence (Primary Key)</li>
+<li><code>InvhDate</code> - Invoice Header Date</li>
+<li><code>VnCode</code> - Vendor Code</li>
+<li><code>PydAmt</code> - Payment Detail Amount</li>
+</ul>
+<h3>Data Types</h3>
+<p><strong>Standard Field Types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Data Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Primary Key</strong></td>
+<td><code>INT AUTO_INCREMENT</code></td>
+<td><code>InvhSeq INT PRIMARY KEY</code></td>
+</tr>
+<tr>
+<td><strong>Codes</strong></td>
+<td><code>VARCHAR(10-20)</code></td>
+<td><code>VnCode VARCHAR(20)</code></td>
+</tr>
+<tr>
+<td><strong>Names</strong></td>
+<td><code>VARCHAR(50-255)</code></td>
+<td><code>VnName VARCHAR(255)</code></td>
+</tr>
+<tr>
+<td><strong>Descriptions</strong></td>
+<td><code>VARCHAR(255-500)</code></td>
+<td><code>InvhDesc VARCHAR(255)</code></td>
+</tr>
+<tr>
+<td><strong>Long Text</strong></td>
+<td><code>TEXT</code> / <code>LONGTEXT</code></td>
+<td><code>InvhInfo LONGTEXT</code></td>
+</tr>
+<tr>
+<td><strong>Amounts</strong></td>
+<td><code>DECIMAL(18,4)</code></td>
+<td><code>InvhTotalAmt DECIMAL(18,4)</code></td>
+</tr>
+<tr>
+<td><strong>Rates</strong></td>
+<td><code>DECIMAL(18,8)</code></td>
+<td><code>CurRate DECIMAL(18,8)</code></td>
+</tr>
+<tr>
+<td><strong>Dates</strong></td>
+<td><code>DATE</code></td>
+<td><code>InvhDate DATE</code></td>
+</tr>
+<tr>
+<td><strong>Timestamps</strong></td>
+<td><code>DATETIME</code> / <code>TIMESTAMP</code></td>
+<td><code>LastModified TIMESTAMP</code></td>
+</tr>
+<tr>
+<td><strong>Flags</strong></td>
+<td><code>TINYINT(1)</code> / <code>CHAR(1)</code></td>
+<td><code>Active TINYINT(1)</code></td>
+</tr>
+</tbody></table>
+<h3>Header-Detail Pattern</h3>
+<p>Most transactional tables follow a <strong>header-detail</strong> structure:</p>
+<div class="mermaid">erDiagram
+    APINVH ||--o{ APINVD : "has"
+    APINVH {
+        int InvhSeq PK
+        varchar TenantCode
+        date InvhDate
+        varchar VnCode FK
+        decimal InvhTotalAmt
+        char InvhStatus
+    }
+    APINVD {
+        int InvdSeq PK
+        int InvhSeq FK
+        varchar InvdDesc
+        decimal NetAmt
+        varchar DeptCode
+    }</div><p><strong>Pattern Benefits:</strong></p>
+<ul>
+<li>✅ Normalized structure (avoid duplication)</li>
+<li>✅ Flexible line items (varying quantities)</li>
+<li>✅ Easy to query totals and breakdowns</li>
+</ul>
+<hr>
+<h2>3. Module Schemas</h2>
+<h3>Accounts Payable (AP) Module</h3>
+<p><strong>Core Tables:</strong></p>
+<div class="mermaid">erDiagram
+    VENDOR ||--o{ APINVH : "issues"
+    APINVH ||--o{ APINVD : "contains"
+    APINVH ||--o{ APPYD : "paid_by"
+    APPYH ||--o{ APPYD : "applies"
+    APBANK ||--o{ APPYH : "uses"
+    APWHT ||--o{ APINVWHT : "calculates"
+    APWHTTYPE ||--o{ APINVH : "classifies"
+
+    VENDOR {
+        int VnId PK
+        varchar VnCode UK
+        varchar VnName
+        varchar TaxId
+        varchar PaymentTerms
+        decimal CreditLimit
+    }
+
+    APINVH {
+        int InvhSeq PK
+        varchar TenantCode
+        date InvhDate
+        varchar VnCode FK
+        varchar InvhInvNo
+        decimal InvhTotalAmt
+        decimal WhtTotalAmt
+        char InvhStatus
+    }
+
+    APINVD {
+        int InvdSeq PK
+        int InvhSeq FK
+        varchar InvdDesc
+        decimal NetAmt
+        varchar DeptCode
+        int whtSeq FK
+    }
+
+    APPYH {
+        int PyhSeq PK
+        varchar TenantCode
+        date PyhDate
+        varchar VnCode FK
+        decimal PyhAmt
+        varchar AppyCode FK
+        char PyhStatus
+    }
+
+    APPYD {
+        int PydSeq PK
+        int PyhSeq FK
+        int InvhSeq FK
+        decimal PydAmt
+    }</div><p><strong>Key Relationships:</strong></p>
+<ul>
+<li>VENDOR → APINVH (One vendor, many invoices)</li>
+<li>APINVH → APINVD (One invoice, many lines)</li>
+<li>APINVH ← APPYD → APPYH (Payment application: many-to-many)</li>
+<li>APINVH → APINVWHT (One invoice, many WHT line items)</li>
+</ul>
+<p><strong>Business Rules:</strong></p>
+<ol>
+<li>Invoice total = SUM(APINVD.NetAmt) + Taxes - WHT</li>
+<li>Outstanding = InvhTotalAmt - SUM(APPYD.PydAmt)</li>
+<li>Payment must reference at least one invoice</li>
+<li>WHT calculated per line or header level</li>
+</ol>
+<hr>
+<h3>Accounts Receivable (AR) Module</h3>
+<p><strong>Core Tables:</strong></p>
+<div class="mermaid">erDiagram
+    ARPROFILE ||--o{ ARCONTRACTH : "signs"
+    ARCONTRACTH ||--o{ ARCONTRACTD : "contains"
+    ARCONTRACTH ||--o{ ARINVH : "bills"
+    ARINVH ||--o{ ARINVD : "contains"
+    ARINVH ||--o{ ARRCPTD : "received_by"
+    ARRCPTH ||--o{ ARRCPTD : "applies"
+    ARFOLIO ||--o{ ARINVH : "tracks"
+    AROWNER ||--o{ ARCONTRACTH : "owns"
+
+    ARPROFILE {
+        int ProfileId PK
+        varchar ProfileCode UK
+        varchar ProfileName
+        varchar TaxId
+        decimal CreditLimit
+        decimal OutstandingBalance
+    }
+
+    ARCONTRACTH {
+        int ArContractHId PK
+        varchar TenantCode
+        varchar ConNo
+        varchar ProfileCode FK
+        date ConStartDate
+        date ConEndDate
+        decimal ConAmt
+        char ConStatus
+    }
+
+    ARINVH {
+        int InvhSeq PK
+        varchar TenantCode
+        varchar InvNo
+        date InvDate
+        varchar ProfileCode FK
+        int ArContractHId FK
+        decimal InvAmt
+        decimal InvTaxAmt
+        decimal InvTotalAmt
+        char InvStatus
+    }
+
+    ARINVD {
+        int InvdSeq PK
+        int InvhSeq FK
+        varchar InvdDesc
+        decimal NetAmt
+        varchar DeptCode
+    }
+
+    ARRCPTH {
+        int RcpthSeq PK
+        varchar TenantCode
+        varchar RcptNo
+        date RcptDate
+        varchar ProfileCode FK
+        decimal RcptAmt
+        char RcptStatus
+    }
+
+    ARRCPTD {
+        int RcptdSeq PK
+        int RcpthSeq FK
+        int InvhSeq FK
+        decimal RcptdAmt
+    }</div><p><strong>Key Relationships:</strong></p>
+<ul>
+<li>ARPROFILE → ARCONTRACTH (Customer contracts)</li>
+<li>ARCONTRACTH → ARINVH (Contract billing)</li>
+<li>ARINVH → ARINVD (Invoice line items)</li>
+<li>ARINVH ← ARRCPTD → ARRCPTH (Receipt application: many-to-many)</li>
+<li>ARFOLIO → ARINVH (Hotel folio tracking)</li>
+</ul>
+<p><strong>Business Rules:</strong></p>
+<ol>
+<li>Invoice total = SUM(ARINVD.NetAmt) + VAT</li>
+<li>Outstanding = InvTotalAmt - SUM(ARRCPTD.RcptdAmt)</li>
+<li>Receipt application uses FIFO (First In, First Out)</li>
+<li>Contract billing: Sum(Invoices) ≤ Contract Amount</li>
+</ol>
+<hr>
+<h3>General Ledger (GL) Module</h3>
+<p><strong>Core Tables:</strong></p>
+<div class="mermaid">erDiagram
+    ACCOUNTCODE ||--o{ GLJVD : "posts_to"
+    GLJVH ||--o{ GLJVD : "contains"
+    PERIOD ||--o{ GLJVH : "belongs_to"
+    DEPARTMENT ||--o{ GLJVD : "allocates"
+
+    ACCOUNTCODE {
+        int AccId PK
+        varchar AccCode UK
+        varchar AccDesc
+        char AccType
+        char AccNature
+        tinyint Active
+        tinyint UseInAp
+        tinyint UseInAr
+        tinyint UseInGl
+    }
+
+    GLJVH {
+        int JvhSeq PK
+        varchar TenantCode
+        varchar JvNo
+        date JvDate
+        varchar JvDesc
+        int PeriodId FK
+        decimal TotalDr
+        decimal TotalCr
+        char JvStatus
+        varchar JvType
+    }
+
+    GLJVD {
+        int JvdSeq PK
+        int JvhSeq FK
+        varchar AccCode FK
+        varchar JvdDesc
+        decimal DrAmt
+        decimal CrAmt
+        varchar DeptCode FK
+    }
+
+    PERIOD {
+        int PeriodId PK
+        varchar TenantCode
+        int FiscalYear
+        int PeriodNo
+        date PeriodStart
+        date PeriodEnd
+        tinyint IsClosed
+    }
+
+    DEPARTMENT {
+        int DeptId PK
+        varchar DeptCode UK
+        varchar DeptName
+        tinyint Active
+    }</div><p><strong>Key Relationships:</strong></p>
+<ul>
+<li>ACCOUNTCODE ← GLJVD → GLJVH (Journal entries)</li>
+<li>PERIOD → GLJVH (Period tracking)</li>
+<li>DEPARTMENT → GLJVD (Cost center allocation)</li>
+</ul>
+<p><strong>Business Rules:</strong></p>
+<ol>
+<li><strong>Balanced Entry</strong>: TotalDr = TotalCr (enforced)</li>
+<li><strong>Period Lock</strong>: Cannot post to closed periods</li>
+<li><strong>Account Validation</strong>: AccCode must exist and allow posting</li>
+<li><strong>Reversal</strong>: Reversal JV references original JvhSeq</li>
+</ol>
+<p><strong>Chart of Accounts Structure (10-Digit):</strong></p>
+<pre><code class="language-text">Format: AAAA-BB-CC-DD
+
+AAAA = Main Account (4 digits)
+  1000-1999: Assets
+  2000-2999: Liabilities
+  3000-3999: Equity
+  4000-4999: Revenue
+  5000-9999: Expenses
+
+BB = Sub-Account (2 digits, 01-99)
+CC = Department (2 digits, 01-99)
+DD = Project (2 digits, 01-99)
+
+Example: 1100-01-10-20
+  1100 = Cash in Bank
+  01 = Checking Account
+  10 = IT Department
+  20 = Project Alpha</code></pre><hr>
+<h3>Asset Management Module</h3>
+<p><strong>Core Tables:</strong></p>
+<div class="mermaid">erDiagram
+    ASTCATEGORY ||--o{ ASTREGISTER : "classifies"
+    ASTDEPARTMENT ||--o{ ASTREGISTER : "owns"
+    ASTLOCATION ||--o{ ASTREGISTER : "locates"
+    ASTREGISTER ||--o{ ASTHISTORY : "tracks"
+    ASTREGISTER ||--o{ ASTDISPOSAL : "disposes"
+
+    ASTREGISTER {
+        int AstId PK
+        varchar TenantCode
+        varchar AstCode UK
+        varchar AstName
+        varchar AstCategoryCode FK
+        varchar AstDeptCode FK
+        varchar AstLocationCode FK
+        date AcquisitionDate
+        decimal AcquisitionCost
+        decimal AccumulatedDepreciation
+        decimal NetBookValue
+        varchar DepreciationMethod
+        int UsefulLife
+        char AstStatus
+    }
+
+    ASTCATEGORY {
+        int AstCategoryId PK
+        varchar AstCategoryCode UK
+        varchar AstCategoryName
+        varchar DefaultAccCode
+        varchar DefaultDepMethod
+        int DefaultUsefulLife
+    }
+
+    ASTHISTORY {
+        int AstHistoryId PK
+        int AstId FK
+        date HistoryDate
+        varchar HistoryType
+        decimal Amount
+        varchar Description
+    }
+
+    ASTDISPOSAL {
+        int AstDisposalId PK
+        int AstId FK
+        date DisposalDate
+        decimal DisposalAmount
+        decimal NetBookValue
+        decimal GainLoss
+        varchar DisposalMethod
+        char DisposalStatus
+    }</div><p><strong>Key Relationships:</strong></p>
+<ul>
+<li>ASTCATEGORY → ASTREGISTER (Asset classification)</li>
+<li>ASTDEPARTMENT → ASTREGISTER (Department ownership)</li>
+<li>ASTREGISTER → ASTHISTORY (Transaction history)</li>
+<li>ASTREGISTER → ASTDISPOSAL (Disposal tracking)</li>
+</ul>
+<p><strong>Business Rules:</strong></p>
+<ol>
+<li><strong>Depreciation Calculation</strong>:<ul>
+<li>Straight-Line: (Cost - Salvage) / UsefulLife / 12</li>
+<li>Declining Balance: NetBookValue × Rate / 12</li>
+</ul>
+</li>
+<li><strong>Net Book Value</strong>: AcquisitionCost - AccumulatedDepreciation</li>
+<li><strong>Disposal G/L</strong>: DisposalAmount - NetBookValue</li>
+</ol>
+<hr>
+<h3>Master Data Tables</h3>
+<p><strong>Core Entities:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+<th>Key Fields</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>VENDOR</strong></td>
+<td>AP vendor master</td>
+<td>VnCode, VnName, TaxId, PaymentTerms</td>
+</tr>
+<tr>
+<td><strong>ARPROFILE</strong></td>
+<td>AR customer master</td>
+<td>ProfileCode, ProfileName, CreditLimit</td>
+</tr>
+<tr>
+<td><strong>ACCOUNTCODE</strong></td>
+<td>Chart of accounts</td>
+<td>AccCode, AccDesc, AccType, AccNature</td>
+</tr>
+<tr>
+<td><strong>DEPARTMENT</strong></td>
+<td>Cost centers</td>
+<td>DeptCode, DeptName</td>
+</tr>
+<tr>
+<td><strong>PROJECT</strong></td>
+<td>Project tracking</td>
+<td>ProjectCode, ProjectName</td>
+</tr>
+<tr>
+<td><strong>CURRENCY</strong></td>
+<td>Multi-currency</td>
+<td>CurCode, CurRate, CurName</td>
+</tr>
+<tr>
+<td><strong>TAXCODE</strong></td>
+<td>Tax rates</td>
+<td>TaxCode, TaxRate, TaxType</td>
+</tr>
+<tr>
+<td><strong>APBANK</strong></td>
+<td>Company bank accounts</td>
+<td>BankCode, BankName, BankAccount</td>
+</tr>
+<tr>
+<td><strong>APPYT</strong></td>
+<td>Payment types</td>
+<td>AppyCode, AppyDesc, UseInAp, UseInAr</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>4. Entity Relationship Diagrams</h2>
+<h3>AP Module Complete ERD</h3>
+<div class="mermaid">erDiagram
+    VENDOR ||--o{ APINVH : "has invoices"
+    APINVH ||--o{ APINVD : "has lines"
+    APINVH ||--o{ APINVWHT : "has WHT"
+    APINVH ||--o{ APPYD : "paid by"
+    APPYH ||--o{ APPYD : "applies to"
+    VENDOR ||--o{ APPYH : "receives payments"
+    APBANK ||--o{ APPYH : "processes"
+    APWHT ||--o{ APINVWHT : "calculates"
+    APWHTTYPE ||--o{ APINVH : "categorizes"
+    ACCOUNTCODE ||--o{ APINVD : "charges to"
+    DEPARTMENT ||--o{ APINVD : "allocates to"</div><h3>AR Module Complete ERD</h3>
+<div class="mermaid">erDiagram
+    ARPROFILE ||--o{ ARCONTRACTH : "signs"
+    ARCONTRACTH ||--o{ ARCONTRACTD : "has terms"
+    ARCONTRACTH ||--o{ ARINVH : "bills"
+    ARINVH ||--o{ ARINVD : "has lines"
+    ARINVH ||--o{ ARRCPTD : "receives"
+    ARRCPTH ||--o{ ARRCPTD : "applies"
+    ARPROFILE ||--o{ ARRCPTH : "pays"
+    ARFOLIO ||--o{ ARINVH : "groups"
+    AROWNER ||--o{ ARCONTRACTH : "owns property"
+    ARTYPE ||--o{ ARPROFILE : "classifies"
+    ARTITLE ||--o{ ARPROFILE : "prefixes"
+    ACCOUNTCODE ||--o{ ARINVD : "credits"
+    DEPARTMENT ||--o{ ARINVD : "allocates to"</div><h3>GL Module Complete ERD</h3>
+<div class="mermaid">erDiagram
+    PERIOD ||--o{ GLJVH : "contains"
+    GLJVH ||--o{ GLJVD : "has entries"
+    ACCOUNTCODE ||--o{ GLJVD : "posts to"
+    DEPARTMENT ||--o{ GLJVD : "allocates"
+    GLJVH ||--o{ GLJVH : "reverses"
+    ACCOUNTCODE ||--o{ ACCOUNTCODE : "hierarchical"</div><hr>
+<h2>5. Table Reference</h2>
+<h3>Critical Tables Deep Dive</h3>
+<h4>APINVH - AP Invoice Header</h4>
+<p><strong>Purpose:</strong> Tracks vendor invoices</p>
+<p><strong>Schema:</strong></p>
+<pre><code class="language-sql">CREATE TABLE apinvh (
+  InvhSeq INT PRIMARY KEY AUTO_INCREMENT COMMENT &#039;Invoice Header Sequence&#039;,
+  TenantCode VARCHAR(20) NOT NULL,
+  InvhDate DATE DEFAULT NULL COMMENT &#039;Transaction Date&#039;,
+  InvhInvNo VARCHAR(30) DEFAULT NULL COMMENT &#039;Invoice Number&#039;,
+  InvhInvDate DATE DEFAULT NULL COMMENT &#039;Invoice Date&#039;,
+  InvhDueDate DATE DEFAULT NULL COMMENT &#039;Due Date&#039;,
+  VnCode VARCHAR(20) DEFAULT NULL COMMENT &#039;Vendor Code&#039;,
+  CurCode VARCHAR(10) DEFAULT NULL COMMENT &#039;Currency Code&#039;,
+  CurRate DECIMAL(18,8) DEFAULT 0.00000000 COMMENT &#039;Exchange Rate&#039;,
+  InvhTotalAmt DECIMAL(18,4) DEFAULT 0.0000 COMMENT &#039;Total Amount&#039;,
+  WhtTotalAmt DECIMAL(18,4) DEFAULT 0.0000 COMMENT &#039;WHT Amount&#039;,
+  InvhStatus CHAR(1) DEFAULT &#039;E&#039; COMMENT &#039;Status: E=Entry, A=Approved, P=Posted&#039;,
+  InvhDesc VARCHAR(255) DEFAULT &#039;&#039; COMMENT &#039;Description&#039;,
+  TaxPeriod VARCHAR(7) DEFAULT NULL COMMENT &#039;Tax Period YYYY-MM&#039;,
+  TaxStatus CHAR(1) DEFAULT NULL COMMENT &#039;Tax Status&#039;,
+  UserModified VARCHAR(50) DEFAULT NULL,
+  LastModified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+  KEY VnCode_I (VnCode),
+  KEY TenantCode_I (TenantCode),
+  KEY InvhDate_I (InvhDate),
+  KEY InvhStatus_I (InvhStatus)
+) ENGINE=InnoDB COMMENT=&#039;AP Invoice Header&#039;;</code></pre><p><strong>Status Values:</strong></p>
+<ul>
+<li><code>E</code> = Entry (Draft)</li>
+<li><code>A</code> = Approved</li>
+<li><code>P</code> = Posted to GL</li>
+<li><code>V</code> = Void</li>
+</ul>
+<p><strong>Indexes:</strong></p>
+<ul>
+<li><code>PRIMARY KEY</code> on InvhSeq (clustered)</li>
+<li><code>VnCode_I</code> for vendor lookups</li>
+<li><code>TenantCode_I</code> for multi-tenant filtering</li>
+<li><code>InvhDate_I</code> for date range queries</li>
+<li><code>InvhStatus_I</code> for status filtering</li>
+</ul>
+<hr>
+<h4>APINVD - AP Invoice Detail</h4>
+<p><strong>Purpose:</strong> Invoice line items with GL account allocation</p>
+<p><strong>Schema:</strong></p>
+<pre><code class="language-sql">CREATE TABLE apinvd (
+  InvdSeq INT PRIMARY KEY AUTO_INCREMENT,
+  InvhSeq INT NOT NULL COMMENT &#039;FK to apinvh&#039;,
+  InvdDesc VARCHAR(255) DEFAULT &#039;&#039;,
+  InvdQty DECIMAL(18,4) DEFAULT 0.0000,
+  UnitCode VARCHAR(10) DEFAULT &#039;&#039;,
+  InvdPrice DECIMAL(18,4) DEFAULT 0.0000,
+  NetAmt DECIMAL(18,4) DEFAULT 0.0000 COMMENT &#039;Line Amount&#039;,
+  InvdBTaxDr VARCHAR(15) DEFAULT NULL COMMENT &#039;GL Debit Account&#039;,
+  InvdTaxT1 CHAR(1) DEFAULT &#039;N&#039; COMMENT &#039;Tax 1 Type&#039;,
+  InvdTaxR1 DECIMAL(18,8) DEFAULT 0.00000000 COMMENT &#039;Tax 1 Rate&#039;,
+  InvdTaxA1 DECIMAL(18,4) DEFAULT 0.0000 COMMENT &#039;Tax 1 Amount&#039;,
+  DeptCode VARCHAR(10) DEFAULT &#039;&#039; COMMENT &#039;Department&#039;,
+  whtSeq INT DEFAULT NULL COMMENT &#039;FK to apinvwht&#039;,
+
+  KEY InvhSeq_I (InvhSeq),
+  CONSTRAINT fk_apinvd_invhseq FOREIGN KEY (InvhSeq) REFERENCES apinvh(InvhSeq) ON DELETE CASCADE
+) ENGINE=InnoDB COMMENT=&#039;AP Invoice Detail&#039;;</code></pre><p><strong>Business Rules:</strong></p>
+<ul>
+<li>SUM(NetAmt) + Taxes - WHT = apinvh.InvhTotalAmt</li>
+<li>InvdBTaxDr must exist in accountcode and allow posting</li>
+<li>DeptCode must exist in department table</li>
+</ul>
+<hr>
+<h4>GLJVH - GL Journal Voucher Header</h4>
+<p><strong>Purpose:</strong> Manual GL journal entries</p>
+<p><strong>Schema:</strong></p>
+<pre><code class="language-sql">CREATE TABLE gljvh (
+  JvhSeq INT PRIMARY KEY AUTO_INCREMENT,
+  TenantCode VARCHAR(20) NOT NULL,
+  JvNo VARCHAR(30) NOT NULL COMMENT &#039;JV Number&#039;,
+  JvDate DATE NOT NULL COMMENT &#039;Journal Date&#039;,
+  JvDesc VARCHAR(255) DEFAULT NULL,
+  PeriodId INT DEFAULT NULL COMMENT &#039;FK to period&#039;,
+  TotalDr DECIMAL(18,4) DEFAULT 0.0000,
+  TotalCr DECIMAL(18,4) DEFAULT 0.0000,
+  JvStatus CHAR(1) DEFAULT &#039;E&#039; COMMENT &#039;E=Entry, P=Posted&#039;,
+  JvType VARCHAR(10) DEFAULT &#039;MJV&#039; COMMENT &#039;Manual JV&#039;,
+  ReversalJvhSeq INT DEFAULT NULL COMMENT &#039;Original JV if reversal&#039;,
+
+  UNIQUE KEY JvNo_U (JvNo, TenantCode),
+  KEY TenantCode_I (TenantCode),
+  KEY JvDate_I (JvDate),
+  KEY PeriodId_I (PeriodId)
+) ENGINE=InnoDB;</code></pre><p><strong>Business Rules:</strong></p>
+<ul>
+<li>TotalDr MUST equal TotalCr (enforced by trigger)</li>
+<li>JvDate must be within open period</li>
+<li>Posted JVs (JvStatus=&#39;P&#39;) cannot be modified</li>
+<li>Reversals reference original via ReversalJvhSeq</li>
+</ul>
+<hr>
+<h4>GLJVD - GL Journal Voucher Detail</h4>
+<p><strong>Schema:</strong></p>
+<pre><code class="language-sql">CREATE TABLE gljvd (
+  JvdSeq INT PRIMARY KEY AUTO_INCREMENT,
+  JvhSeq INT NOT NULL COMMENT &#039;FK to gljvh&#039;,
+  AccCode VARCHAR(15) NOT NULL COMMENT &#039;GL Account&#039;,
+  JvdDesc VARCHAR(255) DEFAULT NULL,
+  DrAmt DECIMAL(18,4) DEFAULT 0.0000,
+  CrAmt DECIMAL(18,4) DEFAULT 0.0000,
+  DeptCode VARCHAR(10) DEFAULT NULL,
+
+  KEY JvhSeq_I (JvhSeq),
+  KEY AccCode_I (AccCode),
+  CONSTRAINT fk_gljvd_jvhseq FOREIGN KEY (JvhSeq) REFERENCES gljvh(JvhSeq) ON DELETE CASCADE
+) ENGINE=InnoDB;</code></pre><p><strong>Business Rules:</strong></p>
+<ul>
+<li>Either DrAmt OR CrAmt &gt; 0 (not both)</li>
+<li>AccCode must exist and allow posting</li>
+<li>SUM(DrAmt) = gljvh.TotalDr</li>
+<li>SUM(CrAmt) = gljvh.TotalCr</li>
+</ul>
+<hr>
+<h2>6. Indexes &amp; Performance</h2>
+<h3>Index Strategy</h3>
+<p><strong>Multi-Tenant Index Pattern:</strong></p>
+<pre><code class="language-sql">-- All transactional tables
+KEY TenantCode_I (TenantCode)
+
+-- Composite index for tenant + status
+KEY TenantCode_Status_I (TenantCode, InvhStatus)
+
+-- Covering index for list queries
+KEY TenantCode_Date_I (TenantCode, InvhDate, InvhStatus)</code></pre><p><strong>Foreign Key Indexes:</strong></p>
+<pre><code class="language-sql">-- Always index FK columns
+KEY VnCode_I (VnCode)          -- FK to vendor
+KEY InvhSeq_I (InvhSeq)        -- FK to invoice header
+KEY AccCode_I (AccCode)        -- FK to account code</code></pre><p><strong>Performance Indexes:</strong></p>
+<pre><code class="language-sql">-- Date range queries
+KEY InvhDate_I (InvhDate)
+
+-- Status filtering
+KEY InvhStatus_I (InvhStatus)
+
+-- Number lookups
+KEY InvhInvNo_I (InvhInvNo)
+
+-- Composite for common queries
+KEY TenantCode_VnCode_Date_I (TenantCode, VnCode, InvhDate)</code></pre><h3>Query Optimization Tips</h3>
+<p><strong>Avoid Full Table Scans:</strong></p>
+<pre><code class="language-sql">-- ❌ BAD: No index on TenantCode
+SELECT * FROM apinvh WHERE InvhDate &gt;= &#039;2025-01-01&#039;;
+
+-- ✅ GOOD: Use composite index
+SELECT * FROM apinvh
+WHERE TenantCode = &#039;TENANT001&#039;
+  AND InvhDate &gt;= &#039;2025-01-01&#039;;</code></pre><p><strong>Use Covering Indexes:</strong></p>
+<pre><code class="language-sql">-- ❌ BAD: Extra lookup to retrieve InvhStatus
+SELECT InvhSeq, InvhStatus FROM apinvh WHERE TenantCode = &#039;TENANT001&#039;;
+
+-- ✅ GOOD: Add covering index
+CREATE INDEX TenantCode_Covering_I ON apinvh(TenantCode, InvhSeq, InvhStatus);</code></pre><p><strong>Pagination:</strong></p>
+<pre><code class="language-sql">-- ✅ GOOD: Efficient pagination
+SELECT * FROM apinvh
+WHERE TenantCode = &#039;TENANT001&#039;
+ORDER BY InvhSeq
+LIMIT 100 OFFSET 0;</code></pre><hr>
+<h2>7. Stored Procedures &amp; Functions</h2>
+<h3>Key Stored Procedures</h3>
+<p><strong>Location:</strong> <code>Carmen.WebApi/App_Data/InstallScriptCarmen/Post/03-StoreProc/</code></p>
+<table>
+<thead>
+<tr>
+<th>Procedure</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>spApInvoicePost</strong></td>
+<td>Post AP invoice to GL</td>
+</tr>
+<tr>
+<td><strong>spApPaymentPost</strong></td>
+<td>Post AP payment to GL</td>
+</tr>
+<tr>
+<td><strong>spArInvoicePost</strong></td>
+<td>Post AR invoice to GL</td>
+</tr>
+<tr>
+<td><strong>spArReceiptPost</strong></td>
+<td>Post AR receipt to GL</td>
+</tr>
+<tr>
+<td><strong>spAssetDepreciation</strong></td>
+<td>Calculate monthly depreciation</td>
+</tr>
+<tr>
+<td><strong>spGlPeriodClose</strong></td>
+<td>Close GL period</td>
+</tr>
+<tr>
+<td><strong>spGlTrialBalance</strong></td>
+<td>Generate trial balance</td>
+</tr>
+</tbody></table>
+<p><strong>Example: spApInvoicePost</strong></p>
+<pre><code class="language-sql">CREATE PROCEDURE spApInvoicePost(
+  IN p_InvhSeq INT,
+  IN p_JvDate DATE,
+  IN p_UserName VARCHAR(50)
+)
+BEGIN
+  DECLARE v_JvhSeq INT;
+  DECLARE v_TotalDr DECIMAL(18,4) DEFAULT 0;
+  DECLARE v_TotalCr DECIMAL(18,4) DEFAULT 0;
+
+  -- Create GL JV Header
+  INSERT INTO gljvh (TenantCode, JvNo, JvDate, JvDesc, JvType, JvStatus)
+  SELECT TenantCode,
+         CONCAT(&#039;AP-&#039;, InvhSeq),
+         p_JvDate,
+         CONCAT(&#039;AP Invoice: &#039;, InvhInvNo),
+         &#039;AP&#039;,
+         &#039;P&#039;
+  FROM apinvh WHERE InvhSeq = p_InvhSeq;
+
+  SET v_JvhSeq = LAST_INSERT_ID();
+
+  -- Post invoice lines (DR Expense accounts)
+  INSERT INTO gljvd (JvhSeq, AccCode, JvdDesc, DrAmt, CrAmt, DeptCode)
+  SELECT v_JvhSeq,
+         d.InvdBTaxDr,
+         d.InvdDesc,
+         d.NetAmt,
+         0,
+         d.DeptCode
+  FROM apinvd d
+  WHERE d.InvhSeq = p_InvhSeq;
+
+  -- Post AP payable (CR Accounts Payable)
+  INSERT INTO gljvd (JvhSeq, AccCode, JvdDesc, DrAmt, CrAmt)
+  SELECT v_JvhSeq,
+         &#039;2100-01-00-00&#039;,  -- AP Control Account
+         CONCAT(&#039;Vendor: &#039;, h.VnCode),
+         0,
+         h.InvhTotalAmt
+  FROM apinvh h
+  WHERE h.InvhSeq = p_InvhSeq;
+
+  -- Update invoice status
+  UPDATE apinvh SET InvhStatus = &#039;P&#039;, JvhSeq = v_JvhSeq
+  WHERE InvhSeq = p_InvhSeq;
+
+  -- Validate balanced entry
+  SELECT SUM(DrAmt), SUM(CrAmt) INTO v_TotalDr, v_TotalCr
+  FROM gljvd WHERE JvhSeq = v_JvhSeq;
+
+  IF v_TotalDr &lt;&gt; v_TotalCr THEN
+    SIGNAL SQLSTATE &#039;45000&#039; SET MESSAGE_TEXT = &#039;JV not balanced&#039;;
+  END IF;
+
+  UPDATE gljvh SET TotalDr = v_TotalDr, TotalCr = v_TotalCr
+  WHERE JvhSeq = v_JvhSeq;
+
+END;</code></pre><hr>
+<h2>8. Views</h2>
+<h3>Key Views</h3>
+<p><strong>Location:</strong> <code>Carmen.WebApi/App_Data/InstallScriptCarmen/Post/04-View/</code></p>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>vw_ApInvoiceList</strong></td>
+<td>AP invoices with vendor info</td>
+</tr>
+<tr>
+<td><strong>vw_ApInvoiceOutstanding</strong></td>
+<td>Unpaid AP invoices</td>
+</tr>
+<tr>
+<td><strong>vw_ArInvoiceList</strong></td>
+<td>AR invoices with customer info</td>
+</tr>
+<tr>
+<td><strong>vw_ArAging</strong></td>
+<td>AR aging report</td>
+</tr>
+<tr>
+<td><strong>vw_GlTrialBalance</strong></td>
+<td>GL trial balance</td>
+</tr>
+<tr>
+<td><strong>vw_AssetRegister</strong></td>
+<td>Asset register with NBV</td>
+</tr>
+</tbody></table>
+<p><strong>Example: vw_ApInvoiceOutstanding</strong></p>
+<pre><code class="language-sql">CREATE VIEW vw_ApInvoiceOutstanding AS
+SELECT
+  h.InvhSeq,
+  h.TenantCode,
+  h.InvhInvNo AS InvoiceNumber,
+  h.InvhDate AS InvoiceDate,
+  h.InvhDueDate AS DueDate,
+  v.VnCode AS VendorCode,
+  v.VnName AS VendorName,
+  h.InvhTotalAmt AS TotalAmount,
+  COALESCE(SUM(pd.PydAmt), 0) AS PaidAmount,
+  h.InvhTotalAmt - COALESCE(SUM(pd.PydAmt), 0) AS OutstandingAmount,
+  DATEDIFF(CURDATE(), h.InvhDueDate) AS DaysOverdue
+FROM apinvh h
+LEFT JOIN vendor v ON v.VnCode = h.VnCode
+LEFT JOIN appyd pd ON pd.InvhSeq = h.InvhSeq
+WHERE h.InvhStatus IN (&#039;A&#039;, &#039;P&#039;)  -- Approved or Posted
+GROUP BY h.InvhSeq
+HAVING OutstandingAmount &gt; 0
+ORDER BY h.InvhDueDate;</code></pre><hr>
+<h2>9. Data Migration</h2>
+<h3>Migration Scripts</h3>
+<p><strong>Location:</strong> <code>Carmen.WebApi/App_Data/migrateBackoffice/Target/</code></p>
+<p><strong>Migration Process:</strong></p>
+<ol>
+<li><strong>Extract</strong> - Export data from legacy system</li>
+<li><strong>Transform</strong> - Map to Carmen.NET schema</li>
+<li><strong>Validate</strong> - Check referential integrity</li>
+<li><strong>Load</strong> - Import with transactions</li>
+<li><strong>Verify</strong> - Reconcile totals</li>
+</ol>
+<p><strong>Sample Migration Script:</strong></p>
+<pre><code class="language-sql">-- Migrate Vendors
+INSERT INTO vendor (VnCode, VnName, TaxId, PaymentTerms)
+SELECT
+  legacy_vendor_code,
+  legacy_vendor_name,
+  legacy_tax_id,
+  CASE legacy_payment_terms
+    WHEN 30 THEN &#039;NET30&#039;
+    WHEN 60 THEN &#039;NET60&#039;
+    ELSE &#039;NET30&#039;
+  END
+FROM legacy_vendors
+WHERE active = 1;
+
+-- Migrate AP Invoices
+INSERT INTO apinvh (
+  TenantCode, InvhDate, InvhInvNo, VnCode,
+  InvhTotalAmt, InvhStatus
+)
+SELECT
+  &#039;TENANT001&#039;,
+  invoice_date,
+  invoice_number,
+  vendor_code,
+  total_amount,
+  CASE status
+    WHEN &#039;DRAFT&#039; THEN &#039;E&#039;
+    WHEN &#039;APPROVED&#039; THEN &#039;A&#039;
+    WHEN &#039;POSTED&#039; THEN &#039;P&#039;
+  END
+FROM legacy_ap_invoices;</code></pre><hr>
+<h2>Summary</h2>
+<p>Carmen.NET database schema implements:</p>
+<p><strong>✅ Architecture:</strong></p>
+<ul>
+<li>Multi-tenant row-level isolation</li>
+<li>Header-detail pattern for transactions</li>
+<li>InnoDB storage engine with ACID compliance</li>
+</ul>
+<p><strong>✅ Modules:</strong></p>
+<ul>
+<li>80+ tables across 11 business modules</li>
+<li>AP, AR, GL, Asset, Income, Tax, Bank modules</li>
+<li>Master data tables for shared entities</li>
+</ul>
+<p><strong>✅ Performance:</strong></p>
+<ul>
+<li>Strategic indexing for multi-tenant queries</li>
+<li>Composite indexes for common access patterns</li>
+<li>75+ stored procedures for business logic</li>
+<li>65+ views for reporting</li>
+</ul>
+<p><strong>✅ Data Integrity:</strong></p>
+<ul>
+<li>Foreign key constraints</li>
+<li>Balanced entry validation (GL)</li>
+<li>Audit trail fields (UserModified, LastModified)</li>
+<li>Soft deletes with IsDeleted flag</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Review <a href="../requirements/data-dictionary.md">Data Dictionary</a> for field definitions</li>
+<li>Study <a href="code-structure-guide.md">Code Structure Guide</a> for data access patterns</li>
+<li>Consult <a href="design-patterns-guide.md">Design Patterns Guide</a> for repository pattern</li>
+<li>Reference <a href="../requirements/functional-requirements.md">Functional Requirements</a> for business rules</li>
+</ul>
+<hr>
+<p><strong>Document Status:</strong> ✅ Complete<br><strong>For Support:</strong> Contact database administrator or development team</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

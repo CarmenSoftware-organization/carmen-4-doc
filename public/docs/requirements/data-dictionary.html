@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Data Dictionary - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Data Dictionary</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Data Dictionary</h1>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 5 - Business Analyst Documentation<br><strong>Target Audience</strong>: Business Analysts, Developers, QA Team, Auditors</p>
+<hr>
+<h2>⚠️ Important Notice</h2>
+<p><strong>This data dictionary reflects VERIFIED entities from the actual Carmen.NET source code.</strong></p>
+<p><strong>Missing/Not Implemented</strong>:</p>
+<ul>
+<li>Purchase Order (PO) module and related entities</li>
+<li>Goods Receipt (GR) module and related entities</li>
+<li>Three-way match validation (AP Invoice ↔ PO ↔ GR)</li>
+</ul>
+<p>The document focuses exclusively on implemented features: Accounts Payable (AP Invoice/Payment), Accounts Receivable (AR Invoice/Receipt), General Ledger (GL Journal Voucher), Asset Management, and Master Data entities.</p>
+<hr>
+<h2>Overview</h2>
+<p>This document defines all data fields, enumerations, code tables, and validation rules used in the Carmen.NET ERP system. It serves as the authoritative reference for data definitions across all 11 modules.</p>
+<p><strong>Purpose</strong>: Ensure consistent understanding of data elements across technical and business teams.</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#common-fields">Common Fields</a></li>
+<li><a href="#accounts-payable-ap">Accounts Payable (AP)</a></li>
+<li><a href="#accounts-receivable-ar">Accounts Receivable (AR)</a></li>
+<li><a href="#general-ledger-gl">General Ledger (GL)</a></li>
+<li><a href="#asset-management">Asset Management</a></li>
+<li><a href="#master-data">Master Data</a></li>
+<li><a href="#enumerations">Enumerations</a></li>
+<li><a href="#code-tables">Code Tables</a></li>
+<li><a href="#validation-rules">Validation Rules</a></li>
+</ol>
+<hr>
+<h2>Common Fields</h2>
+<p><strong>Base Entity Fields</strong> - Present in all database tables</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Id</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Primary key, auto-increment</td>
+</tr>
+<tr>
+<td><strong>TenantCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Multi-tenant identifier</td>
+</tr>
+<tr>
+<td><strong>CreatedBy</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>User ID who created record</td>
+</tr>
+<tr>
+<td><strong>CreatedDate</strong></td>
+<td>DATETIME</td>
+<td>-</td>
+<td>Yes</td>
+<td>Record creation timestamp</td>
+</tr>
+<tr>
+<td><strong>UpdatedBy</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>No</td>
+<td>User ID who last updated record</td>
+</tr>
+<tr>
+<td><strong>UpdatedDate</strong></td>
+<td>DATETIME</td>
+<td>-</td>
+<td>No</td>
+<td>Last update timestamp</td>
+</tr>
+<tr>
+<td><strong>IsDeleted</strong></td>
+<td>BIT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Soft delete flag (default: 0)</td>
+</tr>
+</tbody></table>
+<p><strong>Audit Fields</strong> - For financial transactions</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Transaction status (see enums)</td>
+</tr>
+<tr>
+<td><strong>ApprovedBy</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>No</td>
+<td>User ID who approved</td>
+</tr>
+<tr>
+<td><strong>ApprovedDate</strong></td>
+<td>DATETIME</td>
+<td>-</td>
+<td>No</td>
+<td>Approval timestamp</td>
+</tr>
+<tr>
+<td><strong>PostedBy</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>No</td>
+<td>User ID who posted to GL</td>
+</tr>
+<tr>
+<td><strong>PostedDate</strong></td>
+<td>DATETIME</td>
+<td>-</td>
+<td>No</td>
+<td>GL posting timestamp</td>
+</tr>
+<tr>
+<td><strong>CancelledBy</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>No</td>
+<td>User ID who cancelled</td>
+</tr>
+<tr>
+<td><strong>CancelledDate</strong></td>
+<td>DATETIME</td>
+<td>-</td>
+<td>No</td>
+<td>Cancellation timestamp</td>
+</tr>
+<tr>
+<td><strong>CancellationReason</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>Reason for cancellation</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Accounts Payable (AP)</h2>
+<h3>VENDOR - Vendor Master Data</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>VendorCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Unique per tenant</td>
+<td>Vendor identifier</td>
+</tr>
+<tr>
+<td><strong>VendorName</strong></td>
+<td>NVARCHAR</td>
+<td>200</td>
+<td>Yes</td>
+<td>Min 2 chars</td>
+<td>Vendor legal name</td>
+</tr>
+<tr>
+<td><strong>TaxId</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Thai format: 0-0000-00000-00-0</td>
+<td>Tax identification number</td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Vendor address</td>
+</tr>
+<tr>
+<td><strong>District</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>-</td>
+<td>District/sub-district</td>
+</tr>
+<tr>
+<td><strong>Province</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>-</td>
+<td>Province</td>
+</tr>
+<tr>
+<td><strong>PostalCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>5 digits</td>
+<td>Postal code</td>
+</tr>
+<tr>
+<td><strong>Country</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Default: &#39;Thailand&#39;</td>
+<td>Country</td>
+</tr>
+<tr>
+<td><strong>ContactPerson</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>-</td>
+<td>Primary contact name</td>
+</tr>
+<tr>
+<td><strong>Phone</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>-</td>
+<td>Contact phone</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>Email format</td>
+<td>Contact email</td>
+</tr>
+<tr>
+<td><strong>PaymentTerms</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See PaymentTerms enum</td>
+<td>Payment terms (NET 30, etc.)</td>
+</tr>
+<tr>
+<td><strong>CreditLimit</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Credit limit amount</td>
+</tr>
+<tr>
+<td><strong>BankAccountNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>No</td>
+<td>-</td>
+<td>Vendor bank account</td>
+</tr>
+<tr>
+<td><strong>BankName</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>-</td>
+<td>Vendor bank name</td>
+</tr>
+<tr>
+<td><strong>VendorType</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>No</td>
+<td>See VendorType enum</td>
+<td>Vendor category</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See VendorStatus enum</td>
+<td>Active/Inactive/Blocked</td>
+</tr>
+</tbody></table>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-json">{
+  &quot;vendorCode&quot;: &quot;V001&quot;,
+  &quot;vendorName&quot;: &quot;ABC Supply Co., Ltd.&quot;,
+  &quot;taxId&quot;: &quot;0-1234-56789-01-2&quot;,
+  &quot;paymentTerms&quot;: &quot;NET30&quot;,
+  &quot;status&quot;: &quot;Active&quot;
+}</code></pre><hr>
+<h3>AP_INVOICE_H - AP Invoice Header</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>InvoiceNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique per vendor</td>
+<td>Invoice number</td>
+</tr>
+<tr>
+<td><strong>InvoiceDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≤ Today</td>
+<td>Invoice date</td>
+</tr>
+<tr>
+<td><strong>DueDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≥ InvoiceDate</td>
+<td>Payment due date</td>
+</tr>
+<tr>
+<td><strong>VendorCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist</td>
+<td>Foreign key to VENDOR</td>
+</tr>
+<tr>
+<td><strong>VendorName</strong></td>
+<td>NVARCHAR</td>
+<td>200</td>
+<td>No</td>
+<td>-</td>
+<td>Vendor name (denormalized)</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Invoice description</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Invoice amount (before tax)</td>
+</tr>
+<tr>
+<td><strong>TaxAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>VAT amount (7%)</td>
+</tr>
+<tr>
+<td><strong>WhtAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Withholding tax amount</td>
+</tr>
+<tr>
+<td><strong>TotalAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>= Amount + TaxAmount - WhtAmount</td>
+<td>Total invoice amount</td>
+</tr>
+<tr>
+<td><strong>OutstandingAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>≤ TotalAmount</td>
+<td>Unpaid amount</td>
+</tr>
+<tr>
+<td><strong>CurrencyCode</strong></td>
+<td>NVARCHAR</td>
+<td>3</td>
+<td>Yes</td>
+<td>Default: &#39;THB&#39;</td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><strong>ExchangeRate</strong></td>
+<td>DECIMAL</td>
+<td>18,6</td>
+<td>Yes</td>
+<td>Default: 1.0</td>
+<td>Exchange rate to base currency</td>
+</tr>
+<tr>
+<td><strong>TaxCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Tax code (VAT07, WHT03, etc.)</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>See ApInvoiceStatus enum</td>
+<td>Invoice status</td>
+</tr>
+</tbody></table>
+<p><strong>Calculated Fields</strong>:</p>
+<ul>
+<li><strong>OutstandingAmount</strong> = TotalAmount - SUM(Payments)</li>
+<li><strong>TotalAmount</strong> = Amount + TaxAmount - WhtAmount</li>
+</ul>
+<hr>
+<h3>AP_INVOICE_D - AP Invoice Lines</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>InvoiceId</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>FK to AP_INVOICE_H</td>
+<td>Invoice header ID</td>
+</tr>
+<tr>
+<td><strong>LineNo</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Sequential</td>
+<td>Line number</td>
+</tr>
+<tr>
+<td><strong>AccountCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist, allow posting</td>
+<td>GL account code</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Line description</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>≠ 0</td>
+<td>Line amount</td>
+</tr>
+<tr>
+<td><strong>DepartmentCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Department code</td>
+</tr>
+<tr>
+<td><strong>ProjectCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Project code</td>
+</tr>
+<tr>
+<td><strong>Quantity</strong></td>
+<td>DECIMAL</td>
+<td>18,4</td>
+<td>No</td>
+<td>&gt; 0</td>
+<td>Quantity</td>
+</tr>
+<tr>
+<td><strong>UnitPrice</strong></td>
+<td>DECIMAL</td>
+<td>18,4</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Unit price</td>
+</tr>
+<tr>
+<td><strong>UnitOfMeasure</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>-</td>
+<td>Unit (EA, KG, M, etc.)</td>
+</tr>
+</tbody></table>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Sum of line amounts must equal header amount</li>
+<li>At least one line required</li>
+<li>Account code must allow posting</li>
+</ul>
+<hr>
+<h3>AP_PAYMENT - AP Payment</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PaymentNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>Payment number (PAY-YYYY-NNNN)</td>
+</tr>
+<tr>
+<td><strong>PaymentDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≤ Today</td>
+<td>Payment date</td>
+</tr>
+<tr>
+<td><strong>VendorCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist</td>
+<td>Vendor code</td>
+</tr>
+<tr>
+<td><strong>PaymentMethod</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See PaymentMethod enum</td>
+<td>Check/Wire/ACH</td>
+</tr>
+<tr>
+<td><strong>BankAccountCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist</td>
+<td>Company bank account</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Payment amount</td>
+</tr>
+<tr>
+<td><strong>CheckNumber</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>Required if method=Check</td>
+<td>Check number</td>
+</tr>
+<tr>
+<td><strong>TransferReference</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>No</td>
+<td>Required if method=Wire/ACH</td>
+<td>Transfer reference</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Payment description</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>See PaymentStatus enum</td>
+<td>Payment status</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Accounts Receivable (AR)</h2>
+<h3>CUSTOMER - Customer Master Data</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CustomerCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Unique per tenant</td>
+<td>Customer identifier</td>
+</tr>
+<tr>
+<td><strong>CustomerName</strong></td>
+<td>NVARCHAR</td>
+<td>200</td>
+<td>Yes</td>
+<td>Min 2 chars</td>
+<td>Customer legal name</td>
+</tr>
+<tr>
+<td><strong>TaxId</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>Thai format</td>
+<td>Tax identification</td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Customer address</td>
+</tr>
+<tr>
+<td><strong>ContactPerson</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>-</td>
+<td>Primary contact</td>
+</tr>
+<tr>
+<td><strong>Phone</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>-</td>
+<td>Contact phone</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>No</td>
+<td>Email format</td>
+<td>Contact email</td>
+</tr>
+<tr>
+<td><strong>PaymentTerms</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See PaymentTerms enum</td>
+<td>Payment terms</td>
+</tr>
+<tr>
+<td><strong>CreditLimit</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Credit limit</td>
+</tr>
+<tr>
+<td><strong>OutstandingBalance</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>≥ 0</td>
+<td>Current outstanding</td>
+</tr>
+<tr>
+<td><strong>AvailableCredit</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>Calculated</td>
+<td>CreditLimit - OutstandingBalance</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See CustomerStatus enum</td>
+<td>Active/Inactive/Blocked</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>AR_INVOICE_H - AR Invoice Header</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>InvoiceNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>Invoice number (AR-YYYY-NNNN)</td>
+</tr>
+<tr>
+<td><strong>InvoiceDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≤ Today</td>
+<td>Invoice date</td>
+</tr>
+<tr>
+<td><strong>DueDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≥ InvoiceDate</td>
+<td>Payment due date</td>
+</tr>
+<tr>
+<td><strong>CustomerCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist</td>
+<td>Customer code</td>
+</tr>
+<tr>
+<td><strong>CustomerName</strong></td>
+<td>NVARCHAR</td>
+<td>200</td>
+<td>No</td>
+<td>-</td>
+<td>Customer name (denormalized)</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Invoice description</td>
+</tr>
+<tr>
+<td><strong>ContractNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>No</td>
+<td>Must exist if provided</td>
+<td>Contract reference</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Invoice amount (before VAT)</td>
+</tr>
+<tr>
+<td><strong>VatAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>VAT amount (7%)</td>
+</tr>
+<tr>
+<td><strong>TotalAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>= Amount + VatAmount</td>
+<td>Total invoice amount</td>
+</tr>
+<tr>
+<td><strong>OutstandingAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>≤ TotalAmount</td>
+<td>Unpaid amount</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>See ArInvoiceStatus enum</td>
+<td>Invoice status</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>AR_RECEIPT - AR Receipt</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ReceiptNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>Receipt number (REC-YYYY-NNNN)</td>
+</tr>
+<tr>
+<td><strong>ReceiptDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≤ Today</td>
+<td>Receipt date</td>
+</tr>
+<tr>
+<td><strong>CustomerCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist</td>
+<td>Customer code</td>
+</tr>
+<tr>
+<td><strong>PaymentMethod</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See PaymentMethod enum</td>
+<td>Cash/Check/Transfer</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Receipt amount</td>
+</tr>
+<tr>
+<td><strong>CheckNumber</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>Required if method=Check</td>
+<td>Check number</td>
+</tr>
+<tr>
+<td><strong>CheckDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>No</td>
+<td>Required if method=Check</td>
+<td>Check date</td>
+</tr>
+<tr>
+<td><strong>BankCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>-</td>
+<td>Bank code</td>
+</tr>
+<tr>
+<td><strong>DepositDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>No</td>
+<td>≥ ReceiptDate</td>
+<td>Bank deposit date</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Receipt description</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>See ReceiptStatus enum</td>
+<td>Receipt status</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>General Ledger (GL)</h2>
+<h3>GL_ACCOUNT - Chart of Accounts</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AccountCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Unique, Format: AAAA-BB-CC-DD</td>
+<td>GL account code (10 digits)</td>
+</tr>
+<tr>
+<td><strong>AccountName</strong></td>
+<td>NVARCHAR</td>
+<td>200</td>
+<td>Yes</td>
+<td>Min 2 chars</td>
+<td>Account name</td>
+</tr>
+<tr>
+<td><strong>AccountType</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See AccountType enum</td>
+<td>Asset/Liability/Equity/Revenue/Expense</td>
+</tr>
+<tr>
+<td><strong>NormalBalance</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>Yes</td>
+<td>DR or CR</td>
+<td>Normal balance (Debit/Credit)</td>
+</tr>
+<tr>
+<td><strong>ParentAccountCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Parent account (for hierarchy)</td>
+</tr>
+<tr>
+<td><strong>Level</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>1-4</td>
+<td>Hierarchy level</td>
+</tr>
+<tr>
+<td><strong>AllowPosting</strong></td>
+<td>BIT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Default: 1</td>
+<td>Allow direct posting</td>
+</tr>
+<tr>
+<td><strong>IsActive</strong></td>
+<td>BIT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Default: 1</td>
+<td>Active status</td>
+</tr>
+</tbody></table>
+<p><strong>Account Code Format</strong>:</p>
+<ul>
+<li><strong>AAAA</strong>: Main account (1000-9999)<ul>
+<li>1000-1999: Assets</li>
+<li>2000-2999: Liabilities</li>
+<li>3000-3999: Equity</li>
+<li>4000-4999: Revenue</li>
+<li>5000-9999: Expenses</li>
+</ul>
+</li>
+<li><strong>BB</strong>: Sub-account (01-99)</li>
+<li><strong>CC</strong>: Department (01-99)</li>
+<li><strong>DD</strong>: Project (01-99)</li>
+</ul>
+<p><strong>Example</strong>: <code>1100-01-10-20</code> = Cash in Bank - Checking - IT Dept - Project Alpha</p>
+<hr>
+<h3>GL_JV_H - Journal Voucher Header</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>JvNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>JV number (JV-YYYY-NNNN)</td>
+</tr>
+<tr>
+<td><strong>JvDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>Within open period</td>
+<td>Journal date</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>Yes</td>
+<td>-</td>
+<td>JV description</td>
+</tr>
+<tr>
+<td><strong>PeriodYear</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>-</td>
+<td>Fiscal year</td>
+</tr>
+<tr>
+<td><strong>PeriodNumber</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>1-12</td>
+<td>Period number</td>
+</tr>
+<tr>
+<td><strong>TotalDebit</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Total debit amount</td>
+</tr>
+<tr>
+<td><strong>TotalCredit</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Total credit amount</td>
+</tr>
+<tr>
+<td><strong>IsBalanced</strong></td>
+<td>BIT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Calculated</td>
+<td>TotalDebit = TotalCredit</td>
+</tr>
+<tr>
+<td><strong>ReversalJvNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Original JV if reversal</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>Yes</td>
+<td>See JvStatus enum</td>
+<td>JV status</td>
+</tr>
+</tbody></table>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Total debits must equal total credits</li>
+<li>JV date must be within open period</li>
+<li>Posted JVs cannot be modified</li>
+</ul>
+<hr>
+<h3>GL_JV_D - Journal Voucher Lines</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>JvId</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>FK to GL_JV_H</td>
+<td>JV header ID</td>
+</tr>
+<tr>
+<td><strong>LineNo</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Sequential</td>
+<td>Line number</td>
+</tr>
+<tr>
+<td><strong>AccountCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist, allow posting</td>
+<td>GL account code</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>NVARCHAR</td>
+<td>500</td>
+<td>No</td>
+<td>-</td>
+<td>Line description</td>
+</tr>
+<tr>
+<td><strong>DebitAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Debit amount (0 if credit)</td>
+</tr>
+<tr>
+<td><strong>CreditAmount</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Credit amount (0 if debit)</td>
+</tr>
+<tr>
+<td><strong>DepartmentCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Department</td>
+</tr>
+<tr>
+<td><strong>ProjectCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Project</td>
+</tr>
+</tbody></table>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Either DebitAmount OR CreditAmount must be &gt; 0 (not both)</li>
+<li>At least 2 lines required (one DR, one CR)</li>
+</ul>
+<hr>
+<h2>Asset Management</h2>
+<h3>ASSET_REGISTER - Asset Register</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AssetCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>Asset identifier</td>
+</tr>
+<tr>
+<td><strong>AssetName</strong></td>
+<td>NVARCHAR</td>
+<td>200</td>
+<td>Yes</td>
+<td>-</td>
+<td>Asset name</td>
+</tr>
+<tr>
+<td><strong>AssetCategoryCode</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>Must exist</td>
+<td>Asset category</td>
+</tr>
+<tr>
+<td><strong>AcquisitionDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>≤ Today</td>
+<td>Purchase/acquisition date</td>
+</tr>
+<tr>
+<td><strong>AcquisitionCost</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Original cost</td>
+</tr>
+<tr>
+<td><strong>AccumulatedDepreciation</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>≥ 0, ≤ AcquisitionCost</td>
+<td>Total depreciation to date</td>
+</tr>
+<tr>
+<td><strong>NetBookValue</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>Yes</td>
+<td>Calculated</td>
+<td>AcquisitionCost - AccumulatedDepreciation</td>
+</tr>
+<tr>
+<td><strong>DepreciationMethod</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See DepreciationMethod enum</td>
+<td>Straight-Line/Declining Balance</td>
+</tr>
+<tr>
+<td><strong>UsefulLifeYears</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>Yes</td>
+<td>&gt; 0</td>
+<td>Useful life in years</td>
+</tr>
+<tr>
+<td><strong>SalvageValue</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Residual value</td>
+</tr>
+<tr>
+<td><strong>DepartmentCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Department</td>
+</tr>
+<tr>
+<td><strong>LocationCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Physical location</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td>NVARCHAR</td>
+<td>50</td>
+<td>No</td>
+<td>-</td>
+<td>Serial/model number</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>NVARCHAR</td>
+<td>20</td>
+<td>Yes</td>
+<td>See AssetStatus enum</td>
+<td>Active/Disposed/Written Off</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Master Data</h2>
+<h3>DEPARTMENT - Department Master</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DepartmentCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>Department code</td>
+</tr>
+<tr>
+<td><strong>DepartmentName</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>Yes</td>
+<td>-</td>
+<td>Department name</td>
+</tr>
+<tr>
+<td><strong>ManagerUserId</strong></td>
+<td>INT</td>
+<td>-</td>
+<td>No</td>
+<td>Must exist</td>
+<td>Department manager</td>
+</tr>
+<tr>
+<td><strong>IsActive</strong></td>
+<td>BIT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Default: 1</td>
+<td>Active status</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>PROJECT - Project Master</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Length</th>
+<th>Required</th>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ProjectCode</strong></td>
+<td>NVARCHAR</td>
+<td>10</td>
+<td>Yes</td>
+<td>Unique</td>
+<td>Project code</td>
+</tr>
+<tr>
+<td><strong>ProjectName</strong></td>
+<td>NVARCHAR</td>
+<td>100</td>
+<td>Yes</td>
+<td>-</td>
+<td>Project name</td>
+</tr>
+<tr>
+<td><strong>StartDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>Yes</td>
+<td>-</td>
+<td>Project start date</td>
+</tr>
+<tr>
+<td><strong>EndDate</strong></td>
+<td>DATE</td>
+<td>-</td>
+<td>No</td>
+<td>≥ StartDate</td>
+<td>Project end date</td>
+</tr>
+<tr>
+<td><strong>Budget</strong></td>
+<td>DECIMAL</td>
+<td>18,2</td>
+<td>No</td>
+<td>≥ 0</td>
+<td>Project budget</td>
+</tr>
+<tr>
+<td><strong>IsActive</strong></td>
+<td>BIT</td>
+<td>-</td>
+<td>Yes</td>
+<td>Default: 1</td>
+<td>Active status</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Enumerations</h2>
+<h3>PaymentTerms</h3>
+<pre><code class="language-csharp">public enum PaymentTerms
+{
+    NET15 = &quot;NET 15&quot;,    // Payment due in 15 days
+    NET30 = &quot;NET 30&quot;,    // Payment due in 30 days
+    NET60 = &quot;NET 60&quot;,    // Payment due in 60 days
+    NET90 = &quot;NET 90&quot;,    // Payment due in 90 days
+    COD = &quot;COD&quot;,         // Cash on delivery
+    Prepaid = &quot;Prepaid&quot;  // Payment before delivery
+}</code></pre><h3>PaymentMethod</h3>
+<pre><code class="language-csharp">public enum PaymentMethod
+{
+    Cash = &quot;Cash&quot;,
+    Check = &quot;Check&quot;,
+    Wire = &quot;Wire&quot;,         // Bank wire transfer
+    ACH = &quot;ACH&quot;,          // Electronic transfer
+    CreditCard = &quot;Credit Card&quot;
+}</code></pre><h3>ApInvoiceStatus</h3>
+<pre><code class="language-csharp">public enum ApInvoiceStatus
+{
+    Draft = 1,
+    PendingApproval = 2,
+    Approved = 3,
+    Rejected = 4,
+    Posted = 5,
+    PartiallyPaid = 6,
+    FullyPaid = 7,
+    Cancelled = 8
+}</code></pre><h3>ArInvoiceStatus</h3>
+<pre><code class="language-csharp">public enum ArInvoiceStatus
+{
+    Draft = 1,
+    PendingApproval = 2,
+    Approved = 3,
+    Rejected = 4,
+    Posted = 5,
+    PartiallyPaid = 6,
+    FullyPaid = 7,
+    CreditNote = 8,
+    Cancelled = 9
+}</code></pre><h3>PaymentStatus</h3>
+<pre><code class="language-csharp">public enum PaymentStatus
+{
+    Draft = 1,
+    PendingApproval = 2,
+    Approved = 3,
+    Rejected = 4,
+    Posted = 5,
+    Voided = 6
+}</code></pre><h3>ReceiptStatus</h3>
+<pre><code class="language-csharp">public enum ReceiptStatus
+{
+    Draft = 1,
+    PendingApproval = 2,
+    Approved = 3,
+    Posted = 4,
+    Deposited = 5,
+    Bounced = 6,       // Check bounced
+    Reversed = 7
+}</code></pre><h3>JvStatus</h3>
+<pre><code class="language-csharp">public enum JvStatus
+{
+    Draft = 1,
+    PendingApproval = 2,
+    Approved = 3,
+    Rejected = 4,
+    Posted = 5,
+    Reversed = 6
+}</code></pre><h3>AccountType</h3>
+<pre><code class="language-csharp">public enum AccountType
+{
+    Asset = &quot;Asset&quot;,
+    Liability = &quot;Liability&quot;,
+    Equity = &quot;Equity&quot;,
+    Revenue = &quot;Revenue&quot;,
+    Expense = &quot;Expense&quot;
+}</code></pre><h3>DepreciationMethod</h3>
+<pre><code class="language-csharp">public enum DepreciationMethod
+{
+    StraightLine = &quot;Straight-Line&quot;,
+    DecliningBalance = &quot;Declining Balance&quot;,
+    SumOfYears = &quot;Sum of Years Digits&quot;
+}</code></pre><h3>AssetStatus</h3>
+<pre><code class="language-csharp">public enum AssetStatus
+{
+    Active = &quot;Active&quot;,
+    UnderMaintenance = &quot;Under Maintenance&quot;,
+    Disposed = &quot;Disposed&quot;,
+    WrittenOff = &quot;Written Off&quot;
+}</code></pre><hr>
+<h2>Code Tables</h2>
+<h3>TAX_CODE - Tax Code Master</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Type</th>
+<th>Rate</th>
+<th>Account Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VAT07</td>
+<td>VAT 7% Standard</td>
+<td>VAT</td>
+<td>7.00%</td>
+<td>2130 (VAT Payable)</td>
+</tr>
+<tr>
+<td>VAT00</td>
+<td>VAT 0% Zero-Rated</td>
+<td>VAT</td>
+<td>0.00%</td>
+<td>2130</td>
+</tr>
+<tr>
+<td>VATEX</td>
+<td>VAT Exempt</td>
+<td>VAT</td>
+<td>0.00%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>WHT03</td>
+<td>WHT 3% Services</td>
+<td>WHT</td>
+<td>3.00%</td>
+<td>1150 (WHT Receivable)</td>
+</tr>
+<tr>
+<td>WHT05</td>
+<td>WHT 5% Professional</td>
+<td>WHT</td>
+<td>5.00%</td>
+<td>1150</td>
+</tr>
+<tr>
+<td>WHT10</td>
+<td>WHT 10% Dividends</td>
+<td>WHT</td>
+<td>10.00%</td>
+<td>1150</td>
+</tr>
+<tr>
+<td>WHT15</td>
+<td>WHT 15% Interest</td>
+<td>WHT</td>
+<td>15.00%</td>
+<td>1150</td>
+</tr>
+</tbody></table>
+<h3>CURRENCY - Currency Master</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Symbol</th>
+<th>Exchange Rate</th>
+<th>Decimal Places</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>THB</td>
+<td>Thai Baht</td>
+<td>฿</td>
+<td>1.0000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>USD</td>
+<td>US Dollar</td>
+<td>$</td>
+<td>35.5000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EUR</td>
+<td>Euro</td>
+<td>€</td>
+<td>38.2000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>JPY</td>
+<td>Japanese Yen</td>
+<td>¥</td>
+<td>0.2400</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Validation Rules</h2>
+<h3>Field Validation</h3>
+<p><strong>Email Validation</strong>:</p>
+<pre><code class="language-regex">^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</code></pre><p><strong>Thai Tax ID Validation</strong>:</p>
+<pre><code class="language-regex">^\d-\d{4}-\d{5}-\d{2}-\d$</code></pre><p>Example: <code>0-1234-56789-01-2</code></p>
+<p><strong>Phone Validation</strong> (Thailand):</p>
+<pre><code class="language-regex">^(\+66|0)[0-9]{8,9}$</code></pre><p>Example: <code>+66812345678</code> or <code>0812345678</code></p>
+<p><strong>Postal Code Validation</strong> (Thailand):</p>
+<pre><code class="language-regex">^\d{5}$</code></pre><p>Example: <code>10400</code></p>
+<h3>Business Validation</h3>
+<p><strong>Invoice Amount Validation</strong>:</p>
+<pre><code class="language-text">Amount &gt; 0
+TaxAmount &gt;= 0
+WhtAmount &gt;= 0
+TotalAmount = Amount + TaxAmount - WhtAmount
+Sum(LineAmounts) = Amount</code></pre><p><strong>Date Validation</strong>:</p>
+<pre><code class="language-text">InvoiceDate &lt;= Today
+DueDate &gt;= InvoiceDate
+PaymentDate &gt;= InvoiceDate</code></pre><p><strong>Credit Limit Validation</strong>:</p>
+<pre><code class="language-text">CustomerOutstanding + NewInvoiceAmount &lt;= CustomerCreditLimit</code></pre><p><strong>JV Balance Validation</strong>:</p>
+<pre><code class="language-text">TotalDebitAmount = TotalCreditAmount</code></pre><hr>
+<h2>Data Integrity Rules</h2>
+<h3>Referential Integrity</h3>
+<p><strong>Foreign Key Relationships</strong>:</p>
+<ul>
+<li>All foreign keys must reference existing records</li>
+<li>Deletion restrictions:<ul>
+<li>Cannot delete vendor with outstanding invoices</li>
+<li>Cannot delete customer with outstanding receivables</li>
+<li>Cannot delete GL account with posted transactions</li>
+<li>Cannot delete department with assigned users/transactions</li>
+<li>Cannot delete period if transactions exist</li>
+</ul>
+</li>
+</ul>
+<h3>Unique Constraints</h3>
+<p><strong>Within Tenant Scope</strong>:</p>
+<ul>
+<li>Vendor code</li>
+<li>Customer code</li>
+<li>Invoice number (per vendor for AP, globally for AR)</li>
+<li>Payment number</li>
+<li>JV number</li>
+<li>Asset code</li>
+<li>Account code</li>
+</ul>
+<h3>Check Constraints</h3>
+<p><strong>Amount Constraints</strong>:</p>
+<pre><code class="language-sql">Amount &gt; 0
+TaxAmount &gt;= 0
+WhtAmount &gt;= 0
+CreditLimit &gt;= 0
+OutstandingBalance &gt;= 0</code></pre><p><strong>Date Constraints</strong>:</p>
+<pre><code class="language-sql">InvoiceDate &lt;= GETDATE()
+DueDate &gt;= InvoiceDate
+EndDate &gt;= StartDate (for projects/contracts)</code></pre><hr>
+<h2>Data Retention Policy</h2>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Retention Period</th>
+<th>Archive Strategy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Transactions</strong></td>
+<td>7 years</td>
+<td>Archive to cold storage after 2 years</td>
+</tr>
+<tr>
+<td><strong>Master Data</strong></td>
+<td>Indefinite</td>
+<td>Soft delete only</td>
+</tr>
+<tr>
+<td><strong>Audit Logs</strong></td>
+<td>7 years</td>
+<td>Archive to separate database</td>
+</tr>
+<tr>
+<td><strong>Financial Reports</strong></td>
+<td>10 years</td>
+<td>PDF archive</td>
+</tr>
+<tr>
+<td><strong>User Activity</strong></td>
+<td>1 year</td>
+<td>Rolling deletion</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Appendix: SQL Data Types</h2>
+<table>
+<thead>
+<tr>
+<th>Carmen Type</th>
+<th>SQL Server</th>
+<th>MySQL</th>
+<th>PostgreSQL</th>
+<th>Max Length</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String (short)</td>
+<td>NVARCHAR</td>
+<td>VARCHAR</td>
+<td>VARCHAR</td>
+<td>50</td>
+</tr>
+<tr>
+<td>String (medium)</td>
+<td>NVARCHAR</td>
+<td>VARCHAR</td>
+<td>VARCHAR</td>
+<td>200</td>
+</tr>
+<tr>
+<td>String (long)</td>
+<td>NVARCHAR</td>
+<td>VARCHAR</td>
+<td>VARCHAR</td>
+<td>500</td>
+</tr>
+<tr>
+<td>Integer</td>
+<td>INT</td>
+<td>INT</td>
+<td>INTEGER</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Decimal (amount)</td>
+<td>DECIMAL(18,2)</td>
+<td>DECIMAL(18,2)</td>
+<td>NUMERIC(18,2)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Decimal (rate)</td>
+<td>DECIMAL(18,6)</td>
+<td>DECIMAL(18,6)</td>
+<td>NUMERIC(18,6)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>DATE</td>
+<td>DATE</td>
+<td>DATE</td>
+<td>-</td>
+</tr>
+<tr>
+<td>DateTime</td>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>TIMESTAMP</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>BIT</td>
+<td>TINYINT(1)</td>
+<td>BOOLEAN</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>Document Owner</strong>: Business Analyst + Database Architect<br><strong>Review Cycle</strong>: Quarterly<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Next Review</strong>: 2026-01-06<br><strong>Related Documents</strong>:</p>
+<ul>
+<li>Functional Requirements: <code>/docs/requirements/functional-requirements.md</code></li>
+<li>Database Schema: <code>/docs/database/schema-documentation.md</code></li>
+<li>API Reference: <code>/docs/api/api-reference.md</code></li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

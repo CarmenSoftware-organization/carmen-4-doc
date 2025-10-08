@@ -1,0 +1,86 @@
+@startuml
+title Income/Revenue Module - Entity Relationship Diagram
+
+entity "INCOME_SOURCE" as source {
+  * SourceId : bigint <<PK>>
+  --
+  SourceCode : varchar(20)
+  SourceName : varchar(100)
+  SourceType : varchar(50)
+  AccCode : varchar(50)
+}
+
+entity "INCOME_CATEGORY" as category {
+  * CategoryId : bigint <<PK>>
+  * ParentCategoryId : bigint <<FK>>
+  --
+  CategoryCode : varchar(20)
+  CategoryName : varchar(100)
+  CategoryLevel : int
+}
+
+entity "INCOME_PRODUCT" as product {
+  * ProductId : bigint <<PK>>
+  * CategoryId : bigint <<FK>>
+  --
+  ProductCode : varchar(20)
+  ProductName : varchar(200)
+  ProductPrice : decimal(18,2)
+  AccCode : varchar(50)
+}
+
+entity "INCOME_INVOICE_H" as invoice {
+  * InvoiceId : bigint <<PK>>
+  * SourceId : bigint <<FK>>
+  --
+  InvoiceNo : varchar(50)
+  InvoiceDate : datetime
+  InvoiceStatus : int
+  TotalAmt : decimal(18,2)
+  TaxAmt : decimal(18,2)
+}
+
+entity "INCOME_INVOICE_D" as invoice_d {
+  * InvoicedId : bigint <<PK>>
+  * InvoiceId : bigint <<FK>>
+  * ProductId : bigint <<FK>>
+  --
+  InvoicedSeq : int
+  InvoicedDesc : varchar(500)
+  InvoicedQty : decimal(18,2)
+  InvoicedPrice : decimal(18,2)
+  InvoicedAmt : decimal(18,2)
+}
+
+entity "INCOME_REVENUE" as revenue {
+  * RevenueId : bigint <<PK>>
+  * SourceId : bigint <<FK>>
+  --
+  RevenueNo : varchar(50)
+  RevenueDate : datetime
+  RevenueAmt : decimal(18,2)
+  AccCode : varchar(50)
+}
+
+entity "INCOME_PAY_CODE" as pay_code {
+  * PayCodeId : bigint <<PK>>
+  --
+  PayCode : varchar(20)
+  PayCodeName : varchar(100)
+  AccCode : varchar(50)
+}
+
+entity "INCOME_PAY_TYPE" as pay_type {
+  * PayTypeId : bigint <<PK>>
+  --
+  PayType : varchar(20)
+  PayTypeName : varchar(100)
+}
+
+source ||--o{ invoice : "generates"
+source ||--o{ revenue : "generates"
+category ||--o{ product : "classifies"
+invoice ||--|{ invoice_d : "contains"
+product ||--o{ invoice_d : "sold in"
+
+@enduml

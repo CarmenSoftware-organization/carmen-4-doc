@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Design Patterns & Architecture Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Design Patterns & Architecture Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Design Patterns &amp; Architecture Guide</h1>
+<p><strong>Document Version:</strong> 1.0<br><strong>Last Updated:</strong> October 6, 2025<br><strong>Target Audience:</strong> Software Architects, Senior Developers<br><strong>Prerequisites:</strong> Code Structure Guide, .NET Framework experience</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#architectural-patterns">Architectural Patterns</a></li>
+<li><a href="#creational-patterns">Creational Patterns</a></li>
+<li><a href="#structural-patterns">Structural Patterns</a></li>
+<li><a href="#behavioral-patterns">Behavioral Patterns</a></li>
+<li><a href="#data-access-patterns">Data Access Patterns</a></li>
+<li><a href="#security-patterns">Security Patterns</a></li>
+<li><a href="#anti-patterns-to-avoid">Anti-Patterns to Avoid</a></li>
+<li><a href="#refactoring-recommendations">Refactoring Recommendations</a></li>
+</ol>
+<hr>
+<h2>1. Architectural Patterns</h2>
+<h3>1.1 Modular Monolith Pattern</h3>
+<p><strong>Context:</strong> Carmen.NET organizes 11 business modules (AP, AR, GL, Asset, Income, Tax, Bank, Master Data, Income Tax, Config, Account) within a single deployable application.</p>
+<p><strong>Implementation:</strong></p>
+<div class="mermaid">graph TD
+    Monolith["Carmen.WebApi Monolith"]
+
+    subgraph AP["AP Module"]
+        AP_Ctrl["Controllers:<br/>ApInvoiceController<br/>ApPaymentController"]
+        AP_Fnc["Functions:<br/>FncApInvoice<br/>FncApPayment"]
+        AP_Boundary["Module Boundary<br/>no direct calls to AR/Asset"]
+    end
+
+    subgraph AR["AR Module"]
+        AR_Ctrl["Controllers:<br/>ArInvoiceController<br/>ArReceiptController"]
+        AR_Fnc["Functions:<br/>FncArInvoice<br/>FncArReceipt"]
+        AR_Boundary["Module Boundary"]
+    end
+
+    subgraph GL["GL Module - Shared by all"]
+        GL_Ctrl["Controllers:<br/>GlJvController"]
+        GL_Fnc["Functions:<br/>FncGlJv"]
+        GL_Hub["Central posting hub"]
+    end
+
+    subgraph Shared["Shared Infrastructure"]
+        Auth["Authentication<br/>FncPermission, FncUser"]
+        Tenant["Multi-tenancy<br/>FncBase.ApplyTenant"]
+        DB["Database<br/>DbFactory"]
+    end
+
+    Monolith --> AP
+    Monolith --> AR
+    Monolith --> GL
+    Monolith --> Shared
+
+    style Monolith fill:#e1f5ff,stroke:#0288d1
+    style AP fill:#e8f5e9,stroke:#4caf50,color:#000000
+    style AR fill:#e3f2fd,stroke:#2196f3,color:#000000
+    style GL fill:#fff3e0,stroke:#ff9800,color:#000000
+    style Shared fill:#f3e5f5,stroke:#9c27b0,color:#000000</div><p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Deployment Simplicity:</strong> Single IIS application deployment</li>
+<li><strong>Consistent Transaction Management:</strong> ACID across modules using DB transactions</li>
+<li><strong>Shared Infrastructure:</strong> Common auth, logging, tenant isolation</li>
+<li><strong>Performance:</strong> In-process calls, no network overhead</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li><strong>Coupling Risk:</strong> Modules can bypass boundaries and call each other directly</li>
+<li><strong>Scalability:</strong> Cannot scale individual modules independently</li>
+<li><strong>Technology Lock-in:</strong> All modules must use same .NET Framework version</li>
+</ul>
+<p><strong>Best Practices:</strong></p>
+<pre><code class="language-csharp">// ✅ CORRECT: Cross-module communication via GL
+public async Task&lt;int&gt; PostApInvoiceAsync(ParamApInvoice param)
+{
+    // 1. Create AP invoice
+    var invhSeq = await FncApInvoice.CreateAsync(dbFac, param);
+
+    // 2. Post to GL (cross-module via FncGlJv)
+    if (param.IsPosted)
+    {
+        var glJvParam = MapApInvoiceToGlJv(param);
+        await FncGlJv.CreateAsync(dbFac, glJvParam);  // ✅ Via shared GL module
+    }
+
+    return invhSeq;
+}
+
+// ❌ WRONG: Direct cross-module controller calls
+var arController = new ArInvoiceController();
+var arResult = await arController.GetById(123);  // NEVER DO THIS</code></pre><h3>1.2 Layered Architecture Pattern</h3>
+<p><strong>Layers:</strong></p>
+<div class="mermaid">graph TD
+    Presentation["Presentation Layer<br/>Controllers<br/>━━━━━━━━━━━━━━━━━━━━━<br/>HTTP, Swagger, Routing"]
+
+    Business["Business Logic Layer<br/>Functions<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Validation, Calculations"]
+
+    DataAccess["Data Access Layer<br/>DbFactory + Dapper<br/>━━━━━━━━━━━━━━━━━━━━━<br/>SQL, ORM"]
+
+    Database[("Database<br/>SQL Server/MariaDB<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Tables, Stored Procedures")]
+
+    Presentation --> Business
+    Business --> DataAccess
+    DataAccess --> Database
+
+    style Presentation fill:#e8f5e9,stroke:#4caf50,color:#000000
+    style Business fill:#fff3e0,stroke:#ff9800,color:#000000
+    style DataAccess fill:#e3f2fd,stroke:#2196f3,color:#000000
+    style Database fill:#f3e5f5,stroke:#9c27b0,color:#000000</div><p><strong>Example:</strong></p>
+<pre><code class="language-csharp">// ========== PRESENTATION LAYER ==========
+// File: Carmen.WebApi/Controllers/ApInvoiceController.cs
+[HttpPost]
+[Route(&quot;api/apInvoice&quot;)]
+public async Task&lt;IHttpActionResult&gt; Create(ParamApInvoice param)
+{
+    try
+    {
+        // 1. Authentication check (Authorize attribute)
+        // 2. Permission check
+        var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+        if (!permission.Create) return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Create&quot;);
+
+        // 3. Delegate to business logic layer
+        var dbFac = DbFactory.CarmenDbFactory();
+        var invhSeq = await FncApInvoice.CreateAsync(dbFac, param);  // ← Business layer call
+
+        // 4. Return HTTP result
+        return JsonAddOk(invhSeq);
+    }
+    catch (Exception e)
+    {
+        LogHttpResult.Error(e);
+        return JsonResultInternalError(e);
+    }
+}
+
+// ========== BUSINESS LOGIC LAYER ==========
+// File: Carmen.WebApi/Functions/FncApInvoice.cs
+public static class FncApInvoice
+{
+    public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param)
+    {
+        // 1. Validation
+        await ValidateApInvoiceAsync(dbFac, param);
+
+        // 2. Business calculations
+        var totalAmount = param.Amount + param.TaxAmount - param.WhtAmount;
+        var dueDate = CalculateDueDate(param.InvoiceDate, param.PaymentTerms);
+
+        // 3. Data access layer call
+        using (var db = dbFac.GetConnection())
+        {
+            var invhSeq = await InsertInvoiceHeaderAsync(db, param, totalAmount, dueDate);
+            await InsertInvoiceLinesAsync(db, invhSeq, param.Lines);
+
+            return invhSeq;
+        }
+    }
+
+    // Business rule validation
+    private static async Task ValidateApInvoiceAsync(IDbFactory dbFac, ParamApInvoice param)
+    {
+        // Check vendor exists
+        var vendorExists = await FncVendor.ExistsAsync(dbFac, param.VendorCode);
+        if (!vendorExists)
+            throw new BusinessException(&quot;VENDOR_NOT_FOUND&quot;, $&quot;Vendor {param.VendorCode} not found&quot;);
+
+        // Check duplicate invoice
+        var duplicate = await CheckDuplicateAsync(dbFac, param.VendorCode, param.InvoiceNumber);
+        if (duplicate)
+            throw new BusinessException(&quot;DUPLICATE_INVOICE&quot;, &quot;Invoice already exists&quot;);
+
+        // Validate amounts
+        if (param.Amount &lt;= 0)
+            throw new BusinessException(&quot;INVALID_AMOUNT&quot;, &quot;Amount must be &gt; 0&quot;);
+    }
+
+    // ========== DATA ACCESS LAYER ==========
+    private static async Task&lt;int&gt; InsertInvoiceHeaderAsync(
+        IDbConnection db,
+        ParamApInvoice param,
+        decimal totalAmount,
+        DateTime dueDate)
+    {
+        var sql = @&quot;
+            INSERT INTO AP_INVOICE_H (
+                TenantCode, InvoiceNumber, InvoiceDate, DueDate,
+                VendorCode, Amount, TaxAmount, WhtAmount, TotalAmount,
+                Status, CreatedBy, CreatedDate
+            ) VALUES (
+                @TenantCode, @InvoiceNumber, @InvoiceDate, @DueDate,
+                @VendorCode, @Amount, @TaxAmount, @WhtAmount, @TotalAmount,
+                @Status, @CreatedBy, @CreatedDate
+            );
+            SELECT CAST(SCOPE_IDENTITY() as int);&quot;;
+
+        return await db.ExecuteScalarAsync&lt;int&gt;(sql, new
+        {
+            TenantCode = FncBase.CurrentTenantCode,
+            param.InvoiceNumber,
+            param.InvoiceDate,
+            DueDate = dueDate,
+            param.VendorCode,
+            param.Amount,
+            param.TaxAmount,
+            param.WhtAmount,
+            TotalAmount = totalAmount,
+            Status = &quot;Draft&quot;,
+            CreatedBy = FncBase.CurrentUser,
+            CreatedDate = DateTime.Now
+        });
+    }
+}</code></pre><p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Separation of Concerns:</strong> Each layer has a single responsibility</li>
+<li><strong>Testability:</strong> Business logic can be tested without HTTP layer</li>
+<li><strong>Maintainability:</strong> Changes to UI don&#39;t affect business rules</li>
+</ul>
+<p><strong>Rules:</strong></p>
+<ul>
+<li>Controllers MUST NOT contain SQL queries</li>
+<li>Functions MUST NOT reference HTTP classes (IHttpActionResult, HttpContext)</li>
+<li>Database layer MUST NOT contain business validation</li>
+</ul>
+<hr>
+<h2>2. Creational Patterns</h2>
+<h3>2.1 Factory Pattern (DbFactory)</h3>
+<p><strong>Purpose:</strong> Create database connections with proper configuration</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// File: Carmen.WebApi/Connection/DbFactory.cs
+public class DbFactory : IDbFactory
+{
+    private QueryFactory Db { get; set; }
+    public UriQueryString Qs { get; set; }
+    public ViewUserLogin CurrentUser =&gt; FncBase.GetCurrentUserLogin();
+
+    // ===== Factory Methods =====
+
+    // Create Carmen DB connection for current user
+    public static DbFactory CarmenDbFactory(int queryTimeOut = 300)
+    {
+        var connection = MySqlConn.ConnectionCarmenCurrentUser();
+        var compiler = new MariaDbCompiler();
+        var db = new QueryFactory(connection, compiler)
+        {
+            Logger = compiled =&gt; LogQuery(compiled),
+            QueryTimeout = queryTimeOut
+        };
+
+        return new DbFactory(db)
+        {
+            Qs = new UriQueryString()
+        };
+    }
+
+    // Create Admin DB connection
+    public static DbFactory AdminDbFactory(string adminToken, int queryTimeOut = 300)
+    {
+        var connection = MySqlConn.ConnectionAdmin(adminToken);
+        var compiler = new MariaDbCompiler();
+        // ... similar setup
+    }
+
+    // Create connection for specific tenant
+    public static async Task&lt;DbFactory&gt; CarmenFactoryAsync(
+        string adminToken,
+        string tenant,
+        int queryTimeOut = 300)
+    {
+        var connection = await MySqlConn.ConnectionCarmenAsync(adminToken, tenant);
+        // ... similar setup
+    }
+}</code></pre><p><strong>Usage:</strong></p>
+<pre><code class="language-csharp">// In Controllers
+public async Task&lt;IHttpActionResult&gt; GetList()
+{
+    var dbFac = DbFactory.CarmenDbFactory();  // Factory method
+    var result = await FncApInvoice.GetListAsync(dbFac, dbFac.Qs);
+    return JsonResultOk(result);
+}
+
+// For multi-tenant operations
+var dbFac = await DbFactory.CarmenFactoryAsync(adminToken, &quot;TENANT001&quot;);</code></pre><p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Centralized Configuration:</strong> All DB settings in one place</li>
+<li><strong>Consistent Logging:</strong> Query logging applied automatically</li>
+<li><strong>Multi-Tenancy Support:</strong> Easy tenant switching</li>
+<li><strong>Connection String Management:</strong> Abstract away connection details</li>
+</ul>
+<h3>2.2 Singleton Pattern (Static Function Classes)</h3>
+<p><strong>Purpose:</strong> Provide stateless business logic functions accessible globally</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// File: Carmen.WebApi/Functions/FncBase.cs
+public class FncBase  // Not static class, but used as singleton
+{
+    public static Logger LogConnStr = LogManager.LogFactory.GetLogger(&quot;Connection&quot;);
+    public static Logger LogQueryFac = LogManager.LogFactory.GetLogger(&quot;Query&quot;);
+
+    // Static fields for current context
+    private static AsyncLocal&lt;string&gt; _currentTenantCode = new AsyncLocal&lt;string&gt;();
+    private static AsyncLocal&lt;ViewUserLogin&gt; _currentUser = new AsyncLocal&lt;ViewUserLogin&gt;();
+
+    public static string CurrentTenantCode
+    {
+        get =&gt; _currentTenantCode.Value;
+        set =&gt; _currentTenantCode.Value = value;
+    }
+
+    public static ViewUserLogin CurrentUser
+    {
+        get =&gt; _currentUser.Value ?? GetCurrentUserLogin();
+        set =&gt; _currentUser.Value = value;
+    }
+
+    // Shared utility methods
+    public static void ApplyTenantIfUseTenant(string useTenant)
+    {
+        if (!string.IsNullOrEmpty(useTenant))
+        {
+            CurrentTenantCode = useTenant;
+        }
+    }
+
+    public static ViewUserLogin GetCurrentUserLogin()
+    {
+        var principal = Thread.CurrentPrincipal;
+        // Extract user from JWT claims...
+        return userLogin;
+    }
+}
+
+// File: Carmen.WebApi/Functions/FncApInvoice.cs
+public static class FncApInvoice  // Pure static class
+{
+    // All methods are static - no instance required
+    public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(IDbFactory dbFac, int invhSeq)
+    {
+        // Implementation...
+    }
+
+    public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param)
+    {
+        // Implementation...
+    }
+}</code></pre><p><strong>Usage:</strong></p>
+<pre><code class="language-csharp">// No instantiation needed
+var invoice = await FncApInvoice.GetByIdAsync(dbFac, 123);
+var invhSeq = await FncApInvoice.CreateAsync(dbFac, param);
+
+// Access shared state
+FncBase.ApplyTenantIfUseTenant(&quot;TENANT001&quot;);
+var currentUser = FncBase.CurrentUser;</code></pre><p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>No Object Overhead:</strong> No <code>new</code> keyword required</li>
+<li><strong>Global Access:</strong> Available everywhere in the application</li>
+<li><strong>Thread Safety:</strong> AsyncLocal for thread-isolated state</li>
+</ul>
+<p><strong>Drawbacks:</strong></p>
+<ul>
+<li><strong>Testing Difficulty:</strong> Hard to mock static methods</li>
+<li><strong>Hidden Dependencies:</strong> Not explicit in method signatures</li>
+</ul>
+<hr>
+<h2>3. Structural Patterns</h2>
+<h3>3.1 Repository Pattern (Implicit)</h3>
+<p><strong>Context:</strong> Carmen.NET doesn&#39;t use explicit Repository interfaces, but Functions serve as repositories</p>
+<p><strong>Implicit Repository:</strong></p>
+<pre><code class="language-csharp">// Traditional Repository Pattern (NOT used in Carmen.NET)
+public interface IApInvoiceRepository
+{
+    Task&lt;ApInvoice&gt; GetByIdAsync(int id);
+    Task&lt;List&lt;ApInvoice&gt;&gt; GetAllAsync();
+    Task&lt;int&gt; CreateAsync(ApInvoice invoice);
+}
+
+// Carmen.NET Approach: Static Function Class = Repository
+public static class FncApInvoice  // Acts as repository
+{
+    // Query methods
+    public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(IDbFactory dbFac, int invhSeq) { }
+    public static async Task&lt;ViewPagedResult&lt;ViewApInvoice&gt;&gt; GetListAsync(IDbFactory dbFac, UriQueryString qs) { }
+
+    // Command methods
+    public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param) { }
+    public static async Task&lt;bool&gt; UpdateAsync(IDbFactory dbFac, int invhSeq, ParamApInvoice param) { }
+    public static async Task&lt;bool&gt; DeleteAsync(IDbFactory dbFac, int invhSeq) { }
+
+    // Business operations
+    public static async Task&lt;bool&gt; ApproveAsync(IDbFactory dbFac, int invhSeq, string approver) { }
+    public static async Task&lt;bool&gt; PostAsync(IDbFactory dbFac, int invhSeq) { }
+}</code></pre><p><strong>CQRS-like Separation (Emerging Pattern):</strong></p>
+<pre><code class="language-csharp">// Query side - Optimized for reads
+public static async Task&lt;ViewPagedResult&lt;ViewApInvoice&gt;&gt; GetListAsync(
+    IDbFactory dbFac,
+    UriQueryString qs)
+{
+    using (var db = dbFac.GetConnection())
+    {
+        // Use SqlKata for flexible queries
+        var query = new Query(&quot;AP_INVOICE_H AS H&quot;)
+            .LeftJoin(&quot;VENDOR AS V&quot;, &quot;V.VendorCode&quot;, &quot;H.VendorCode&quot;)
+            .Select(&quot;H.*&quot;, &quot;V.VendorName&quot;)
+            .Where(&quot;H.TenantCode&quot;, FncBase.CurrentTenantCode);
+
+        // Dynamic filtering
+        if (!string.IsNullOrEmpty(qs.Filter))
+        {
+            query.WhereContains(&quot;H.InvoiceNumber&quot;, qs.Filter)
+                 .OrWhereContains(&quot;V.VendorName&quot;, qs.Filter);
+        }
+
+        var sql = dbFac.Compiler.Compile(query.Paginate(qs.Page, qs.PageSize));
+        var data = await db.QueryAsync&lt;ViewApInvoice&gt;(sql.Sql, sql.NamedBindings);
+
+        return new ViewPagedResult&lt;ViewApInvoice&gt; { Data = data.ToList(), ... };
+    }
+}
+
+// Command side - Enforces business rules
+public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param)
+{
+    using (var db = dbFac.GetConnection())
+    using (var transaction = db.BeginTransaction())
+    {
+        try
+        {
+            // Validation
+            await ValidateAsync(dbFac, param);
+
+            // Insert header
+            var invhSeq = await InsertHeaderAsync(db, param, transaction);
+
+            // Insert lines
+            foreach (var line in param.Lines)
+            {
+                await InsertLineAsync(db, invhSeq, line, transaction);
+            }
+
+            // GL posting (if applicable)
+            if (param.IsPosted)
+            {
+                await PostToGlAsync(db, invhSeq, transaction);
+            }
+
+            transaction.Commit();
+            return invhSeq;
+        }
+        catch
+        {
+            transaction.Rollback();
+            throw;
+        }
+    }
+}</code></pre><h3>3.2 Adapter Pattern (Query Builder)</h3>
+<p><strong>Purpose:</strong> Adapt SqlKata query builder to different SQL dialects (MariaDB/MySQL/SQL Server)</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// File: Carmen.WebApi/Connection/DbFactory.cs
+private static DbFactory MyDbFactory(IDbConnection connection, Compiler compiler, int queryTimeOut = 300)
+{
+    var db = new QueryFactory(connection, compiler)  // Compiler = Adapter
+    {
+        Logger = compiled =&gt; FncBase.LogQueryFac.Trace(compiled),
+        QueryTimeout = queryTimeOut
+    };
+
+    return new DbFactory(db);
+}
+
+public static DbFactory MyDbFactory(IDbConnection connection, int queryTimeOut = 300)
+{
+    var compiler = new MariaDbCompiler();  // ← Adapter for MariaDB
+    return MyDbFactory(connection, compiler, queryTimeOut);
+}
+
+// For SQL Server (if needed)
+public static DbFactory SqlServerFactory(IDbConnection connection)
+{
+    var compiler = new SqlServerCompiler();  // ← Adapter for SQL Server
+    return MyDbFactory(connection, compiler);
+}</code></pre><p><strong>Usage:</strong></p>
+<pre><code class="language-csharp">// Same query code works across databases
+var query = new Query(&quot;AP_INVOICE_H&quot;)
+    .Select(&quot;*&quot;)
+    .Where(&quot;TenantCode&quot;, &quot;TENANT001&quot;)
+    .OrderByDesc(&quot;InvoiceDate&quot;);
+
+// Compiled to MariaDB SQL
+var mariaDbSql = new MariaDbCompiler().Compile(query);
+// Result: SELECT * FROM `AP_INVOICE_H` WHERE `TenantCode` = @p0 ORDER BY `InvoiceDate` DESC
+
+// Compiled to SQL Server SQL
+var sqlServerSql = new SqlServerCompiler().Compile(query);
+// Result: SELECT * FROM [AP_INVOICE_H] WHERE [TenantCode] = @p0 ORDER BY [InvoiceDate] DESC</code></pre><h3>3.3 Facade Pattern (BaseApiController)</h3>
+<p><strong>Purpose:</strong> Provide simplified interface for common HTTP responses</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// File: Carmen.WebApi/Controllers/BaseApiController.cs
+public class BaseApiController : ApiController
+{
+    // Facade methods for HTTP responses
+    protected internal virtual JsonTextActionResult JsonResultOk(JObject data)
+    {
+        return new JsonTextActionResult(data, HttpStatusCode.OK);
+    }
+
+    protected internal virtual JsonTextActionResult JsonAddOk(int id)
+    {
+        return JsonResultOk($&quot;{id}&quot;, &quot;Add Success&quot;.UiString(&quot;Result.Add.Ok&quot;));
+    }
+
+    protected internal virtual JsonTextActionResult JsonUpdateOk()
+    {
+        return JsonResultOk(&quot;Update OK&quot;, &quot;Success&quot;.UiString(&quot;Result.Update.Ok&quot;));
+    }
+
+    protected internal virtual JsonTextActionResult JsonDeleteOk()
+    {
+        return JsonResultOk(&quot;Delete OK&quot;, &quot;Success&quot;.UiString(&quot;Result.Delete.Ok&quot;));
+    }
+
+    protected internal virtual JsonTextActionResult JsonResultForbidden(
+        string userMessage = &quot;Access Denied.&quot;,
+        string permissionName = &quot;&quot;,
+        string permissionAction = &quot;&quot;)
+    {
+        var apiResponse = new ApiReturnResponse(403)
+        {
+            Code = &quot;PERMISSION_DENIED&quot;,
+            Success = false,
+            Message = userMessage,
+            Permission = permissionName,
+            Action = permissionAction
+        };
+
+        return new JsonTextActionResult(apiResponse, HttpStatusCode.Forbidden);
+    }
+
+    protected internal virtual JsonTextActionResult JsonResultInternalError(Exception e)
+    {
+        var apiResponse = new ApiReturnResponse(500)
+        {
+            Code = &quot;INTERNAL_ERROR&quot;,
+            Success = false,
+            Message = e.Message,
+            StackTrace = e.StackTrace  // Only in development
+        };
+
+        return new JsonTextActionResult(apiResponse, HttpStatusCode.InternalServerError);
+    }
+}</code></pre><p><strong>Usage:</strong></p>
+<pre><code class="language-csharp">// In derived controllers
+public class ApInvoiceController : BaseApiController
+{
+    [HttpPost]
+    public async Task&lt;IHttpActionResult&gt; Create(ParamApInvoice param)
+    {
+        try
+        {
+            var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+
+            // Simplified permission check
+            if (!permission.Create)
+                return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Create&quot;);  // ← Facade method
+
+            var dbFac = DbFactory.CarmenDbFactory();
+            var invhSeq = await FncApInvoice.CreateAsync(dbFac, param);
+
+            return JsonAddOk(invhSeq);  // ← Facade method
+        }
+        catch (BusinessException be)
+        {
+            return JsonResultBusinessError(be);  // ← Facade method
+        }
+        catch (Exception e)
+        {
+            LogHttpResult.Error(e);
+            return JsonResultInternalError(e);  // ← Facade method
+        }
+    }
+}</code></pre><p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Consistency:</strong> All controllers return same JSON structure</li>
+<li><strong>Reduced Boilerplate:</strong> No manual JSON serialization in controllers</li>
+<li><strong>Centralized i18n:</strong> User messages localized in one place</li>
+</ul>
+<hr>
+<h2>4. Behavioral Patterns</h2>
+<h3>4.1 Strategy Pattern (Permission Checks)</h3>
+<p><strong>Purpose:</strong> Encapsulate different permission checking strategies</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// File: Carmen.WebApi/Functions/FncPermission.cs
+public static class FncPermission
+{
+    // Permission strategy interface (implicit)
+    public static async Task&lt;IPermissionStore&gt; GetPermissionInfoByPermissionNameAsync(string permissionName)
+    {
+        var dbFac = DbFactory.CarmenDbFactory();
+        var currentUser = FncBase.CurrentUser;
+
+        using (var db = dbFac.GetConnection())
+        {
+            // Strategy 1: Check user-specific permissions
+            var userPermission = await db.Query(&quot;USER_PERMISSION&quot;)
+                .Where(&quot;UserId&quot;, currentUser.UserId)
+                .Where(&quot;PermissionName&quot;, permissionName)
+                .Where(&quot;TenantCode&quot;, FncBase.CurrentTenantCode)
+                .FirstOrDefaultAsync&lt;IPermissionStore&gt;();
+
+            if (userPermission != null)
+                return userPermission;  // User-level override
+
+            // Strategy 2: Check role-based permissions
+            var rolePermission = await db.Query(&quot;ROLE_PERMISSION AS RP&quot;)
+                .Join(&quot;USER_ROLE AS UR&quot;, &quot;UR.RoleId&quot;, &quot;RP.RoleId&quot;)
+                .Where(&quot;UR.UserId&quot;, currentUser.UserId)
+                .Where(&quot;RP.PermissionName&quot;, permissionName)
+                .Where(&quot;RP.TenantCode&quot;, FncBase.CurrentTenantCode)
+                .FirstOrDefaultAsync&lt;IPermissionStore&gt;();
+
+            if (rolePermission != null)
+                return rolePermission;  // Role-level permission
+
+            // Strategy 3: Default deny
+            return new PermissionStore
+            {
+                PermissionName = permissionName,
+                View = false,
+                Create = false,
+                Update = false,
+                Delete = false,
+                Approve = false
+            };
+        }
+    }
+}</code></pre><p><strong>Usage:</strong></p>
+<pre><code class="language-csharp">// In controllers
+var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+
+if (!permission.View) return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;View&quot;);
+if (!permission.Create) return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Create&quot;);
+if (!permission.Approve) return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Approve&quot;);</code></pre><h3>4.2 Template Method Pattern (CRUD Operations)</h3>
+<p><strong>Purpose:</strong> Define skeleton of CRUD operations, let subclasses override specific steps</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// Base template (conceptual - not explicitly coded)
+public abstract class CrudTemplate
+{
+    // Template method
+    public async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, TParam param)
+    {
+        // 1. Validate (can be overridden)
+        await ValidateAsync(dbFac, param);
+
+        // 2. Transform (can be overridden)
+        var entity = MapParamToEntity(param);
+
+        // 3. Insert (must be implemented)
+        var id = await InsertAsync(dbFac, entity);
+
+        // 4. Post-process (can be overridden)
+        await OnCreatedAsync(dbFac, id, param);
+
+        return id;
+    }
+
+    protected abstract Task ValidateAsync(IDbFactory dbFac, TParam param);
+    protected abstract TEntity MapParamToEntity(TParam param);
+    protected abstract Task&lt;int&gt; InsertAsync(IDbFactory dbFac, TEntity entity);
+    protected virtual Task OnCreatedAsync(IDbFactory dbFac, int id, TParam param) =&gt; Task.CompletedTask;
+}
+
+// Concrete implementation (actual pattern in Carmen.NET)
+public static class FncApInvoice
+{
+    public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param)
+    {
+        // 1. Validate (step can vary by entity)
+        await ValidateApInvoiceAsync(dbFac, param);
+
+        // 2. Transform
+        var totalAmount = param.Amount + param.TaxAmount - param.WhtAmount;
+        var dueDate = CalculateDueDate(param.InvoiceDate, param.PaymentTerms);
+
+        // 3. Insert
+        var invhSeq = await InsertHeaderAsync(dbFac, param, totalAmount, dueDate);
+        await InsertLinesAsync(dbFac, invhSeq, param.Lines);
+
+        // 4. Post-process (step can vary by entity)
+        if (param.IsPosted)
+        {
+            await PostToGlAsync(dbFac, invhSeq);
+        }
+
+        return invhSeq;
+    }
+
+    // Steps that vary by entity
+    private static async Task ValidateApInvoiceAsync(IDbFactory dbFac, ParamApInvoice param)
+    {
+        // AP-specific validation
+        var vendorExists = await FncVendor.ExistsAsync(dbFac, param.VendorCode);
+        if (!vendorExists)
+            throw new BusinessException(&quot;VENDOR_NOT_FOUND&quot;);
+
+        // Check three-way match if PO exists
+        if (!string.IsNullOrEmpty(param.PoNumber))
+        {
+            await ValidateThreeWayMatchAsync(dbFac, param);
+        }
+    }
+}
+
+public static class FncArInvoice
+{
+    public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamArInvoice param)
+    {
+        // 1. Validate (AR-specific)
+        await ValidateArInvoiceAsync(dbFac, param);
+
+        // 2. Transform
+        var totalAmount = param.Amount + param.TaxAmount;
+
+        // 3. Insert
+        var invhSeq = await InsertHeaderAsync(dbFac, param, totalAmount);
+        await InsertLinesAsync(dbFac, invhSeq, param.Lines);
+
+        // 4. Post-process (AR-specific)
+        if (param.ContractSeq &gt; 0)
+        {
+            await UpdateContractBalanceAsync(dbFac, param.ContractSeq, totalAmount);
+        }
+
+        return invhSeq;
+    }
+
+    // AR-specific validation
+    private static async Task ValidateArInvoiceAsync(IDbFactory dbFac, ParamArInvoice param)
+    {
+        var customerExists = await FncCustomer.ExistsAsync(dbFac, param.CustomerCode);
+        if (!customerExists)
+            throw new BusinessException(&quot;CUSTOMER_NOT_FOUND&quot;);
+
+        // Check credit limit
+        await CheckCreditLimitAsync(dbFac, param.CustomerCode, param.Amount);
+    }
+}</code></pre><hr>
+<h2>5. Data Access Patterns</h2>
+<h3>5.1 Unit of Work Pattern (Database Transactions)</h3>
+<p><strong>Purpose:</strong> Group multiple database operations into a single transaction</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">public static async Task&lt;int&gt; CreateApInvoiceWithPaymentAsync(
+    IDbFactory dbFac,
+    ParamApInvoice invoiceParam,
+    ParamApPayment paymentParam)
+{
+    using (var db = dbFac.GetConnection())
+    using (var transaction = db.BeginTransaction())  // ← Unit of Work
+    {
+        try
+        {
+            // Operation 1: Create invoice
+            var invhSeq = await FncApInvoice.CreateAsync(dbFac, invoiceParam);
+
+            // Operation 2: Create payment
+            paymentParam.InvhSeq = invhSeq;
+            var pyhSeq = await FncApPayment.CreateAsync(dbFac, paymentParam);
+
+            // Operation 3: Update invoice status
+            await UpdateInvoiceStatusAsync(db, invhSeq, &quot;Paid&quot;, transaction);
+
+            // Operation 4: Post to GL
+            await FncGlJv.CreateAsync(dbFac, MapToGlJv(invoiceParam, paymentParam));
+
+            // Commit all or nothing
+            transaction.Commit();
+            return invhSeq;
+        }
+        catch (Exception e)
+        {
+            transaction.Rollback();  // Rollback all operations
+            LogHttpResult.Error(e);
+            throw;
+        }
+    }
+}</code></pre><p><strong>Best Practices:</strong></p>
+<pre><code class="language-csharp">// ✅ GOOD: Transaction scope clearly defined
+using (var transaction = db.BeginTransaction())
+{
+    // All operations
+    transaction.Commit();
+}
+
+// ❌ BAD: Transaction spans multiple functions
+public async Task CreateInvoiceAsync()
+{
+    using (var transaction = db.BeginTransaction())
+    {
+        await SomeOtherFunctionAsync();  // Transaction leaks to other function
+        transaction.Commit();
+    }
+}</code></pre><h3>5.2 Query Object Pattern (SqlKata Integration)</h3>
+<p><strong>Purpose:</strong> Build complex queries programmatically</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">public static async Task&lt;ViewPagedResult&lt;ViewApInvoice&gt;&gt; GetListAsync(
+    IDbFactory dbFac,
+    UriQueryString qs)
+{
+    using (var db = dbFac.GetConnection())
+    {
+        // Build base query
+        var query = new Query(&quot;AP_INVOICE_H AS H&quot;)
+            .LeftJoin(&quot;VENDOR AS V&quot;, &quot;V.VendorCode&quot;, &quot;H.VendorCode&quot;)
+            .LeftJoin(&quot;ACCOUNT_CODE AS AC&quot;, &quot;AC.AccountCode&quot;, &quot;H.AccountCode&quot;)
+            .Select(
+                &quot;H.*&quot;,
+                &quot;V.VendorName&quot;,
+                &quot;AC.AccountName&quot;
+            )
+            .Where(&quot;H.TenantCode&quot;, FncBase.CurrentTenantCode);
+
+        // Apply filters dynamically
+        if (!string.IsNullOrEmpty(qs.Filter))
+        {
+            query.Where(q =&gt;
+            {
+                q.WhereContains(&quot;H.InvoiceNumber&quot;, qs.Filter)
+                 .OrWhereContains(&quot;V.VendorName&quot;, qs.Filter)
+                 .OrWhereContains(&quot;H.Description&quot;, qs.Filter);
+            });
+        }
+
+        if (qs.StartDate.HasValue)
+        {
+            query.WhereDate(&quot;H.InvoiceDate&quot;, &quot;&gt;=&quot;, qs.StartDate.Value);
+        }
+
+        if (qs.EndDate.HasValue)
+        {
+            query.WhereDate(&quot;H.InvoiceDate&quot;, &quot;&lt;=&quot;, qs.EndDate.Value);
+        }
+
+        if (!string.IsNullOrEmpty(qs.Status))
+        {
+            query.Where(&quot;H.Status&quot;, qs.Status);
+        }
+
+        // Apply sorting
+        if (!string.IsNullOrEmpty(qs.SortBy))
+        {
+            if (qs.SortDesc)
+                query.OrderByDesc(qs.SortBy);
+            else
+                query.OrderBy(qs.SortBy);
+        }
+        else
+        {
+            query.OrderByDesc(&quot;H.CreatedDate&quot;);  // Default sort
+        }
+
+        // Get total count
+        var totalRows = await db.ExecuteScalarAsync&lt;int&gt;(
+            dbFac.Compiler.Compile(query.AsCount()).Sql
+        );
+
+        // Apply pagination
+        var sql = dbFac.Compiler.Compile(query.Paginate(qs.Page, qs.PageSize));
+
+        // Execute query
+        var data = await db.QueryAsync&lt;ViewApInvoice&gt;(sql.Sql, sql.NamedBindings);
+
+        return new ViewPagedResult&lt;ViewApInvoice&gt;
+        {
+            Data = data.ToList(),
+            TotalRows = totalRows,
+            Page = qs.Page,
+            PageSize = qs.PageSize
+        };
+    }
+}</code></pre><p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Type Safety:</strong> Compile-time checking of table/column names</li>
+<li><strong>SQL Injection Protection:</strong> Parameterized queries automatically</li>
+<li><strong>Database Portability:</strong> Same code works across SQL dialects</li>
+<li><strong>Reusability:</strong> Query fragments can be composed</li>
+</ul>
+<hr>
+<h2>6. Security Patterns</h2>
+<h3>6.1 Multi-Tenancy Row-Level Security Pattern</h3>
+<p><strong>Purpose:</strong> Ensure users can only access data for their tenant</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// File: Carmen.WebApi/Functions/FncBase.cs
+public class FncBase
+{
+    // Thread-safe tenant context
+    private static AsyncLocal&lt;string&gt; _currentTenantCode = new AsyncLocal&lt;string&gt;();
+
+    public static string CurrentTenantCode
+    {
+        get =&gt; _currentTenantCode.Value ?? GetTenantFromToken();
+        set =&gt; _currentTenantCode.Value = value;
+    }
+
+    public static void ApplyTenantIfUseTenant(string useTenant)
+    {
+        if (!string.IsNullOrEmpty(useTenant))
+        {
+            CurrentTenantCode = useTenant;
+        }
+    }
+
+    private static string GetTenantFromToken()
+    {
+        var principal = Thread.CurrentPrincipal;
+        return principal.GetClaim&lt;string&gt;(&quot;Tenant&quot;);
+    }
+}
+
+// In every query
+public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(IDbFactory dbFac, int invhSeq)
+{
+    using (var db = dbFac.GetConnection())
+    {
+        var query = new Query(&quot;AP_INVOICE_H&quot;)
+            .Select(&quot;*&quot;)
+            .Where(&quot;InvhSeq&quot;, invhSeq)
+            .Where(&quot;TenantCode&quot;, FncBase.CurrentTenantCode);  // ← CRITICAL: Always filter by tenant
+
+        var sql = dbFac.Compiler.Compile(query);
+        return await db.QueryFirstOrDefaultAsync&lt;ViewApInvoice&gt;(sql.Sql, sql.NamedBindings);
+    }
+}
+
+// In all insert/update operations
+public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param)
+{
+    var sql = @&quot;
+        INSERT INTO AP_INVOICE_H (
+            TenantCode,  -- ← CRITICAL: Always insert tenant code
+            InvoiceNumber,
+            InvoiceDate,
+            ...
+        ) VALUES (
+            @TenantCode,
+            @InvoiceNumber,
+            @InvoiceDate,
+            ...
+        )&quot;;
+
+    return await db.ExecuteScalarAsync&lt;int&gt;(sql, new
+    {
+        TenantCode = FncBase.CurrentTenantCode,  // ← From current context
+        param.InvoiceNumber,
+        param.InvoiceDate,
+        ...
+    });
+}</code></pre><p><strong>Security Checklist:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> All SELECT queries filter by <code>TenantCode</code></li>
+<li><input disabled="" type="checkbox"> All INSERT operations include <code>TenantCode</code></li>
+<li><input disabled="" type="checkbox"> All UPDATE operations filter by <code>TenantCode</code> in WHERE clause</li>
+<li><input disabled="" type="checkbox"> All DELETE operations filter by <code>TenantCode</code> in WHERE clause</li>
+<li><input disabled="" type="checkbox"> JOIN queries check <code>TenantCode</code> on all tables</li>
+<li><input disabled="" type="checkbox"> No raw SQL bypasses tenant filtering</li>
+</ul>
+<h3>6.2 Permission-Based Access Control Pattern</h3>
+<p><strong>Purpose:</strong> Enforce RBAC permissions on all operations</p>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-csharp">// Standard permission check in controllers
+[HttpPost]
+[Route(&quot;api/apInvoice&quot;)]
+public async Task&lt;IHttpActionResult&gt; Create(ParamApInvoice param)
+{
+    try
+    {
+        // 1. Check permission BEFORE any business logic
+        var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+
+        if (!permission.Create)
+            return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Create&quot;);
+
+        // 2. Proceed with operation
+        var dbFac = DbFactory.CarmenDbFactory();
+        var invhSeq = await FncApInvoice.CreateAsync(dbFac, param);
+
+        return JsonAddOk(invhSeq);
+    }
+    catch (Exception e)
+    {
+        LogHttpResult.Error(e);
+        return JsonResultInternalError(e);
+    }
+}
+
+// Fine-grained approval permission
+[HttpPut]
+[Route(&quot;api/apInvoice/{invhSeq}/approve&quot;)]
+public async Task&lt;IHttpActionResult&gt; Approve(int invhSeq, ParamApproval param)
+{
+    var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+
+    // Check specific action permission
+    if (!permission.Approve)
+        return JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;Approve&quot;);
+
+    // Additional business rule: Check approval amount threshold
+    var invoice = await FncApInvoice.GetByIdAsync(dbFac, invhSeq);
+
+    if (invoice.TotalAmount &gt; 10000 &amp;&amp; !CurrentUser.IsManager)
+    {
+        return JsonResultForbidden(&quot;Amount exceeds approval limit&quot;);
+    }
+
+    await FncApInvoice.ApproveAsync(dbFac, invhSeq, param.Approver);
+    return JsonUpdateOk();
+}</code></pre><p><strong>Permission Matrix:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>View</th>
+<th>Create</th>
+<th>Update</th>
+<th>Delete</th>
+<th>Approve</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AP.Invoice</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>AP.Payment</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>AR.Invoice</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>GL.JV</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>7. Anti-Patterns to Avoid</h2>
+<h3>7.1 God Object Anti-Pattern</h3>
+<p><strong>❌ BAD:</strong></p>
+<pre><code class="language-csharp">// 10,000+ line class with all business logic
+public static class FncEverything
+{
+    public static async Task CreateApInvoice() { /* 500 lines */ }
+    public static async Task CreateArInvoice() { /* 500 lines */ }
+    public static async Task ProcessPayment() { /* 500 lines */ }
+    public static async Task PostToGl() { /* 500 lines */ }
+    // ... 20 more methods
+}</code></pre><p><strong>✅ GOOD:</strong></p>
+<pre><code class="language-csharp">// Separate by domain
+public static class FncApInvoice { /* AP invoice logic only */ }
+public static class FncArInvoice { /* AR invoice logic only */ }
+public static class FncPayment { /* Payment logic only */ }
+public static class FncGlJv { /* GL posting logic only */ }</code></pre><h3>7.2 Magic Numbers Anti-Pattern</h3>
+<p><strong>❌ BAD:</strong></p>
+<pre><code class="language-csharp">if (invoice.Status == &quot;1&quot;) { }  // What does &quot;1&quot; mean?
+if (payment.Amount &gt; 50000) { }  // Why 50000?</code></pre><p><strong>✅ GOOD:</strong></p>
+<pre><code class="language-csharp">// Use enums
+if (invoice.Status == ApInvoiceStatus.Approved) { }
+
+// Use named constants
+private const decimal MANAGER_APPROVAL_LIMIT = 50000m;
+if (payment.Amount &gt; MANAGER_APPROVAL_LIMIT) { }</code></pre><h3>7.3 Anemic Domain Model Anti-Pattern</h3>
+<p><strong>Context:</strong> Carmen.NET suffers from this - models have no behavior</p>
+<p><strong>❌ Current (Anemic):</strong></p>
+<pre><code class="language-csharp">// Model has no behavior
+public class ViewApInvoice
+{
+    public int InvhSeq { get; set; }
+    public decimal Amount { get; set; }
+    public decimal TaxAmount { get; set; }
+    public decimal WhtAmount { get; set; }
+    public decimal TotalAmount { get; set; }  // Should be calculated
+}
+
+// All logic in static functions
+public static class FncApInvoice
+{
+    public static decimal CalculateTotalAmount(ViewApInvoice invoice)
+    {
+        return invoice.Amount + invoice.TaxAmount - invoice.WhtAmount;
+    }
+}</code></pre><p><strong>✅ Better (Rich Domain Model):</strong></p>
+<pre><code class="language-csharp">// Model with behavior
+public class ApInvoice
+{
+    public int InvhSeq { get; set; }
+    public decimal Amount { get; private set; }
+    public decimal TaxAmount { get; private set; }
+    public decimal WhtAmount { get; private set; }
+
+    // Calculated property (no setter)
+    public decimal TotalAmount =&gt; Amount + TaxAmount - WhtAmount;
+
+    // Business methods
+    public void AddTax(decimal taxRate)
+    {
+        TaxAmount = Amount * taxRate;
+    }
+
+    public void ApplyWithholding(decimal whtRate)
+    {
+        WhtAmount = Amount * whtRate;
+    }
+
+    public bool CanBeApproved()
+    {
+        return Status == ApInvoiceStatus.PendingApproval
+            &amp;&amp; TotalAmount &gt; 0
+            &amp;&amp; !string.IsNullOrEmpty(VendorCode);
+    }
+}</code></pre><hr>
+<h2>8. Refactoring Recommendations</h2>
+<h3>8.1 Introduce Dependency Injection</h3>
+<p><strong>Current State:</strong></p>
+<pre><code class="language-csharp">public async Task&lt;IHttpActionResult&gt; GetList()
+{
+    var dbFac = DbFactory.CarmenDbFactory();  // Tight coupling
+    var result = await FncApInvoice.GetListAsync(dbFac, qs);
+    return JsonResultOk(result);
+}</code></pre><p><strong>Recommended:</strong></p>
+<pre><code class="language-csharp">public class ApInvoiceController : BaseApiController
+{
+    private readonly IDbFactory _dbFactory;
+    private readonly IApInvoiceService _apInvoiceService;
+
+    public ApInvoiceController(IDbFactory dbFactory, IApInvoiceService apInvoiceService)
+    {
+        _dbFactory = dbFactory;
+        _apInvoiceService = apInvoiceService;
+    }
+
+    public async Task&lt;IHttpActionResult&gt; GetList()
+    {
+        var result = await _apInvoiceService.GetListAsync(qs);
+        return JsonResultOk(result);
+    }
+}
+
+// Register in Startup.cs
+services.AddScoped&lt;IDbFactory, DbFactory&gt;();
+services.AddScoped&lt;IApInvoiceService, ApInvoiceService&gt;();</code></pre><h3>8.2 Extract Interfaces for Testing</h3>
+<p><strong>Current State:</strong></p>
+<pre><code class="language-csharp">// Cannot mock static methods
+public static class FncApInvoice
+{
+    public static async Task&lt;int&gt; CreateAsync(IDbFactory dbFac, ParamApInvoice param) { }
+}
+
+// Hard to test
+[Test]
+public async Task TestCreateInvoice()
+{
+    // Cannot mock FncApInvoice.CreateAsync() ❌
+}</code></pre><p><strong>Recommended:</strong></p>
+<pre><code class="language-csharp">// Interface
+public interface IApInvoiceService
+{
+    Task&lt;int&gt; CreateAsync(ParamApInvoice param);
+    Task&lt;ViewApInvoice&gt; GetByIdAsync(int invhSeq);
+}
+
+// Implementation
+public class ApInvoiceService : IApInvoiceService
+{
+    private readonly IDbFactory _dbFactory;
+
+    public ApInvoiceService(IDbFactory dbFactory)
+    {
+        _dbFactory = dbFactory;
+    }
+
+    public async Task&lt;int&gt; CreateAsync(ParamApInvoice param)
+    {
+        // Implementation...
+    }
+}
+
+// Testable
+[Test]
+public async Task TestCreateInvoice()
+{
+    // Mock service
+    var mockService = new Mock&lt;IApInvoiceService&gt;();
+    mockService.Setup(s =&gt; s.CreateAsync(It.IsAny&lt;ParamApInvoice&gt;()))
+               .ReturnsAsync(123);
+
+    var controller = new ApInvoiceController(mockDbFactory, mockService.Object);
+    var result = await controller.Create(new ParamApInvoice());
+
+    Assert.IsTrue(result is JsonTextActionResult);
+}</code></pre><h3>8.3 Separate Query and Command Models (CQRS)</h3>
+<p><strong>Current State:</strong></p>
+<pre><code class="language-csharp">// Same model for read and write
+public class ParamApInvoice
+{
+    public string InvoiceNumber { get; set; }
+    public decimal Amount { get; set; }
+    // ... 30 more properties
+}
+
+public static async Task&lt;ViewApInvoice&gt; GetByIdAsync(int invhSeq) { }
+public static async Task&lt;int&gt; CreateAsync(ParamApInvoice param) { }  // Uses all 30 properties
+public static async Task&lt;bool&gt; UpdateAsync(int invhSeq, ParamApInvoice param) { }  // Only 5 properties needed</code></pre><p><strong>Recommended:</strong></p>
+<pre><code class="language-csharp">// Query models (optimized for reads)
+public class ApInvoiceListQuery
+{
+    public string Filter { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+    public string Status { get; set; }
+    public int Page { get; set; }
+    public int PageSize { get; set; }
+}
+
+// Command models (optimized for writes)
+public class CreateApInvoiceCommand
+{
+    public string InvoiceNumber { get; set; }
+    public DateTime InvoiceDate { get; set; }
+    public string VendorCode { get; set; }
+    public decimal Amount { get; set; }
+    // ... only properties needed for creation
+}
+
+public class UpdateApInvoiceStatusCommand
+{
+    public int InvhSeq { get; set; }
+    public string Status { get; set; }
+    public string UpdatedBy { get; set; }
+    // Only 3 properties instead of 30
+}
+
+// Separate handlers
+public async Task&lt;ViewPagedResult&lt;ViewApInvoice&gt;&gt; Handle(ApInvoiceListQuery query) { }
+public async Task&lt;int&gt; Handle(CreateApInvoiceCommand command) { }
+public async Task Handle(UpdateApInvoiceStatusCommand command) { }</code></pre><hr>
+<h2>Summary</h2>
+<p>Carmen.NET implements a mix of classic and modern design patterns:</p>
+<p><strong>Architectural Patterns:</strong></p>
+<ul>
+<li>✅ Modular Monolith (11 business modules)</li>
+<li>✅ Layered Architecture (Presentation → Business → Data)</li>
+</ul>
+<p><strong>Creational Patterns:</strong></p>
+<ul>
+<li>✅ Factory Pattern (DbFactory)</li>
+<li>✅ Singleton Pattern (Static function classes)</li>
+</ul>
+<p><strong>Structural Patterns:</strong></p>
+<ul>
+<li>✅ Implicit Repository Pattern (Functions as repositories)</li>
+<li>✅ Adapter Pattern (SqlKata query builder)</li>
+<li>✅ Facade Pattern (BaseApiController)</li>
+</ul>
+<p><strong>Behavioral Patterns:</strong></p>
+<ul>
+<li>✅ Strategy Pattern (Permission checks)</li>
+<li>✅ Template Method Pattern (CRUD operations)</li>
+</ul>
+<p><strong>Data Access Patterns:</strong></p>
+<ul>
+<li>✅ Unit of Work Pattern (Database transactions)</li>
+<li>✅ Query Object Pattern (SqlKata)</li>
+</ul>
+<p><strong>Security Patterns:</strong></p>
+<ul>
+<li>✅ Multi-Tenancy Row-Level Security</li>
+<li>✅ Permission-Based Access Control (RBAC)</li>
+</ul>
+<p><strong>Refactoring Opportunities:</strong></p>
+<ul>
+<li>⚠️ Introduce Dependency Injection (.NET 8 migration)</li>
+<li>⚠️ Extract Interfaces for testing</li>
+<li>⚠️ Separate CQRS models</li>
+<li>⚠️ Migrate from Anemic to Rich Domain Models</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Review <a href="code-structure-guide.md">Code Structure Guide</a> for implementation details</li>
+<li>Study <a href="database-schema-guide.md">Database Schema Documentation</a> for data model</li>
+<li>Consult <a href="testing-guide.md">Testing Guide</a> for pattern testing</li>
+<li>Reference <a href="../architecture/architecture-decision-records.md">ADRs</a> for pattern decisions</li>
+</ul>
+<hr>
+<p><strong>Document Status:</strong> ✅ Complete<br><strong>For Support:</strong> Contact development team or solution architect</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculation Rules and Workflows - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Tax Calculation Rules and Workflows</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Tax Calculation Rules and Workflows</h1>
+<h2>Overview</h2>
+<p>This document defines the tax calculation rules, withholding tax (WHT) processing, Value Added Tax (VAT) handling, and tax compliance workflows used in Carmen.NET.</p>
+<h2>Tax System Architecture</h2>
+<h3>Tax Types Supported</h3>
+<div class="mermaid">graph TB
+    subgraph "Tax System"
+        WHT[Withholding Tax - WHT]
+        VAT[Value Added Tax - VAT]
+        CORP[Corporate Income Tax]
+        PROP[Property Tax]
+    end
+
+    subgraph "WHT Categories"
+        WHT_SERVICE[Service WHT - 3%]
+        WHT_PROFESSIONAL[Professional WHT - 5%]
+        WHT_RENT[Rent WHT - 5%]
+        WHT_INTEREST[Interest WHT - 15%]
+        WHT_DIVIDEND[Dividend WHT - 10%]
+    end
+
+    subgraph "VAT Categories"
+        VAT_STANDARD[Standard VAT - 7%]
+        VAT_ZERO[Zero-Rated VAT - 0%]
+        VAT_EXEMPT[Exempt - No VAT]
+    end
+
+    WHT --> WHT_SERVICE
+    WHT --> WHT_PROFESSIONAL
+    WHT --> WHT_RENT
+    WHT --> WHT_INTEREST
+    WHT --> WHT_DIVIDEND
+
+    VAT --> VAT_STANDARD
+    VAT --> VAT_ZERO
+    VAT --> VAT_EXEMPT</div><h2>Withholding Tax (WHT) Rules</h2>
+<h3>WHT Calculation Principles</h3>
+<p><strong>Tax Base Determination</strong>:</p>
+<ul>
+<li>WHT calculated on gross amount (before VAT)</li>
+<li>Excludes VAT from WHT base</li>
+<li>Includes all taxable service fees and charges</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code class="language-text">WHT Amount = Gross Amount (excl. VAT) × WHT Rate
+Net Payment = Gross Amount + VAT - WHT Amount</code></pre><h3>WHT Rate Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Transaction Type</th>
+<th>WHT Rate</th>
+<th>Tax Code</th>
+<th>Applies To</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Professional Services</strong></td>
+<td>5%</td>
+<td>WHT05</td>
+<td>Consultants, Advisors, Auditors</td>
+</tr>
+<tr>
+<td><strong>Service Fees</strong></td>
+<td>3%</td>
+<td>WHT03</td>
+<td>General services, Maintenance</td>
+</tr>
+<tr>
+<td><strong>Rent</strong></td>
+<td>5%</td>
+<td>WHT05</td>
+<td>Property rental, Equipment lease</td>
+</tr>
+<tr>
+<td><strong>Interest</strong></td>
+<td>15%</td>
+<td>WHT15</td>
+<td>Loan interest, Bank interest</td>
+</tr>
+<tr>
+<td><strong>Dividend</strong></td>
+<td>10%</td>
+<td>WHT10</td>
+<td>Dividend distributions</td>
+</tr>
+<tr>
+<td><strong>Advertising</strong></td>
+<td>2%</td>
+<td>WHT02</td>
+<td>Advertising and marketing services</td>
+</tr>
+<tr>
+<td><strong>Transportation</strong></td>
+<td>1%</td>
+<td>WHT01</td>
+<td>Freight and logistics services</td>
+</tr>
+<tr>
+<td><strong>Royalty</strong></td>
+<td>5%</td>
+<td>WHT05</td>
+<td>Licensing and royalty fees</td>
+</tr>
+</tbody></table>
+<h3>WHT Exemption Rules</h3>
+<p><strong>Exempt Entities</strong>:</p>
+<ul>
+<li>Government agencies and departments</li>
+<li>Charitable organizations (registered)</li>
+<li>Educational institutions (certified)</li>
+<li>Hospitals and medical facilities</li>
+<li>Foreign entities with tax treaty benefits</li>
+</ul>
+<p><strong>Exemption Documentation</strong>:</p>
+<ul>
+<li>Tax exemption certificate from revenue authority</li>
+<li>Valid tax ID with exemption status</li>
+<li>Tax treaty certificate (for foreign entities)</li>
+<li>Annual renewal of exemption status</li>
+</ul>
+<h3>WHT Calculation Workflow</h3>
+<div class="mermaid">flowchart TD
+    Start([Start: AP Invoice Entry]) --> CheckVendor{Vendor Subject<br/>to WHT?}
+
+    CheckVendor -->|No| NoWHT[No WHT Calculation]
+    CheckVendor -->|Yes| CheckExemption{Vendor<br/>Exempt?}
+
+    CheckExemption -->|Yes| NoWHT
+    CheckExemption -->|No| DetermineType[Determine Transaction Type]
+
+    DetermineType --> SelectRate[Select WHT Rate<br/>Based on Type]
+    SelectRate --> CalculateBase[Calculate WHT Base:<br/>Gross Amount excl. VAT]
+
+    CalculateBase --> CalculateWHT[Calculate WHT:<br/>Base × WHT Rate]
+    CalculateWHT --> ValidateMinimum{Amount ><br/>Minimum Threshold?}
+
+    ValidateMinimum -->|No| NoWHT
+    ValidateMinimum -->|Yes| CreateWHTRecord[Create WHT Record]
+
+    CreateWHTRecord --> LinkInvoice[Link WHT to Invoice]
+    LinkInvoice --> CalculateNet[Calculate Net Payment:<br/>Gross + VAT - WHT]
+
+    CalculateNet --> PostGL[Post to GL:<br/>DR: Expense + WHT Receivable<br/>CR: AP Payable]
+
+    PostGL --> EndWHT([End: WHT Calculated])
+    NoWHT --> EndWHT</div><h3>WHT GL Posting Examples</h3>
+<p><strong>Service Invoice with WHT</strong>:</p>
+<pre><code class="language-text">Transaction: Professional Services
+Gross Amount: 100,000.00
+VAT (7%): 7,000.00
+WHT (5%): 5,000.00
+Net Payment: 102,000.00
+
+GL Posting:
+DR: Professional Expense                    100,000.00
+DR: VAT Input                                 7,000.00
+DR: WHT Receivable (Tax Asset)                5,000.00
+CR: AP Payable (Net)                        112,000.00
+
+Payment Posting:
+DR: AP Payable                              112,000.00
+CR: Bank Account                            102,000.00
+CR: WHT Payable (to Revenue Authority)       10,000.00</code></pre><p><strong>Rent Invoice with WHT</strong>:</p>
+<pre><code class="language-text">Transaction: Property Rent
+Gross Amount: 50,000.00
+VAT: Exempt
+WHT (5%): 2,500.00
+Net Payment: 47,500.00
+
+GL Posting:
+DR: Rent Expense                             50,000.00
+DR: WHT Receivable                            2,500.00
+CR: AP Payable (Net)                         52,500.00</code></pre><h2>Value Added Tax (VAT) Rules</h2>
+<h3>VAT Calculation Principles</h3>
+<p><strong>Tax Inclusive vs. Exclusive</strong>:</p>
+<ul>
+<li><strong>Tax Exclusive</strong>: VAT calculated on net amount, added to total</li>
+<li><strong>Tax Inclusive</strong>: VAT included in total, backed out from total</li>
+</ul>
+<p><strong>Formula (Tax Exclusive)</strong>:</p>
+<pre><code class="language-text">VAT Amount = Net Amount × VAT Rate
+Gross Amount = Net Amount + VAT Amount</code></pre><p><strong>Formula (Tax Inclusive)</strong>:</p>
+<pre><code class="language-text">Net Amount = Gross Amount / (1 + VAT Rate)
+VAT Amount = Gross Amount - Net Amount</code></pre><h3>VAT Rate Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>VAT Rate</th>
+<th>Tax Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Standard Rated</strong></td>
+<td>7%</td>
+<td>VAT07</td>
+<td>Most goods and services</td>
+</tr>
+<tr>
+<td><strong>Zero-Rated</strong></td>
+<td>0%</td>
+<td>VAT00</td>
+<td>Exports, International transport, Basic foods</td>
+</tr>
+<tr>
+<td><strong>Exempt</strong></td>
+<td>N/A</td>
+<td>EXEMPT</td>
+<td>Financial services, Education, Healthcare</td>
+</tr>
+</tbody></table>
+<h3>VAT Transaction Types</h3>
+<h4>Input VAT (VAT Receivable)</h4>
+<ul>
+<li>VAT paid on purchases (AP transactions)</li>
+<li>Recoverable from revenue authority</li>
+<li>GL Account: VAT Input / VAT Receivable (Asset)</li>
+</ul>
+<h4>Output VAT (VAT Payable)</h4>
+<ul>
+<li>VAT collected on sales (AR transactions)</li>
+<li>Payable to revenue authority</li>
+<li>GL Account: VAT Output / VAT Payable (Liability)</li>
+</ul>
+<h3>VAT Calculation Workflow</h3>
+<div class="mermaid">flowchart TD
+    Start([Start: Transaction Entry]) --> DetermineDirection{Transaction<br/>Direction?}
+
+    DetermineDirection -->|Purchase - AP| InputVAT[Input VAT Calculation]
+    DetermineDirection -->|Sale - AR| OutputVAT[Output VAT Calculation]
+
+    InputVAT --> CheckVATStatus{Vendor<br/>VAT Registered?}
+    CheckVATStatus -->|No| NoInputVAT[No VAT]
+    CheckVATStatus -->|Yes| DetermineInputCategory[Determine VAT Category]
+
+    DetermineInputCategory --> InputRateSelection{VAT Rate?}
+    InputRateSelection -->|Standard 7%| CalcInput7[Calculate Input VAT 7%]
+    InputRateSelection -->|Zero 0%| CalcInput0[Calculate Input VAT 0%]
+    InputRateSelection -->|Exempt| NoInputVAT
+
+    CalcInput7 --> PostInputVAT[Post Input VAT:<br/>DR: VAT Input<br/>CR: Included in AP]
+    CalcInput0 --> PostInputVAT
+
+    OutputVAT --> CheckCustomerVAT{Customer<br/>VAT Registered?}
+    CheckCustomerVAT -->|No| UseStandard[Use Standard Rate]
+    CheckCustomerVAT -->|Yes| DetermineOutputCategory[Determine VAT Category]
+
+    UseStandard --> OutputRateSelection
+    DetermineOutputCategory --> OutputRateSelection{VAT Rate?}
+
+    OutputRateSelection -->|Standard 7%| CalcOutput7[Calculate Output VAT 7%]
+    OutputRateSelection -->|Zero 0%| CalcOutput0[Calculate Output VAT 0%]
+    OutputRateSelection -->|Exempt| NoOutputVAT[No VAT]
+
+    CalcOutput7 --> PostOutputVAT[Post Output VAT:<br/>DR: Included in AR<br/>CR: VAT Output]
+    CalcOutput0 --> PostOutputVAT
+
+    PostInputVAT --> EndVAT([End: VAT Calculated])
+    PostOutputVAT --> EndVAT
+    NoInputVAT --> EndVAT
+    NoOutputVAT --> EndVAT</div><h3>VAT GL Posting Examples</h3>
+<p><strong>Purchase Invoice (Input VAT)</strong>:</p>
+<pre><code class="language-text">Transaction: Office Supplies Purchase
+Net Amount: 10,000.00
+VAT (7%): 700.00
+Gross Amount: 10,700.00
+
+GL Posting:
+DR: Office Supplies Expense               10,000.00
+DR: VAT Input (Recoverable)                  700.00
+CR: AP Payable                            10,700.00</code></pre><p><strong>Sales Invoice (Output VAT)</strong>:</p>
+<pre><code class="language-text">Transaction: Product Sale
+Net Amount: 50,000.00
+VAT (7%): 3,500.00
+Gross Amount: 53,500.00
+
+GL Posting:
+DR: AR Receivable                         53,500.00
+CR: Sales Revenue                         50,000.00
+CR: VAT Output (Payable)                   3,500.00</code></pre><p><strong>Zero-Rated Export</strong>:</p>
+<pre><code class="language-text">Transaction: Export Sale
+Net Amount: 100,000.00
+VAT (0%): 0.00
+Gross Amount: 100,000.00
+
+GL Posting:
+DR: AR Receivable                        100,000.00
+CR: Export Sales Revenue                 100,000.00
+CR: VAT Output (0%)                            0.00</code></pre><h2>Combined WHT and VAT Calculation</h2>
+<h3>Calculation Sequence</h3>
+<ol>
+<li><strong>Calculate VAT</strong> on net amount</li>
+<li><strong>Calculate WHT</strong> on net amount (excluding VAT)</li>
+<li><strong>Calculate Total</strong> = Net + VAT - WHT</li>
+</ol>
+<h3>Example: Service Invoice with Both WHT and VAT</h3>
+<pre><code class="language-text">Transaction: Professional Services
+Net Amount: 100,000.00
+
+Step 1 - Calculate VAT:
+VAT (7%): 100,000.00 × 7% = 7,000.00
+
+Step 2 - Calculate WHT:
+WHT (5%): 100,000.00 × 5% = 5,000.00
+
+Step 3 - Calculate Totals:
+Gross Amount: 100,000.00 + 7,000.00 = 107,000.00
+Net Payment: 107,000.00 - 5,000.00 = 102,000.00
+
+GL Posting:
+DR: Professional Expense                    100,000.00
+DR: VAT Input                                 7,000.00
+DR: WHT Receivable                            5,000.00
+CR: AP Payable                              112,000.00
+
+Payment:
+DR: AP Payable                              112,000.00
+CR: Bank Account (actual payment)           102,000.00
+CR: WHT to be remitted                       10,000.00</code></pre><h2>Tax Filing and Compliance</h2>
+<h3>WHT Filing Process</h3>
+<div class="mermaid">flowchart TD
+    Start([Start: Monthly WHT Filing]) --> ExtractWHT[Extract WHT Transactions<br/>for Filing Period]
+
+    ExtractWHT --> GenerateWHTReport[Generate WHT Report:<br/>PND 1, PND 3, PND 53]
+
+    GenerateWHTReport --> ValidateData{Data<br/>Validated?}
+    ValidateData -->|No| FixErrors[Fix Data Errors]
+    FixErrors --> GenerateWHTReport
+
+    ValidateData -->|Yes| PrepareForm[Prepare WHT Filing Form]
+    PrepareForm --> ReviewForm[Supervisor Review]
+
+    ReviewForm --> Approved{Approved?}
+    Approved -->|No| ReviseForm[Revise Form]
+    ReviseForm --> PrepareForm
+
+    Approved -->|Yes| SubmitFiling[Submit to Revenue Authority]
+    SubmitFiling --> PayWHT[Pay WHT Amount]
+
+    PayWHT --> PostPayment[Post Payment:<br/>DR: WHT Payable<br/>CR: Bank]
+
+    PostPayment --> IssueWHTCert[Issue WHT Certificates to Vendors]
+    IssueWHTCert --> FilingComplete([End: Filing Complete])</div><h3>WHT Filing Forms (Thailand Example)</h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+<th>Filing Deadline</th>
+<th>Applies To</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PND 1</strong></td>
+<td>WHT on salary and wages</td>
+<td>7th of following month</td>
+<td>Employee salaries</td>
+</tr>
+<tr>
+<td><strong>PND 3</strong></td>
+<td>WHT on payments to companies</td>
+<td>7th of following month</td>
+<td>Corporate vendors</td>
+</tr>
+<tr>
+<td><strong>PND 53</strong></td>
+<td>WHT on payments to individuals</td>
+<td>7th of following month</td>
+<td>Individual vendors</td>
+</tr>
+<tr>
+<td><strong>PND 54</strong></td>
+<td>Annual WHT summary</td>
+<td>End of February</td>
+<td>Annual reconciliation</td>
+</tr>
+</tbody></table>
+<h3>VAT Filing Process</h3>
+<div class="mermaid">flowchart TD
+    Start([Start: Monthly VAT Filing]) --> ExtractVAT[Extract VAT Transactions:<br/>Input VAT + Output VAT]
+
+    ExtractVAT --> ReconcileVAT[Reconcile VAT:<br/>GL vs. Tax Report]
+
+    ReconcileVAT --> Balanced{VAT<br/>Balanced?}
+    Balanced -->|No| InvestigateVariance[Investigate Variance]
+    InvestigateVariance --> ReconcileVAT
+
+    Balanced -->|Yes| CalculateNet[Calculate Net VAT:<br/>Output VAT - Input VAT]
+
+    CalculateNet --> DeterminePosition{VAT<br/>Position?}
+
+    DeterminePosition -->|Output > Input| VATPayable[VAT Payable Position]
+    DeterminePosition -->|Input > Output| VATRefundable[VAT Refundable Position]
+
+    VATPayable --> PrepareVATReturn[Prepare VAT Return - PP30]
+    VATRefundable --> PrepareVATReturn
+
+    PrepareVATReturn --> ReviewReturn[Manager Review]
+    ReviewReturn --> Approved{Approved?}
+
+    Approved -->|No| ReviseReturn[Revise Return]
+    ReviseReturn --> PrepareVATReturn
+
+    Approved -->|Yes| SubmitReturn[Submit VAT Return]
+
+    SubmitReturn --> CheckPayable{VAT<br/>Payable?}
+    CheckPayable -->|Yes| PayVAT[Pay VAT to Revenue Authority]
+    CheckPayable -->|No| RequestRefund[Request VAT Refund]
+
+    PayVAT --> PostVATPayment[Post Payment:<br/>DR: VAT Payable<br/>CR: Bank]
+    RequestRefund --> TrackRefund[Track Refund Status]
+
+    PostVATPayment --> FilingComplete([End: VAT Filing Complete])
+    TrackRefund --> FilingComplete</div><h3>VAT Filing Forms (Thailand Example)</h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+<th>Filing Deadline</th>
+<th>Applies To</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PP30</strong></td>
+<td>Monthly VAT return</td>
+<td>15th of following month</td>
+<td>All VAT registered entities</td>
+</tr>
+<tr>
+<td><strong>PP36</strong></td>
+<td>VAT return for small businesses</td>
+<td>Quarterly</td>
+<td>Small businesses (turnover &lt;1.8M)</td>
+</tr>
+</tbody></table>
+<h2>Tax Compliance Controls</h2>
+<h3>Validation Controls</h3>
+<ol>
+<li><p><strong>Tax Registration Validation</strong>:</p>
+<ul>
+<li>Verify vendor/customer tax ID format</li>
+<li>Validate VAT registration status</li>
+<li>Check WHT exemption certificates</li>
+</ul>
+</li>
+<li><p><strong>Rate Validation</strong>:</p>
+<ul>
+<li>Verify correct WHT rate applied</li>
+<li>Validate VAT rate based on product/service category</li>
+<li>Alert for rate changes or updates</li>
+</ul>
+</li>
+<li><p><strong>Calculation Validation</strong>:</p>
+<ul>
+<li>Automated calculation checks</li>
+<li>Rounding validation (standard 2 decimal places)</li>
+<li>Cross-check tax amounts against base amounts</li>
+</ul>
+</li>
+<li><p><strong>Filing Validation</strong>:</p>
+<ul>
+<li>Reconciliation of tax accounts before filing</li>
+<li>Validation of filing completeness</li>
+<li>Approval workflow for tax returns</li>
+</ul>
+</li>
+</ol>
+<h3>Audit Trail Requirements</h3>
+<p><strong>Required Documentation</strong>:</p>
+<ul>
+<li>Original tax invoices (WHT and VAT)</li>
+<li>WHT certificates issued and received</li>
+<li>VAT tax invoices with proper format</li>
+<li>Tax filing forms and submission receipts</li>
+<li>Payment confirmations to revenue authority</li>
+</ul>
+<p><strong>Retention Period</strong>: 7 years minimum (or per local regulation)</p>
+<h2>Tax Report Suite</h2>
+<h3>WHT Reports</h3>
+<ol>
+<li><strong>WHT Payable Report</strong>: Summary of WHT withheld by period</li>
+<li><strong>WHT by Vendor</strong>: Detail of WHT by vendor and tax type</li>
+<li><strong>WHT Certificate Register</strong>: All WHT certificates issued</li>
+<li><strong>WHT Filing Report</strong>: Ready-to-file format (PND forms)</li>
+</ol>
+<h3>VAT Reports</h3>
+<ol>
+<li><strong>VAT Input Report</strong>: Detail of input VAT by vendor</li>
+<li><strong>VAT Output Report</strong>: Detail of output VAT by customer</li>
+<li><strong>VAT Reconciliation</strong>: GL vs. Tax filing reconciliation</li>
+<li><strong>VAT Filing Report</strong>: Ready-to-file format (PP30)</li>
+</ol>
+<h3>Tax Analysis Reports</h3>
+<ol>
+<li><strong>Effective Tax Rate Analysis</strong>: Actual tax vs. standard rate</li>
+<li><strong>Tax Compliance Dashboard</strong>: Filing status and deadlines</li>
+<li><strong>Tax Variance Report</strong>: Unusual tax patterns or exceptions</li>
+<li><strong>Tax Credit Utilization</strong>: WHT and VAT credit usage trends</li>
+</ol>
+<h2>API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/tax/wht/calculate</code></td>
+<td>POST</td>
+<td>Calculate WHT amount</td>
+</tr>
+<tr>
+<td><code>/api/tax/vat/calculate</code></td>
+<td>POST</td>
+<td>Calculate VAT amount</td>
+</tr>
+<tr>
+<td><code>/api/tax/wht/certificate/{invoiceId}</code></td>
+<td>GET</td>
+<td>Generate WHT certificate</td>
+</tr>
+<tr>
+<td><code>/api/tax/wht/filing-report</code></td>
+<td>GET</td>
+<td>WHT filing report</td>
+</tr>
+<tr>
+<td><code>/api/tax/vat/filing-report</code></td>
+<td>GET</td>
+<td>VAT filing report</td>
+</tr>
+<tr>
+<td><code>/api/tax/rate/list</code></td>
+<td>GET</td>
+<td>Get current tax rates</td>
+</tr>
+<tr>
+<td><code>/api/tax/exemption/validate</code></td>
+<td>POST</td>
+<td>Validate tax exemption</td>
+</tr>
+</tbody></table>
+<h2>Best Practices</h2>
+<h3>Tax Configuration</h3>
+<ol>
+<li><strong>Maintain Tax Rates</strong>: Regular review and update of tax rates</li>
+<li><strong>Vendor/Customer Setup</strong>: Accurate tax registration data</li>
+<li><strong>Product/Service Classification</strong>: Correct VAT category assignment</li>
+<li><strong>Exemption Management</strong>: Current exemption certificates on file</li>
+</ol>
+<h3>Tax Processing</h3>
+<ol>
+<li><strong>Automated Calculation</strong>: Use system tax calculation, minimize manual</li>
+<li><strong>Validation Rules</strong>: Enable all tax validation controls</li>
+<li><strong>Regular Reconciliation</strong>: Monthly reconciliation of tax accounts</li>
+<li><strong>Timely Filing</strong>: File tax returns before deadline</li>
+<li><strong>Document Retention</strong>: Maintain complete tax documentation</li>
+</ol>
+<h3>Compliance Management</h3>
+<ol>
+<li><strong>Stay Current</strong>: Monitor tax law changes and updates</li>
+<li><strong>Professional Review</strong>: Periodic review by tax professionals</li>
+<li><strong>Audit Readiness</strong>: Maintain complete audit trail</li>
+<li><strong>Training</strong>: Regular training for accounting staff on tax rules</li>
+<li><strong>Quality Control</strong>: Management review of tax filings before submission</li>
+</ol>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

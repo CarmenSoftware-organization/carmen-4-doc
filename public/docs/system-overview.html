@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET System Overview - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET System Overview</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET System Overview</h1>
+<h2>Executive Summary</h2>
+<p><strong>Carmen.NET</strong> is a comprehensive accounting and financial ERP (Enterprise Resource Planning) system built with .NET/C# that provides enterprise-grade financial management capabilities including accounts payable/receivable, general ledger, asset management, and multi-tenant support.</p>
+<hr>
+<h2>Core Modules</h2>
+<h3>1. Accounts Payable (AP) Management</h3>
+<p><strong>Invoice Processing</strong></p>
+<ul>
+<li><code>ApInvoice</code>: Invoice header and main details</li>
+<li><code>ApInvoiceD</code>: Invoice detail lines</li>
+<li>Invoice status tracking and workflow</li>
+<li>Multi-currency invoice support with exchange rates</li>
+</ul>
+<p><strong>Payment Management</strong></p>
+<ul>
+<li><code>ApPayment</code>: Payment processing and tracking</li>
+<li><code>ApPaymentType</code>: Payment method categorization</li>
+<li>Payment procedure workflows (<code>ApProcedure</code>)</li>
+</ul>
+<p><strong>Withholding Tax (WHT)</strong></p>
+<ul>
+<li><code>ApInvWht</code>: Withholding tax header information</li>
+<li><code>ApInvWhtItem</code>: Individual WHT line items</li>
+<li><code>ApWhtCondition</code>: Tax condition rules</li>
+<li>Automated tax calculation based on conditions</li>
+</ul>
+<p><strong>Vendor Management</strong></p>
+<ul>
+<li>Vendor code tracking (<code>VnCode</code>)</li>
+<li>Vendor-specific payment terms</li>
+<li>Credit management</li>
+</ul>
+<p><strong>Controllers</strong>:</p>
+<ul>
+<li><code>ApInvoiceController</code>: Invoice CRUD operations</li>
+<li><code>ApPaymentController</code>: Payment processing</li>
+<li><code>ApPaymentTypeController</code>: Payment type management</li>
+<li><code>ApProcedureController</code>: Procedure workflows</li>
+<li><code>ApWhtConditionController</code>: Tax condition rules</li>
+</ul>
+<hr>
+<h3>2. Accounts Receivable (AR)</h3>
+<p><strong>Invoice Management</strong></p>
+<ul>
+<li>Customer invoice generation</li>
+<li>Invoice status tracking (<code>EnumArInvoiceStatus</code>)</li>
+<li>Payment collection management</li>
+<li>Aging reports and collections</li>
+</ul>
+<p><strong>Income Tracking</strong></p>
+<ul>
+<li>Income status management (<code>EnumIncomeStatus</code>)</li>
+<li>Revenue recognition</li>
+</ul>
+<hr>
+<h3>3. General Ledger (GL)</h3>
+<p><strong>Account Management</strong></p>
+<ul>
+<li><code>AccountCodeController</code>: Chart of accounts maintenance</li>
+<li>Account code hierarchy</li>
+<li>GL standard types (<code>EnumGlStandardType</code>)</li>
+<li>Credit/Debit classification (<code>EnumGlCrOrDr</code>)</li>
+</ul>
+<p><strong>Period Management</strong></p>
+<ul>
+<li>Fiscal period status tracking (<code>EnumGlPeriodStatus</code>)</li>
+<li>Period opening and closing</li>
+<li>Year-end processing</li>
+</ul>
+<p><strong>Posting &amp; Transactions</strong></p>
+<ul>
+<li>GL status tracking (<code>EnumGlStatus</code>)</li>
+<li>Posting separators (<code>EnumPostingSeparator</code>)</li>
+<li>Multi-dimensional posting</li>
+</ul>
+<hr>
+<h3>4. Asset Management</h3>
+<p><strong>Asset Tracking</strong></p>
+<ul>
+<li>Asset registration and tracking</li>
+<li>Pre-asset status management (<code>EnumPreAssetStatus</code>)</li>
+<li>Asset auto-ID formatting (<code>EnumAssetAutoIdFormat</code>)</li>
+<li>Asset deletion history (<code>EnumAssetDeleteHisAt</code>)</li>
+</ul>
+<p><strong>Depreciation &amp; Amortization</strong></p>
+<ul>
+<li>Amortization type handling (<code>EnumTypeOfAmortize</code>)</li>
+<li>Asset calculation utilities (<code>AssetCalculation</code>)</li>
+<li>Automated depreciation schedules</li>
+</ul>
+<p><strong>Asset Disposal</strong></p>
+<ul>
+<li>Disposal type classification (<code>EnumDisposalType</code>)</li>
+<li>Disposal date tracking (<code>EnumDisposalAtDate</code>)</li>
+<li>Asset write-off management</li>
+</ul>
+<hr>
+<h3>5. Tax Management</h3>
+<p><strong>Tax Types</strong></p>
+<ul>
+<li>VAT/Sales tax (<code>EnumTaxType</code>, <code>EnumVatSource</code>)</li>
+<li>Withholding tax (<code>EnumWhtSource</code>)</li>
+<li>Tax condition rules</li>
+<li>Withholding tax display options (<code>EnumShowWithholdingTaxAt</code>)</li>
+</ul>
+<p><strong>Tax Calculation</strong></p>
+<ul>
+<li>Automated tax computation</li>
+<li>Multi-rate tax support</li>
+<li>Tax reporting and filing</li>
+</ul>
+<hr>
+<h3>6. Multi-Dimensional Accounting</h3>
+<p><strong>Dimension Management</strong></p>
+<ul>
+<li>Cost center tracking</li>
+<li>Department codes (<code>WhtDeptCode</code>)</li>
+<li>Project codes</li>
+<li>Dimension types (<code>EnumDimensionType</code>)</li>
+<li>Module-specific dimensions (<code>EnumDimensionModule</code>)</li>
+<li><code>DimensionList</code>: Hierarchical dimension structures</li>
+</ul>
+<hr>
+<h2>Technical Architecture</h2>
+<h3>Project Structure</h3>
+<div class="mermaid">graph TD
+    Root["Carmen.NET/"]
+
+    Root --> Models["Carmen.Models/<br/>Data models & business entities<br/>(600+ model files)"]
+    Root --> WebApi["Carmen.WebApi/<br/>REST API layer"]
+    Root --> Enum["Carmen.Enum/<br/>Business enumerations"]
+    Root --> Utils["Carmen.Utils/<br/>Utility libraries<br/>(30+ utility files)"]
+    Root --> Query["Carmen.Query/<br/>Database query handling"]
+    Root --> Crypto["Carmen.Crypto/<br/>Encryption services"]
+    Root --> License["Carmen.LicenseApi/<br/>Licensing system"]
+    Root --> ApiClient["Carmen.Api.Client/<br/>API client library"]
+    Root --> Interface["Carmen.Models.Interface/<br/>Interface definitions"]
+    Root --> InterfaceList["Carmen.Models.InterfaceList/"]
+    Root --> Version["Carmen.Models.Version/<br/>Versioning support"]
+
+    Models --> ApInvoice["ApInvoice.cs"]
+    Models --> ApInvWht["ApInvWht.cs"]
+    Models --> ApInvWhtItem["ApInvWhtItem.cs"]
+    Models --> MoreModels["..."]
+
+    WebApi --> Controllers["Controllers/"]
+    WebApi --> Areas["Areas/"]
+
+    Controllers --> ApInvoiceCtrl["ApInvoiceController.cs"]
+    Controllers --> ApPaymentCtrl["ApPaymentController.cs"]
+    Controllers --> AccountCodeCtrl["AccountCodeController.cs"]
+
+    Areas --> Management["Management/"]
+    Areas --> Support["Support/"]
+
+    Enum --> EnumTax["EnumTaxType.cs"]
+    Enum --> EnumGl["EnumGlStatus.cs"]
+    Enum --> EnumWorkflow["EnumWorkflowModule.cs"]
+
+    Utils --> Amount["AmountUtils.cs"]
+    Utils --> Asset["AssetCalculation.cs"]
+    Utils --> Date["DateExtension.cs"]
+    Utils --> MoreUtils["..."]
+
+    Query --> UriQuery["UriQueryString.cs"]
+    Query --> ViewPaged["ViewPagedResult.cs"]
+    Query --> Condition["Condition.cs"]
+
+    Crypto --> Encryption["Encryption/"]
+    Crypto --> Decryption["Decryption/"]
+
+    style Root fill:#e1f5ff
+    style Models fill:#fff4e1
+    style WebApi fill:#e8f5e9
+    style Enum fill:#f3e5f5
+    style Utils fill:#fff9c4</div><hr>
+<h3>Key Architectural Features</h3>
+<p><strong>Multi-Tenant Architecture</strong></p>
+<ul>
+<li>Tenant isolation via <code>useTenant</code> parameter</li>
+<li>Tenant-specific data segregation</li>
+<li>Cross-tenant reporting capabilities</li>
+</ul>
+<p><strong>Security &amp; Permissions</strong></p>
+<ul>
+<li>Role-based access control (RBAC)</li>
+<li>Permission validation per operation (<code>FncPermission</code>)</li>
+<li>Module-level permissions (e.g., &quot;AP.Invoice&quot;)</li>
+<li>Action-level permissions (View, Create, Update, Delete)</li>
+</ul>
+<p><strong>Workflow &amp; Approval</strong></p>
+<ul>
+<li>Workflow module support (<code>EnumWorkflowModule</code>)</li>
+<li>Approval code tracking (<code>EnumWorkflowApproveCode</code>)</li>
+<li>Multi-level approval chains</li>
+<li>Status-based workflow progression</li>
+</ul>
+<p><strong>API Design</strong></p>
+<ul>
+<li>RESTful API with Swagger documentation</li>
+<li>Async/await pattern throughout</li>
+<li>Standardized response formats (<code>ApiReturnResponse</code>)</li>
+<li>Query string filtering (<code>UriQueryString</code>)</li>
+<li>Paged results (<code>ViewPagedResult</code>)</li>
+</ul>
+<p><strong>Data Access</strong></p>
+<ul>
+<li>Database factory pattern (<code>DbFactory.CarmenDbFactory()</code>)</li>
+<li>Connection provider abstraction (<code>EnumConnectionProvider</code>)</li>
+<li>Query builder support</li>
+</ul>
+<p><strong>Integration Capabilities</strong></p>
+<ul>
+<li>Interface type support (<code>EnumInterfaceType</code>)<ul>
+<li>File-based interfaces</li>
+<li>Database interfaces</li>
+<li>Web API interfaces</li>
+<li>Data bank interfaces</li>
+</ul>
+</li>
+<li>Document type mapping (<code>EnumInterfaceDocType</code>)</li>
+<li>Interface mapping configuration (<code>IInterfaceMapping</code>)</li>
+<li>Account code mapping (<code>IAccCodeFromTo</code>)</li>
+<li>Excel export parameters (<code>ExcelParam</code>)</li>
+</ul>
+<p><strong>Localization &amp; Multi-Currency</strong></p>
+<ul>
+<li>Currency code support (<code>CurCode</code>)</li>
+<li>Exchange rate management (<code>CurRate</code>, <code>EnumExchageRateType</code>)</li>
+<li>Multi-language support</li>
+<li>Regional tax compliance</li>
+</ul>
+<p><strong>Audit &amp; Logging</strong></p>
+<ul>
+<li>Log action tracking (<code>EnumLogAction</code>)</li>
+<li>Request logging (<code>LogHttpRequest</code>)</li>
+<li>Result logging (<code>LogHttpResult</code>)</li>
+<li>Error tracking and reporting</li>
+</ul>
+<p><strong>Comments &amp; Documentation</strong></p>
+<ul>
+<li>Comment module system (<code>EnumCommentModule</code>)</li>
+<li>In-code documentation support</li>
+<li>Remark fields (<code>WhtRemark1</code>, <code>WhtRemark2</code>)</li>
+</ul>
+<hr>
+<h2>Technology Stack</h2>
+<p><strong>Backend</strong></p>
+<ul>
+<li>.NET Framework/C#</li>
+<li>ASP.NET Web API</li>
+<li>Entity Framework (implied)</li>
+<li>Newtonsoft.Json for JSON serialization</li>
+</ul>
+<p><strong>API Documentation</strong></p>
+<ul>
+<li>Swagger/Swashbuckle for API documentation</li>
+<li>NSwag for API client generation (<code>Carmen.Api.Client.nswag</code>)</li>
+</ul>
+<p><strong>Security</strong></p>
+<ul>
+<li>OAuth/Authorization attributes</li>
+<li>Custom crypto library (<code>Carmen.Crypto</code>)</li>
+<li>Base64 encoding utilities</li>
+</ul>
+<p><strong>Data Format</strong></p>
+<ul>
+<li>JSON for API communication</li>
+<li>CSV helper utilities</li>
+<li>Excel integration support</li>
+<li>Data table extensions</li>
+</ul>
+<hr>
+<h2>Key Business Enumerations</h2>
+<h3>Financial Status</h3>
+<ul>
+<li><code>EnumGlStatus</code>: General ledger transaction status</li>
+<li><code>EnumGlPeriodStatus</code>: Accounting period status</li>
+<li><code>EnumArInvoiceStatus</code>: AR invoice lifecycle status</li>
+<li><code>EnumIncomeStatus</code>: Revenue recognition status</li>
+</ul>
+<h3>Transaction Types</h3>
+<ul>
+<li><code>EnumTaxType</code>: Tax classification</li>
+<li><code>EnumGlStandardType</code>: Standard GL entry types</li>
+<li><code>EnumGlCrOrDr</code>: Credit or Debit indicator</li>
+<li><code>EnumDisposalType</code>: Asset disposal methods</li>
+</ul>
+<h3>Configuration</h3>
+<ul>
+<li><code>EnumLicenseType</code>: System licensing</li>
+<li><code>EnumMailProfile</code>: Email configuration</li>
+<li><code>EnumFieldType</code>: Dynamic field types</li>
+<li><code>EnumNavigate</code>: Navigation patterns</li>
+<li><code>EnumLookup</code>: Lookup value sources</li>
+</ul>
+<hr>
+<h2>Data Models</h2>
+<h3>Invoice Model Example</h3>
+<pre><code class="language-csharp">public class ApInvoice : IApInvoice
+{
+    public string VnCode { get; set; }          // Vendor code
+    public DateTime InvhDate { get; set; }      // Invoice date
+    public string InvhDesc { get; set; }        // Description
+    public string InvhInvNo { get; set; }       // Invoice number
+    public DateTime InvhDueDate { get; set; }   // Due date
+    public int InvhCredit { get; set; }         // Credit terms
+    public string CurCode { get; set; }         // Currency
+    public decimal CurRate { get; set; }        // Exchange rate
+    public EnumTaxType InvhTaxT1 { get; set; }  // Tax type
+    public ApInvWht InvWht { get; set; }        // WHT info
+    public DimensionList DimHList { get; set; } // Dimensions
+}</code></pre><h3>Withholding Tax Model</h3>
+<pre><code class="language-csharp">public class ApInvWht : IApInvWht
+{
+    public string WhtTypeCode { get; set; }           // WHT type
+    public decimal WhtTotalAmt { get; set; }          // Total amount
+    public string WhtDeptCode { get; set; }           // Department
+    public string WhtRemark1 { get; set; }            // Remark 1
+    public string WhtRemark2 { get; set; }            // Remark 2
+    public string WhtNo { get; set; }                 // WHT number
+    public string WhtTaxCr { get; set; }              // Tax credit
+    public Collection&lt;ApInvWhtItem&gt; Items { get; set; } // Line items
+}</code></pre><hr>
+<h2>API Patterns</h2>
+<h3>Standard Controller Pattern</h3>
+<pre><code class="language-csharp">[HttpPost]
+[Authorize]
+[Route(&quot;api/apInvoice/search&quot;)]
+[SwaggerConsumes(&quot;application/json&quot;)]
+[SwaggerProduces(&quot;application/json&quot;)]
+[SwaggerResponse(HttpStatusCode.OK, &quot;OK&quot;, typeof(ViewPagedResult&lt;ViewApInvoice&gt;))]
+public async Task&lt;IHttpActionResult&gt; Search(UriQueryString qs, string useTenant = &quot;&quot;)
+{
+    // 1. Logging
+    LogHttpRequest.Info($&quot;{this.GetType().Name} : Search&quot;);
+
+    // 2. Tenant handling
+    FncBase.ApplyTenantIfUseTenant(useTenant);
+
+    // 3. Permission check
+    var permission = await FncPermission.GetPermissionInfoByPermissionNameAsync(&quot;AP.Invoice&quot;);
+    if (!permission.View) return this.JsonResultForbidden(&quot;&quot;, &quot;AP.Invoice&quot;, &quot;View&quot;);
+
+    // 4. Database operation
+    var dbFac = DbFactory.CarmenDbFactory();
+    dbFac.Qs = qs;
+    var l = await FncApInvoice.GetListAsync(dbFac, dbFac.Qs);
+
+    // 5. Response
+    var r = JObject.FromObject(l);
+    return this.JsonResultOk(r);
+}</code></pre><hr>
+<h2>Utility Libraries</h2>
+<p><strong>Amount &amp; Math</strong></p>
+<ul>
+<li><code>AmountUtils</code>: Financial calculations</li>
+<li><code>MathUtils</code>: Mathematical operations</li>
+<li><code>DecimalUtils</code>: Decimal precision handling</li>
+</ul>
+<p><strong>Date &amp; Time</strong></p>
+<ul>
+<li><code>DateExtension</code>: Date manipulation</li>
+<li><code>MinDateTimeConverter</code>: JSON date conversion</li>
+</ul>
+<p><strong>String &amp; Data</strong></p>
+<ul>
+<li><code>StringUtils</code>, <code>StringExtension</code>: String operations</li>
+<li><code>Base64Utils</code>: Encoding/decoding</li>
+<li><code>Hash</code>: Hashing utilities</li>
+</ul>
+<p><strong>Collections &amp; Objects</strong></p>
+<ul>
+<li><code>ListExtension</code>, <code>CollectionExtension</code>: Collection helpers</li>
+<li><code>EnumerableExtensions</code>: LINQ extensions</li>
+<li><code>ObjectExtension</code>, <code>ObjectCompare</code>: Object operations</li>
+</ul>
+<p><strong>File &amp; Data</strong></p>
+<ul>
+<li><code>FileUtils</code>: File operations</li>
+<li><code>CsvHelper</code>: CSV import/export</li>
+<li><code>ImageHelper</code>: Image processing</li>
+<li><code>DataTableExtension</code>: DataTable operations</li>
+</ul>
+<p><strong>Search &amp; Query</strong></p>
+<ul>
+<li><code>SearchHelper</code>: Search functionality</li>
+<li><code>PermissionUtils</code>: Permission utilities</li>
+<li><code>DynamicUtils</code>: Dynamic object handling</li>
+</ul>
+<p><strong>Conversion &amp; Serialization</strong></p>
+<ul>
+<li><code>ConvertUtils</code>: Type conversion</li>
+<li><code>JsonSerializerSettingsDataTableFormat</code>: JSON configuration</li>
+</ul>
+<p><strong>Specialized</strong></p>
+<ul>
+<li><code>AssetCalculation</code>: Asset depreciation calculations</li>
+<li><code>RandomGenerator</code>: Random value generation</li>
+<li><code>VersionsComparer</code>: Version comparison</li>
+</ul>
+<hr>
+<h2>License &amp; Deployment</h2>
+<p><strong>Licensing System</strong></p>
+<ul>
+<li><code>Carmen.LicenseApi</code>: License validation service</li>
+<li><code>EnumLicenseType</code>: License type enumeration</li>
+<li>License validation and enforcement</li>
+</ul>
+<p><strong>Web Applications</strong></p>
+<ul>
+<li><code>Carmen.WebApi</code>: Main API application</li>
+<li><code>Carmen.WebLicense</code>: License management portal</li>
+<li><code>CarmenExcelAddIn</code>: Excel integration add-in</li>
+</ul>
+<p><strong>Testing</strong></p>
+<ul>
+<li><code>Carmen.WebApi.Test</code>: API test suite</li>
+<li>Test configuration management</li>
+<li>Base test classes</li>
+</ul>
+<hr>
+<h2>Use Cases</h2>
+<h3>Primary Use Cases</h3>
+<ol>
+<li><p><strong>Vendor Invoice Processing</strong></p>
+<ul>
+<li>Receive and record vendor invoices</li>
+<li>Calculate and track withholding taxes</li>
+<li>Apply multi-dimensional cost allocation</li>
+<li>Support multi-currency transactions</li>
+</ul>
+</li>
+<li><p><strong>Payment Management</strong></p>
+<ul>
+<li>Process vendor payments</li>
+<li>Track payment status</li>
+<li>Manage payment methods and terms</li>
+<li>Generate payment vouchers</li>
+</ul>
+</li>
+<li><p><strong>Financial Reporting</strong></p>
+<ul>
+<li>Generate GL reports</li>
+<li>Track account balances</li>
+<li>Period-end closing</li>
+<li>Multi-dimensional reporting</li>
+</ul>
+</li>
+<li><p><strong>Asset Lifecycle Management</strong></p>
+<ul>
+<li>Register new assets</li>
+<li>Calculate depreciation</li>
+<li>Process asset disposals</li>
+<li>Track asset history</li>
+</ul>
+</li>
+<li><p><strong>Tax Compliance</strong></p>
+<ul>
+<li>Calculate and track VAT</li>
+<li>Manage withholding tax obligations</li>
+<li>Generate tax reports</li>
+<li>Support tax filing requirements</li>
+</ul>
+</li>
+<li><p><strong>Multi-Tenant Operations</strong></p>
+<ul>
+<li>Manage multiple legal entities</li>
+<li>Segregate data by tenant</li>
+<li>Cross-tenant reporting</li>
+<li>Tenant-specific configurations</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Integration Points</h2>
+<p><strong>Interface Types Supported</strong></p>
+<ul>
+<li>File-based imports/exports</li>
+<li>Database-to-database integration</li>
+<li>Web API integration</li>
+<li>Data bank connectivity</li>
+</ul>
+<p><strong>Excel Integration</strong></p>
+<ul>
+<li>Excel add-in for data entry</li>
+<li>Export to Excel functionality</li>
+<li>Excel template support</li>
+</ul>
+<p><strong>External Systems</strong></p>
+<ul>
+<li>Banking interfaces</li>
+<li>Payment gateways</li>
+<li>Tax authority systems</li>
+<li>Third-party accounting systems</li>
+</ul>
+<hr>
+<h2>Summary</h2>
+<p>Carmen.NET is a <strong>full-featured financial ERP system</strong> designed for:</p>
+<ul>
+<li>Multi-entity organizations requiring consolidated financial management</li>
+<li>Businesses with complex approval workflows</li>
+<li>Companies operating in multiple currencies</li>
+<li>Organizations requiring detailed cost center tracking</li>
+<li>Enterprises needing comprehensive tax compliance</li>
+<li>Multi-tenant SaaS deployments</li>
+</ul>
+<p>The system provides <strong>enterprise-grade capabilities</strong> with robust security, extensive configurability, and comprehensive API access for integration scenarios.</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

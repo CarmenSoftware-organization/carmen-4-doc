@@ -1,0 +1,23 @@
+Carmen.NET Business Rules Extraction Summary
+=============================================
+
+Extraction Date: 2025-10-06T07:50:51.599498Z
+
+Total Rules Extracted: 1500
+
+By Category:
+------------
+Validation Rules:    0
+Calculation Rules:   0
+Permission Checks:   664
+Workflow Rules:      0
+Tax Rules:           0
+Business Logic:      836
+
+By Module:
+----------
+AP: 259 rules
+AR: 393 rules
+Asset: 240 rules
+GL: 355 rules
+Income: 253 rules

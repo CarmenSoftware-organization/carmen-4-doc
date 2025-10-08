@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 3: Undocumented Features Report - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Phase 3: Undocumented Features Report</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Phase 3: Undocumented Features Report</h1>
+<p><strong>Report Date</strong>: 2025-10-07<br><strong>Report Type</strong>: Gap Analysis - Undocumented Features Inventory<br><strong>Source</strong>: Carmen.NET ERP System (Carmen4)<br><strong>Status</strong>: Phase 3.1 - Complete Inventory</p>
+<hr>
+<h2>Executive Summary</h2>
+<p><strong>Total API Endpoints</strong>: 433<br><strong>Documented Endpoints</strong>: 4 (0.9%)<br><strong>Undocumented Endpoints</strong>: 429 (99.1%)</p>
+<p><strong>Documentation Crisis</strong>: The system has a critical documentation gap affecting all modules except Authentication.</p>
+<hr>
+<h2>Undocumented Features by Module</h2>
+<h3>1. AP Module (Accounts Payable) - 33 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: 8 controllers</p>
+<ul>
+<li>ApInvoiceController.cs</li>
+<li>ApPaymentController.cs</li>
+<li>ApPaymentTypeController.cs</li>
+<li>ApProcedureController.cs</li>
+<li>ApWhtController.cs</li>
+<li>ApWhtConditionController.cs</li>
+<li>ApWhtReconController.cs</li>
+<li>ApWhtTypeController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>1.1 AP Invoice Management (7 routes)</h4>
+<pre><code class="language-text">api/apInvoice                          - Create/list AP invoices
+api/apInvoice/search                   - Search invoices
+api/apInvoice/status                   - Get invoice status
+api/apInvoice/unpaid                   - List unpaid invoices
+api/apInvoice/newunpaid                - List new unpaid invoices
+api/apInvoice/{invhSeq}                - Get/update/delete invoice by ID
+api/apInvoice/{invhSeq}/{invdSeq}      - Manage invoice line items</code></pre><p><strong>Business Functionality</strong>: Invoice creation, modification, status tracking, unpaid invoice queries</p>
+<h4>1.2 AP Payment Processing (5 routes)</h4>
+<pre><code class="language-text">api/apPayment                          - Create/list payments
+api/apPayment/search                   - Search payments
+api/apPayment/getEmail/{id}            - Get payment notification email
+api/apPayment/sendEmail/               - Send payment notification
+api/apPayment/{pyhSeq}                 - Get/update/delete payment</code></pre><p><strong>Business Functionality</strong>: Payment processing, email notifications, payment queries</p>
+<h4>1.3 Payment Type Configuration (3 routes)</h4>
+<pre><code class="language-text">api/apPaymentType                      - Create/list payment types
+api/apPaymentType/search               - Search payment types
+api/apPaymentType/{id}                 - Get/update/delete payment type</code></pre><p><strong>Business Functionality</strong>: Master data for payment methods (cash, check, wire transfer, etc.)</p>
+<h4>1.4 Withholding Tax Management (15 routes)</h4>
+<pre><code class="language-text">api/apWht                              - Manage WHT records
+api/apWht/search                       - Search WHT records
+api/apWht/{id}                         - Get/update/delete WHT record
+
+api/apWhtCondition                     - Manage WHT conditions
+api/apWhtCondition/search              - Search WHT conditions
+api/apWhtCondition/{id}                - Get/update/delete condition
+
+api/apWhtRecon                         - WHT reconciliation
+api/apWhtRecon/search                  - Search reconciliation records
+api/apWhtRecon/import                  - Import WHT data
+api/apWhtRecon/import/{year}/{month}   - Import by period
+api/apWhtRecon/year                    - List available years
+api/apWhtRecon/{id}                    - Get/update/delete reconciliation
+api/apWhtRecon/{year}/{month}          - Get reconciliation by period
+
+api/apWhtType                          - Manage WHT types
+api/apWhtType/search                   - Search WHT types
+api/apWhtType/{id}                     - Get/update/delete WHT type</code></pre><p><strong>Business Functionality</strong>: Thailand-specific withholding tax calculation, reconciliation, and government filing</p>
+<h4>1.5 AP Procedures (2 routes)</h4>
+<pre><code class="language-text">api/apProcedure/closePeriod            - Close accounting period
+api/apProcedure/isPostedFromInventory  - Check inventory integration</code></pre><p><strong>Business Functionality</strong>: Period-end closing, inventory integration validation</p>
+<h4>1.6 Vendor Management (3 routes)</h4>
+<pre><code class="language-text">api/vendor                             - Create/list vendors
+api/vendor/search                      - Search vendors
+api/vendor/{id}                        - Get/update/delete vendor</code></pre><p><strong>Business Functionality</strong>: Vendor master data management</p>
+<h4>1.7 Vendor Category (3 routes)</h4>
+<pre><code class="language-text">api/vendorCategory                     - Create/list categories
+api/vendorCategory/search              - Search categories
+api/vendorCategory/{id}                - Get/update/delete category</code></pre><p><strong>Business Functionality</strong>: Vendor classification and categorization</p>
+<hr>
+<h3>2. AR Module (Accounts Receivable) - 52 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: 11 controllers</p>
+<ul>
+<li>ArContractController.cs</li>
+<li>ArFolioController.cs</li>
+<li>ArInvoiceController.cs</li>
+<li>ArOwnerController.cs</li>
+<li>ArPaymentTypeController.cs</li>
+<li>ArProcedureController.cs</li>
+<li>ArProfileController.cs</li>
+<li>ArProjectController.cs</li>
+<li>ArReceiptController.cs</li>
+<li>ArTitleController.cs</li>
+<li>ArTypeController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>2.1 AR Contract Management (7 routes)</h4>
+<pre><code class="language-text">api/arContract                                    - Create/list contracts
+api/arContract/search                             - Search contracts
+api/arContract/applyContract                      - Apply contract to invoice
+api/arContract/byArNo/{arno}                      - Get contracts by AR number
+api/arContract/byDate/{frDate}/{toDate}           - Get contracts by date range
+api/arContract/checkDuplicateContractNo/{*contractNo} - Validate contract number
+api/arContract/{id}                               - Get/update/delete contract</code></pre><p><strong>Business Functionality</strong>: Recurring revenue contracts, subscription management, contract application to invoices</p>
+<h4>2.2 AR Folio Management (5 routes)</h4>
+<pre><code class="language-text">api/arFolio                            - Create/list folios
+api/arFolio/search                     - Search folios
+api/arFolio/unpaid                     - List unpaid folios
+api/arFolio/addOrUpdateBatch           - Bulk folio operations
+api/arFolio/{id}                       - Get/update/delete folio</code></pre><p><strong>Business Functionality</strong>: Hotel/property folio management (hospitality-specific feature)</p>
+<h4>2.3 AR Invoice Management (10 routes)</h4>
+<pre><code class="language-text">api/arInvoice                          - Create/list invoices
+api/arInvoice/search                   - Search invoices
+api/arInvoice/unpaid                   - List unpaid invoices
+api/arInvoice/Invoice/{id}             - Get invoice with details
+api/arInvoice/getEmail/{id}            - Get invoice email
+api/arInvoice/sendEmail/               - Send invoice by email
+api/arInvoice/comment                  - Add comment to invoice
+api/arInvoice/commentById/{id}         - Get comments by invoice ID
+api/arInvoice/{id}                     - Get/update/delete invoice</code></pre><p><strong>Business Functionality</strong>: Invoice generation, email delivery, commenting, unpaid tracking</p>
+<h4>2.4 AR Receipt Processing (8 routes)</h4>
+<pre><code class="language-text">api/arReceipt                          - Create/list receipts
+api/arReceipt/search                   - Search receipts
+api/arReceipt/Receipt/{id}             - Get receipt with details
+api/arReceipt/getEmail/{id}            - Get receipt email
+api/arReceipt/sendEmail/               - Send receipt by email
+api/arReceipt/comment                  - Add comment to receipt
+api/arReceipt/comment/{id}             - Get comments by receipt ID
+api/arReceipt/{id}                     - Get/update/delete receipt</code></pre><p><strong>Business Functionality</strong>: Payment receipt generation, email delivery, commenting</p>
+<h4>2.5 AR Customer Profile (7 routes)</h4>
+<pre><code class="language-text">api/arProfile                          - Create/list customer profiles
+api/arProfile/search                   - Search profiles
+api/arProfile/fileAttach               - Upload file attachment
+api/arProfile/fileAttach/{arNo}        - List files by AR number
+api/arProfile/fileAttach/download/{id} - Download attachment
+api/arProfile/fileAttach/{id}          - Delete attachment
+api/arProfile/{id}                     - Get/update/delete profile</code></pre><p><strong>Business Functionality</strong>: Customer master data, document management, file attachments</p>
+<h4>2.6 AR Owner Management (3 routes)</h4>
+<pre><code class="language-text">api/arOwner                            - Create/list owners
+api/arOwner/search                     - Search owners
+api/arOwner/{id}                       - Get/update/delete owner</code></pre><p><strong>Business Functionality</strong>: Property owner management (hospitality-specific)</p>
+<h4>2.7 AR Project Management (3 routes)</h4>
+<pre><code class="language-text">api/arProject                          - Create/list projects
+api/arProject/search                   - Search projects
+api/arProject/{id}                     - Get/update/delete project</code></pre><p><strong>Business Functionality</strong>: Project-based billing and revenue tracking</p>
+<h4>2.8 AR Configuration (12 routes)</h4>
+<pre><code class="language-text">api/arPaymentType                      - Payment type configuration
+api/arPaymentType/search               - Search payment types
+api/arPaymentType/{id}                 - Get/update/delete payment type
+
+api/arTitle                            - Customer title configuration
+api/arTitle/search                     - Search titles
+api/arTitle/{id}                       - Get/update/delete title
+
+api/arType                             - Customer type configuration
+api/arType/search                      - Search customer types
+api/arType/{id}                        - Get/update/delete customer type
+
+api/arProcedure/closePeriod            - Close AR period</code></pre><p><strong>Business Functionality</strong>: Master data configuration, period-end processing</p>
+<hr>
+<h3>3. GL Module (General Ledger) - 34 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: 7 controllers</p>
+<ul>
+<li>GlJvController.cs</li>
+<li>GlJvFrController.cs</li>
+<li>GlPeriodController.cs</li>
+<li>GlPrefixController.cs</li>
+<li>GlProcedureController.cs</li>
+<li>AccountCodeController.cs</li>
+<li>AllocationJvController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>3.1 Journal Voucher Management (9 routes)</h4>
+<pre><code class="language-text">api/glJv                               - Create/list journal vouchers
+api/glJv/search                        - Search journal vouchers
+api/glJv/addBatch                      - Bulk JV creation
+api/glJv/addBatchTempTable             - Bulk JV via temp table
+api/glJv/addOrUpdateBatch              - Bulk upsert operations
+api/glJv/addOrUpdateBatchTempTable     - Bulk upsert via temp table
+api/glJv/delBatchTempTable             - Delete temp table batch
+api/glJv/{jvhSeq}                      - Get/update/delete JV
+api/glJv/{navigate}                    - Navigate between JVs</code></pre><p><strong>Business Functionality</strong>: Manual journal entries, batch imports, navigation</p>
+<h4>3.2 Fixed Journal Vouchers (3 routes)</h4>
+<pre><code class="language-text">api/glJvFr                             - Create/list fixed JVs
+api/glJvFr/search                      - Search fixed JVs
+api/glJvFr/{fjvhSeq}                   - Get/update/delete fixed JV</code></pre><p><strong>Business Functionality</strong>: Recurring journal templates</p>
+<h4>3.3 Amortization Management (4 routes)</h4>
+<pre><code class="language-text">api/amortizeStdJv                      - Standard amortization JVs
+api/amortizeStdJv/search               - Search amortization JVs
+api/amortizeStdJv/{fjvhSeq}            - Get/update/delete amortization
+api/amortizeHistory/{fjvhSeq}          - Get amortization history</code></pre><p><strong>Business Functionality</strong>: Prepaid/deferred expense amortization</p>
+<h4>3.4 Allocation Journal (3 routes)</h4>
+<pre><code class="language-text">api/allocationJv                       - Create/list allocation JVs
+api/allocationJv/search                - Search allocation JVs
+api/allocationJv/{jvhSeq}              - Get/update/delete allocation</code></pre><p><strong>Business Functionality</strong>: Cost allocation across departments/projects</p>
+<h4>3.5 Chart of Accounts (4 routes)</h4>
+<pre><code class="language-text">api/accountCode                        - Create/list account codes
+api/accountCode/search                 - Search account codes
+api/accountCode/batch                  - Bulk account operations
+api/accountCode/{id}                   - Get/update/delete account</code></pre><p><strong>Business Functionality</strong>: Chart of accounts management</p>
+<h4>3.6 GL Periods (6 routes)</h4>
+<pre><code class="language-text">api/glPeriod                           - Create/list periods
+api/glPeriod/search                    - Search periods
+api/glPeriod/initial                   - Initialize first period
+api/glPeriod/year/{year}               - Get periods by year
+api/glPeriod/Anniversary/{anniversary} - Get anniversary periods
+api/glPeriod/{id}                      - Get/update/delete period</code></pre><p><strong>Business Functionality</strong>: Accounting period management, calendar setup</p>
+<h4>3.7 GL Prefix Configuration (3 routes)</h4>
+<pre><code class="language-text">api/glPrefix                           - Create/list prefixes
+api/glPrefix/search                    - Search prefixes
+api/glPrefix/{id}                      - Get/update/delete prefix</code></pre><p><strong>Business Functionality</strong>: Document numbering schemes</p>
+<h4>3.8 GL Procedures (11 routes)</h4>
+<pre><code class="language-text">api/glProcedure/closePeriod            - Close accounting period
+api/glProcedure/postAp                 - Post AP to GL
+api/glProcedure/postAr                 - Post AR to GL
+api/glProcedure/postAsset              - Post Asset transactions
+api/glProcedure/postAssetDepre         - Post depreciation
+api/glProcedure/postAssetDisposal      - Post asset disposal
+api/glProcedure/applyStandardJv        - Apply standard JV
+api/glProcedure/applyAmortizeJv        - Apply amortization
+api/glProcedure/reCalPeriod            - Recalculate period
+api/glProcedure/reCalPeriodNoWait      - Recalculate async
+api/glProcedure/checkPostInvalid       - Validate posting
+api/glProcedure/createGlHis            - Create GL history
+api/glProcedure/verifyData             - Data integrity check</code></pre><p><strong>Business Functionality</strong>: Integration posting, period-end closing, data validation</p>
+<hr>
+<h3>4. Asset Module - 26 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: 7 controllers</p>
+<ul>
+<li>AssetRegisterController.cs</li>
+<li>AssetDisposalController.cs</li>
+<li>AssetDepartmentController.cs</li>
+<li>AssetLocationController.cs</li>
+<li>AssetHistoryController.cs</li>
+<li>AstCategoryController.cs</li>
+<li>PreassetController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>4.1 Asset Register Management (9 routes)</h4>
+<pre><code class="language-text">api/assetRegister                      - Create/list assets
+api/assetRegister/search               - Search assets
+api/assetRegister/copy                 - Copy asset record
+api/assetRegister/changeLocation       - Transfer asset location
+api/assetRegister/remain/{id}/{date}   - Calculate remaining value
+api/assetRegister/isDisposal/{id}      - Check disposal status
+api/assetRegister/endDate/{id}/{no}    - Update end date
+api/assetRegister/{id}                 - Get/update/delete asset</code></pre><p><strong>Business Functionality</strong>: Fixed asset registration, transfers, valuation</p>
+<h4>4.2 Asset Disposal (5 routes)</h4>
+<pre><code class="language-text">api/assetDisposal                      - Create/list disposals
+api/assetDisposal/search               - Search disposals
+api/assetDisposal/{id}                 - Get/update/delete disposal
+api/assetDisposalAccuDepre             - Accumulated depreciation on disposal
+api/assetDisposalQuery                 - Query disposal records</code></pre><p><strong>Business Functionality</strong>: Asset retirement, sale, write-off processing</p>
+<h4>4.3 Asset Configuration (9 routes)</h4>
+<pre><code class="language-text">api/astCategory                        - Asset categories
+api/astCategory/search                 - Search categories
+api/astCategory/{id}                   - Get/update/delete category
+
+api/assetDepartment                    - Department assignment
+api/assetDepartment/search             - Search departments
+api/assetDepartment/{id}               - Get/update/delete department
+
+api/assetLocation                      - Location management
+api/assetLocation/search               - Search locations
+api/assetLocation/{id}                 - Get/update/delete location</code></pre><p><strong>Business Functionality</strong>: Asset classification, organizational structure</p>
+<h4>4.4 Asset History &amp; Tracking (3 routes)</h4>
+<pre><code class="language-text">api/assetHistory/                      - Asset transaction history
+api/assetHistory/LocLog/               - Location change log
+api/preasset/search                    - Search pre-assets
+api/preasset/{id}                      - Manage pre-assets</code></pre><p><strong>Business Functionality</strong>: Audit trail, location tracking, asset acquisition workflow</p>
+<h4>4.5 Asset Procedures (2 routes)</h4>
+<pre><code class="language-text">api/assetProcedure/closePeriod         - Close asset period
+api/assetProcedure/postAp              - Post AP to asset</code></pre><p><strong>Business Functionality</strong>: Period-end processing, AP integration</p>
+<hr>
+<h3>5. Income Module - 23 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: 8 controllers</p>
+<ul>
+<li>IncomeCategoryController.cs</li>
+<li>IncomeInvoiceController.cs</li>
+<li>IncomePayCodeController.cs</li>
+<li>IncomePayTypeController.cs</li>
+<li>IncomeProductController.cs</li>
+<li>IncomeRevenueController.cs</li>
+<li>IncomeSourceController.cs</li>
+<li>IncomeProcedureController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>5.1 Income Invoice Management (3 routes)</h4>
+<pre><code class="language-text">api/incomeInvoice                      - Create/list income invoices
+api/incomeInvoice/search               - Search invoices
+api/incomeInvoice/{id}                 - Get/update/delete invoice</code></pre><p><strong>Business Functionality</strong>: Daily revenue capture from PMS/POS systems</p>
+<h4>5.2 Income Revenue Recording (3 routes)</h4>
+<pre><code class="language-text">api/incomeRevenue                      - Create/list revenue records
+api/incomeRevenue/search               - Search revenue
+api/incomeRevenue/{id}                 - Get/update/delete revenue</code></pre><p><strong>Business Functionality</strong>: Revenue transaction recording and categorization</p>
+<h4>5.3 Income Configuration (15 routes)</h4>
+<pre><code class="language-text">api/incomeCategory                     - Revenue categories
+api/incomeCategory/search              - Search categories
+api/incomeCategory/{id}                - Get/update/delete category
+
+api/incomePayCode                      - Payment codes
+api/incomePayCode/search               - Search payment codes
+api/incomePayCode/{id}                 - Get/update/delete pay code
+
+api/incomePayType                      - Payment types
+api/incomePayType/search               - Search payment types
+api/incomePayType/{id}                 - Get/update/delete pay type
+
+api/incomeProduct                      - Product/service catalog
+api/incomeProduct/search               - Search products
+api/incomeProduct/{id}                 - Get/update/delete product
+
+api/incomeSource                       - Revenue sources
+api/incomeSource/search                - Search sources
+api/incomeSource/{id}                  - Get/update/delete source</code></pre><p><strong>Business Functionality</strong>: Revenue classification, product catalog, payment methods</p>
+<h4>5.4 Income Procedures (2 routes)</h4>
+<pre><code class="language-text">api/incomeProcedure/closePeriod        - Close income period
+api/incomeProcedure/postHmsRevenue     - Post HMS revenue to GL</code></pre><p><strong>Business Functionality</strong>: Period-end closing, PMS integration</p>
+<hr>
+<h3>6. Tax Module - 16 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: 3 controllers</p>
+<ul>
+<li>TaxReconcileController.cs</li>
+<li>VatReconcileController.cs</li>
+<li>EditVatReconcileController.cs</li>
+<li>TaxProfileController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>6.1 Tax Reconciliation (8 routes)</h4>
+<pre><code class="language-text">api/TaxReconcile                       - Create/list tax reconciliations
+api/TaxReconcile/search                - Search reconciliations
+api/TaxReconcile/batch                 - Bulk reconciliation
+api/TaxReconcile/{frDate}/{toDate}     - Reconcile by date range
+api/TaxReconcile/export/{frDate}/{toDate}/{overWrite} - Export tax data
+api/TaxReconcile/prefix                - Get available prefixes
+api/TaxReconcile/prefix/{prefix}       - Filter by prefix
+api/TaxReconcile/{id}                  - Get/update/delete reconciliation</code></pre><p><strong>Business Functionality</strong>: Tax calculation, reconciliation, government filing</p>
+<h4>6.2 VAT Reconciliation (4 routes)</h4>
+<pre><code class="language-text">api/VatReconcile/batch                 - Bulk VAT reconciliation
+api/VatReconcile/{frDate}/{toDate}     - Reconcile VAT by period
+api/VatReconcile/export/{frDate}/{toDate}/{overWrite} - Export VAT data
+api/editVatReconcile                   - Edit VAT records
+api/editVatReconcile/search            - Search VAT edits
+api/editVatReconcile/prefix            - Get prefixes
+api/editVatReconcile/prefix/{prefix}   - Filter by prefix
+api/editVatReconcile/{id}              - Get/update/delete VAT edit</code></pre><p><strong>Business Functionality</strong>: VAT calculation, filing, corrections</p>
+<h4>6.3 Tax Profile (3 routes)</h4>
+<pre><code class="language-text">api/taxProfile                         - Create/list tax profiles
+api/taxProfile/search                  - Search tax profiles
+api/taxProfile/{id}                    - Get/update/delete profile</code></pre><p><strong>Business Functionality</strong>: Tax configuration, company tax settings</p>
+<hr>
+<h3>7. Bank Module - 1 Undocumented Route</h3>
+<p><strong>Controllers</strong>: 2 controllers</p>
+<ul>
+<li>ChequeReconcileController.cs</li>
+<li>GblFilefromBankController.cs</li>
+</ul>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>7.1 Cheque Reconciliation (3 routes)</h4>
+<pre><code class="language-text">api/chequeReconcile                    - Create/list reconciliations
+api/chequeReconcile/search             - Search reconciliations
+api/chequeReconcile/fileFromBank       - Import bank statement</code></pre><p><strong>Business Functionality</strong>: Bank reconciliation, cheque clearing</p>
+<h4>7.2 Bank File Import (3 routes)</h4>
+<pre><code class="language-text">api/gblfilefrombank                    - Create/list bank files
+api/gblfilefrombank/search             - Search bank files
+api/gblfilefrombank/{id}               - Get/update/delete file</code></pre><p><strong>Business Functionality</strong>: Electronic bank statement import</p>
+<hr>
+<h3>8. Master Data &amp; Configuration - 84 Undocumented Routes</h3>
+<p><strong>Controllers</strong>: Multiple shared controllers</p>
+<p><strong>Undocumented Features</strong>:</p>
+<h4>8.1 Company Configuration (4 routes)</h4>
+<pre><code class="language-text">api/company                            - Get/update company info
+api/company/country                    - Get company country
+api/company/license                    - Get license info
+api/company/numberofuser               - Get user count</code></pre><h4>8.2 Currency Management (9 routes)</h4>
+<pre><code class="language-text">api/currency                           - Create/list currencies
+api/currency/search                    - Search currencies
+api/currency/active                    - List active currencies
+api/currency/{id}                      - Get/update/delete currency
+
+api/currencyexchange                   - Exchange rate management
+api/currencyexchange/search            - Search rates
+api/currencyexchange/addBatch          - Bulk rate import
+api/currencyexchange/bycurrency        - Rates by currency
+api/currencyexchange/bycurrencydate    - Rates by currency &amp; date
+api/currencyexchange/bydate            - Rates by date
+api/currencyexchange/{id}              - Get/update/delete rate
+api/currencyexchange/{provider}/{base_Currency}/{currency} - External rates</code></pre><h4>8.3 Department &amp; Dimension (8 routes)</h4>
+<pre><code class="language-text">api/department                         - Create/list departments
+api/department/search                  - Search departments
+api/department/FromAcCode/{accCode}/{currentDeptCode} - By account code
+api/department/{id}                    - Get/update/delete department
+
+api/dimension                          - Create/list dimensions
+api/dimension/search                   - Search dimensions
+api/dimension/module                   - Get modules
+api/dimension/byEnum/{module}          - Dimensions by module
+api/dimension/FilterOper               - Filter operators
+api/dimension/{id}                     - Get/update/delete dimension</code></pre><h4>8.4 Workflow System (7 routes)</h4>
+<pre><code class="language-text">api/Workflow                           - Create/list workflows
+api/Workflow/{code}                    - Get/update/delete workflow
+api/Workflow/Approve/{code}            - Approve workflow step
+api/Workflow/ApproveBatch/{code}       - Bulk approval
+api/Workflow/Detail/{code}             - Get workflow details
+api/Workflow/History/{code}/{id}       - Get approval history
+api/Workflow/Steps/{code}              - Get workflow steps
+api/Workflow/StepsByCurrentUser/{code} - Get user&#039;s pending steps
+api/Workflow/SetActive/{code}          - Activate workflow</code></pre><h4>8.5 User &amp; Permission Management (20 routes)</h4>
+<pre><code class="language-text">api/user                               - Create/list users
+api/user/search                        - Search users
+api/user/changePassword/{userId}       - Change password
+api/user/forgotPassword/{username}     - Password reset
+api/user/resetPassword/                - Reset password
+api/user/{userId}                      - Get/update/delete user
+
+api/permission                         - Get/set permissions
+api/permission/Template                - Permission templates
+api/permission/TemplateByLicense       - Templates by license
+api/permission/TemplateByName/{*permissionName} - Template by name
+api/permission/license/{tenant}/{userName} - License permissions
+api/permission/setAdmin                - Set admin permissions
+api/permission/{permissionName}        - Get permission
+api/permission/{tenant}/{userName}     - User permissions
+
+api/userTenant                         - Tenant assignments
+api/userTenant/UserName/{userName}     - By username
+api/userTenant/addOrDelete             - Add/remove tenant
+api/userTenant/setDefault              - Set default tenant
+api/userTenant/tenantList/{adminToken} - List tenants
+api/userTenant/tenantListIn/{adminToken}/{userName} - User&#039;s tenants
+api/userTenant/tenantListNotIn/{adminToken}/{userName} - Available tenants
+api/userTenant/tenantName/{tenant}     - Get tenant name
+api/userTenant/updateToActive          - Activate user-tenant
+api/userTenant/updateToInActive        - Deactivate user-tenant
+api/userTenant/userNameListBy/{tenant} - Users by tenant
+api/userTenant/{userTenantId}          - Get/update/delete assignment</code></pre><h4>8.6 Reporting &amp; Analytics (7 routes)</h4>
+<pre><code class="language-text">api/report                             - Create/list reports
+api/report/search                      - Search reports
+api/report/Connection                  - Report connection
+api/report/pdf                         - Generate PDF report
+api/report/web                         - Web report viewer
+api/report/{id}                        - Get/update/delete report
+
+api/financialreport/BS/                - Balance Sheet report
+api/financialreport/PL/                - P&amp;L report
+api/financialreport/reportlist/        - List financial reports
+api/financialreport/setting/{id}       - Report settings</code></pre><h4>8.7 System Configuration (30+ routes)</h4>
+<pre><code class="language-text">api/setting/all                        - All system settings
+api/setting/closePeriod                - Period close settings
+api/settingAp                          - AP settings
+api/settingAr                          - AR settings
+api/settingAsset                       - Asset settings
+api/settingGl                          - GL settings
+api/settingIncome                      - Income settings
+api/settingPolicy                      - Policy settings
+api/settingSystem                      - System settings
+api/settingBudgetXls                   - Budget Excel template
+
+api/gblParams                          - Global parameters
+api/gblParams/search                   - Search parameters
+api/gblParams/{section}/{key}          - Get/set parameter
+
+api/budget                             - Budget management
+api/budget/search                      - Search budgets
+api/budget/addBatch                    - Bulk budget import
+api/budget/{id}                        - Get/update/delete budget
+
+api/paymentType                        - Payment types
+api/paymentType/search                 - Search payment types
+api/paymentType/{id}                   - Get/update/delete type
+
+api/country                            - Country master
+api/country/search                     - Search countries
+api/country/{id}                       - Get/update/delete country
+
+api/unit                               - Unit of measure
+api/unit/search                        - Search units
+api/unit/{id}                          - Get/update/delete unit</code></pre><h4>8.8 Database &amp; System Utilities (15+ routes)</h4>
+<pre><code class="language-text">api/database/connectionString/admin    - Admin DB connection
+api/database/connectionString/carmen   - Carmen DB connection
+api/database/showTable/{tableName}     - Show table structure
+
+api/dataDic                            - Data dictionary
+api/dataDic/{dataDicName}              - Get data dictionary entry
+
+api/callStoreProc                      - Execute stored procedure
+api/callStoreProc/ds                   - Execute SP with dataset
+api/callStoreProc/ds/{*spName}         - Execute SP by name
+api/callStoreProc/dsH                  - Execute SP with headers
+api/callStoreProc/dsH/{*spName}        - Execute SP by name with headers
+api/callStoreProc/{*sql}               - Execute raw SQL
+
+api/storedProc                         - Manage stored procedures
+api/storedProc/search                  - Search procedures
+api/storedProc/resync                  - Resync procedures
+api/storedProc/{id}                    - Get/update/delete procedure
+
+api/migrate/admin                      - Migrate admin DB
+api/migrate/carmen                     - Migrate Carmen DB
+api/migrate/backupAdmin                - Backup admin DB
+api/migrate/backupCarmen               - Backup Carmen DB
+api/migrate/fixAssetHistory            - Fix asset history data
+
+api/setup/createBlankDB                - Create blank database
+api/setup/createCompany                - Create new company
+api/setup/createOrUpdate/admin         - Setup admin DB
+api/setup/createOrUpdate/carmen        - Setup Carmen DB
+api/setup/createOrUpdate/backOffice    - Setup back office
+api/setup/createOrUpdate/carmenAndBackoffice - Setup both
+api/setup/ImportPreConfig              - Import configuration
+api/setup/initialPeriod                - Initialize periods
+api/setup/adminInfo                    - Get admin info</code></pre><h4>8.9 Tenant &amp; Multi-Tenancy (5 routes)</h4>
+<pre><code class="language-text">api/tenant                             - Create/list tenants
+api/tenant/search                      - Search tenants
+api/tenant/adminToken/{adminToken}     - Get tenant by admin token
+api/tenant/{tenant}                    - Get/update/delete tenant
+
+api/Headquarter/HqList/{adminToken}    - List headquarters</code></pre><h4>8.10 Comments &amp; Attachments (5 routes)</h4>
+<pre><code class="language-text">api/comment                            - Create comment
+api/comment/{module}/{moduleId}        - Get comments by module
+api/comment/download/{id}              - Download attachment
+api/comment/{id}                       - Get/update/delete comment</code></pre><h4>8.11 License &amp; Plugins (10 routes)</h4>
+<pre><code class="language-text">api/license/                           - Get license info
+api/licenseInfo/                       - Get detailed license info
+
+api/licenseInterface                   - License interface
+api/licenseInterface/license           - Get license
+api/licenseInterface/interfaceList/{licenseType} - Interface list
+api/licenseInterface/activeModule/     - Active modules
+api/licenseInterface/activeModule/{licenseType} - Modules by type
+api/licenseInterface/batch             - Bulk license operations
+api/licenseInterface/updatelicense/    - Update license
+api/licenseInterface/{id}              - Get/update/delete
+api/licenseInterface/{showError}       - Show errors
+
+api/interface/addlicense               - Add license
+api/interface/updatelicense            - Update license
+
+api/plugins                            - Plugin management</code></pre><h4>8.12 Lookup &amp; Enums (40+ routes)</h4>
+<pre><code class="language-text">api/lookup/currency/                   - Currency lookup
+api/lookup/lastModified/{lookupType}   - Last modified
+api/lookup/{lookupType}                - Get lookup data
+
+api/enum/EnumAccountNature             - Account nature enum
+api/enum/EnumAccountType               - Account type enum
+api/enum/EnumActionMode                - Action mode enum
+api/enum/EnumAddOrDelete               - Add/delete enum
+api/enum/EnumAndOr                     - And/Or operator enum
+api/enum/EnumApAgingPeriodDateBy       - AP aging enum
+api/enum/EnumApInvoiceStatus           - AP invoice status
+api/enum/EnumApPaymentPostingBy        - AP payment posting
+api/enum/EnumApPaymentStatus           - AP payment status
+api/enum/EnumApTaxStatus               - AP tax status
+api/enum/EnumAssetAutoIdFormat         - Asset ID format
+api/enum/EnumAssetDeleteHisAt          - Asset delete history
+api/enum/EnumConnectionProvider        - Connection provider
+api/enum/EnumDimensionType             - Dimension type
+api/enum/EnumDisposalAtDate            - Disposal date
+api/enum/EnumDisposalType              - Disposal type
+api/enum/EnumFieldType                 - Field type
+api/enum/EnumGlCrOrDr                  - Debit/Credit
+api/enum/EnumGlPeriodStatus            - Period status
+api/enum/EnumGlStandardType            - Standard type
+api/enum/EnumGlStatus                  - GL status
+api/enum/EnumIncomeStatus              - Income status
+api/enum/EnumLicenseType               - License type
+api/enum/EnumLogAction                 - Log action
+api/enum/EnumLookup                    - Lookup type
+api/enum/EnumModule                    - Module enum
+api/enum/EnumNavigate                  - Navigation enum
+api/enum/EnumShowWithholdingTaxAt      - WHT display
+api/enum/EnumTaxType                   - Tax type
+api/enum/EnumVatSource                 - VAT source
+api/enum/EnumWhtSource                 - WHT source
+api/enum/EnumWorkflowModule            - Workflow module</code></pre><h4>8.13 Process Logging (2 routes)</h4>
+<pre><code class="language-text">api/processLog                         - Create/list process logs
+api/processLog/search                  - Search process logs</code></pre><h4>8.14 System Info &amp; Version (7 routes)</h4>
+<pre><code class="language-text">api/systemInfo/                        - Get system information
+
+api/version                            - Get version info
+api/version/Compare/{serverVersion}/{clientVersion} - Compare versions
+api/version/History                    - Version history
+api/version/compareServer/{version}    - Compare server version
+
+api/token/{jwtToken}                   - Validate JWT token</code></pre><h4>8.15 Home &amp; Updater (8 routes)</h4>
+<pre><code class="language-text">Home/index                             - Home page
+Home/swagger                           - Swagger documentation
+Home/download                          - Download installer
+Home/DownloadExcelReg32                - Download Excel add-in (32-bit)
+Home/DownloadExcelReg64                - Download Excel add-in (64-bit)
+Home/DownloadReg                       - Download registry
+
+Updater/Changelog                      - Application changelog
+Updater/ChangelogAddIn                 - Add-in changelog
+Updater/Versions                       - Application versions
+Updater/VersionsAddIn                  - Add-in versions
+Updater/update                         - Update application
+Updater/updateAddIn32                  - Update add-in (32-bit)
+Updater/updateAddIn64                  - Update add-in (64-bit)
+Updater/appExe                         - Application executable
+Updater/appAddIn32                     - Add-in (32-bit)
+Updater/appAddIn64                     - Add-in (64-bit)</code></pre><h4>8.16 Support &amp; Admin (3 routes)</h4>
+<pre><code class="language-text">api/supportLogin                       - Support login
+api/supportLogin/captha/{adminToken}   - Get captcha
+api/supportLogin/{adminToken}          - Login with admin token</code></pre><hr>
+<h2>Summary by Category</h2>
+<h3>Feature Categories</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Routes</th>
+<th>% of Total</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Core Transactions</strong></td>
+<td>120</td>
+<td>28%</td>
+</tr>
+<tr>
+<td>- AP Invoices &amp; Payments</td>
+<td>33</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>- AR Invoices &amp; Receipts</td>
+<td>52</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>- GL Journal Vouchers</td>
+<td>35</td>
+<td>8%</td>
+</tr>
+<tr>
+<td><strong>Master Data</strong></td>
+<td>85</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>- Vendors &amp; Customers</td>
+<td>15</td>
+<td>3%</td>
+</tr>
+<tr>
+<td>- Chart of Accounts</td>
+<td>4</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>- Currencies &amp; Exchange</td>
+<td>9</td>
+<td>2%</td>
+</tr>
+<tr>
+<td>- Departments &amp; Dimensions</td>
+<td>8</td>
+<td>2%</td>
+</tr>
+<tr>
+<td>- Other Master Data</td>
+<td>49</td>
+<td>11%</td>
+</tr>
+<tr>
+<td><strong>Asset Management</strong></td>
+<td>26</td>
+<td>6%</td>
+</tr>
+<tr>
+<td><strong>Tax &amp; Compliance</strong></td>
+<td>31</td>
+<td>7%</td>
+</tr>
+<tr>
+<td>- Thailand WHT</td>
+<td>15</td>
+<td>3%</td>
+</tr>
+<tr>
+<td>- VAT Reconciliation</td>
+<td>8</td>
+<td>2%</td>
+</tr>
+<tr>
+<td>- Tax Profiles</td>
+<td>8</td>
+<td>2%</td>
+</tr>
+<tr>
+<td><strong>Income/Revenue</strong></td>
+<td>23</td>
+<td>5%</td>
+</tr>
+<tr>
+<td><strong>Bank Reconciliation</strong></td>
+<td>6</td>
+<td>1%</td>
+</tr>
+<tr>
+<td><strong>System Administration</strong></td>
+<td>70</td>
+<td>16%</td>
+</tr>
+<tr>
+<td>- User &amp; Permissions</td>
+<td>20</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>- Settings &amp; Configuration</td>
+<td>30</td>
+<td>7%</td>
+</tr>
+<tr>
+<td>- Database &amp; Migration</td>
+<td>15</td>
+<td>3%</td>
+</tr>
+<tr>
+<td>- Licensing</td>
+<td>5</td>
+<td>1%</td>
+</tr>
+<tr>
+<td><strong>Reporting</strong></td>
+<td>10</td>
+<td>2%</td>
+</tr>
+<tr>
+<td><strong>Workflow Engine</strong></td>
+<td>7</td>
+<td>2%</td>
+</tr>
+<tr>
+<td><strong>Utilities &amp; Support</strong></td>
+<td>51</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>- Enums &amp; Lookups</td>
+<td>35</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>- Versioning &amp; Updates</td>
+<td>8</td>
+<td>2%</td>
+</tr>
+<tr>
+<td>- Support &amp; Admin</td>
+<td>8</td>
+<td>2%</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>429</strong></td>
+<td><strong>99.1%</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Critical Observations</h2>
+<h3>1. <strong>Complete Module Blackout</strong></h3>
+<p>Every functional module (AP, AR, GL, Asset, Income, Tax, Bank) has 0% API documentation except for 4 authentication endpoints.</p>
+<h3>2. <strong>High-Value Undocumented Features</strong></h3>
+<ul>
+<li><strong>Workflow Engine</strong>: 7-step approval workflow system completely undocumented</li>
+<li><strong>Multi-Currency</strong>: 12 routes for currency and exchange rate management</li>
+<li><strong>Tax Compliance</strong>: Thailand-specific WHT and VAT systems (critical for compliance)</li>
+<li><strong>Asset Management</strong>: Full fixed asset lifecycle (acquisition to disposal)</li>
+<li><strong>Multi-Tenancy</strong>: Sophisticated tenant isolation and management</li>
+</ul>
+<h3>3. <strong>Integration Endpoints</strong></h3>
+<ul>
+<li><strong>HMS/PMS Integration</strong>: Income module with hospitality-specific features (folios, owners)</li>
+<li><strong>Excel Add-In</strong>: Download and update endpoints for Office integration</li>
+<li><strong>Bank Import</strong>: Electronic bank statement processing</li>
+<li><strong>Stored Procedures</strong>: Direct database procedure execution</li>
+</ul>
+<h3>4. <strong>Business-Critical Procedures</strong></h3>
+<ul>
+<li>Period closing procedures for all modules (AP, AR, GL, Asset, Income)</li>
+<li>Cross-module posting (AP→GL, AR→GL, Asset→GL)</li>
+<li>Data migration and database setup utilities</li>
+<li>Backup and restore functionality</li>
+</ul>
+<hr>
+<h2>Recommendations</h2>
+<h3>Immediate Actions (Week 1)</h3>
+<ol>
+<li><p><strong>Acknowledge Documentation Debt</strong></p>
+<ul>
+<li>Update api-reference.md to remove false &quot;351 endpoints&quot; claim</li>
+<li>Add clear note: &quot;API documentation is currently incomplete&quot;</li>
+<li>Link to this gap analysis report</li>
+</ul>
+</li>
+<li><p><strong>Prioritize Core Modules</strong></p>
+<ul>
+<li>Document authentication endpoints (already done ✅)</li>
+<li>Document AP Invoice &amp; Payment (12 routes)</li>
+<li>Document AR Invoice &amp; Receipt (18 routes)</li>
+<li>Document GL Journal Vouchers (9 routes)</li>
+</ul>
+</li>
+</ol>
+<h3>Short-Term Plan (Month 1)</h3>
+<ol start="3">
+<li><strong>Document Critical Features</strong><ul>
+<li>Tax &amp; Compliance endpoints (31 routes) - regulatory requirement</li>
+<li>User &amp; Permission management (20 routes) - security requirement</li>
+<li>Master data endpoints (85 routes) - foundation for all operations</li>
+</ul>
+</li>
+</ol>
+<h3>Long-Term Plan (Quarter 1)</h3>
+<ol start="4">
+<li><p><strong>Complete Documentation</strong></p>
+<ul>
+<li>Asset Management (26 routes)</li>
+<li>Income Module (23 routes)</li>
+<li>Bank Reconciliation (6 routes)</li>
+<li>System utilities (51 routes)</li>
+<li>Workflow engine (7 routes)</li>
+</ul>
+</li>
+<li><p><strong>Establish Documentation Standards</strong></p>
+<ul>
+<li>API specification format (OpenAPI/Swagger)</li>
+<li>Request/response examples</li>
+<li>Business logic documentation</li>
+<li>Error handling documentation</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Next Steps</h2>
+<ol>
+<li>✅ <strong>Phase 3.1 Complete</strong>: Undocumented features identified (429 routes)</li>
+<li>🔄 <strong>Phase 3.2</strong>: Compile fictional content report</li>
+<li>🔄 <strong>Phase 3.3</strong>: Calculate documentation coverage metrics</li>
+<li>🔄 <strong>Phase 3.4</strong>: Categorize issues by severity</li>
+<li>🔄 <strong>Phase 3.5</strong>: Create correction priority matrix</li>
+</ol>
+<hr>
+<p><strong>Report Status</strong>: Complete<br><strong>Next Phase</strong>: Step 3.2 - Fictional Content Compilation</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

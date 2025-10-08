@@ -1,0 +1,743 @@
+{
+  "extractionDate": "2025-10-06T07:50:51.598863Z",
+  "totalRules": 1500,
+  "summary": {
+    "validation": 0,
+    "calculation": 0,
+    "permission": 664,
+    "workflow": 0,
+    "tax": 0,
+    "business_logic": 836
+  },
+  "categories": {
+    "validation": {
+      "count": 0,
+      "description": "Input validation, business rule validation, data integrity checks",
+      "rules": []
+    },
+    "calculation": {
+      "count": 0,
+      "description": "Financial calculations, totals, averages, formula-based rules",
+      "rules": []
+    },
+    "permission": {
+      "count": 664,
+      "description": "RBAC permission checks, authorization rules",
+      "rules": [
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 44,
+          "permission": "Ast.VendorCate"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 45,
+          "permission": "AP.Config.Wht"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 88,
+          "permission": "AP.Config.Wht"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 132,
+          "permission": "AP.Config.Wht"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 175,
+          "permission": "AP.Config.Wht"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 217,
+          "permission": "AP.Config.Wht"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 258,
+          "permission": "AP.Config.Wht"
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 47,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 90,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 134,
+          "permission": null
+        },
+        {
+          "type": "Update permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 219,
+          "permission": null
+        },
+        {
+          "type": "Delete permission check",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 260,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 47,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 90,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 134,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 177,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 219,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 260,
+          "permission": null
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 45,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 89,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 133,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 178,
+          "permission": "AP.Payment"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 231,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 280,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 323,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 366,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 405,
+          "permission": "AP.Invoice"
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 448,
+          "permission": "AP.Payment"
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 47,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 91,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 135,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 180,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 233,
+          "permission": null
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 450,
+          "permission": null
+        },
+        {
+          "type": "Update permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 325,
+          "permission": null
+        },
+        {
+          "type": "Update permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 407,
+          "permission": null
+        },
+        {
+          "type": "Delete permission check",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 368,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 47,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 91,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 135,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 180,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 233,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 282,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 325,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 368,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 407,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 450,
+          "permission": null
+        },
+        {
+          "type": "Permission check",
+          "module": "AP",
+          "file": "ApProcedureController.cs",
+          "line": 42,
+          "permission": "AP.Procedure.PeriodEnd"
+        },
+        {
+          "type": "View permission check",
+          "module": "AP",
+          "file": "ApProcedureController.cs",
+          "line": 44,
+          "permission": null
+        },
+        {
+          "type": "Forbidden response",
+          "module": "AP",
+          "file": "ApProcedureController.cs",
+          "line": 44,
+          "permission": null
+        }
+      ]
+    },
+    "workflow": {
+      "count": 0,
+      "description": "State transitions, approval workflows, status-based logic",
+      "rules": []
+    },
+    "tax": {
+      "count": 0,
+      "description": "Tax calculations, WHT, VAT, tax rate applications",
+      "rules": []
+    },
+    "business_logic": {
+      "count": 836,
+      "description": "Multi-tenant isolation, logging, transactions",
+      "rules": [
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 42
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 86
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 130
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 173
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 215
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 256
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 40
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 84
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 128
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 171
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 213
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 254
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 59
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 103
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 147
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 188
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 230
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApWhtController.cs",
+          "line": 271
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 43
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 87
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 131
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 176
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 229
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 278
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 321
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 364
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 403
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 446
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 41
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 85
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 129
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 174
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 227
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 276
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 319
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 362
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 401
+        },
+        {
+          "type": "Request logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 444
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 60
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 104
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 148
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 200
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 252
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 294
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 336
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 380
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 418
+        },
+        {
+          "type": "Error logging",
+          "module": "AP",
+          "file": "ApInvoiceController.cs",
+          "line": 471
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApProcedureController.cs",
+          "line": 40
+        },
+        {
+          "type": "Multi-tenant isolation",
+          "module": "AP",
+          "file": "ApProcedureController.cs",
+          "line": 83
+        }
+      ]
+    }
+  },
+  "byModule": {
+    "AP": {
+      "validation": 0,
+      "calculation": 0,
+      "permission": 107,
+      "workflow": 0,
+      "tax": 0,
+      "business_logic": 152,
+      "total": 259
+    },
+    "AR": {
+      "validation": 0,
+      "calculation": 0,
+      "permission": 161,
+      "workflow": 0,
+      "tax": 0,
+      "business_logic": 232,
+      "total": 393
+    },
+    "GL": {
+      "validation": 0,
+      "calculation": 0,
+      "permission": 157,
+      "workflow": 0,
+      "tax": 0,
+      "business_logic": 198,
+      "total": 355
+    },
+    "Asset": {
+      "validation": 0,
+      "calculation": 0,
+      "permission": 117,
+      "workflow": 0,
+      "tax": 0,
+      "business_logic": 123,
+      "total": 240
+    },
+    "Income": {
+      "validation": 0,
+      "calculation": 0,
+      "permission": 122,
+      "workflow": 0,
+      "tax": 0,
+      "business_logic": 131,
+      "total": 253
+    }
+  }
+}

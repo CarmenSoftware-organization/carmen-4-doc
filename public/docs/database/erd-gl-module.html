@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Ledger (GL) Module - Entity Relationship Diagram - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>General Ledger (GL) Module - Entity Relationship Diagram</h1>
+        </div>
+        <div class="doc-content">
+            <h1>General Ledger (GL) Module - Entity Relationship Diagram</h1>
+<div class="mermaid">erDiagram
+    %% Account Code Hierarchy
+    ACCOUNT_CODE ||--o{ ACCOUNT_CODE : "parent account"
+
+    %% Journal Voucher Relationships
+    GL_JV_H ||--|{ GL_JV_D : "contains"
+    ACCOUNT_CODE ||--o{ GL_JV_D : "posted to"
+    GL_PERIOD ||--o{ GL_JV_H : "period for"
+
+    %% Allocation JV
+    GL_ALLOCATION_JV_H ||--|{ GL_ALLOCATION_JV_D : "contains"
+    ACCOUNT_CODE ||--o{ GL_ALLOCATION_JV_D : "allocated to"
+
+    %% Amortization
+    ACCOUNT_CODE ||--o{ GL_AMORTIZE : "amortized"
+
+    %% Foreign JV
+    GL_JV_FR_H ||--|{ GL_JV_FR_D : "contains"
+    ACCOUNT_CODE ||--o{ GL_JV_FR_D : "posted to"
+
+    %% Budget
+    ACCOUNT_CODE ||--o{ BUDGET : "budgeted"
+    GL_PERIOD ||--o{ BUDGET : "budget period"
+
+    %% Lookups
+    DEPARTMENT ||--o{ GL_JV_D : "department"
+    CURRENCY ||--o{ GL_JV_H : "currency"
+    DIMENSION ||--o{ GL_JV_D : "dimension"
+
+    %% Entities
+    ACCOUNT_CODE {
+        varchar AccCode PK
+        varchar AccName "Account Name"
+        varchar AccNameEn "Account Name English"
+        int AccType "Account Type"
+        int AccNature "Account Nature (DR/CR)"
+        int AccLevel "Hierarchy Level"
+        varchar ParentAccCode FK "Parent Account"
+        bit IsActive "Active Status"
+        bit AllowPosting "Allow Direct Posting"
+        datetime CreatedDate "Created Date"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_JV_H {
+        bigint JvhId PK
+        varchar JvhNo "JV Number"
+        datetime JvhDate "JV Date"
+        varchar JvhDesc "JV Description"
+        int JvhStatus "Status (0=Draft,1=Posted)"
+        varchar JvhSource "Source Module (AP/AR/GL)"
+        bigint SourceId FK "Source Transaction ID"
+        int JvhType "JV Type"
+        varchar CurrencyCode FK "Currency Code"
+        decimal ExchangeRate "Exchange Rate"
+        bigint PeriodId FK "Period ID"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+        bigint CreatedBy FK "Created By"
+    }
+
+    GL_JV_D {
+        bigint JvdId PK
+        bigint JvhId FK "JV Header ID"
+        int JvdSeq "Line Sequence"
+        varchar AccCode FK "Account Code"
+        varchar JvdDesc "Line Description"
+        decimal JvdDr "Debit Amount"
+        decimal JvdCr "Credit Amount"
+        varchar DeptCode FK "Department"
+        varchar ProjectCode "Project Code"
+        varchar DimensionCode FK "Dimension"
+    }
+
+    GL_PERIOD {
+        bigint PeriodId PK
+        int PeriodYear "Fiscal Year"
+        int PeriodMonth "Fiscal Month"
+        int PeriodStatus "Status (0=Open,1=Closed)"
+        datetime StartDate "Period Start Date"
+        datetime EndDate "Period End Date"
+        datetime ClosedDate "Closed Date"
+        bigint ClosedBy FK "Closed By User"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_ALLOCATION_JV_H {
+        bigint AllocId PK
+        varchar AllocNo "Allocation Number"
+        datetime AllocDate "Allocation Date"
+        varchar AllocDesc "Allocation Description"
+        varchar AllocType "Allocation Type"
+        decimal TotalAmt "Total Amount to Allocate"
+        int AllocStatus "Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_ALLOCATION_JV_D {
+        bigint AllocdId PK
+        bigint AllocId FK "Allocation Header ID"
+        int AllocdSeq "Sequence"
+        varchar AccCode FK "Account Code"
+        varchar DeptCode FK "Department"
+        decimal AllocdRate "Allocation Rate %"
+        decimal AllocdAmt "Allocated Amount"
+    }
+
+    GL_AMORTIZE {
+        bigint AmortizeId PK
+        varchar AmortizeNo "Amortization Number"
+        varchar AccCode FK "Expense Account"
+        varchar AssetAccCode FK "Asset/Prepaid Account"
+        int AmortizeType "Type (0=Expense,1=Revenue)"
+        datetime StartDate "Start Date"
+        datetime EndDate "End Date"
+        int AmortizeMonths "Amortization Months"
+        decimal TotalAmt "Total Amount"
+        decimal MonthlyAmt "Monthly Amortization"
+        decimal AmortizedAmt "Amortized to Date"
+        int AmortizeStatus "Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_JV_FR_H {
+        bigint JvFrId PK
+        varchar JvFrNo "Foreign JV Number"
+        datetime JvFrDate "JV Date"
+        varchar JvFrDesc "JV Description"
+        varchar CurrencyCode FK "Foreign Currency"
+        decimal ExchangeRate "Exchange Rate"
+        int JvFrStatus "Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_JV_FR_D {
+        bigint JvFrdId PK
+        bigint JvFrId FK "Foreign JV Header ID"
+        int JvFrdSeq "Sequence"
+        varchar AccCode FK "Account Code"
+        decimal JvFrdDrFC "Debit Foreign Currency"
+        decimal JvFrdCrFC "Credit Foreign Currency"
+        decimal JvFrdDrLC "Debit Local Currency"
+        decimal JvFrdCrLC "Credit Local Currency"
+    }
+
+    BUDGET {
+        bigint BudgetId PK
+        varchar BudgetNo "Budget Number"
+        bigint PeriodId FK "Period ID"
+        varchar AccCode FK "Account Code"
+        varchar DeptCode FK "Department"
+        decimal BudgetAmt "Budget Amount"
+        decimal ActualAmt "Actual Amount"
+        decimal VarianceAmt "Variance"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    DEPARTMENT {
+        varchar DeptCode PK
+        varchar DeptName "Department Name"
+    }
+
+    CURRENCY {
+        varchar CurrencyCode PK
+        varchar CurrencyName "Currency Name"
+        decimal ExchangeRate "Exchange Rate"
+    }
+
+    DIMENSION {
+        varchar DimensionCode PK
+        varchar DimensionName "Dimension Name"
+        varchar DimensionType "Dimension Type"
+    }</div><h2>GL Module Workflow</h2>
+<h3>1. Journal Voucher Flow</h3>
+<pre><code class="language-text">JV Created (Manual or Auto) → Validated → Approved → Posted to GL → Update Account Balances</code></pre><h3>2. Period Management Flow</h3>
+<pre><code class="language-text">Open Period → Transactions Posted → Period Closed → No More Posting Allowed</code></pre><h3>3. Allocation Flow</h3>
+<pre><code class="language-text">Create Allocation Rule → Run Allocation → Generate JV → Post to GL</code></pre><h3>4. Amortization Flow</h3>
+<pre><code class="language-text">Create Amortization Schedule → Monthly Auto-Generate JV → Post to GL</code></pre><h2>Account Code Structure</h2>
+<p><strong>Account Hierarchy</strong> (Example):</p>
+<pre><code class="language-text">1000 - Assets (Level 1)
+  1100 - Current Assets (Level 2)
+    1110 - Cash &amp; Bank (Level 3)
+      1111 - Petty Cash (Level 4)
+      1112 - Bank Account A (Level 4)</code></pre><p><strong>Account Types</strong> (<code>AccType</code>):</p>
+<ul>
+<li>1 = Asset</li>
+<li>2 = Liability</li>
+<li>3 = Equity</li>
+<li>4 = Revenue</li>
+<li>5 = Expense</li>
+</ul>
+<p><strong>Account Nature</strong> (<code>AccNature</code>):</p>
+<ul>
+<li>0 = Debit (Assets, Expenses)</li>
+<li>1 = Credit (Liabilities, Equity, Revenue)</li>
+</ul>
+<h2>GL Posting Examples</h2>
+<h3>Manual Journal Entry</h3>
+<pre><code class="language-text">DR: Expense Account                              $1000
+CR: Cash Account                                 $1000</code></pre><h3>Allocation Example (Overhead Allocation)</h3>
+<pre><code class="language-text">DR: Dept A Expense                               $ 600
+DR: Dept B Expense                               $ 400
+CR: Overhead Pool                                $1000</code></pre><h3>Amortization Example (Monthly)</h3>
+<pre><code class="language-text">DR: Amortization Expense                         $ 100
+CR: Prepaid Asset                                $ 100</code></pre><h3>Foreign Currency JV</h3>
+<pre><code class="language-text">DR: Expense Account (USD 100 @ 30)              THB 3000
+CR: Bank Account (USD 100 @ 30)                 THB 3000</code></pre><h2>Key Tables</h2>
+<p><strong>ACCOUNT_CODE</strong>: Chart of accounts with hierarchy<br><strong>GL_JV_H/D</strong>: Journal voucher header and details (core transaction table)<br><strong>GL_PERIOD</strong>: Accounting period management (monthly close)<br><strong>GL_ALLOCATION_JV_H/D</strong>: Cost allocation journal<br><strong>GL_AMORTIZE</strong>: Amortization schedules (prepaid, deferred revenue)<br><strong>GL_JV_FR_H/D</strong>: Foreign currency journal vouchers<br><strong>BUDGET</strong>: Budget vs. actual tracking</p>
+<h2>Period Status</h2>
+<p><strong>Period Status</strong> (<code>PeriodStatus</code>):</p>
+<ul>
+<li>0 = Open - Transactions allowed</li>
+<li>1 = Closed - No posting allowed</li>
+<li>2 = Adjusting - Only adjusting entries allowed</li>
+</ul>
+<p><strong>Period Close Process</strong>:</p>
+<ol>
+<li>Review all transactions in period</li>
+<li>Run period-end reports</li>
+<li>Reconcile all accounts</li>
+<li>Close period (change status to 1)</li>
+<li>Generate opening balances for next period</li>
+</ol>
+<h2>GL Validation Rules</h2>
+<ol>
+<li><strong>Balanced Entry</strong>: Total DR must equal total CR</li>
+<li><strong>Account Validation</strong>: Only active accounts with <code>AllowPosting=true</code></li>
+<li><strong>Period Validation</strong>: Cannot post to closed periods</li>
+<li><strong>Source Tracking</strong>: All auto-generated JVs link to source transaction</li>
+</ol>
+<h2>Multi-Tenant</h2>
+<p>All tables include <code>TenantId</code> for data isolation.<br>Enforced via <code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> in all controllers.</p>
+<h2>Financial Reports Generated from GL</h2>
+<ul>
+<li><strong>Trial Balance</strong>: All account balances</li>
+<li><strong>Balance Sheet</strong>: Assets = Liabilities + Equity</li>
+<li><strong>Profit &amp; Loss</strong>: Revenue - Expenses</li>
+<li><strong>Cash Flow Statement</strong>: Operating/Investing/Financing activities</li>
+<li><strong>Budget vs. Actual</strong>: Variance analysis</li>
+<li><strong>Account Ledger</strong>: Transaction detail by account</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

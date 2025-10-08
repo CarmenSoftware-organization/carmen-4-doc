@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Reverse Engineering Execution Plan - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Reverse Engineering Execution Plan</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Reverse Engineering Execution Plan</h1>
+<h2>Overview</h2>
+<p>This execution plan provides a systematic, automated approach to reverse engineering the Carmen.NET ERP system with <strong>recursive code scanning</strong> to ensure complete coverage and comprehensive documentation.</p>
+<hr>
+<h2>Execution Strategy</h2>
+<h3>Core Principles</h3>
+<ol>
+<li><strong>Automation-First</strong>: Automate recursive scanning and analysis</li>
+<li><strong>Bottom-Up + Top-Down</strong>: Combine code analysis with architecture discovery</li>
+<li><strong>Incremental Delivery</strong>: Produce documentation progressively</li>
+<li><strong>Validation Gates</strong>: Quality checks at each phase</li>
+<li><strong>Tool-Assisted</strong>: Leverage automated analysis tools</li>
+</ol>
+<h3>Success Criteria</h3>
+<ul>
+<li>✅ 100% controller coverage</li>
+<li>✅ 100% model/entity mapping</li>
+<li>✅ All business rules extracted</li>
+<li>✅ Complete dependency graph</li>
+<li>✅ All API endpoints documented</li>
+<li>✅ Database schema fully mapped</li>
+<li>✅ All workflows visualized</li>
+</ul>
+<hr>
+<h2>Phase 0: Setup &amp; Preparation (Week 1, Days 1-2)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Set up analysis environment</li>
+<li>Install and configure tools</li>
+<li>Establish documentation repository</li>
+<li>Create automation scripts</li>
+</ul>
+<h3>Tasks</h3>
+<h4>0.1 Environment Setup</h4>
+<pre><code class="language-bash"># Create documentation structure
+mkdir -p docs/{executive,architecture,requirements,workflows,business-rules,api,development,database,design,operations,analysis}
+
+# Create analysis output directories
+mkdir -p analysis/{controllers,models,enums,dependencies,database,api,workflows,business-rules}
+
+# Initialize tools
+dotnet tool install --global dotnet-script
+dotnet tool install --global dotnet-outdated
+dotnet tool install --global dotnet-depends</code></pre><h4>0.2 Tool Installation</h4>
+<p><strong>Code Analysis Tools</strong>:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Visual Studio 2022 (or Rider)</li>
+<li><input checked="" disabled="" type="checkbox"> ReSharper / Rider (code analysis)</li>
+<li><input checked="" disabled="" type="checkbox"> NDepend (architecture analysis) - Optional but recommended</li>
+<li><input checked="" disabled="" type="checkbox"> dotnet-script (C# scripting)</li>
+<li><input checked="" disabled="" type="checkbox"> Roslyn API (programmatic code analysis)</li>
+</ul>
+<p><strong>Documentation Tools</strong>:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> DocFX (API documentation)</li>
+<li><input checked="" disabled="" type="checkbox"> Mermaid CLI (diagram generation)</li>
+<li><input checked="" disabled="" type="checkbox"> PlantUML (UML diagrams)</li>
+<li><input checked="" disabled="" type="checkbox"> Swagger UI (already in project)</li>
+</ul>
+<p><strong>Database Tools</strong>:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> SQL Server Management Studio / Azure Data Studio</li>
+<li><input checked="" disabled="" type="checkbox"> Entity Framework Power Tools</li>
+<li><input checked="" disabled="" type="checkbox"> SchemaSpy (database documentation)</li>
+</ul>
+<p><strong>Utilities</strong>:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> PowerShell / Bash scripting</li>
+<li><input checked="" disabled="" type="checkbox"> jq (JSON processing)</li>
+<li><input checked="" disabled="" type="checkbox"> ripgrep (fast code search)</li>
+</ul>
+<h4>0.3 Create Analysis Scripts</h4>
+<p><strong>Script 1: Recursive Controller Scanner</strong> (<code>scripts/scan-controllers.ps1</code>)</p>
+<pre><code class="language-powershell"># Recursively scan all controllers
+$controllersPath = &quot;Carmen.WebApi/Controllers&quot;
+$areasPath = &quot;Carmen.WebApi/Areas&quot;
+$outputFile = &quot;analysis/controllers/controller-inventory.json&quot;
+
+$controllers = @()
+
+# Scan main controllers
+Get-ChildItem -Path $controllersPath -Filter &quot;*Controller.cs&quot; -Recurse | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+
+    # Extract controller metadata
+    $controllerName = $_.BaseName
+    $order = if ($content -match &#039;\[SwaggerControllerOrder\((\d+)\)\]&#039;) { $Matches[1] } else { &quot;N/A&quot; }
+    $routes = [regex]::Matches($content, &#039;\[Route\(&quot;([^&quot;]+)&quot;\)\]&#039;) | ForEach-Object { $_.Groups[1].Value }
+    $methods = [regex]::Matches($content, &#039;\[Http(Get|Post|Put|Delete|Patch)\]&#039;) | ForEach-Object { $_.Groups[1].Value }
+
+    $controllers += @{
+        Name = $controllerName
+        Path = $_.FullName
+        Order = $order
+        Routes = $routes
+        HttpMethods = $methods
+        LineCount = (Get-Content $_.FullName).Count
+    }
+}
+
+# Scan area controllers
+Get-ChildItem -Path $areasPath -Filter &quot;*Controller.cs&quot; -Recurse | ForEach-Object {
+    $area = $_.FullName -replace &#039;.*Areas[\\/]([^\\/]+)[\\/].*&#039;, &#039;$1&#039;
+    $controllerName = $_.BaseName
+
+    $controllers += @{
+        Name = $controllerName
+        Path = $_.FullName
+        Area = $area
+        LineCount = (Get-Content $_.FullName).Count
+    }
+}
+
+$controllers | ConvertTo-Json -Depth 10 | Out-File $outputFile
+Write-Host &quot;Found $($controllers.Count) controllers&quot;</code></pre><p><strong>Script 2: Recursive Model Scanner</strong> (<code>scripts/scan-models.csx</code>)</p>
+<pre><code class="language-csharp">#r &quot;nuget: Microsoft.CodeAnalysis.CSharp, 4.0.1&quot;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.IO;
+using System.Text.Json;
+
+var modelsPath = &quot;Carmen.Models&quot;;
+var outputFile = &quot;analysis/models/model-inventory.json&quot;;
+
+var models = new List&lt;object&gt;();
+
+// Recursively scan all .cs files
+foreach (var file in Directory.GetFiles(modelsPath, &quot;*.cs&quot;, SearchOption.AllDirectories))
+{
+    var code = File.ReadAllText(file);
+    var tree = CSharpSyntaxTree.ParseText(code);
+    var root = tree.GetRoot();
+
+    // Find all class declarations
+    var classes = root.DescendantNodes().OfType&lt;ClassDeclarationSyntax&gt;();
+
+    foreach (var classNode in classes)
+    {
+        var className = classNode.Identifier.Text;
+        var properties = classNode.Members.OfType&lt;PropertyDeclarationSyntax&gt;()
+            .Select(p =&gt; new {
+                Name = p.Identifier.Text,
+                Type = p.Type.ToString(),
+                HasGetter = p.AccessorList?.Accessors.Any(a =&gt; a.Kind() == SyntaxKind.GetAccessorDeclaration) ?? false,
+                HasSetter = p.AccessorList?.Accessors.Any(a =&gt; a.Kind() == SyntaxKind.SetAccessorDeclaration) ?? false
+            }).ToList();
+
+        var interfaces = classNode.BaseList?.Types
+            .Select(t =&gt; t.ToString())
+            .Where(t =&gt; t.StartsWith(&quot;I&quot;))
+            .ToList() ?? new List&lt;string&gt;();
+
+        models.Add(new {
+            FileName = Path.GetFileName(file),
+            FilePath = file,
+            ClassName = className,
+            IsInterface = className.StartsWith(&quot;I&quot;),
+            IsView = className.StartsWith(&quot;View&quot;),
+            IsParam = className.StartsWith(&quot;Param&quot;),
+            PropertyCount = properties.Count,
+            Properties = properties,
+            Interfaces = interfaces,
+            LineCount = code.Split(&#039;\n&#039;).Length
+        });
+    }
+}
+
+var json = JsonSerializer.Serialize(models, new JsonSerializerOptions { WriteIndented = true });
+File.WriteAllText(outputFile, json);
+Console.WriteLine($&quot;Scanned {models.Count} models from {Directory.GetFiles(modelsPath, &quot;*.cs&quot;, SearchOption.AllDirectories).Length} files&quot;);</code></pre><p><strong>Script 3: Recursive Dependency Analyzer</strong> (<code>scripts/analyze-dependencies.ps1</code>)</p>
+<pre><code class="language-powershell"># Analyze project dependencies recursively
+$solutionFile = &quot;Carmen.NET.sln&quot;
+$outputFile = &quot;analysis/dependencies/dependency-graph.json&quot;
+
+$projects = @()
+$dependencies = @()
+
+# Parse solution file for projects
+$solutionContent = Get-Content $solutionFile
+$projectPattern = &#039;Project\(&quot;[^&quot;]+&quot;\)\s*=\s*&quot;([^&quot;]+)&quot;,\s*&quot;([^&quot;]+)&quot;&#039;
+
+$solutionContent | Select-String -Pattern $projectPattern -AllMatches | ForEach-Object {
+    $_.Matches | ForEach-Object {
+        $projectName = $_.Groups[1].Value
+        $projectPath = $_.Groups[2].Value
+
+        if ($projectPath -match &#039;\.csproj$&#039;) {
+            $projects += @{
+                Name = $projectName
+                Path = $projectPath
+            }
+        }
+    }
+}
+
+# Analyze each project for dependencies
+foreach ($project in $projects) {
+    if (Test-Path $project.Path) {
+        [xml]$csproj = Get-Content $project.Path
+
+        # Project references
+        $projectRefs = $csproj.Project.ItemGroup.ProjectReference.Include
+        foreach ($ref in $projectRefs) {
+            if ($ref) {
+                $refName = [System.IO.Path]::GetFileNameWithoutExtension($ref)
+                $dependencies += @{
+                    From = $project.Name
+                    To = $refName
+                    Type = &quot;ProjectReference&quot;
+                }
+            }
+        }
+
+        # NuGet packages
+        $packages = $csproj.Project.ItemGroup.PackageReference
+        foreach ($pkg in $packages) {
+            if ($pkg.Include) {
+                $dependencies += @{
+                    From = $project.Name
+                    To = $pkg.Include
+                    Version = $pkg.Version
+                    Type = &quot;NuGetPackage&quot;
+                }
+            }
+        }
+    }
+}
+
+$result = @{
+    Projects = $projects
+    Dependencies = $dependencies
+    ProjectCount = $projects.Count
+    DependencyCount = $dependencies.Count
+}
+
+$result | ConvertTo-Json -Depth 10 | Out-File $outputFile
+Write-Host &quot;Analyzed $($projects.Count) projects with $($dependencies.Count) dependencies&quot;</code></pre><p><strong>Script 4: Recursive API Endpoint Extractor</strong> (<code>scripts/extract-api-endpoints.ps1</code>)</p>
+<pre><code class="language-powershell"># Extract all API endpoints recursively
+$controllersPath = &quot;Carmen.WebApi/Controllers&quot;
+$outputFile = &quot;analysis/api/api-endpoints.json&quot;
+
+$endpoints = @()
+
+Get-ChildItem -Path $controllersPath -Filter &quot;*Controller.cs&quot; -Recurse | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+    $controllerName = $_.BaseName -replace &#039;Controller$&#039;, &#039;&#039;
+
+    # Extract route attributes
+    $routeMatches = [regex]::Matches($content, &#039;\[Route\(&quot;([^&quot;]+)&quot;\)\]\s+public\s+(?:async\s+)?Task&lt;[^&gt;]+&gt;\s+(\w+)\s*\(([^)]*)\)&#039;)
+
+    foreach ($match in $routeMatches) {
+        $route = $match.Groups[1].Value
+        $methodName = $match.Groups[2].Value
+        $parameters = $match.Groups[3].Value
+
+        # Extract HTTP method
+        $httpMethod = &quot;GET&quot; # default
+        if ($content -match &quot;\[Http(Get|Post|Put|Delete|Patch)\]\s+(?:\[Route[^\]]+\]\s+)?public\s+(?:async\s+)?Task&lt;[^&gt;]+&gt;\s+$methodName&quot;) {
+            $httpMethod = $Matches[1].ToUpper()
+        }
+
+        # Extract permissions
+        $permission = if ($content -match &quot;GetPermissionInfoByPermissionNameAsync\(`&quot;([^`&quot;]+)`&quot;\)&quot;) { $Matches[1] } else { $null }
+
+        $endpoints += @{
+            Controller = $controllerName
+            Route = $route
+            HttpMethod = $httpMethod
+            MethodName = $methodName
+            Parameters = $parameters
+            Permission = $permission
+            File = $_.Name
+        }
+    }
+}
+
+$endpoints | ConvertTo-Json -Depth 10 | Out-File $outputFile
+Write-Host &quot;Extracted $($endpoints.Count) API endpoints&quot;</code></pre><p><strong>Script 5: Business Rule Extractor</strong> (<code>scripts/extract-business-rules.ps1</code>)</p>
+<pre><code class="language-powershell"># Extract business rules from code
+$controllersPath = &quot;Carmen.WebApi/Controllers&quot;
+$outputFile = &quot;analysis/business-rules/extracted-rules.json&quot;
+
+$rules = @()
+
+Get-ChildItem -Path $controllersPath -Filter &quot;*.cs&quot; -Recurse | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+
+    # Extract validation patterns
+    $validations = [regex]::Matches($content, &#039;if\s*\(([^)]+)\)\s*(?:return|throw)[^;]+;&#039;)
+    foreach ($match in $validations) {
+        $rules += @{
+            Type = &quot;Validation&quot;
+            Condition = $match.Groups[1].Value.Trim()
+            File = $_.Name
+            Location = &quot;Controller&quot;
+        }
+    }
+
+    # Extract permission checks
+    $permissions = [regex]::Matches($content, &#039;if\s*\(!\s*permission\.(\w+)\)\s*return&#039;)
+    foreach ($match in $permissions) {
+        $rules += @{
+            Type = &quot;Permission&quot;
+            Action = $match.Groups[1].Value
+            File = $_.Name
+            Location = &quot;Controller&quot;
+        }
+    }
+}
+
+$rules | ConvertTo-Json -Depth 10 | Out-File $outputFile
+Write-Host &quot;Extracted $($rules.Count) business rules&quot;</code></pre><h4>0.4 Validation Checklist</h4>
+<ul>
+<li><input disabled="" type="checkbox"> All tools installed and verified</li>
+<li><input disabled="" type="checkbox"> Scripts tested and working</li>
+<li><input disabled="" type="checkbox"> Documentation structure created</li>
+<li><input disabled="" type="checkbox"> Team access to repositories configured</li>
+<li><input disabled="" type="checkbox"> Backup of source code created</li>
+</ul>
+<hr>
+<h2>Phase 1: Automated Code Discovery (Week 1, Days 3-5)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Recursively scan entire codebase</li>
+<li>Generate comprehensive inventory</li>
+<li>Map all relationships and dependencies</li>
+<li>Extract metadata from all files</li>
+</ul>
+<h3>Tasks</h3>
+<h4>1.1 Recursive Code Scanning</h4>
+<p><strong>Execute All Analysis Scripts</strong>:</p>
+<pre><code class="language-bash"># Run all scanners in parallel
+./scripts/scan-controllers.ps1 &amp;
+dotnet script scripts/scan-models.csx &amp;
+./scripts/analyze-dependencies.ps1 &amp;
+./scripts/extract-api-endpoints.ps1 &amp;
+./scripts/extract-business-rules.ps1 &amp;
+
+wait
+
+# Generate summary report
+./scripts/generate-summary.ps1</code></pre><p><strong>Expected Outputs</strong>:</p>
+<ul>
+<li><code>analysis/controllers/controller-inventory.json</code> (101 controllers)</li>
+<li><code>analysis/models/model-inventory.json</code> (600+ models)</li>
+<li><code>analysis/dependencies/dependency-graph.json</code></li>
+<li><code>analysis/api/api-endpoints.json</code> (500+ endpoints)</li>
+<li><code>analysis/business-rules/extracted-rules.json</code></li>
+</ul>
+<h4>1.2 Deep Code Analysis (Recursive)</h4>
+<p><strong>Script: Recursive Code Analyzer</strong> (<code>scripts/deep-analysis.csx</code>)</p>
+<pre><code class="language-csharp">#r &quot;nuget: Microsoft.CodeAnalysis.CSharp.Workspaces, 4.0.1&quot;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.MSBuild;
+using System.IO;
+using System.Text.Json;
+
+var workspace = MSBuildWorkspace.Create();
+var solution = await workspace.OpenSolutionAsync(&quot;Carmen.NET.sln&quot;);
+
+var analysis = new {
+    Projects = new List&lt;object&gt;(),
+    Classes = new List&lt;object&gt;(),
+    Methods = new List&lt;object&gt;(),
+    Dependencies = new List&lt;object&gt;()
+};
+
+foreach (var project in solution.Projects)
+{
+    Console.WriteLine($&quot;Analyzing project: {project.Name}&quot;);
+
+    var compilation = await project.GetCompilationAsync();
+
+    foreach (var syntaxTree in compilation.SyntaxTrees)
+    {
+        var root = await syntaxTree.GetRootAsync();
+        var semanticModel = compilation.GetSemanticModel(syntaxTree);
+
+        // Recursively analyze all class declarations
+        var classes = root.DescendantNodes().OfType&lt;ClassDeclarationSyntax&gt;();
+
+        foreach (var classNode in classes)
+        {
+            var classSymbol = semanticModel.GetDeclaredSymbol(classNode);
+
+            // Extract class metadata
+            analysis.Classes.Add(new {
+                Project = project.Name,
+                ClassName = classSymbol?.Name,
+                Namespace = classSymbol?.ContainingNamespace?.ToDisplayString(),
+                BaseType = classSymbol?.BaseType?.Name,
+                Interfaces = classSymbol?.Interfaces.Select(i =&gt; i.Name).ToList(),
+                IsAbstract = classSymbol?.IsAbstract,
+                IsSealed = classSymbol?.IsSealed,
+                AccessModifier = classSymbol?.DeclaredAccessibility.ToString()
+            });
+
+            // Recursively analyze methods
+            var methods = classNode.Members.OfType&lt;MethodDeclarationSyntax&gt;();
+
+            foreach (var method in methods)
+            {
+                var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+
+                analysis.Methods.Add(new {
+                    Project = project.Name,
+                    Class = classSymbol?.Name,
+                    MethodName = methodSymbol?.Name,
+                    ReturnType = methodSymbol?.ReturnType?.Name,
+                    Parameters = methodSymbol?.Parameters.Select(p =&gt; new {
+                        p.Name,
+                        Type = p.Type.Name
+                    }).ToList(),
+                    IsAsync = methodSymbol?.IsAsync,
+                    IsPublic = methodSymbol?.DeclaredAccessibility == Accessibility.Public
+                });
+            }
+        }
+    }
+}
+
+// Save analysis results
+var json = JsonSerializer.Serialize(analysis, new JsonSerializerOptions { WriteIndented = true });
+File.WriteAllText(&quot;analysis/deep-analysis.json&quot;, json);
+
+Console.WriteLine($&quot;Analysis complete: {analysis.Classes.Count} classes, {analysis.Methods.Count} methods&quot;);</code></pre><p><strong>Execute</strong>:</p>
+<pre><code class="language-bash">dotnet script scripts/deep-analysis.csx</code></pre><h4>1.3 Database Schema Reverse Engineering</h4>
+<p><strong>Using EF Power Tools or Manual Analysis</strong>:</p>
+<pre><code class="language-bash"># Generate database context from existing database
+Scaffold-DbContext &quot;Server=.;Database=Carmen;Trusted_Connection=True;&quot; Microsoft.EntityFrameworkCore.SqlServer -OutputDir analysis/database/generated -Context CarmenDbContext
+
+# Or analyze models to infer schema
+./scripts/infer-database-schema.ps1</code></pre><p><strong>Script: Schema Inference</strong> (<code>scripts/infer-database-schema.ps1</code>)</p>
+<pre><code class="language-powershell"># Infer database schema from model classes
+$modelsJson = Get-Content &quot;analysis/models/model-inventory.json&quot; | ConvertFrom-Json
+
+$tables = @()
+
+foreach ($model in $modelsJson) {
+    if (-not ($model.ClassName.StartsWith(&quot;View&quot;) -or $model.ClassName.StartsWith(&quot;Param&quot;) -or $model.ClassName.StartsWith(&quot;I&quot;))) {
+        $tables += @{
+            TableName = $model.ClassName
+            Columns = $model.Properties | ForEach-Object {
+                @{
+                    Name = $_.Name
+                    DataType = $_.Type
+                    Nullable = $_.Type -match &#039;\?$&#039;
+                }
+            }
+            ForeignKeys = $model.Properties | Where-Object { $_.Name -match &#039;Code$&#039; -or $_.Name -match &#039;Id$&#039; } | ForEach-Object { $_.Name }
+        }
+    }
+}
+
+$tables | ConvertTo-Json -Depth 10 | Out-File &quot;analysis/database/inferred-schema.json&quot;
+Write-Host &quot;Inferred schema for $($tables.Count) tables&quot;</code></pre><h4>1.4 Workflow &amp; State Machine Extraction</h4>
+<p><strong>Script: Extract State Machines</strong> (<code>scripts/extract-workflows.ps1</code>)</p>
+<pre><code class="language-powershell"># Extract status enums and workflow transitions
+$enumsPath = &quot;Carmen.Enum&quot;
+$controllersPath = &quot;Carmen.WebApi/Controllers&quot;
+$outputFile = &quot;analysis/workflows/state-machines.json&quot;
+
+$stateMachines = @()
+
+# Find all status enums
+Get-ChildItem -Path $enumsPath -Filter &quot;Enum*Status.cs&quot; | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+    $enumName = $_.BaseName
+
+    # Extract enum values
+    $values = [regex]::Matches($content, &#039;(\w+)\s*(?:=\s*\d+)?,?\s*(?://.*)?&#039;) |
+        Where-Object { $_.Groups[1].Value -notmatch &#039;^(public|enum|namespace)&#039; } |
+        ForEach-Object { $_.Groups[1].Value }
+
+    $stateMachines += @{
+        EnumName = $enumName
+        States = $values
+        Module = if ($enumName -match &#039;^EnumAp&#039;) { &quot;AP&quot; }
+                 elseif ($enumName -match &#039;^EnumAr&#039;) { &quot;AR&quot; }
+                 elseif ($enumName -match &#039;^EnumGl&#039;) { &quot;GL&quot; }
+                 elseif ($enumName -match &#039;^EnumAsset&#039;) { &quot;Asset&quot; }
+                 else { &quot;General&quot; }
+    }
+}
+
+$stateMachines | ConvertTo-Json -Depth 10 | Out-File $outputFile
+Write-Host &quot;Extracted $($stateMachines.Count) state machines&quot;</code></pre><h4>1.5 Generate Dependency Graphs</h4>
+<p><strong>Using Roslyn and GraphViz</strong>:</p>
+<pre><code class="language-bash"># Generate visual dependency graph
+./scripts/generate-dependency-graph.ps1
+dot -Tpng analysis/dependencies/dependency-graph.dot -o docs/architecture/dependency-graph.png
+dot -Tsvg analysis/dependencies/dependency-graph.dot -o docs/architecture/dependency-graph.svg</code></pre><p><strong>Script: Generate Dependency Graph</strong> (<code>scripts/generate-dependency-graph.ps1</code>)</p>
+<pre><code class="language-powershell">$depsJson = Get-Content &quot;analysis/dependencies/dependency-graph.json&quot; | ConvertFrom-Json
+$outputDot = &quot;analysis/dependencies/dependency-graph.dot&quot;
+
+$dot = @&quot;
+digraph Carmen {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+
+&quot;@
+
+# Add project nodes
+foreach ($project in $depsJson.Projects) {
+    $dot += &quot;    `&quot;$($project.Name)`&quot; [fillcolor=lightblue, style=`&quot;rounded,filled`&quot;];`n&quot;
+}
+
+# Add dependency edges
+foreach ($dep in $depsJson.Dependencies | Where-Object { $_.Type -eq &quot;ProjectReference&quot; }) {
+    $dot += &quot;    `&quot;$($dep.From)`&quot; -&gt; `&quot;$($dep.To)`&quot;;`n&quot;
+}
+
+$dot += &quot;}&quot;
+
+$dot | Out-File $outputDot
+Write-Host &quot;Dependency graph generated at $outputDot&quot;</code></pre><h4>1.6 Quality Metrics Collection</h4>
+<p><strong>Script: Calculate Code Metrics</strong> (<code>scripts/calculate-metrics.ps1</code>)</p>
+<pre><code class="language-powershell"># Calculate comprehensive code metrics
+$metrics = @{
+    Controllers = (Get-ChildItem &quot;Carmen.WebApi/Controllers&quot; -Filter &quot;*.cs&quot; -Recurse).Count
+    Models = (Get-ChildItem &quot;Carmen.Models&quot; -Filter &quot;*.cs&quot; -Recurse).Count
+    Enums = (Get-ChildItem &quot;Carmen.Enum&quot; -Filter &quot;*.cs&quot; -Recurse).Count
+    TotalFiles = (Get-ChildItem -Path . -Filter &quot;*.cs&quot; -Recurse).Count
+    TotalLines = (Get-ChildItem -Path . -Filter &quot;*.cs&quot; -Recurse | Get-Content | Measure-Object -Line).Lines
+    Projects = ([xml](Get-Content &quot;Carmen.NET.sln&quot;)).Project.ItemGroup.ProjectReference.Count
+}
+
+# Complexity analysis (simple heuristic)
+$avgComplexity = 0
+Get-ChildItem -Path &quot;Carmen.WebApi/Controllers&quot; -Filter &quot;*.cs&quot; -Recurse | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+    $ifCount = ([regex]::Matches($content, &#039;\bif\s*\(&#039;)).Count
+    $forCount = ([regex]::Matches($content, &#039;\b(for|foreach|while)\s*\(&#039;)).Count
+    $switchCount = ([regex]::Matches($content, &#039;\bswitch\s*\(&#039;)).Count
+    $avgComplexity += $ifCount + $forCount + $switchCount
+}
+$metrics.AverageCyclomaticComplexity = [math]::Round($avgComplexity / $metrics.Controllers, 2)
+
+$metrics | ConvertTo-Json -Depth 10 | Out-File &quot;analysis/code-metrics.json&quot;
+$metrics | Format-Table | Out-File &quot;analysis/code-metrics.txt&quot;
+
+Write-Host &quot;Code Metrics:&quot;
+$metrics | Format-List</code></pre><h3>Deliverables (Phase 1)</h3>
+<ul>
+<li>✅ Complete code inventory (JSON format)</li>
+<li>✅ Dependency graphs (visual + data)</li>
+<li>✅ API endpoint catalog</li>
+<li>✅ Business rules extraction</li>
+<li>✅ Code quality metrics</li>
+<li>✅ Database schema inference</li>
+</ul>
+<hr>
+<h2>Phase 2: Architecture &amp; Data Modeling (Week 2)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Generate architecture diagrams</li>
+<li>Create ERD diagrams</li>
+<li>Map integration points</li>
+<li>Document security model</li>
+</ul>
+<h3>Tasks</h3>
+<h4>2.1 Generate Architecture Diagrams</h4>
+<p><strong>Script: Auto-Generate C4 Diagrams</strong> (<code>scripts/generate-c4-diagrams.ps1</code>)</p>
+<pre><code class="language-powershell"># Generate PlantUML C4 diagrams from analysis data
+
+# System Context Diagram
+$c4Context = @&quot;
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context Diagram - Carmen.NET ERP
+
+Person(user, &quot;Business User&quot;, &quot;AP/AR/GL clerk, Manager, Accountant&quot;)
+Person(admin, &quot;System Admin&quot;, &quot;IT administrator&quot;)
+
+System(carmen, &quot;Carmen.NET ERP&quot;, &quot;Multi-tenant financial ERP system&quot;)
+
+System_Ext(bank, &quot;Banking System&quot;, &quot;Payment file exchange&quot;)
+System_Ext(tax, &quot;Tax Authority&quot;, &quot;Tax filing integration&quot;)
+System_Ext(excel, &quot;Microsoft Excel&quot;, &quot;Excel add-in integration&quot;)
+
+Rel(user, carmen, &quot;Uses&quot;, &quot;HTTPS&quot;)
+Rel(admin, carmen, &quot;Configures&quot;, &quot;HTTPS&quot;)
+Rel(carmen, bank, &quot;Exchanges payment files&quot;, &quot;File/API&quot;)
+Rel(carmen, tax, &quot;Submits tax reports&quot;, &quot;File/API&quot;)
+Rel(excel, carmen, &quot;Integrates with&quot;, &quot;REST API&quot;)
+
+@enduml
+&quot;@
+
+$c4Context | Out-File &quot;docs/architecture/c4-context.puml&quot;
+
+# Container Diagram
+$c4Container = @&quot;
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container Diagram - Carmen.NET
+
+Person(user, &quot;User&quot;)
+
+System_Boundary(carmen, &quot;Carmen.NET&quot;) {
+    Container(webapp, &quot;Web Application&quot;, &quot;ASP.NET MVC&quot;, &quot;User interface&quot;)
+    Container(webapi, &quot;Web API&quot;, &quot;ASP.NET Web API&quot;, &quot;REST API (101 endpoints)&quot;)
+    Container(functions, &quot;Business Logic&quot;, &quot;.NET Classes&quot;, &quot;Business rules &amp; workflows&quot;)
+    ContainerDb(db, &quot;Database&quot;, &quot;SQL Server&quot;, &quot;Multi-tenant data storage&quot;)
+    Container(licenseApi, &quot;License API&quot;, &quot;ASP.NET Web API&quot;, &quot;License validation&quot;)
+}
+
+Rel(user, webapp, &quot;Uses&quot;, &quot;HTTPS&quot;)
+Rel(webapp, webapi, &quot;Calls&quot;, &quot;HTTPS/JSON&quot;)
+Rel(webapi, functions, &quot;Uses&quot;)
+Rel(functions, db, &quot;Reads/Writes&quot;, &quot;ADO.NET/EF&quot;)
+Rel(webapi, licenseApi, &quot;Validates&quot;, &quot;HTTPS&quot;)
+
+@enduml
+&quot;@
+
+$c4Container | Out-File &quot;docs/architecture/c4-container.puml&quot;
+
+Write-Host &quot;C4 diagrams generated. Render with: plantuml docs/architecture/*.puml&quot;</code></pre><p><strong>Generate Component Diagram</strong>:</p>
+<pre><code class="language-bash"># Auto-generate from dependency analysis
+./scripts/generate-component-diagram.ps1</code></pre><h4>2.2 Generate ERD Diagrams</h4>
+<p><strong>Script: Auto-Generate ERD</strong> (<code>scripts/generate-erd.ps1</code>)</p>
+<pre><code class="language-powershell"># Generate ERD from model analysis
+$modelsJson = Get-Content &quot;analysis/models/model-inventory.json&quot; | ConvertFrom-Json
+
+$erdModules = @(&quot;Ap&quot;, &quot;Ar&quot;, &quot;Gl&quot;, &quot;Asset&quot;, &quot;Income&quot;)
+
+foreach ($module in $erdModules) {
+    $erdContent = &quot;@startuml`n&quot;
+    $erdContent += &quot;title $module Module - Entity Relationship Diagram`n`n&quot;
+
+    # Filter models for this module
+    $moduleModels = $modelsJson | Where-Object {
+        $_.ClassName -match &quot;^$module&quot; -and
+        -not ($_.ClassName.StartsWith(&quot;View&quot;) -or $_.ClassName.StartsWith(&quot;Param&quot;) -or $_.IsInterface)
+    }
+
+    foreach ($model in $moduleModels) {
+        $erdContent += &quot;entity `&quot;$($model.ClassName)`&quot; {`n&quot;
+        foreach ($prop in $model.Properties) {
+            $erdContent += &quot;  * $($prop.Name) : $($prop.Type)`n&quot;
+        }
+        $erdContent += &quot;}`n`n&quot;
+    }
+
+    # Add relationships (inferred from naming conventions)
+    foreach ($model in $moduleModels) {
+        foreach ($prop in $model.Properties) {
+            if ($prop.Name -match &#039;(\w+)Code$&#039; -or $prop.Name -match &#039;(\w+)Id$&#039;) {
+                $relatedEntity = $Matches[1]
+                $erdContent += &quot;`&quot;$($model.ClassName)`&quot; }o--|| `&quot;$relatedEntity`&quot;`n&quot;
+            }
+        }
+    }
+
+    $erdContent += &quot;@enduml&quot;
+
+    $erdContent | Out-File &quot;docs/database/erd-$module.puml&quot;
+}
+
+Write-Host &quot;ERD diagrams generated for $($erdModules.Count) modules&quot;</code></pre><h4>2.3 Security Architecture Documentation</h4>
+<p><strong>Script: Extract Security Model</strong> (<code>scripts/analyze-security.ps1</code>)</p>
+<pre><code class="language-powershell"># Analyze authentication and authorization patterns
+$controllersPath = &quot;Carmen.WebApi/Controllers&quot;
+$outputFile = &quot;docs/architecture/security-model.md&quot;
+
+$securityDoc = @&quot;
+# Carmen.NET Security Architecture
+
+## Authentication
+
+### Login Flow
+&quot;@
+
+# Extract login controller logic
+$loginController = Get-Content &quot;$controllersPath/LoginController.cs&quot; -Raw
+$securityDoc += @&quot;
+
+Based on LoginController analysis:
+- Token-based authentication (JWT inferred)
+- Username/password authentication
+- Token endpoint: ``/api/login``
+
+## Authorization
+
+### Permission Model
+&quot;@
+
+# Extract permission checks
+$permissions = @()
+Get-ChildItem -Path $controllersPath -Filter &quot;*.cs&quot; -Recurse | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+    $permMatches = [regex]::Matches($content, &#039;GetPermissionInfoByPermissionNameAsync\(&quot;([^&quot;]+)&quot;\)&#039;)
+    foreach ($match in $permMatches) {
+        $permissions += $match.Groups[1].Value
+    }
+}
+
+$uniquePermissions = $permissions | Select-Object -Unique | Sort-Object
+
+$securityDoc += &quot;`n`n### Permission List ($($uniquePermissions.Count) unique permissions):`n`n&quot;
+foreach ($perm in $uniquePermissions) {
+    $securityDoc += &quot;- ``$perm```n&quot;
+}
+
+$securityDoc += @&quot;
+
+## Multi-Tenant Security
+
+### Tenant Isolation
+- Tenant context applied via ``useTenant`` parameter
+- ``FncBase.ApplyTenantIfUseTenant(useTenant)`` pattern used throughout
+- Data segregation at database level (inferred)
+
+## API Security
+
+### Endpoint Protection
+- All endpoints marked with ``[Authorize]`` attribute
+- Permission checks before data access
+- Standardized error responses (no information leakage)
+&quot;@
+
+$securityDoc | Out-File $outputFile
+Write-Host &quot;Security architecture documented at $outputFile&quot;</code></pre><h4>2.4 Integration Architecture</h4>
+<p><strong>Script: Map Integration Points</strong> (<code>scripts/map-integrations.ps1</code>)</p>
+<pre><code class="language-powershell"># Analyze integration capabilities
+$interfaceModelsPath = &quot;Carmen.Models.Interface&quot;
+$outputFile = &quot;docs/architecture/integration-architecture.md&quot;
+
+$integrationDoc = @&quot;
+# Carmen.NET Integration Architecture
+
+## Integration Types
+
+Based on Carmen.Models.Interface analysis:
+&quot;@
+
+Get-ChildItem -Path $interfaceModelsPath -Filter &quot;*.cs&quot; | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw
+    $className = $_.BaseName
+
+    $integrationDoc += &quot;`n### $className`n&quot;
+    $integrationDoc += &quot;``````csharp`n&quot;
+    $integrationDoc += $content
+    $integrationDoc += &quot;`n```````n&quot;
+}
+
+$integrationDoc += @&quot;
+
+## Integration Patterns
+
+### File-Based Integration
+- CSV import/export
+- Excel integration
+- Banking file formats
+
+### Database Integration
+- Direct database-to-database sync
+- SQL Server linked servers (inferred)
+
+### API Integration
+- REST API endpoints (101 controllers)
+- Swagger documentation
+- JSON request/response
+
+### Banking Integration
+- Payment file generation
+- Bank statement import
+- Reconciliation automation
+&quot;@
+
+$integrationDoc | Out-File $outputFile
+Write-Host &quot;Integration architecture documented&quot;</code></pre><h3>Deliverables (Phase 2)</h3>
+<ul>
+<li>✅ C4 architecture diagrams (Context, Container, Component)</li>
+<li>✅ ERD diagrams per module (AP, AR, GL, Asset, Income)</li>
+<li>✅ Security architecture documentation</li>
+<li>✅ Integration architecture documentation</li>
+<li>✅ Deployment architecture diagram</li>
+</ul>
+<hr>
+<h2>Phase 3: Business Logic &amp; Workflow Analysis (Week 3)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Extract and document all business rules</li>
+<li>Map workflow state machines</li>
+<li>Document approval processes</li>
+<li>Create business process flows</li>
+</ul>
+<h3>Tasks</h3>
+<h4>3.1 Comprehensive Business Rule Extraction</h4>
+<p><strong>Script: Advanced Rule Extractor</strong> (<code>scripts/extract-all-business-rules.csx</code>)</p>
+<pre><code class="language-csharp">#r &quot;nuget: Microsoft.CodeAnalysis.CSharp, 4.0.1&quot;
+
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Text.Json;
+
+var rules = new List&lt;object&gt;();
+
+// Scan Functions folder for business logic
+var functionsPath = &quot;Carmen.WebApi/Functions&quot;;
+var controllerPath = &quot;Carmen.WebApi/Controllers&quot;;
+
+void AnalyzeFile(string filePath, string location)
+{
+    var code = File.ReadAllText(filePath);
+    var tree = CSharpSyntaxTree.ParseText(code);
+    var root = tree.GetRoot();
+
+    // Extract validation rules
+    var ifStatements = root.DescendantNodes().OfType&lt;IfStatementSyntax&gt;();
+    foreach (var ifStmt in ifStatements)
+    {
+        var condition = ifStmt.Condition.ToString();
+        var consequence = ifStmt.Statement.ToString();
+
+        // Check if it&#039;s a validation
+        if (consequence.Contains(&quot;throw&quot;) || consequence.Contains(&quot;return&quot;) || consequence.Contains(&quot;error&quot;))
+        {
+            rules.Add(new {
+                Type = &quot;Validation&quot;,
+                Condition = condition,
+                Action = consequence.Length &gt; 100 ? consequence.Substring(0, 100) + &quot;...&quot; : consequence,
+                File = Path.GetFileName(filePath),
+                Location = location,
+                LineNumber = ifStmt.GetLocation().GetLineSpan().StartLinePosition.Line
+            });
+        }
+    }
+
+    // Extract switch statements (often contain business rules)
+    var switchStatements = root.DescendantNodes().OfType&lt;SwitchStatementSyntax&gt;();
+    foreach (var switchStmt in switchStatements)
+    {
+        rules.Add(new {
+            Type = &quot;BusinessLogic&quot;,
+            Pattern = &quot;SwitchStatement&quot;,
+            Expression = switchStmt.Expression.ToString(),
+            Cases = switchStmt.Sections.Count,
+            File = Path.GetFileName(filePath),
+            Location = location,
+            LineNumber = switchStmt.GetLocation().GetLineSpan().StartLinePosition.Line
+        });
+    }
+
+    // Extract calculation methods
+    var methods = root.DescendantNodes().OfType&lt;MethodDeclarationSyntax&gt;()
+        .Where(m =&gt; m.Identifier.Text.Contains(&quot;Calculate&quot;) ||
+                    m.Identifier.Text.Contains(&quot;Compute&quot;) ||
+                    m.Identifier.Text.Contains(&quot;Total&quot;));
+
+    foreach (var method in methods)
+    {
+        rules.Add(new {
+            Type = &quot;Calculation&quot;,
+            MethodName = method.Identifier.Text,
+            ReturnType = method.ReturnType.ToString(),
+            Parameters = method.ParameterList.Parameters.Count,
+            File = Path.GetFileName(filePath),
+            Location = location,
+            LineNumber = method.GetLocation().GetLineSpan().StartLinePosition.Line
+        });
+    }
+}
+
+// Analyze all C# files
+foreach (var file in Directory.GetFiles(functionsPath, &quot;*.cs&quot;, SearchOption.AllDirectories))
+{
+    AnalyzeFile(file, &quot;Functions&quot;);
+}
+
+foreach (var file in Directory.GetFiles(controllerPath, &quot;*.cs&quot;, SearchOption.AllDirectories))
+{
+    AnalyzeFile(file, &quot;Controllers&quot;);
+}
+
+var json = JsonSerializer.Serialize(rules, new JsonSerializerOptions { WriteIndented = true });
+File.WriteAllText(&quot;analysis/business-rules/comprehensive-rules.json&quot;, json);
+
+Console.WriteLine($&quot;Extracted {rules.Count} business rules&quot;);</code></pre><h4>3.2 Workflow State Machine Generator</h4>
+<p><strong>Script: Generate Workflow Diagrams</strong> (<code>scripts/generate-workflow-diagrams.ps1</code>)</p>
+<pre><code class="language-powershell"># Generate Mermaid state diagrams for all workflows
+$workflowsJson = Get-Content &quot;analysis/workflows/state-machines.json&quot; | ConvertFrom-Json
+
+foreach ($workflow in $workflowsJson) {
+    $mermaid = @&quot;
+# $($workflow.EnumName) Workflow
+
+``````mermaid
+stateDiagram-v2
+    [*] --&gt; $($workflow.States[0])
+&quot;@
+
+    # Generate transitions (simplified heuristic based on typical patterns)
+    for ($i = 0; $i -lt $workflow.States.Count - 1; $i++) {
+        $current = $workflow.States[$i]
+        $next = $workflow.States[$i + 1]
+        $mermaid += &quot;`n    $current --&gt; $next&quot;
+    }
+
+    $mermaid += &quot;`n    $($workflow.States[-1]) --&gt; [*]&quot;
+    $mermaid += &quot;`n``````&quot;
+
+    $fileName = $workflow.EnumName -replace &quot;^Enum&quot;, &quot;&quot; -replace &quot;Status$&quot;, &quot;&quot;
+    $mermaid | Out-File &quot;docs/workflows/$fileName-workflow.md&quot;
+}
+
+Write-Host &quot;Generated workflow diagrams for $($workflowsJson.Count) state machines&quot;</code></pre><h4>3.3 Approval Process Documentation</h4>
+<p><strong>Script: Extract Approval Logic</strong> (<code>scripts/extract-approval-logic.ps1</code>)</p>
+<pre><code class="language-powershell"># Search for workflow and approval patterns
+$controllersPath = &quot;Carmen.WebApi/Controllers&quot;
+$workflowController = Get-Content &quot;$controllersPath/WorkflowController.cs&quot; -Raw
+
+$approvalDoc = @&quot;
+# Approval Workflows
+
+## Workflow Modules
+
+Based on EnumWorkflowModule:
+- AP_VENDOR: Vendor approval workflow
+- AP_INVOICE: Invoice approval workflow
+- AP_PAYMENT: Payment approval workflow
+- AR_INVOICE: Customer invoice approval
+- AR_RECEIPT: Receipt approval workflow
+
+## Approval Patterns
+
+### Detected Approval Logic:
+&quot;@
+
+# Extract approval-related code
+$approvalMethods = [regex]::Matches($workflowController, &#039;public\s+(?:async\s+)?Task&lt;[^&gt;]+&gt;\s+(Approve\w*|Reject\w*)\s*\([^)]*\)&#039;)
+foreach ($match in $approvalMethods) {
+    $approvalDoc += &quot;`n- ``$($match.Groups[1].Value)``&quot;
+}
+
+$approvalDoc | Out-File &quot;docs/workflows/approval-processes.md&quot;
+Write-Host &quot;Approval processes documented&quot;</code></pre><h3>Deliverables (Phase 3)</h3>
+<ul>
+<li>✅ Comprehensive business rules catalog (1000+ rules)</li>
+<li>✅ Workflow state diagrams (Mermaid format)</li>
+<li>✅ Approval process documentation</li>
+<li>✅ Calculation formulas extracted</li>
+<li>✅ Validation rules catalog</li>
+</ul>
+<hr>
+<h2>Phase 4: API &amp; Integration Documentation (Week 4)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Generate complete API documentation</li>
+<li>Create integration guides</li>
+<li>Document data formats</li>
+<li>Provide code examples</li>
+</ul>
+<h3>Tasks</h3>
+<h4>4.1 Enhanced Swagger Documentation</h4>
+<p><strong>Script: Enhance Swagger with Examples</strong> (<code>scripts/enhance-swagger.csx</code>)</p>
+<pre><code class="language-csharp">// This would integrate with Swashbuckle to add examples
+// For now, we&#039;ll generate supplementary API documentation
+
+using System.Text.Json;
+
+var endpointsJson = File.ReadAllText(&quot;analysis/api/api-endpoints.json&quot;);
+var endpoints = JsonSerializer.Deserialize&lt;List&lt;Dictionary&lt;string, object&gt;&gt;&gt;(endpointsJson);
+
+var apiDoc = &quot;# Carmen.NET API Reference\n\n&quot;;
+apiDoc += $&quot;Total Endpoints: {endpoints.Count}\n\n&quot;;
+
+// Group by controller
+var grouped = endpoints.GroupBy(e =&gt; e[&quot;Controller&quot;].ToString());
+
+foreach (var group in grouped.OrderBy(g =&gt; g.Key))
+{
+    apiDoc += $&quot;\n## {group.Key} API\n\n&quot;;
+
+    foreach (var endpoint in group)
+    {
+        apiDoc += $&quot;### {endpoint[&quot;HttpMethod&quot;]} {endpoint[&quot;Route&quot;]}\n\n&quot;;
+        apiDoc += $&quot;**Method**: `{endpoint[&quot;MethodName&quot;]}`\n\n&quot;;
+
+        if (endpoint.ContainsKey(&quot;Permission&quot;) &amp;&amp; endpoint[&quot;Permission&quot;] != null)
+        {
+            apiDoc += $&quot;**Required Permission**: `{endpoint[&quot;Permission&quot;]}`\n\n&quot;;
+        }
+
+        apiDoc += $&quot;**Parameters**: `{endpoint[&quot;Parameters&quot;]}`\n\n&quot;;
+        apiDoc += &quot;---\n\n&quot;;
+    }
+}
+
+File.WriteAllText(&quot;docs/api/api-reference-complete.md&quot;, apiDoc);
+Console.WriteLine($&quot;API documentation generated for {endpoints.Count} endpoints&quot;);</code></pre><h4>4.2 Generate Postman Collection</h4>
+<p><strong>Script: Auto-Generate Postman Collection</strong> (<code>scripts/generate-postman-collection.ps1</code>)</p>
+<pre><code class="language-powershell"># Generate Postman collection from API analysis
+$endpointsJson = Get-Content &quot;analysis/api/api-endpoints.json&quot; | ConvertFrom-Json
+
+$collection = @{
+    info = @{
+        name = &quot;Carmen.NET API&quot;
+        description = &quot;Auto-generated API collection&quot;
+        schema = &quot;https://schema.getpostman.com/json/collection/v2.1.0/collection.json&quot;
+    }
+    item = @()
+}
+
+# Group by controller
+$grouped = $endpointsJson | Group-Object -Property Controller
+
+foreach ($group in $grouped) {
+    $folder = @{
+        name = $group.Name
+        item = @()
+    }
+
+    foreach ($endpoint in $group.Group) {
+        $request = @{
+            name = $endpoint.MethodName
+            request = @{
+                method = $endpoint.HttpMethod
+                header = @(
+                    @{ key = &quot;Authorization&quot;; value = &quot;Bearer {{token}}&quot; }
+                    @{ key = &quot;Content-Type&quot;; value = &quot;application/json&quot; }
+                )
+                url = @{
+                    raw = &quot;{{baseUrl}}$($endpoint.Route)&quot;
+                    host = @(&quot;{{baseUrl}}&quot;)
+                    path = $endpoint.Route -split &#039;/&#039; | Where-Object { $_ -ne &#039;&#039; }
+                }
+            }
+        }
+
+        if ($endpoint.HttpMethod -eq &quot;POST&quot; -or $endpoint.HttpMethod -eq &quot;PUT&quot;) {
+            $request.request.body = @{
+                mode = &quot;raw&quot;
+                raw = &quot;{}&quot;
+            }
+        }
+
+        $folder.item += $request
+    }
+
+    $collection.item += $folder
+}
+
+$collection | ConvertTo-Json -Depth 10 | Out-File &quot;docs/api/carmen-api-postman-collection.json&quot;
+Write-Host &quot;Postman collection generated with $($endpointsJson.Count) requests&quot;</code></pre><h4>4.3 Integration Examples</h4>
+<p><strong>Create Integration Guide</strong>:</p>
+<pre><code class="language-markdown"># docs/api/integration-guide.md
+
+# Carmen.NET Integration Guide
+
+## Authentication
+
+### Obtain Access Token
+\`\`\`http
+POST /api/login
+Content-Type: application/json
+
+{
+  &quot;username&quot;: &quot;user@example.com&quot;,
+  &quot;password&quot;: &quot;password&quot;
+}
+\`\`\`
+
+**Response**:
+\`\`\`json
+{
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIs...&quot;,
+  &quot;expiresIn&quot;: 3600
+}
+\`\`\`
+
+### Use Token
+\`\`\`http
+GET /api/apInvoice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
+\`\`\`
+
+## Common Integration Scenarios
+
+### Scenario 1: Create AP Invoice
+[Step-by-step with code examples]
+
+### Scenario 2: Process Payment
+[Step-by-step with code examples]
+
+### Scenario 3: Export Financial Reports
+[Step-by-step with code examples]</code></pre><h3>Deliverables (Phase 4)</h3>
+<ul>
+<li>✅ Complete API reference documentation</li>
+<li>✅ Postman collection (importable)</li>
+<li>✅ Integration guide with examples</li>
+<li>✅ Authentication &amp; authorization guide</li>
+<li>✅ Error code catalog</li>
+</ul>
+<hr>
+<h2>Phase 5: Audience-Specific Documentation (Weeks 5-6)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Generate stakeholder documentation</li>
+<li>Create architect documentation</li>
+<li>Write BA functional specs</li>
+<li>Produce developer guides</li>
+<li>Design UI/UX documentation</li>
+</ul>
+<h3>Tasks</h3>
+<h4>5.1 Auto-Generate Executive Summary</h4>
+<p><strong>Script: Generate Executive Summary</strong> (<code>scripts/generate-executive-summary.ps1</code>)</p>
+<pre><code class="language-powershell"># Compile metrics and insights into executive summary
+$metrics = Get-Content &quot;analysis/code-metrics.json&quot; | ConvertFrom-Json
+$controllers = Get-Content &quot;analysis/controllers/controller-inventory.json&quot; | ConvertFrom-Json
+$deps = Get-Content &quot;analysis/dependencies/dependency-graph.json&quot; | ConvertFrom-Json
+
+$execSummary = @&quot;
+# Carmen.NET Executive Summary
+
+## System Overview
+Carmen.NET is a comprehensive multi-tenant financial ERP system built on .NET technology.
+
+## Key Metrics
+- **Total Code Lines**: $($metrics.TotalLines.ToString(&#039;N0&#039;))
+- **Projects**: $($deps.ProjectCount)
+- **API Endpoints**: $($controllers.Count)
+- **Business Modules**: 11 core modules
+- **Sub-Modules**: 78+ functional areas
+
+## Technology Stack
+- Platform: .NET Framework
+- API: ASP.NET Web API
+- Database: SQL Server (inferred)
+- Authentication: Token-based (JWT)
+
+## Business Capabilities
+✓ Accounts Payable Management
+✓ Accounts Receivable Management
+✓ General Ledger &amp; Financial Reporting
+✓ Fixed Asset Management
+✓ Tax Compliance (VAT/WHT)
+✓ Multi-tenant SaaS Architecture
+
+## Technical Health
+- Code Quality: Moderate complexity (Avg cyclomatic: $($metrics.AverageCyclomaticComplexity))
+- Architecture: Well-structured 3-tier architecture
+- API Design: RESTful with Swagger documentation
+- Security: Role-based access control
+
+## Modernization Recommendations
+1. Migrate to .NET 8+ (from .NET Framework)
+2. Implement comprehensive unit test coverage
+3. Enhance API documentation with examples
+4. Consider microservices architecture for scalability
+5. Implement CI/CD pipelines
+
+## Risk Assessment
+- **Technical Debt**: Moderate (legacy .NET Framework)
+- **Documentation**: Limited (requires comprehensive documentation)
+- **Testing**: Unknown coverage (needs assessment)
+- **Scalability**: Good (multi-tenant ready)
+
+## Strategic Roadmap
+### Phase 1: Documentation (Current)
+Complete reverse engineering and documentation
+
+### Phase 2: Modernization
+Migrate to modern .NET platform
+
+### Phase 3: Enhancement
+Add new features and improve UX
+
+### Phase 4: Optimization
+Performance tuning and scaling
+&quot;@
+
+$execSummary | Out-File &quot;docs/executive/executive-summary.md&quot;
+Write-Host &quot;Executive summary generated&quot;</code></pre><h4>5.2 Generate Complete Architecture Documentation</h4>
+<pre><code class="language-bash"># Consolidate all architecture artifacts
+./scripts/consolidate-architecture-docs.ps1</code></pre><h4>5.3 Generate Functional Requirements</h4>
+<p><strong>Script: Auto-Generate Functional Requirements</strong> (<code>scripts/generate-functional-requirements.ps1</code>)</p>
+<pre><code class="language-powershell"># Generate functional requirements from code analysis
+$controllers = Get-Content &quot;analysis/controllers/controller-inventory.json&quot; | ConvertFrom-Json
+$rules = Get-Content &quot;analysis/business-rules/comprehensive-rules.json&quot; | ConvertFrom-Json
+
+$funcReqs = @&quot;
+# Carmen.NET Functional Requirements
+
+## Reverse Engineered Requirements
+
+This document contains functional requirements extracted from the source code.
+&quot;@
+
+# Group by module
+$modules = @(&quot;Ap&quot;, &quot;Ar&quot;, &quot;Gl&quot;, &quot;Asset&quot;, &quot;Income&quot;)
+
+foreach ($module in $modules) {
+    $funcReqs += &quot;`n## $module Module`n`n&quot;
+
+    # Find controllers for this module
+    $moduleControllers = $controllers | Where-Object { $_.Name -match &quot;^$module&quot; }
+
+    foreach ($ctrl in $moduleControllers) {
+        $funcReqs += &quot;`n### $($ctrl.Name)`n`n&quot;
+        $funcReqs += &quot;**Endpoints**: $($ctrl.Routes.Count)`n&quot;
+        $funcReqs += &quot;**HTTP Methods**: $($ctrl.HttpMethods -join &#039;, &#039;)`n`n&quot;
+
+        # Add business rules for this controller
+        $ctrlRules = $rules | Where-Object { $_.File -eq &quot;$($ctrl.Name).cs&quot; }
+        if ($ctrlRules.Count -gt 0) {
+            $funcReqs += &quot;**Business Rules**: $($ctrlRules.Count) identified`n`n&quot;
+        }
+    }
+}
+
+$funcReqs | Out-File &quot;docs/requirements/functional-requirements.md&quot;
+Write-Host &quot;Functional requirements generated&quot;</code></pre><h4>5.4 Generate Developer Guide</h4>
+<p><strong>Create comprehensive developer guide with code examples</strong>:</p>
+<pre><code class="language-bash">./scripts/generate-developer-guide.ps1</code></pre><h4>5.5 Generate UI/UX Documentation</h4>
+<p><strong>Script: Extract UI Patterns</strong> (would require actual frontend analysis)</p>
+<pre><code class="language-powershell"># Placeholder for UI pattern extraction
+# This would analyze Razor views, JavaScript, CSS
+# For now, create template
+
+$uiDoc = @&quot;
+# Carmen.NET UI/UX Documentation
+
+## UI Framework
+[To be analyzed from frontend code]
+
+## Screen Catalog
+[Generated from view analysis]
+
+## Component Library
+[Extracted from UI code]
+
+## Design Patterns
+[Identified from CSS/JS]
+&quot;@
+
+$uiDoc | Out-File &quot;docs/design/ui-documentation.md&quot;</code></pre><h3>Deliverables (Phase 5)</h3>
+<ul>
+<li>✅ Executive summary</li>
+<li>✅ Complete architecture documentation</li>
+<li>✅ Functional requirements (all modules)</li>
+<li>✅ Developer guide with examples</li>
+<li>✅ UI/UX documentation (template)</li>
+</ul>
+<hr>
+<h2>Phase 6: Validation &amp; Quality Assurance (Week 7)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Validate all documentation</li>
+<li>Verify code-to-doc accuracy</li>
+<li>Conduct stakeholder reviews</li>
+<li>Identify gaps</li>
+</ul>
+<h3>Tasks</h3>
+<h4>6.1 Automated Documentation Validation</h4>
+<p><strong>Script: Validate Documentation</strong> (<code>scripts/validate-documentation.ps1</code>)</p>
+<pre><code class="language-powershell"># Check documentation completeness
+$validationReport = @{
+    ExecutiveDocsComplete = Test-Path &quot;docs/executive/executive-summary.md&quot;
+    ArchitectureDocsComplete = Test-Path &quot;docs/architecture/system-architecture.md&quot;
+    APIDocsComplete = Test-Path &quot;docs/api/api-reference-complete.md&quot;
+    FunctionalReqsComplete = Test-Path &quot;docs/requirements/functional-requirements.md&quot;
+    WorkflowDocsComplete = (Get-ChildItem &quot;docs/workflows&quot; -Filter &quot;*.md&quot;).Count -gt 0
+    DatabaseDocsComplete = Test-Path &quot;docs/database/inferred-schema.json&quot;
+    DeveloperGuideComplete = Test-Path &quot;docs/development/code-structure.md&quot;
+    TotalDocuments = (Get-ChildItem &quot;docs&quot; -Filter &quot;*.md&quot; -Recurse).Count
+    TotalDiagrams = (Get-ChildItem &quot;docs&quot; -Filter &quot;*.puml&quot; -Recurse).Count +
+                     (Get-ChildItem &quot;docs&quot; -Filter &quot;*.mermaid&quot; -Recurse).Count
+}
+
+$validationReport | ConvertTo-Json | Out-File &quot;analysis/documentation-validation.json&quot;
+
+# Generate validation report
+$report = @&quot;
+# Documentation Validation Report
+
+## Completeness Check
+- Executive Documentation: $(if ($validationReport.ExecutiveDocsComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+- Architecture Documentation: $(if ($validationReport.ArchitectureDocsComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+- API Documentation: $(if ($validationReport.APIDocsComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+- Functional Requirements: $(if ($validationReport.FunctionalReqsComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+- Workflow Documentation: $(if ($validationReport.WorkflowDocsComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+- Database Documentation: $(if ($validationReport.DatabaseDocsComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+- Developer Guide: $(if ($validationReport.DeveloperGuideComplete) { &#039;✅&#039; } else { &#039;❌&#039; })
+
+## Statistics
+- Total Documents: $($validationReport.TotalDocuments)
+- Total Diagrams: $($validationReport.TotalDiagrams)
+
+## Status
+$(if ($validationReport.ExecutiveDocsComplete -and
+     $validationReport.ArchitectureDocsComplete -and
+     $validationReport.APIDocsComplete) {
+    &#039;✅ Documentation package is COMPLETE&#039;
+} else {
+    &#039;⚠️ Documentation package is INCOMPLETE - review missing items above&#039;
+})
+&quot;@
+
+$report | Out-File &quot;docs/validation-report.md&quot;
+Write-Host &quot;Validation complete. See docs/validation-report.md&quot;</code></pre><h4>6.2 Code-to-Documentation Traceability</h4>
+<p><strong>Script: Verify Traceability</strong> (<code>scripts/verify-traceability.ps1</code>)</p>
+<pre><code class="language-powershell"># Verify all controllers are documented
+$controllers = Get-Content &quot;analysis/controllers/controller-inventory.json&quot; | ConvertFrom-Json
+$apiDocs = Get-Content &quot;docs/api/api-reference-complete.md&quot; -Raw
+
+$undocumented = @()
+foreach ($ctrl in $controllers) {
+    if ($apiDocs -notmatch $ctrl.Name) {
+        $undocumented += $ctrl.Name
+    }
+}
+
+if ($undocumented.Count -gt 0) {
+    Write-Host &quot;WARNING: $($undocumented.Count) controllers not documented:&quot;
+    $undocumented | ForEach-Object { Write-Host &quot;  - $_&quot; }
+} else {
+    Write-Host &quot;✅ All controllers documented&quot;
+}</code></pre><h4>6.3 Stakeholder Review Checklist</h4>
+<pre><code class="language-markdown"># Stakeholder Review Checklist
+
+## Executive Review
+- [ ] Executive summary is clear and non-technical
+- [ ] Business value is articulated
+- [ ] Strategic roadmap is realistic
+- [ ] ROI analysis is complete
+
+## Architecture Review
+- [ ] System architecture diagrams are accurate
+- [ ] Technology stack is correctly identified
+- [ ] Integration points are documented
+- [ ] Security model is comprehensive
+
+## Business Analyst Review
+- [ ] All modules are functionally documented
+- [ ] Workflows match actual system behavior
+- [ ] Business rules are complete
+- [ ] Permission matrix is accurate
+
+## Developer Review
+- [ ] Code structure guide is helpful
+- [ ] API documentation is accurate
+- [ ] Examples work as documented
+- [ ] Technical debt is identified
+
+## Designer Review
+- [ ] UI components are cataloged
+- [ ] Screen flows are accurate
+- [ ] Design patterns are identified</code></pre><h3>Deliverables (Phase 6)</h3>
+<ul>
+<li>✅ Documentation validation report</li>
+<li>✅ Traceability matrix</li>
+<li>✅ Stakeholder review checklist</li>
+<li>✅ Gap analysis report</li>
+<li>✅ Quality metrics</li>
+</ul>
+<hr>
+<h2>Phase 7: Publication &amp; Maintenance (Week 8+)</h2>
+<h3>Objectives</h3>
+<ul>
+<li>Publish documentation</li>
+<li>Set up maintenance processes</li>
+<li>Enable searchability</li>
+<li>Establish update cadence</li>
+</ul>
+<h3>Tasks</h3>
+<h4>7.1 Generate Static Documentation Site</h4>
+<p><strong>Using DocFX or MkDocs</strong>:</p>
+<pre><code class="language-bash"># Option 1: MkDocs
+pip install mkdocs mkdocs-material
+mkdocs new carmen-docs
+# Copy all MD files to docs/
+mkdocs build
+mkdocs serve
+
+# Option 2: DocFX
+docfx init
+# Configure docfx.json
+docfx build
+docfx serve</code></pre><p><strong>MkDocs Configuration</strong> (<code>mkdocs.yml</code>):</p>
+<pre><code class="language-yaml">site_name: Carmen.NET Documentation
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+
+nav:
+  - Home: index.md
+  - Executive:
+    - Summary: executive/executive-summary.md
+    - Business Processes: executive/business-processes.md
+  - Architecture:
+    - System Architecture: architecture/system-architecture.md
+    - Data Architecture: architecture/data-architecture.md
+    - Security: architecture/security-architecture.md
+  - Requirements:
+    - Functional Requirements: requirements/functional-requirements.md
+    - Permission Matrix: requirements/permission-matrix.md
+  - API:
+    - API Reference: api/api-reference-complete.md
+    - Integration Guide: api/integration-guide.md
+  - Workflows:
+    - Approval Processes: workflows/approval-processes.md
+  - Development:
+    - Code Structure: development/code-structure.md
+    - Design Patterns: development/design-patterns.md
+  - Database:
+    - Schema: database/inferred-schema.md
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid</code></pre><h4>7.2 Set Up CI/CD for Documentation</h4>
+<p><strong>GitHub Actions Workflow</strong> (<code>.github/workflows/docs.yml</code>):</p>
+<pre><code class="language-yaml">name: Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - &#039;docs/**&#039;
+      - &#039;scripts/**&#039;
+      - &#039;**.cs&#039;
+
+jobs:
+  regenerate-docs:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: &#039;6.0.x&#039;
+
+      - name: Run code analysis
+        run: |
+          pwsh scripts/scan-controllers.ps1
+          dotnet script scripts/scan-models.csx
+          pwsh scripts/analyze-dependencies.ps1
+
+      - name: Generate documentation
+        run: |
+          pwsh scripts/generate-executive-summary.ps1
+          pwsh scripts/generate-api-docs.ps1
+
+      - name: Build documentation site
+        run: |
+          pip install mkdocs-material
+          mkdocs build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site</code></pre><h4>7.3 Documentation Maintenance Plan</h4>
+<p><strong>Quarterly Update Schedule</strong>:</p>
+<pre><code class="language-markdown"># Documentation Maintenance Plan
+
+## Update Frequency
+
+### Real-time Updates (Automated)
+- API documentation (on code commit via CI/CD)
+- Code metrics (on code commit)
+- Dependency graphs (on dependency changes)
+
+### Monthly Updates
+- Business rules catalog (manual review)
+- Workflow diagrams (on process changes)
+
+### Quarterly Updates
+- Architecture diagrams (review and update)
+- Executive summary (update metrics)
+- Functional requirements (validate completeness)
+
+### Annual Updates
+- Complete documentation review
+- Stakeholder validation sessions
+- Gap analysis and improvement plan
+
+## Update Process
+1. Automated scripts run on code commits
+2. Documentation team reviews generated docs
+3. Subject matter experts validate accuracy
+4. Documentation published to site
+5. Stakeholders notified of updates
+
+## Ownership
+- **Executive Docs**: Business Analyst + Product Owner
+- **Architecture Docs**: Solution Architect
+- **API Docs**: Automated + Dev Team validation
+- **Functional Reqs**: Business Analyst
+- **Developer Docs**: Senior Developers
+- **UI/UX Docs**: Design Team</code></pre><h3>Deliverables (Phase 7)</h3>
+<ul>
+<li>✅ Published documentation website</li>
+<li>✅ CI/CD pipeline for auto-updates</li>
+<li>✅ Maintenance plan</li>
+<li>✅ Search functionality enabled</li>
+<li>✅ Access controls configured</li>
+</ul>
+<hr>
+<h2>Automation Scripts Summary</h2>
+<h3>Core Analysis Scripts (Required)</h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Purpose</th>
+<th>Output</th>
+<th>Execution Time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>scan-controllers.ps1</code></td>
+<td>Scan all controllers</td>
+<td><code>controller-inventory.json</code></td>
+<td>~30 sec</td>
+</tr>
+<tr>
+<td><code>scan-models.csx</code></td>
+<td>Scan all models</td>
+<td><code>model-inventory.json</code></td>
+<td>~1 min</td>
+</tr>
+<tr>
+<td><code>analyze-dependencies.ps1</code></td>
+<td>Map dependencies</td>
+<td><code>dependency-graph.json</code></td>
+<td>~30 sec</td>
+</tr>
+<tr>
+<td><code>extract-api-endpoints.ps1</code></td>
+<td>Extract API endpoints</td>
+<td><code>api-endpoints.json</code></td>
+<td>~45 sec</td>
+</tr>
+<tr>
+<td><code>extract-business-rules.ps1</code></td>
+<td>Extract business rules</td>
+<td><code>extracted-rules.json</code></td>
+<td>~1 min</td>
+</tr>
+<tr>
+<td><code>deep-analysis.csx</code></td>
+<td>Roslyn deep analysis</td>
+<td><code>deep-analysis.json</code></td>
+<td>~5 min</td>
+</tr>
+<tr>
+<td><code>calculate-metrics.ps1</code></td>
+<td>Code metrics</td>
+<td><code>code-metrics.json</code></td>
+<td>~1 min</td>
+</tr>
+</tbody></table>
+<h3>Documentation Generation Scripts</h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Purpose</th>
+<th>Output</th>
+<th>Execution Time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>generate-executive-summary.ps1</code></td>
+<td>Executive summary</td>
+<td><code>executive-summary.md</code></td>
+<td>~10 sec</td>
+</tr>
+<tr>
+<td><code>generate-c4-diagrams.ps1</code></td>
+<td>C4 architecture diagrams</td>
+<td><code>*.puml</code> files</td>
+<td>~5 sec</td>
+</tr>
+<tr>
+<td><code>generate-erd.ps1</code></td>
+<td>ERD diagrams</td>
+<td><code>erd-*.puml</code> files</td>
+<td>~30 sec</td>
+</tr>
+<tr>
+<td><code>generate-workflow-diagrams.ps1</code></td>
+<td>Workflow diagrams</td>
+<td><code>*-workflow.md</code></td>
+<td>~15 sec</td>
+</tr>
+<tr>
+<td><code>generate-postman-collection.ps1</code></td>
+<td>Postman collection</td>
+<td><code>postman-collection.json</code></td>
+<td>~10 sec</td>
+</tr>
+<tr>
+<td><code>generate-functional-requirements.ps1</code></td>
+<td>Functional requirements</td>
+<td><code>functional-requirements.md</code></td>
+<td>~30 sec</td>
+</tr>
+</tbody></table>
+<h3>Validation Scripts</h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Purpose</th>
+<th>Output</th>
+<th>Execution Time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>validate-documentation.ps1</code></td>
+<td>Check completeness</td>
+<td><code>validation-report.md</code></td>
+<td>~5 sec</td>
+</tr>
+<tr>
+<td><code>verify-traceability.ps1</code></td>
+<td>Code-to-doc traceability</td>
+<td>Console output</td>
+<td>~10 sec</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Execution Timeline</h2>
+<h3>Week 1</h3>
+<ul>
+<li><strong>Day 1-2</strong>: Setup (Phase 0)</li>
+<li><strong>Day 3-5</strong>: Automated scanning (Phase 1)</li>
+</ul>
+<h3>Week 2</h3>
+<ul>
+<li>Architecture &amp; data modeling (Phase 2)</li>
+</ul>
+<h3>Week 3</h3>
+<ul>
+<li>Business logic &amp; workflows (Phase 3)</li>
+</ul>
+<h3>Week 4</h3>
+<ul>
+<li>API &amp; integration docs (Phase 4)</li>
+</ul>
+<h3>Week 5-6</h3>
+<ul>
+<li>Audience-specific docs (Phase 5)</li>
+</ul>
+<h3>Week 7</h3>
+<ul>
+<li>Validation &amp; QA (Phase 6)</li>
+</ul>
+<h3>Week 8+</h3>
+<ul>
+<li>Publication &amp; maintenance (Phase 7)</li>
+</ul>
+<hr>
+<h2>Master Execution Command</h2>
+<p><strong>Run All Analysis Scripts</strong>:</p>
+<pre><code class="language-powershell"># scripts/run-all-analysis.ps1
+Write-Host &quot;=== Carmen.NET Reverse Engineering - Full Analysis ===&quot;
+
+Write-Host &quot;`n[1/10] Scanning controllers...&quot;
+./scripts/scan-controllers.ps1
+
+Write-Host &quot;`n[2/10] Scanning models...&quot;
+dotnet script scripts/scan-models.csx
+
+Write-Host &quot;`n[3/10] Analyzing dependencies...&quot;
+./scripts/analyze-dependencies.ps1
+
+Write-Host &quot;`n[4/10] Extracting API endpoints...&quot;
+./scripts/extract-api-endpoints.ps1
+
+Write-Host &quot;`n[5/10] Extracting business rules...&quot;
+./scripts/extract-business-rules.ps1
+
+Write-Host &quot;`n[6/10] Deep code analysis (Roslyn)...&quot;
+dotnet script scripts/deep-analysis.csx
+
+Write-Host &quot;`n[7/10] Calculating metrics...&quot;
+./scripts/calculate-metrics.ps1
+
+Write-Host &quot;`n[8/10] Extracting workflows...&quot;
+./scripts/extract-workflows.ps1
+
+Write-Host &quot;`n[9/10] Inferring database schema...&quot;
+./scripts/infer-database-schema.ps1
+
+Write-Host &quot;`n[10/10] Analyzing security model...&quot;
+./scripts/analyze-security.ps1
+
+Write-Host &quot;`n=== Analysis Complete ===&quot;
+Write-Host &quot;Results saved in analysis/ directory&quot;
+Write-Host &quot;`nNext steps:&quot;
+Write-Host &quot;1. Review analysis/code-metrics.txt&quot;
+Write-Host &quot;2. Run ./scripts/generate-all-documentation.ps1&quot;
+Write-Host &quot;3. Validate with ./scripts/validate-documentation.ps1&quot;</code></pre><p><strong>Run All Documentation Generation</strong>:</p>
+<pre><code class="language-powershell"># scripts/generate-all-documentation.ps1
+Write-Host &quot;=== Generating All Documentation ===&quot;
+
+Write-Host &quot;`n[1/8] Generating executive summary...&quot;
+./scripts/generate-executive-summary.ps1
+
+Write-Host &quot;`n[2/8] Generating architecture diagrams...&quot;
+./scripts/generate-c4-diagrams.ps1
+./scripts/generate-dependency-graph.ps1
+
+Write-Host &quot;`n[3/8] Generating ERD diagrams...&quot;
+./scripts/generate-erd.ps1
+
+Write-Host &quot;`n[4/8] Generating workflow diagrams...&quot;
+./scripts/generate-workflow-diagrams.ps1
+
+Write-Host &quot;`n[5/8] Generating API documentation...&quot;
+dotnet script scripts/enhance-swagger.csx
+./scripts/generate-postman-collection.ps1
+
+Write-Host &quot;`n[6/8] Generating functional requirements...&quot;
+./scripts/generate-functional-requirements.ps1
+
+Write-Host &quot;`n[7/8] Generating developer guide...&quot;
+./scripts/generate-developer-guide.ps1
+
+Write-Host &quot;`n[8/8] Rendering diagrams...&quot;
+plantuml docs/architecture/*.puml
+plantuml docs/database/*.puml
+
+Write-Host &quot;`n=== Documentation Generation Complete ===&quot;
+Write-Host &quot;Documentation available in docs/ directory&quot;
+Write-Host &quot;`nNext: ./scripts/validate-documentation.ps1&quot;</code></pre><hr>
+<h2>Success Metrics</h2>
+<h3>Quantitative Metrics</h3>
+<ul>
+<li>✅ 100% controller coverage</li>
+<li>✅ 100% model documentation</li>
+<li>✅ 100% API endpoint documentation</li>
+<li>✅ 500+ business rules extracted</li>
+<li>✅ 50+ diagrams generated</li>
+<li>✅ 100+ documentation pages</li>
+</ul>
+<h3>Qualitative Metrics</h3>
+<ul>
+<li>✅ Stakeholder approval</li>
+<li>✅ Developer onboarding time &lt; 2 days</li>
+<li>✅ BA can write requirements from docs</li>
+<li>✅ SA can design new features</li>
+<li>✅ Executives can make strategic decisions</li>
+</ul>
+<hr>
+<h2>Conclusion</h2>
+<p>This execution plan provides:</p>
+<ol>
+<li><strong>Automated recursive scanning</strong> of entire codebase</li>
+<li><strong>Comprehensive documentation</strong> for all audiences</li>
+<li><strong>Reproducible process</strong> via scripts</li>
+<li><strong>Validation gates</strong> for quality assurance</li>
+<li><strong>Maintenance plan</strong> for long-term sustainability</li>
+</ol>
+<p>All scripts are designed to be <strong>recursive</strong> and <strong>comprehensive</strong>, ensuring no code is left undocumented.</p>
+<p><strong>Total Estimated Effort</strong>: 8 weeks (with automation)<br><strong>Manual Effort Saved</strong>: ~60% through automation<br><strong>Documentation Artifacts</strong>: 100+ files</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

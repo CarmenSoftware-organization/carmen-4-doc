@@ -1,0 +1,46 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+title Deployment Diagram - Carmen.NET ERP
+
+Deployment_Node(client, "Client Device", "Windows/Mac/Linux") {
+    Container(browser, "Web Browser", "Chrome, Edge, Firefox")
+    Container(excel_client, "Excel", "Microsoft Office")
+}
+
+Deployment_Node(web_tier, "Web Tier", "IIS/Windows Server") {
+    Deployment_Node(iis, "IIS Application Server", "IIS 10+") {
+        Container(webapp, "Web Application", "ASP.NET MVC")
+        Container(webapi, "Web API", "ASP.NET Web API")
+    }
+}
+
+Deployment_Node(app_tier, "Application Tier", "Windows Server") {
+    Deployment_Node(app_server, "Application Server", ".NET Runtime") {
+        Container(license_api, "License API", "ASP.NET Web API")
+        Container(business_logic, "Business Logic", ".NET Libraries")
+    }
+}
+
+Deployment_Node(data_tier, "Data Tier", "Database Server") {
+    Deployment_Node(db_server, "SQL Server", "SQL Server 2016+") {
+        ContainerDb(database, "Carmen Database", "SQL Server")
+        ContainerDb(tenant_dbs, "Tenant Databases", "Multi-tenant DBs")
+    }
+}
+
+Deployment_Node(file_server, "File Storage", "File Server/NAS") {
+    Container(files, "Document Storage", "File System")
+}
+
+Rel(browser, webapp, "HTTPS", "443")
+Rel(browser, webapi, "HTTPS/JSON", "443")
+Rel(excel_client, webapi, "HTTPS/JSON", "443")
+Rel(webapp, webapi, "Internal", "80/443")
+Rel(webapi, business_logic, "In-process")
+Rel(webapi, license_api, "HTTPS", "Internal")
+Rel(business_logic, database, "SQL/TDS", "1433")
+Rel(business_logic, tenant_dbs, "SQL/TDS", "1433")
+Rel(business_logic, files, "File I/O", "SMB")
+
+@enduml

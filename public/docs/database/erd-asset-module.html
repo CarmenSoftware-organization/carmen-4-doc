@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Management Module - Entity Relationship Diagram - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Asset Management Module - Entity Relationship Diagram</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Asset Management Module - Entity Relationship Diagram</h1>
+<div class="mermaid">erDiagram
+    %% Asset Master Relationships
+    ASSET_CATEGORY ||--o{ ASSET_REGISTER : "classifies"
+    ASSET_LOCATION ||--o{ ASSET_REGISTER : "located at"
+    ASSET_DEPARTMENT ||--o{ ASSET_REGISTER : "assigned to"
+
+    %% Asset History & Disposal
+    ASSET_REGISTER ||--o{ ASSET_HISTORY : "tracks history"
+    ASSET_REGISTER ||--o| ASSET_DISPOSAL : "disposed"
+
+    %% Pre-Asset
+    PRE_ASSET ||--o| ASSET_REGISTER : "converted to"
+
+    %% GL Posting
+    ASSET_REGISTER ||--o{ GL_JV_H : "posts depreciation"
+    ASSET_DISPOSAL ||--o{ GL_JV_H : "posts disposal"
+
+    %% Lookups
+    ACCOUNT_CODE ||--o{ ASSET_CATEGORY : "asset accounts"
+
+    %% Entities
+    ASSET_REGISTER {
+        bigint AssetId PK
+        varchar AssetNo "Asset Number"
+        varchar AssetName "Asset Name"
+        varchar AssetDesc "Description"
+        datetime AssetDate "Acquisition Date"
+        bigint CategoryId FK "Asset Category"
+        bigint LocationId FK "Asset Location"
+        bigint DeptId FK "Asset Department"
+        decimal PurchaseAmt "Purchase Amount"
+        decimal SalvageValue "Salvage Value"
+        decimal AccumDepre "Accumulated Depreciation"
+        decimal BookValue "Book Value"
+        int AssetStatus "Status"
+        varchar DepreMethod "Depreciation Method"
+        int UsefulLife "Useful Life (Years)"
+        decimal DepreRate "Depreciation Rate %"
+        varchar SerialNo "Serial Number"
+        varchar Model "Model"
+        varchar Manufacturer "Manufacturer"
+        varchar WarrantyExpiry "Warranty Expiry"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+        bigint CreatedBy FK "Created By"
+    }
+
+    ASSET_CATEGORY {
+        bigint CategoryId PK
+        varchar CategoryCode "Category Code"
+        varchar CategoryName "Category Name"
+        varchar CategoryDesc "Description"
+        decimal DepreRate "Standard Depreciation Rate %"
+        varchar DepreMethod "Standard Depreciation Method"
+        int StandardUsefulLife "Standard Useful Life"
+        varchar AccCode_Asset FK "Asset Account Code"
+        varchar AccCode_Depre FK "Depreciation Expense Account"
+        varchar AccCode_Accum FK "Accumulated Depreciation Account"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    ASSET_LOCATION {
+        bigint LocationId PK
+        varchar LocationCode "Location Code"
+        varchar LocationName "Location Name"
+        varchar LocationDesc "Location Description"
+        varchar Address "Address"
+        varchar ContactPerson "Contact Person"
+        varchar Phone "Phone"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    ASSET_DEPARTMENT {
+        bigint DeptId PK
+        varchar DeptCode "Department Code"
+        varchar DeptName "Department Name"
+        varchar DeptManager "Department Manager"
+        bit IsActive "Active Status"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    ASSET_HISTORY {
+        bigint HistoryId PK
+        bigint AssetId FK "Asset ID"
+        datetime HistoryDate "History Date"
+        varchar HistoryType "History Type"
+        varchar HistoryDesc "Description"
+        decimal HistoryAmt "Amount"
+        decimal OldValue "Old Value"
+        decimal NewValue "New Value"
+        varchar OldLocation FK "Old Location"
+        varchar NewLocation FK "New Location"
+        varchar OldDept FK "Old Department"
+        varchar NewDept FK "New Department"
+        bigint UpdatedBy FK "Updated By"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    ASSET_DISPOSAL {
+        bigint DisposalId PK
+        bigint AssetId FK "Asset ID"
+        varchar DisposalNo "Disposal Number"
+        datetime DisposalDate "Disposal Date"
+        int DisposalType "Disposal Type"
+        decimal DisposalAmt "Disposal Amount"
+        decimal BookValue "Book Value at Disposal"
+        decimal GainLoss "Gain/Loss on Disposal"
+        varchar DisposalReason "Disposal Reason"
+        varchar DisposalTo "Disposed To"
+        int DisposalStatus "Status"
+        bigint TenantId FK "Tenant ID"
+        datetime CreatedDate "Created Date"
+    }
+
+    PRE_ASSET {
+        bigint PreAssetId PK
+        varchar PreAssetNo "Pre-Asset Number"
+        varchar PreAssetName "Pre-Asset Name"
+        varchar PreAssetDesc "Description"
+        int PreAssetStatus "Status"
+        decimal TotalAmt "Total Amount"
+        datetime StartDate "Start Date"
+        datetime ExpectedCompleteDate "Expected Complete Date"
+        datetime ActualCompleteDate "Actual Complete Date"
+        bigint AssetId FK "Converted Asset ID"
+        bigint TenantId FK "Tenant ID"
+    }
+
+    GL_JV_H {
+        bigint JvhId PK
+        varchar JvhNo "JV Number"
+        datetime JvhDate "JV Date"
+        varchar JvhSource "Source (Asset)"
+        bigint SourceId FK "Asset/Disposal ID"
+    }
+
+    ACCOUNT_CODE {
+        varchar AccCode PK
+        varchar AccName "Account Name"
+    }</div><h2>Asset Management Workflow</h2>
+<h3>1. Asset Acquisition Flow</h3>
+<pre><code class="language-text">Purchase Request → PO → Receiving → Pre-Asset (if WIP) → Asset Register</code></pre><h3>2. Depreciation Flow</h3>
+<pre><code class="language-text">Monthly Process → Calculate Depreciation → Generate JV → Post to GL</code></pre><h3>3. Transfer Flow</h3>
+<pre><code class="language-text">Transfer Request → Approval → Update Location/Department → Record History</code></pre><h3>4. Disposal Flow</h3>
+<pre><code class="language-text">Disposal Request → Approval → Calculate Gain/Loss → Post to GL → Update Status</code></pre><h2>Depreciation Methods</h2>
+<p><strong>Straight Line</strong>:</p>
+<pre><code class="language-text">Annual Depreciation = (Cost - Salvage Value) / Useful Life
+Monthly Depreciation = Annual Depreciation / 12</code></pre><p><strong>Declining Balance</strong>:</p>
+<pre><code class="language-text">Annual Depreciation = Book Value × Depreciation Rate</code></pre><p><strong>Sum of Years Digits</strong>:</p>
+<pre><code class="language-text">Annual Depreciation = (Cost - Salvage Value) × (Remaining Life / Sum of Years)</code></pre><p><strong>Units of Production</strong>:</p>
+<pre><code class="language-text">Depreciation per Unit = (Cost - Salvage Value) / Total Units
+Period Depreciation = Units Produced × Depreciation per Unit</code></pre><h2>GL Posting Examples</h2>
+<h3>Asset Acquisition</h3>
+<pre><code class="language-text">DR: Asset Account (from ASSET_CATEGORY.AccCode_Asset)  $10,000
+CR: Cash/AP Account                                    $10,000</code></pre><h3>Monthly Depreciation</h3>
+<pre><code class="language-text">DR: Depreciation Expense (AccCode_Depre)               $   100
+CR: Accumulated Depreciation (AccCode_Accum)           $   100</code></pre><h3>Asset Disposal (Gain)</h3>
+<pre><code class="language-text">DR: Cash/Receivable                                    $ 6,000
+DR: Accumulated Depreciation                           $ 5,000
+CR: Asset Account                                      $10,000
+CR: Gain on Disposal                                   $ 1,000</code></pre><h3>Asset Disposal (Loss)</h3>
+<pre><code class="language-text">DR: Cash/Receivable                                    $ 3,000
+DR: Accumulated Depreciation                           $ 5,000
+DR: Loss on Disposal                                   $ 2,000
+CR: Asset Account                                      $10,000</code></pre><h2>Key Tables</h2>
+<p><strong>ASSET_REGISTER</strong>: Master asset list with depreciation details<br><strong>ASSET_CATEGORY</strong>: Asset categories with default depreciation settings<br><strong>ASSET_LOCATION</strong>: Physical locations of assets<br><strong>ASSET_DEPARTMENT</strong>: Department assignments for assets<br><strong>ASSET_HISTORY</strong>: Complete audit trail of asset changes<br><strong>ASSET_DISPOSAL</strong>: Asset disposal records with gain/loss<br><strong>PRE_ASSET</strong>: Work-in-progress assets (construction, software development)</p>
+<h2>Asset Status</h2>
+<p><strong>Asset Status</strong> (<code>AssetStatus</code>):</p>
+<ul>
+<li>0 = In Use</li>
+<li>1 = Idle</li>
+<li>2 = Under Maintenance</li>
+<li>3 = Disposed</li>
+<li>4 = Sold</li>
+<li>5 = Scrapped</li>
+<li>9 = Written Off</li>
+</ul>
+<p><strong>Pre-Asset Status</strong> (<code>PreAssetStatus</code>):</p>
+<ul>
+<li>0 = Planning</li>
+<li>1 = In Progress</li>
+<li>2 = Completed (converted to Asset)</li>
+<li>9 = Cancelled</li>
+</ul>
+<p><strong>Disposal Type</strong> (<code>DisposalType</code>):</p>
+<ul>
+<li>1 = Sale</li>
+<li>2 = Scrap</li>
+<li>3 = Trade-in</li>
+<li>4 = Donation</li>
+<li>5 = Transfer</li>
+<li>9 = Write-off</li>
+</ul>
+<h2>Asset History Types</h2>
+<p><strong>History Type</strong> (<code>HistoryType</code>):</p>
+<ul>
+<li>ACQUIRE = Asset Acquisition</li>
+<li>DEPRECIATE = Depreciation Posting</li>
+<li>TRANSFER = Location/Department Transfer</li>
+<li>REVALUE = Revaluation</li>
+<li>IMPAIR = Impairment</li>
+<li>DISPOSE = Disposal</li>
+<li>MAINTAIN = Maintenance Record</li>
+</ul>
+<h2>Asset Reports</h2>
+<ul>
+<li><strong>Asset Register Report</strong>: Complete asset listing</li>
+<li><strong>Depreciation Schedule</strong>: Current and projected depreciation</li>
+<li><strong>Asset Valuation Report</strong>: Book value by category/location/department</li>
+<li><strong>Disposal Report</strong>: Gain/loss on disposals</li>
+<li><strong>Asset Movement Report</strong>: Transfers and changes</li>
+<li><strong>Maintenance History</strong>: Asset maintenance tracking</li>
+<li><strong>Asset Age Analysis</strong>: Asset age distribution</li>
+</ul>
+<h2>Multi-Tenant</h2>
+<p>All tables include <code>TenantId</code> for data isolation.<br>Enforced via <code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> in all controllers.</p>
+<h2>Pre-Asset (Work in Progress)</h2>
+<p><strong>Use Cases</strong>:</p>
+<ul>
+<li>Building construction</li>
+<li>Software development</li>
+<li>Machine assembly</li>
+<li>Custom equipment fabrication</li>
+</ul>
+<p><strong>Process</strong>:</p>
+<ol>
+<li>Create Pre-Asset record</li>
+<li>Accumulate costs (labor, materials, overhead)</li>
+<li>When complete, convert to Asset Register</li>
+<li>Start depreciation from in-service date</li>
+</ol>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

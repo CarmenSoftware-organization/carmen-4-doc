@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carmen.NET ERP System - Complete Technical Documentation">
+    <title>Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book"></i>
+                    <span>Carmen.NET Docs</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#getting-started" class="nav-link">Getting Started</a>
+                    <a href="#documentation" class="nav-link">Documentation</a>
+                    <a href="#api" class="nav-link">API Reference</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="search-toggle" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search documentation..." autofocus>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Carmen.NET ERP Documentation</h1>
+                <p class="hero-subtitle">Complete technical documentation for the Carmen.NET multi-tenant ERP system</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">76+</div>
+                        <div class="stat-label">Documents</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">663+</div>
+                        <div class="stat-label">Pages</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">393+</div>
+                        <div class="stat-label">API Endpoints</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">11</div>
+                        <div class="stat-label">Modules</div>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#getting-started" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </a>
+                    <a href="#documentation" class="btn btn-secondary">
+                        <i class="fas fa-book-open"></i>
+                        Browse Docs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-layout">
+                <!-- Sidebar -->
+                <aside class="sidebar" id="sidebar">
+                    <div class="sidebar-content">
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Getting Started</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/executive/executive-summary.html"><i class="fas fa-chart-line"></i> Executive Summary</a></li>
+                                <li><a href="docs/development/developer-onboarding-guide.html"><i class="fas fa-user-plus"></i> Developer Onboarding</a></li>
+                                <li><a href="docs/system-overview.html"><i class="fas fa-sitemap"></i> System Overview</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Executive</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/executive/executive-summary.html">Executive Summary</a></li>
+                                <li><a href="docs/executive/roi-analysis.html">ROI Analysis</a></li>
+                                <li><a href="docs/executive/modernization-recommendations.html">Modernization Recommendations</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Architecture</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/architecture/system-architecture.html">System Architecture</a></li>
+                                <li><a href="docs/architecture/architecture-decision-records.html">Architecture Decision Records</a></li>
+                                <li><a href="docs/architecture/technology-stack.html">Technology Stack</a></li>
+                                <li><a href="docs/architecture/security-architecture.html">Security Architecture</a></li>
+                                <li><a href="docs/architecture/integration-architecture.html">Integration Architecture</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Requirements</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/requirements/functional-requirements.html">Functional Requirements</a></li>
+                                <li><a href="docs/requirements/requirements-validation-report.html">Requirements Validation</a></li>
+                                <li><a href="docs/requirements/asset-income-requirements.html">Asset & Income Requirements</a></li>
+                                <li><a href="docs/requirements/permission-matrix.html">Permission Matrix</a></li>
+                                <li><a href="docs/requirements/data-dictionary.html">Data Dictionary</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Development</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/development/developer-onboarding-guide.html">Developer Onboarding</a></li>
+                                <li><a href="docs/development/code-structure-guide.html">Code Structure</a></li>
+                                <li><a href="docs/development/design-patterns-guide.html">Design Patterns</a></li>
+                                <li><a href="docs/development/database-schema-guide.html">Database Schema</a></li>
+                                <li><a href="docs/development/testing-guide.html">Testing Guide</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">API Reference</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/api/api-reference.html">API Reference</a></li>
+                                <li><a href="docs/api/authentication-guide.html">Authentication</a></li>
+                                <li><a href="docs/api/integration-guide.html">Integration Guide</a></li>
+                                <li><a href="docs/api/error-handling-guide.html">Error Handling</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Workflows</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/workflows/business-process-flows.html">Business Process Flows</a></li>
+                                <li><a href="docs/workflows/process-flow-validation.html">Process Flow Validation</a></li>
+                                <li><a href="docs/workflows/ap-invoice-workflow.html">AP Invoice Workflow</a></li>
+                                <li><a href="docs/workflows/ar-invoice-workflow.html">AR Invoice Workflow</a></li>
+                                <li><a href="docs/workflows/approval-workflows.html">Approval Workflows</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">UI/UX</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/ui-ux/ui-component-inventory.html">UI Component Inventory</a></li>
+                                <li><a href="docs/ui-ux/screen-flow-diagrams.html">Screen Flow Diagrams</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Database</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/database/erd-master-overview.html">Master ERD</a></li>
+                                <li><a href="docs/database/erd-ap-module.html">AP Module ERD</a></li>
+                                <li><a href="docs/database/erd-ar-module.html">AR Module ERD</a></li>
+                                <li><a href="docs/database/erd-gl-module.html">GL Module ERD</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Validation & QA</h3>
+                            <ul class="sidebar-menu">
+                                <li><a href="docs/validation-report.html">Validation Report</a></li>
+                                <li><a href="docs/traceability-matrix.html">Traceability Matrix</a></li>
+                                <li><a href="docs/diagram-quality-report.html">Diagram Quality Report</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Content -->
+                <div class="content" id="mainContent">
+                    <!-- Overview Cards -->
+                    <section id="home" class="content-section active">
+                        <h2>Welcome to Carmen.NET Documentation</h2>
+                        <p class="lead">Comprehensive technical documentation for the Carmen.NET multi-tenant ERP system, including architecture, API references, workflows, and development guides.</p>
+
+                        <div class="card-grid">
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3 class="card-title">Executive Documentation</h3>
+                                <p class="card-description">Strategic overview, ROI analysis, and modernization roadmap for decision-makers.</p>
+                                <a href="docs/executive/executive-summary.html" class="card-link">Read More →</a>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <h3 class="card-title">Architecture</h3>
+                                <p class="card-description">System architecture, design patterns, and architectural decision records.</p>
+                                <a href="docs/architecture/system-architecture.html" class="card-link">Explore →</a>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3 class="card-title">Developer Guide</h3>
+                                <p class="card-description">Complete development documentation with code structure, patterns, and best practices.</p>
+                                <a href="docs/development/developer-onboarding-guide.html" class="card-link">Start Coding →</a>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <h3 class="card-title">API Reference</h3>
+                                <p class="card-description">351 API endpoints across 11 modules with authentication and integration guides.</p>
+                                <a href="docs/api/api-reference.html" class="card-link">View APIs →</a>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h3 class="card-title">Database Schema</h3>
+                                <p class="card-description">Complete database documentation with ERDs, tables, stored procedures, and views.</p>
+                                <a href="docs/development/database-schema-guide.html" class="card-link">View Schema →</a>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <h3 class="card-title">Testing Guide</h3>
+                                <p class="card-description">Testing strategy with unit, integration, and E2E testing patterns.</p>
+                                <a href="docs/development/testing-guide.html" class="card-link">Learn Testing →</a>
+                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-box-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="info-box-content">
+                                <h4>Documentation Quality</h4>
+                                <p>All documentation has passed Phase 6 validation with a <strong>9.7/10 quality score</strong> and <strong>100% traceability coverage</strong>. Approved by all 6 stakeholder groups for production use.</p>
+                            </div>
+                        </div>
+
+                        <h3>System Modules</h3>
+                        <div class="module-grid">
+                            <div class="module-card">
+                                <h4><i class="fas fa-file-invoice-dollar"></i> Accounts Payable (AP)</h4>
+                                <p>Vendor management, purchase orders, receiving, invoices, payments, and WHT</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-receipt"></i> Accounts Receivable (AR)</h4>
+                                <p>Customer management, contracts, billing, receipts, and credit notes</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-book"></i> General Ledger (GL)</h4>
+                                <p>Chart of accounts, journal entries, period close, and financial reporting</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-building"></i> Asset Management</h4>
+                                <p>Asset registration, depreciation, disposal, and lifecycle tracking</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-dollar-sign"></i> Income</h4>
+                                <p>Income tracking, revenue recognition, and income invoicing</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-percentage"></i> Tax</h4>
+                                <p>VAT (7%), WHT (3-15%), tax calculations, and Thai tax compliance</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-university"></i> Bank</h4>
+                                <p>Bank accounts, transactions, reconciliation, and statements</p>
+                            </div>
+                            <div class="module-card">
+                                <h4><i class="fas fa-database"></i> Master Data</h4>
+                                <p>Customers, vendors, products, employees, and reference data</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="getting-started" class="content-section">
+                        <h2>Getting Started</h2>
+                        <p class="lead">Quick start guides for different stakeholder groups.</p>
+
+                        <div class="card-grid">
+                            <div class="card">
+                                <h3 class="card-title">For Executives</h3>
+                                <p class="card-description">Strategic overview and business case</p>
+                                <ul>
+                                    <li><a href="docs/executive/executive-summary.html">Executive Summary</a></li>
+                                    <li><a href="docs/executive/roi-analysis.html">ROI Analysis (122% ROI)</a></li>
+                                    <li><a href="docs/executive/modernization-recommendations.html">Modernization Roadmap</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h3 class="card-title">For Developers</h3>
+                                <p class="card-description">Get productive in < 2 days</p>
+                                <ul>
+                                    <li><a href="docs/development/developer-onboarding-guide.html">Onboarding Guide (Day 1-30)</a></li>
+                                    <li><a href="docs/development/code-structure-guide.html">Code Structure</a></li>
+                                    <li><a href="docs/development/design-patterns-guide.html">Design Patterns</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h3 class="card-title">For Architects</h3>
+                                <p class="card-description">System architecture and decisions</p>
+                                <ul>
+                                    <li><a href="docs/architecture/system-architecture.html">System Architecture</a></li>
+                                    <li><a href="docs/architecture/architecture-decision-records.html">15 ADRs</a></li>
+                                    <li><a href="docs/architecture/technology-stack.html">Technology Stack</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h3 class="card-title">For Business Analysts</h3>
+                                <p class="card-description">Requirements and specifications</p>
+                                <ul>
+                                    <li><a href="docs/requirements/functional-requirements.html">Functional Requirements</a></li>
+                                    <li><a href="docs/requirements/permission-matrix.html">Permission Matrix (114 permissions)</a></li>
+                                    <li><a href="docs/requirements/data-dictionary.html">Data Dictionary</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Carmen.NET Documentation</h4>
+                    <p>Complete technical documentation for the multi-tenant ERP system.</p>
+                    <p class="footer-version">Version 1.0 | Last Updated: October 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="docs/system-overview.html">System Overview</a></li>
+                        <li><a href="docs/module-structure.html">Module Structure</a></li>
+                        <li><a href="docs/reverse-engineering-guide.html">Reverse Engineering Guide</a></li>
+                        <li><a href="docs/execution-plan.html">Execution Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul class="footer-links">
+                        <li><a href="docs/PHASE-5-FINAL-SUMMARY.html">Phase 5 Summary</a></li>
+                        <li><a href="docs/PHASE-6-COMPLETION-SUMMARY.html">Phase 6 Summary</a></li>
+                        <li><a href="docs/validation-report.html">Validation Report</a></li>
+                        <li><a href="docs/traceability-matrix.html">Traceability Matrix</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Statistics</h4>
+                    <ul class="footer-stats">
+                        <li><strong>76+</strong> Documents</li>
+                        <li><strong>663+</strong> Pages</li>
+                        <li><strong>351</strong> API Endpoints</li>
+                        <li><strong>9.7/10</strong> Quality Score</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Carmen.NET Documentation. All rights reserved.</p>
+                <p>Generated with Phase 0-6 reverse engineering documentation project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

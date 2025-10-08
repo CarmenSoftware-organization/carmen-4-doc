@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Testing Guide - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Testing Guide</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Testing Guide</h1>
+<p><strong>Document Version:</strong> 1.0<br><strong>Last Updated:</strong> October 6, 2025<br><strong>Target Audience:</strong> QA Engineers, Developers, Test Automation Engineers<br><strong>Prerequisites:</strong> Code Structure Guide, Developer Onboarding Guide</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#testing-strategy">Testing Strategy</a></li>
+<li><a href="#test-infrastructure">Test Infrastructure</a></li>
+<li><a href="#unit-testing">Unit Testing</a></li>
+<li><a href="#integration-testing">Integration Testing</a></li>
+<li><a href="#api-testing">API Testing</a></li>
+<li><a href="#end-to-end-testing">End-to-End Testing</a></li>
+<li><a href="#test-data-management">Test Data Management</a></li>
+<li><a href="#testing-best-practices">Testing Best Practices</a></li>
+<li><a href="#cicd-integration">CI/CD Integration</a></li>
+</ol>
+<hr>
+<h2>1. Testing Strategy</h2>
+<h3>Testing Pyramid</h3>
+<p>Carmen.NET follows a <strong>testing pyramid</strong> approach with emphasis on unit tests:</p>
+<pre><code class="language-text">                /\
+               /  \
+              /E2E \           ← 10% (Manual + Automated)
+             /------\
+            /  API   \         ← 20% (Integration Tests)
+           /----------\
+          / Unit Tests \       ← 70% (Fast, Isolated)
+         /--------------\</code></pre><p><strong>Current State vs. Target:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Current Coverage</th>
+<th>Target Coverage</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Unit Tests</strong></td>
+<td>~5%</td>
+<td>70%</td>
+<td>🔴 Critical</td>
+</tr>
+<tr>
+<td><strong>Integration Tests</strong></td>
+<td>~15%</td>
+<td>20%</td>
+<td>🟡 Medium</td>
+</tr>
+<tr>
+<td><strong>API Tests</strong></td>
+<td>~10%</td>
+<td>20%</td>
+<td>🟡 Medium</td>
+</tr>
+<tr>
+<td><strong>E2E Tests</strong></td>
+<td>~5%</td>
+<td>10%</td>
+<td>🟢 Low</td>
+</tr>
+</tbody></table>
+<h3>Test Types</h3>
+<p><strong>1. Unit Tests</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Test individual methods/functions in isolation</li>
+<li><strong>Scope</strong>: Single class/function</li>
+<li><strong>Duration</strong>: &lt; 100ms per test</li>
+<li><strong>Dependencies</strong>: Mocked</li>
+<li><strong>Framework</strong>: xUnit</li>
+</ul>
+<p><strong>2. Integration Tests</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Test component interactions</li>
+<li><strong>Scope</strong>: Database + Business Logic</li>
+<li><strong>Duration</strong>: &lt; 2s per test</li>
+<li><strong>Dependencies</strong>: Real database (test environment)</li>
+<li><strong>Framework</strong>: xUnit + Test Database</li>
+</ul>
+<p><strong>3. API Tests</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Test HTTP endpoints</li>
+<li><strong>Scope</strong>: Controller → Function → Database</li>
+<li><strong>Duration</strong>: &lt; 3s per test</li>
+<li><strong>Dependencies</strong>: Real API + Test Database</li>
+<li><strong>Framework</strong>: xUnit + Carmen.Api.Client</li>
+</ul>
+<p><strong>4. E2E Tests</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Test complete user workflows</li>
+<li><strong>Scope</strong>: Full application stack</li>
+<li><strong>Duration</strong>: &lt; 30s per test</li>
+<li><strong>Dependencies</strong>: Full environment</li>
+<li><strong>Framework</strong>: Selenium/Playwright (Future)</li>
+</ul>
+<hr>
+<h2>2. Test Infrastructure</h2>
+<h3>Test Projects</h3>
+<p><strong>Carmen.WebApi.Test</strong></p>
+<ul>
+<li><strong>Location</strong>: <code>/Carmen.WebApi.Test/</code></li>
+<li><strong>Purpose</strong>: API integration tests</li>
+<li><strong>Framework</strong>: xUnit 2.4.1</li>
+<li><strong>Target</strong>: .NET Framework 4.6.2</li>
+</ul>
+<p><strong>Project Structure:</strong></p>
+<div class="mermaid">graph TD
+    Root["Carmen.WebApi.Test/"]
+
+    Root --> Setup["01-Setup.cs<br/>Test initialization"]
+    Root --> Login["02_Login.cs<br/>Authentication tests"]
+    Root --> BaseClass["BaseClass.cs<br/>Test base class"]
+    Root --> FncConfig["FncConfig.cs<br/>Configuration helper"]
+    Root --> ConfigItem["ConfigItem.cs<br/>Config model"]
+    Root --> Config["Const.default.config.json<br/>Test configuration"]
+    Root --> Packages["packages.config<br/>NuGet dependencies"]
+
+    style Root fill:#e1f5ff,stroke:#0288d1
+    style Setup fill:#e8f5e9,stroke:#4caf50
+    style Login fill:#fff3e0,stroke:#ff9800
+    style BaseClass fill:#f3e5f5,stroke:#9c27b0</div><h3>NuGet Packages</h3>
+<p><strong>Testing Frameworks:</strong></p>
+<pre><code class="language-xml">&lt;!-- Core Testing --&gt;
+&lt;package id=&quot;xunit&quot; version=&quot;2.4.1&quot; /&gt;
+&lt;package id=&quot;xunit.runner.visualstudio&quot; version=&quot;2.4.2&quot; /&gt;
+&lt;package id=&quot;xunit.runner.console&quot; version=&quot;2.4.1&quot; /&gt;
+&lt;package id=&quot;Xunit.Extensions.Ordering&quot; version=&quot;1.4.5&quot; /&gt;
+
+&lt;!-- Assertions &amp; Mocking --&gt;
+&lt;package id=&quot;xunit.assert&quot; version=&quot;2.4.1&quot; /&gt;
+&lt;!-- Future: Moq for mocking --&gt;
+&lt;!-- Future: FluentAssertions for readable assertions --&gt;
+
+&lt;!-- API Client --&gt;
+&lt;package id=&quot;Carmen.Api.Client&quot; /&gt;
+&lt;package id=&quot;Newtonsoft.Json&quot; version=&quot;12.0.3&quot; /&gt;</code></pre><h3>Test Configuration</h3>
+<p><strong>File:</strong> <code>Const.default.config.json</code></p>
+<pre><code class="language-json">{
+  &quot;BaseUrl&quot;: &quot;https://localhost:44301&quot;,
+  &quot;AdminToken&quot;: &quot;your-admin-token&quot;,
+  &quot;CarmenTenant&quot;: &quot;TENANT001&quot;,
+  &quot;SuperUserUserName&quot;: &quot;admin@example.com&quot;,
+  &quot;SuperUserPassword&quot;: &quot;P@ssw0rd123&quot;,
+  &quot;TestVendorCode&quot;: &quot;V001&quot;,
+  &quot;TestCustomerCode&quot;: &quot;C001&quot;
+}</code></pre><p><strong>Environment Variables:</strong></p>
+<pre><code class="language-bash"># For CI/CD
+export CARMEN_TEST_BASE_URL=&quot;https://test.carmen.com&quot;
+export CARMEN_TEST_ADMIN_TOKEN=&quot;admin-token-here&quot;
+export CARMEN_TEST_TENANT=&quot;TENANT_TEST&quot;</code></pre><hr>
+<h2>3. Unit Testing</h2>
+<h3>Unit Test Structure</h3>
+<p><strong>Naming Convention:</strong></p>
+<pre><code class="language-text">{ClassName}Tests.cs
+{MethodName}_Should{ExpectedBehavior}_When{Condition}</code></pre><p><strong>Example:</strong></p>
+<pre><code class="language-csharp">// File: FncApInvoiceTests.cs
+using Xunit;
+using Carmen.WebApi.Functions;
+using Carmen.Models;
+
+namespace Carmen.WebApi.Tests.Functions
+{
+    public class FncApInvoiceTests
+    {
+        [Fact]
+        public void CalculateTotalAmount_ShouldIncludeTax_WhenTaxAmountProvided()
+        {
+            // Arrange
+            var invoice = new ParamApInvoice
+            {
+                Amount = 1000m,
+                TaxAmount = 70m,    // 7% VAT
+                WhtAmount = 30m     // 3% WHT
+            };
+
+            // Act
+            var totalAmount = FncApInvoice.CalculateTotalAmount(invoice);
+
+            // Assert
+            Assert.Equal(1040m, totalAmount);  // 1000 + 70 - 30
+        }
+
+        [Fact]
+        public void CalculateDueDate_ShouldAddDays_WhenPaymentTermsIsNet30()
+        {
+            // Arrange
+            var invoiceDate = new DateTime(2025, 10, 1);
+            var paymentTerms = &quot;NET30&quot;;
+
+            // Act
+            var dueDate = FncApInvoice.CalculateDueDate(invoiceDate, paymentTerms);
+
+            // Assert
+            Assert.Equal(new DateTime(2025, 10, 31), dueDate);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-100)]
+        public void CreateAsync_ShouldThrowException_WhenAmountIsZeroOrNegative(decimal amount)
+        {
+            // Arrange
+            var param = new ParamApInvoice { Amount = amount };
+            var dbFac = CreateMockDbFactory();
+
+            // Act &amp; Assert
+            Assert.ThrowsAsync&lt;BusinessException&gt;(
+                async () =&gt; await FncApInvoice.CreateAsync(dbFac, param)
+            );
+        }
+    }
+}</code></pre><h3>Mocking with Moq (Recommended)</h3>
+<p><strong>Setup:</strong></p>
+<pre><code class="language-bash">dotnet add package Moq --version 4.18.4</code></pre><p><strong>Example:</strong></p>
+<pre><code class="language-csharp">using Moq;
+using Carmen.WebApi.Connection;
+
+public class FncApInvoiceTests
+{
+    private Mock&lt;IDbFactory&gt; CreateMockDbFactory()
+    {
+        var mockDbFactory = new Mock&lt;IDbFactory&gt;();
+        var mockDb = new Mock&lt;QueryFactory&gt;();
+
+        mockDbFactory.Setup(f =&gt; f.GetConnection())
+                     .Returns(mockDb.Object);
+
+        return mockDbFactory;
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_ShouldReturnInvoice_WhenInvoiceExists()
+    {
+        // Arrange
+        var mockDbFactory = CreateMockDbFactory();
+        var expectedInvoice = new ViewApInvoice
+        {
+            InvhSeq = 123,
+            InvoiceNumber = &quot;INV-001&quot;
+        };
+
+        mockDbFactory.Setup(f =&gt; f.Db.Query(&quot;apinvh&quot;)
+                     .Where(&quot;InvhSeq&quot;, 123)
+                     .FirstOrDefaultAsync&lt;ViewApInvoice&gt;())
+                     .ReturnsAsync(expectedInvoice);
+
+        // Act
+        var result = await FncApInvoice.GetByIdAsync(mockDbFactory.Object, 123);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(&quot;INV-001&quot;, result.InvoiceNumber);
+    }
+}</code></pre><h3>Testing Patterns</h3>
+<p><strong>AAA Pattern (Arrange-Act-Assert):</strong></p>
+<pre><code class="language-csharp">[Fact]
+public void TestMethod()
+{
+    // Arrange - Set up test data and dependencies
+    var input = &quot;test data&quot;;
+    var expected = &quot;expected output&quot;;
+
+    // Act - Execute the method under test
+    var actual = MethodUnderTest(input);
+
+    // Assert - Verify the result
+    Assert.Equal(expected, actual);
+}</code></pre><p><strong>Theory Tests (Data-Driven):</strong></p>
+<pre><code class="language-csharp">[Theory]
+[InlineData(&quot;NET15&quot;, 15)]
+[InlineData(&quot;NET30&quot;, 30)]
+[InlineData(&quot;NET60&quot;, 60)]
+[InlineData(&quot;NET90&quot;, 90)]
+public void GetPaymentTermsDays_ShouldReturnCorrectDays(string terms, int expectedDays)
+{
+    var result = FncBase.GetPaymentTermsDays(terms);
+    Assert.Equal(expectedDays, result);
+}</code></pre><hr>
+<h2>4. Integration Testing</h2>
+<h3>Integration Test Setup</h3>
+<p><strong>Test Database:</strong></p>
+<pre><code class="language-sql">-- Create test database
+CREATE DATABASE Carmen_Test;
+
+-- Run schema scripts
+SOURCE Carmen.WebApi/App_Data/InstallScriptCarmen/Pre/01-Table/02-Create-Table.sql;
+
+-- Insert test data
+SOURCE Carmen.WebApi/App_Data/InstallScriptCarmen/Pre/01-Table/03-Add-InitialData.sql;</code></pre><p><strong>Connection String:</strong></p>
+<pre><code class="language-csharp">// File: IntegrationTestBase.cs
+public class IntegrationTestBase : IDisposable
+{
+    protected IDbFactory DbFactory { get; private set; }
+    protected string TenantCode =&gt; &quot;TEST001&quot;;
+
+    public IntegrationTestBase()
+    {
+        // Use test database
+        var connectionString = &quot;Server=localhost;Database=Carmen_Test;Uid=root;Pwd=password;&quot;;
+        var connection = new MySqlConnection(connectionString);
+        DbFactory = DbFactory.MyDbFactory(connection);
+
+        // Set test tenant context
+        FncBase.CurrentTenantCode = TenantCode;
+    }
+
+    public void Dispose()
+    {
+        // Cleanup: Rollback transactions or delete test data
+        CleanupTestData();
+    }
+
+    protected void CleanupTestData()
+    {
+        using (var db = DbFactory.GetConnection())
+        {
+            db.Execute(&quot;DELETE FROM apinvh WHERE TenantCode = @TenantCode&quot;, new { TenantCode });
+            db.Execute(&quot;DELETE FROM appyh WHERE TenantCode = @TenantCode&quot;, new { TenantCode });
+        }
+    }
+}</code></pre><h3>Integration Test Example</h3>
+<pre><code class="language-csharp">// File: ApInvoiceIntegrationTests.cs
+using Xunit;
+using Carmen.WebApi.Functions;
+using Carmen.Models;
+
+namespace Carmen.WebApi.Tests.Integration
+{
+    public class ApInvoiceIntegrationTests : IntegrationTestBase
+    {
+        [Fact]
+        public async Task CreateAsync_ShouldInsertInvoice_WhenDataIsValid()
+        {
+            // Arrange
+            var param = new ParamApInvoice
+            {
+                InvoiceNumber = &quot;TEST-INV-001&quot;,
+                InvoiceDate = DateTime.Now,
+                VendorCode = &quot;V001&quot;,
+                Amount = 1000m,
+                TaxAmount = 70m,
+                WhtAmount = 0m,
+                Lines = new List&lt;ParamApInvoiceLine&gt;
+                {
+                    new ParamApInvoiceLine
+                    {
+                        LineNum = 1,
+                        Description = &quot;Test Item&quot;,
+                        Amount = 1000m,
+                        AccountCode = &quot;5000-01-10-00&quot;
+                    }
+                }
+            };
+
+            // Act
+            var invhSeq = await FncApInvoice.CreateAsync(DbFactory, param);
+
+            // Assert
+            Assert.True(invhSeq &gt; 0);
+
+            // Verify in database
+            var invoice = await FncApInvoice.GetByIdAsync(DbFactory, invhSeq);
+            Assert.NotNull(invoice);
+            Assert.Equal(&quot;TEST-INV-001&quot;, invoice.InvoiceNumber);
+            Assert.Equal(1070m, invoice.TotalAmount);  // 1000 + 70
+        }
+
+        [Fact]
+        public async Task CreateAsync_ShouldThrowException_WhenVendorNotFound()
+        {
+            // Arrange
+            var param = new ParamApInvoice
+            {
+                VendorCode = &quot;INVALID_VENDOR&quot;,
+                Amount = 1000m
+            };
+
+            // Act &amp; Assert
+            var ex = await Assert.ThrowsAsync&lt;BusinessException&gt;(
+                async () =&gt; await FncApInvoice.CreateAsync(DbFactory, param)
+            );
+
+            Assert.Equal(&quot;VENDOR_NOT_FOUND&quot;, ex.Code);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_ShouldModifyInvoice_WhenStatusIsDraft()
+        {
+            // Arrange - Create invoice first
+            var invhSeq = await CreateTestInvoiceAsync();
+
+            var updateParam = new ParamApInvoice
+            {
+                InvoiceNumber = &quot;TEST-INV-001-UPDATED&quot;,
+                Amount = 2000m,
+                TaxAmount = 140m
+            };
+
+            // Act
+            var result = await FncApInvoice.UpdateAsync(DbFactory, invhSeq, updateParam);
+
+            // Assert
+            Assert.True(result);
+
+            var updatedInvoice = await FncApInvoice.GetByIdAsync(DbFactory, invhSeq);
+            Assert.Equal(2140m, updatedInvoice.TotalAmount);
+        }
+
+        private async Task&lt;int&gt; CreateTestInvoiceAsync()
+        {
+            var param = new ParamApInvoice
+            {
+                InvoiceNumber = &quot;TEST-INV-001&quot;,
+                InvoiceDate = DateTime.Now,
+                VendorCode = &quot;V001&quot;,
+                Amount = 1000m,
+                Lines = new List&lt;ParamApInvoiceLine&gt;
+                {
+                    new ParamApInvoiceLine { Amount = 1000m, AccountCode = &quot;5000-01-10-00&quot; }
+                }
+            };
+
+            return await FncApInvoice.CreateAsync(DbFactory, param);
+        }
+    }
+}</code></pre><hr>
+<h2>5. API Testing</h2>
+<h3>API Test Infrastructure</h3>
+<p><strong>Current Implementation:</strong></p>
+<pre><code class="language-csharp">// File: 02_Login.cs
+using Carmen.Api.Client;
+using Xunit;
+using Xunit.Extensions.Ordering;
+
+[CollectionDefinition(&quot;02-Login&quot;, DisableParallelization = true)]
+[Order(2)]
+[Collection(&quot;02-Login&quot;)]
+public class Login : BaseClass
+{
+    private readonly ITestOutputHelper _output;
+
+    public Login(ITestOutputHelper output)
+    {
+        _output = output;
+    }
+
+    [Order(10)]
+    [Fact(DisplayName = &quot;02-Test Login With fail username&quot;)]
+    public async Task TestLoginFailUserName()
+    {
+        var client = new Login_Client
+        {
+            BaseUrl = Config.BaseUrl
+        };
+
+        var task = client.LoginAsync(
+            Config.AdminToken,
+            new ParamUserLogin
+            {
+                Tenant = Config.CarmenTenant,
+                UserName = &quot;Hack User name&quot;,
+                Password = &quot;&quot;,
+                Email = &quot;&quot;,
+                Language = &quot;en-US&quot;
+            });
+
+        var ex = await Assert.ThrowsAsync&lt;ApiException&gt;(async () =&gt; await task);
+        _output.WriteLine($&quot;ex = {ex.Response}&quot;);
+
+        Assert.Equal(401, ex.StatusCode);
+        Assert.Equal(&quot;User / Password is incorrect.&quot;,
+            JsonConvert.DeserializeObject&lt;ApiReturnResponse&gt;(ex.Response).UserMessage);
+    }
+
+    [Order(20)]
+    [Fact(DisplayName = &quot;04-Test Login Success&quot;)]
+    public async Task TestLoginSuccess()
+    {
+        var client = new Login_Client { BaseUrl = Config.BaseUrl };
+
+        var result = await client.LoginAsync(
+            Config.AdminToken,
+            new ParamUserLogin
+            {
+                Tenant = Config.CarmenTenant,
+                UserName = Config.SuperUserUserName,
+                Password = Config.SuperUserPassword,
+                Email = &quot;&quot;,
+                Language = &quot;en-US&quot;
+            });
+
+        Assert.NotNull(result);
+        Assert.NotNull(result.AccessToken);
+        Assert.NotEmpty(result.AccessToken);
+
+        // Store token for subsequent tests
+        CurrentUser = result;
+    }
+}</code></pre><h3>API Test Patterns</h3>
+<p><strong>CRUD Test Suite:</strong></p>
+<pre><code class="language-csharp">// File: ApInvoiceApiTests.cs
+using Carmen.Api.Client;
+using Xunit;
+
+public class ApInvoiceApiTests : BaseClass
+{
+    private ApInvoice_Client _client;
+
+    public ApInvoiceApiTests()
+    {
+        _client = new ApInvoice_Client { BaseUrl = Config.BaseUrl };
+        _client.SetBearerToken(CurrentUser.AccessToken);
+    }
+
+    [Fact]
+    public async Task GetList_ShouldReturnInvoices()
+    {
+        // Act
+        var result = await _client.GetListAsync(tenantCode: Config.CarmenTenant);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.NotNull(result.Data);
+        Assert.True(result.TotalRows &gt;= 0);
+    }
+
+    [Fact]
+    public async Task GetById_ShouldReturnInvoice_WhenInvoiceExists()
+    {
+        // Arrange
+        var invhSeq = await CreateTestInvoiceAsync();
+
+        // Act
+        var result = await _client.GetByIdAsync(invhSeq, Config.CarmenTenant);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(invhSeq, result.InvhSeq);
+    }
+
+    [Fact]
+    public async Task Create_ShouldReturnId_WhenDataIsValid()
+    {
+        // Arrange
+        var param = new ParamApInvoice
+        {
+            InvoiceNumber = $&quot;TEST-{Guid.NewGuid()}&quot;,
+            InvoiceDate = DateTime.Now,
+            VendorCode = Config.TestVendorCode,
+            Amount = 1000m,
+            TaxAmount = 70m,
+            Lines = new List&lt;ParamApInvoiceLine&gt;
+            {
+                new ParamApInvoiceLine
+                {
+                    LineNum = 1,
+                    Description = &quot;Test Item&quot;,
+                    Amount = 1000m,
+                    AccountCode = &quot;5000-01-10-00&quot;
+                }
+            }
+        };
+
+        // Act
+        var result = await _client.CreateAsync(param, Config.CarmenTenant);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.True(result.Success);
+        Assert.True(result.Data &gt; 0);
+    }
+
+    [Fact]
+    public async Task Create_ShouldReturnError_WhenVendorInvalid()
+    {
+        // Arrange
+        var param = new ParamApInvoice
+        {
+            VendorCode = &quot;INVALID&quot;,
+            Amount = 1000m
+        };
+
+        // Act &amp; Assert
+        var ex = await Assert.ThrowsAsync&lt;ApiException&gt;(
+            async () =&gt; await _client.CreateAsync(param, Config.CarmenTenant)
+        );
+
+        Assert.Equal(400, ex.StatusCode);
+        var errorResponse = JsonConvert.DeserializeObject&lt;ApiReturnResponse&gt;(ex.Response);
+        Assert.Equal(&quot;VENDOR_NOT_FOUND&quot;, errorResponse.Code);
+    }
+
+    [Fact]
+    public async Task Update_ShouldModifyInvoice_WhenStatusIsDraft()
+    {
+        // Arrange
+        var invhSeq = await CreateTestInvoiceAsync();
+        var param = new ParamApInvoice
+        {
+            Amount = 2000m,
+            TaxAmount = 140m
+        };
+
+        // Act
+        var result = await _client.UpdateAsync(invhSeq, param, Config.CarmenTenant);
+
+        // Assert
+        Assert.True(result.Success);
+
+        // Verify update
+        var updated = await _client.GetByIdAsync(invhSeq, Config.CarmenTenant);
+        Assert.Equal(2140m, updated.TotalAmount);
+    }
+
+    [Fact]
+    public async Task Delete_ShouldRemoveInvoice_WhenInvoiceIsDraft()
+    {
+        // Arrange
+        var invhSeq = await CreateTestInvoiceAsync();
+
+        // Act
+        var result = await _client.DeleteAsync(invhSeq, Config.CarmenTenant);
+
+        // Assert
+        Assert.True(result.Success);
+
+        // Verify deletion
+        await Assert.ThrowsAsync&lt;ApiException&gt;(
+            async () =&gt; await _client.GetByIdAsync(invhSeq, Config.CarmenTenant)
+        );
+    }
+
+    private async Task&lt;int&gt; CreateTestInvoiceAsync()
+    {
+        var param = new ParamApInvoice
+        {
+            InvoiceNumber = $&quot;TEST-{Guid.NewGuid()}&quot;,
+            InvoiceDate = DateTime.Now,
+            VendorCode = Config.TestVendorCode,
+            Amount = 1000m,
+            Lines = new List&lt;ParamApInvoiceLine&gt;
+            {
+                new ParamApInvoiceLine { Amount = 1000m, AccountCode = &quot;5000-01-10-00&quot; }
+            }
+        };
+
+        var result = await _client.CreateAsync(param, Config.CarmenTenant);
+        return result.Data;
+    }
+}</code></pre><hr>
+<h2>6. End-to-End Testing</h2>
+<h3>E2E Test Framework (Future)</h3>
+<p><strong>Recommended: Playwright for .NET</strong></p>
+<p><strong>Setup:</strong></p>
+<pre><code class="language-bash">dotnet add package Microsoft.Playwright --version 1.40.0
+dotnet tool install --global Microsoft.Playwright.CLI
+playwright install</code></pre><p><strong>Example E2E Test:</strong></p>
+<pre><code class="language-csharp">using Microsoft.Playwright;
+using Xunit;
+
+public class ApInvoiceE2ETests : IAsyncLifetime
+{
+    private IPlaywright _playwright;
+    private IBrowser _browser;
+    private IBrowserContext _context;
+    private IPage _page;
+
+    public async Task InitializeAsync()
+    {
+        _playwright = await Playwright.CreateAsync();
+        _browser = await _playwright.Chromium.LaunchAsync(new()
+        {
+            Headless = true
+        });
+        _context = await _browser.NewContextAsync();
+        _page = await _context.NewPageAsync();
+    }
+
+    [Fact]
+    public async Task UserCanCreateApInvoice()
+    {
+        // Navigate to login
+        await _page.GotoAsync(&quot;https://localhost:44301/login&quot;);
+
+        // Login
+        await _page.FillAsync(&quot;#username&quot;, &quot;admin@example.com&quot;);
+        await _page.FillAsync(&quot;#password&quot;, &quot;P@ssw0rd123&quot;);
+        await _page.ClickAsync(&quot;button[type=&#039;submit&#039;]&quot;);
+
+        // Wait for redirect
+        await _page.WaitForURLAsync(&quot;**/dashboard&quot;);
+
+        // Navigate to AP Invoice
+        await _page.ClickAsync(&quot;text=Accounts Payable&quot;);
+        await _page.ClickAsync(&quot;text=Invoices&quot;);
+
+        // Click New Invoice
+        await _page.ClickAsync(&quot;button:has-text(&#039;New Invoice&#039;)&quot;);
+
+        // Fill invoice form
+        await _page.FillAsync(&quot;#invoiceNumber&quot;, &quot;TEST-E2E-001&quot;);
+        await _page.SelectOptionAsync(&quot;#vendorCode&quot;, &quot;V001&quot;);
+        await _page.FillAsync(&quot;#amount&quot;, &quot;1000&quot;);
+        await _page.FillAsync(&quot;#taxAmount&quot;, &quot;70&quot;);
+
+        // Add line item
+        await _page.ClickAsync(&quot;button:has-text(&#039;Add Line&#039;)&quot;);
+        await _page.FillAsync(&quot;#line1-accountCode&quot;, &quot;5000-01-10-00&quot;);
+        await _page.FillAsync(&quot;#line1-amount&quot;, &quot;1000&quot;);
+
+        // Save
+        await _page.ClickAsync(&quot;button:has-text(&#039;Save&#039;)&quot;);
+
+        // Verify success
+        await _page.WaitForSelectorAsync(&quot;text=Invoice created successfully&quot;);
+
+        // Verify in list
+        await _page.ClickAsync(&quot;text=Back to List&quot;);
+        var invoiceRow = await _page.QuerySelectorAsync(&quot;text=TEST-E2E-001&quot;);
+        Assert.NotNull(invoiceRow);
+    }
+
+    public async Task DisposeAsync()
+    {
+        await _context.CloseAsync();
+        await _browser.CloseAsync();
+        _playwright.Dispose();
+    }
+}</code></pre><hr>
+<h2>7. Test Data Management</h2>
+<h3>Test Data Setup</h3>
+<p><strong>Seeding Test Data:</strong></p>
+<pre><code class="language-csharp">// File: TestDataSeeder.cs
+public class TestDataSeeder
+{
+    private readonly IDbFactory _dbFactory;
+
+    public TestDataSeeder(IDbFactory dbFactory)
+    {
+        _dbFactory = dbFactory;
+    }
+
+    public async Task SeedAsync()
+    {
+        await SeedVendorsAsync();
+        await SeedCustomersAsync();
+        await SeedAccountsAsync();
+        await SeedDepartmentsAsync();
+    }
+
+    private async Task SeedVendorsAsync()
+    {
+        var vendors = new[]
+        {
+            new { VnCode = &quot;V001&quot;, VnName = &quot;Test Vendor 1&quot;, TaxId = &quot;0-1234-56789-01-2&quot; },
+            new { VnCode = &quot;V002&quot;, VnName = &quot;Test Vendor 2&quot;, TaxId = &quot;0-2345-67890-12-3&quot; }
+        };
+
+        using (var db = _dbFactory.GetConnection())
+        {
+            foreach (var vendor in vendors)
+            {
+                await db.ExecuteAsync(@&quot;
+                    INSERT INTO vendor (VnCode, VnName, TaxId)
+                    VALUES (@VnCode, @VnName, @TaxId)
+                    ON DUPLICATE KEY UPDATE VnName = @VnName&quot;,
+                    vendor);
+            }
+        }
+    }
+}</code></pre><h3>Test Data Builders</h3>
+<pre><code class="language-csharp">// File: TestDataBuilders/ApInvoiceBuilder.cs
+public class ApInvoiceBuilder
+{
+    private ParamApInvoice _invoice;
+
+    public ApInvoiceBuilder()
+    {
+        _invoice = new ParamApInvoice
+        {
+            InvoiceNumber = $&quot;TEST-{Guid.NewGuid().ToString().Substring(0, 8)}&quot;,
+            InvoiceDate = DateTime.Now,
+            VendorCode = &quot;V001&quot;,
+            Amount = 1000m,
+            TaxAmount = 70m,
+            WhtAmount = 0m,
+            Lines = new List&lt;ParamApInvoiceLine&gt;()
+        };
+    }
+
+    public ApInvoiceBuilder WithVendor(string vendorCode)
+    {
+        _invoice.VendorCode = vendorCode;
+        return this;
+    }
+
+    public ApInvoiceBuilder WithAmount(decimal amount)
+    {
+        _invoice.Amount = amount;
+        return this;
+    }
+
+    public ApInvoiceBuilder WithLine(string accountCode, decimal amount, string description = &quot;&quot;)
+    {
+        _invoice.Lines.Add(new ParamApInvoiceLine
+        {
+            LineNum = _invoice.Lines.Count + 1,
+            AccountCode = accountCode,
+            Amount = amount,
+            Description = description
+        });
+        return this;
+    }
+
+    public ParamApInvoice Build()
+    {
+        return _invoice;
+    }
+}
+
+// Usage
+var invoice = new ApInvoiceBuilder()
+    .WithVendor(&quot;V001&quot;)
+    .WithAmount(2000m)
+    .WithLine(&quot;5000-01-10-00&quot;, 1000m, &quot;Office Supplies&quot;)
+    .WithLine(&quot;5100-01-10-00&quot;, 1000m, &quot;Software License&quot;)
+    .Build();</code></pre><hr>
+<h2>8. Testing Best Practices</h2>
+<h3>Do&#39;s</h3>
+<p>✅ <strong>Write Tests First (TDD)</strong></p>
+<pre><code class="language-csharp">// 1. Write failing test
+[Fact]
+public void CalculateTotalAmount_ShouldIncludeTax()
+{
+    var result = FncApInvoice.CalculateTotalAmount(1000m, 70m, 0m);
+    Assert.Equal(1070m, result);
+}
+
+// 2. Implement method
+public static decimal CalculateTotalAmount(decimal amount, decimal tax, decimal wht)
+{
+    return amount + tax - wht;
+}
+
+// 3. Test passes</code></pre><p>✅ <strong>Test One Thing Per Test</strong></p>
+<pre><code class="language-csharp">// ✅ GOOD
+[Fact]
+public void CreateAsync_ShouldThrowException_WhenAmountIsZero()
+{
+    // Test only amount validation
+}
+
+[Fact]
+public void CreateAsync_ShouldThrowException_WhenVendorNotFound()
+{
+    // Test only vendor existence
+}
+
+// ❌ BAD
+[Fact]
+public void CreateAsync_ShouldValidateEverything()
+{
+    // Tests multiple conditions
+}</code></pre><p>✅ <strong>Use Descriptive Test Names</strong></p>
+<pre><code class="language-csharp">// ✅ GOOD
+[Fact]
+public void GetByIdAsync_ShouldReturnNull_WhenInvoiceDoesNotExist()
+
+// ❌ BAD
+[Fact]
+public void Test1()</code></pre><p>✅ <strong>Isolate Tests</strong></p>
+<pre><code class="language-csharp">// Each test should clean up after itself
+public void Dispose()
+{
+    CleanupTestData();
+}</code></pre><h3>Don&#39;ts</h3>
+<p>❌ <strong>Don&#39;t Test Framework Code</strong></p>
+<pre><code class="language-csharp">// ❌ BAD - Testing Entity Framework
+[Fact]
+public void EntityFramework_ShouldSaveData()
+{
+    var entity = new ApInvh();
+    context.ApInvh.Add(entity);
+    context.SaveChanges();
+}</code></pre><p>❌ <strong>Don&#39;t Use Real Production Data</strong></p>
+<pre><code class="language-csharp">// ❌ BAD
+var vendor = await db.Query(&quot;vendor&quot;).Where(&quot;VnCode&quot;, &quot;REAL_VENDOR&quot;).First();
+
+// ✅ GOOD
+var vendor = CreateTestVendor(&quot;V001&quot;);</code></pre><p>❌ <strong>Don&#39;t Ignore Flaky Tests</strong></p>
+<pre><code class="language-csharp">// ❌ BAD
+[Fact(Skip = &quot;Flaky test&quot;)]
+public void SometimesFailsTest() { }
+
+// ✅ GOOD - Fix the root cause
+[Fact]
+public void ReliableTest()
+{
+    // Add proper waits, mocks, or test data setup
+}</code></pre><hr>
+<h2>9. CI/CD Integration</h2>
+<h3>GitHub Actions Workflow</h3>
+<pre><code class="language-yaml"># .github/workflows/test.yml
+name: Run Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: Carmen_Test
+        ports:
+          - 3306:3306
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: &#039;4.6.2&#039;
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Run Unit Tests
+        run: dotnet test --no-build --verbosity normal --filter &quot;Category=Unit&quot;
+
+      - name: Run Integration Tests
+        run: dotnet test --no-build --verbosity normal --filter &quot;Category=Integration&quot;
+        env:
+          CARMEN_TEST_CONNECTION_STRING: &quot;Server=localhost;Database=Carmen_Test;Uid=root;Pwd=password;&quot;
+
+      - name: Generate Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: &#039;**/*.trx&#039;
+          reporter: dotnet-trx</code></pre><h3>Test Categories</h3>
+<pre><code class="language-csharp">// Categorize tests for selective running
+[Trait(&quot;Category&quot;, &quot;Unit&quot;)]
+public class UnitTests { }
+
+[Trait(&quot;Category&quot;, &quot;Integration&quot;)]
+public class IntegrationTests { }
+
+[Trait(&quot;Category&quot;, &quot;E2E&quot;)]
+public class E2ETests { }
+
+[Trait(&quot;Category&quot;, &quot;Smoke&quot;)]
+public class SmokeTests { }</code></pre><p><strong>Run Specific Categories:</strong></p>
+<pre><code class="language-bash"># Run only unit tests
+dotnet test --filter &quot;Category=Unit&quot;
+
+# Run integration and E2E tests
+dotnet test --filter &quot;Category=Integration|Category=E2E&quot;
+
+# Run smoke tests only
+dotnet test --filter &quot;Category=Smoke&quot;</code></pre><hr>
+<h2>Summary</h2>
+<p>Carmen.NET testing infrastructure:</p>
+<p><strong>✅ Implemented:</strong></p>
+<ul>
+<li>xUnit framework setup</li>
+<li>API integration tests</li>
+<li>Test configuration management</li>
+<li>Ordered test execution</li>
+</ul>
+<p><strong>🟡 Partially Implemented:</strong></p>
+<ul>
+<li>Unit tests (minimal coverage)</li>
+<li>Integration tests (basic examples)</li>
+<li>Test data management</li>
+</ul>
+<p><strong>🔴 Recommended:</strong></p>
+<ul>
+<li>Increase unit test coverage to 70%</li>
+<li>Implement mocking with Moq</li>
+<li>Add integration test suite</li>
+<li>Implement E2E tests with Playwright</li>
+<li>Set up CI/CD pipeline with automated testing</li>
+<li>Implement code coverage reporting (target: 80%+)</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Review <a href="code-structure-guide.md">Code Structure Guide</a> for code organization</li>
+<li>Study <a href="design-patterns-guide.md">Design Patterns Guide</a> for testable patterns</li>
+<li>Consult <a href="developer-onboarding-guide.md">Developer Onboarding Guide</a> for environment setup</li>
+<li>Reference <a href="../requirements/functional-requirements.md">Functional Requirements</a> for test scenarios</li>
+</ul>
+<hr>
+<p><strong>Document Status:</strong> ✅ Complete<br><strong>For Support:</strong> Contact QA team or development team</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

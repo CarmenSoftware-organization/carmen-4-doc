@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET - API Component Diagram (C4 Level 3) - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET - API Component Diagram (C4 Level 3)</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET - API Component Diagram (C4 Level 3)</h1>
+<div class="mermaid">graph TB
+    subgraph "Web API Application Components"
+        subgraph "Authentication & Security"
+            LOGIN[Login Controller<br/>Order: 0<br/>User Authentication]
+            TOKEN[Token Controller<br/>Order: 4<br/>Token Management]
+            AUTH_FILTER[Authorization Filter<br/>Authorize Attribute<br/>Token Validation]
+            PERMISSION[Permission Service<br/>FncPermission<br/>RBAC Checks]
+        end
+
+        subgraph "AP Module Controllers"
+            AP_INV[AP Invoice Controller<br/>Order: 200<br/>Invoice Management]
+            AP_PAY[AP Payment Controller<br/>Order: 210<br/>Payment Processing]
+            AP_WHT[AP WHT Controller<br/>Order: 220<br/>Withholding Tax]
+            AP_VENDOR[AP Vendor Controller<br/>Order: 230<br/>Vendor Management]
+            AP_OTHER["+3 More AP Controllers<br/>PO, Requisition, Receiving"]
+        end
+
+        subgraph "AR Module Controllers"
+            AR_INV[AR Invoice Controller<br/>Order: 300<br/>AR Invoicing]
+            AR_RCPT[AR Receipt Controller<br/>Order: 310<br/>Receipt Processing]
+            AR_CONTRACT[AR Contract Controller<br/>Order: 320<br/>Contract Management]
+            AR_OTHER["+6 More AR Controllers<br/>Customer, Folio, Notes"]
+        end
+
+        subgraph "GL Module Controllers"
+            GL_ACCOUNT[Account Code Controller<br/>Order: 400<br/>Chart of Accounts]
+            GL_JV[GL JV Controller<br/>Order: 410<br/>Journal Vouchers]
+            GL_PERIOD[GL Period Controller<br/>Order: 430<br/>Period Management]
+            GL_OTHER["+2 More GL Controllers<br/>Allocation, Amortize"]
+        end
+
+        subgraph "Asset Module Controllers"
+            ASSET_REG[Asset Register Controller<br/>Order: 500<br/>Asset Management]
+            ASSET_CAT[Asset Category Controller<br/>Order: 510<br/>Asset Categories]
+            ASSET_DISP[Asset Disposal Controller<br/>Order: 520<br/>Asset Disposal]
+            ASSET_OTHER["+3 More Asset Controllers<br/>History, Location, Dept"]
+        end
+
+        subgraph "Income Module Controllers"
+            INC_INV[Income Invoice Controller<br/>Order: 600<br/>Income Invoicing]
+            INC_REV[Income Revenue Controller<br/>Order: 610<br/>Revenue Recognition]
+            INC_OTHER["+3 More Income Controllers<br/>Product, Category, Source"]
+        end
+
+        subgraph "System Admin Controllers"
+            USER[User Controller<br/>User Management]
+            ROLE[Role Controller<br/>Role & Permission]
+            TENANT[Tenant Controller<br/>Order: 5<br/>Multi-tenant Config]
+            CONFIG[Config Controller<br/>System Configuration]
+            ADMIN_OTHER["+11 More Admin Controllers<br/>Workflow, Dimension, etc."]
+        end
+
+        subgraph "Utility Controllers"
+            EXCEL[Excel Controller<br/>Order: 1000<br/>Excel Import/Export]
+            FILE[File Controller<br/>Order: 1010<br/>File Upload/Download]
+            REPORT[Report Controller<br/>Order: 800+<br/>Financial Reports]
+            LOG[Process Log Controller<br/>Order: 1020<br/>Audit Logging]
+        end
+
+        subgraph "Base Components"
+            BASE_CTRL[Base API Controller<br/>858 Lines<br/>Error Handling<br/>JSON Responses<br/>Logging]
+            TENANT_CTX[Tenant Context Service<br/>FncBase<br/>Multi-tenant Isolation]
+        end
+    end
+
+    subgraph "External Dependencies"
+        EF[Entity Framework<br/>Data Access Layer]
+        CRYPTO[Carmen.Crypto<br/>Encryption Library]
+        LOGGER[Logging Service<br/>LogHttpRequest/Result]
+    end
+
+    %% Authentication flow
+    LOGIN --> TOKEN
+    AUTH_FILTER --> TOKEN
+    AUTH_FILTER --> PERMISSION
+
+    %% All controllers inherit from Base
+    BASE_CTRL -.->|inherits| AP_INV
+    BASE_CTRL -.->|inherits| AR_INV
+    BASE_CTRL -.->|inherits| GL_JV
+    BASE_CTRL -.->|inherits| ASSET_REG
+    BASE_CTRL -.->|inherits| INC_INV
+    BASE_CTRL -.->|inherits| USER
+
+    %% All controllers use tenant context
+    TENANT_CTX --> AP_INV
+    TENANT_CTX --> AR_INV
+    TENANT_CTX --> GL_JV
+    TENANT_CTX --> ASSET_REG
+    TENANT_CTX --> INC_INV
+
+    %% All controllers use permission service
+    PERMISSION --> AP_INV
+    PERMISSION --> AR_INV
+    PERMISSION --> GL_JV
+    PERMISSION --> ASSET_REG
+    PERMISSION --> INC_INV
+
+    %% Base controller dependencies
+    BASE_CTRL --> LOGGER
+    BASE_CTRL --> EF
+
+    %% Security dependencies
+    LOGIN --> CRYPTO
+    TOKEN --> CRYPTO
+
+    %% Data access
+    AP_INV --> EF
+    AR_INV --> EF
+    GL_JV --> EF
+    ASSET_REG --> EF
+    INC_INV --> EF
+    USER --> EF
+
+    classDef authComponent fill:#ff6b6b,stroke:#c92a2a,color:#ffffff
+    classDef moduleComponent fill:#1168bd,stroke:#0b4884,color:#ffffff
+    classDef baseComponent fill:#20c997,stroke:#087f5b,color:#ffffff
+    classDef utilComponent fill:#ffd43b,stroke:#e8ac00,color:#000000
+    classDef external fill:#999999,stroke:#666666,color:#ffffff
+
+    class LOGIN,TOKEN,AUTH_FILTER,PERMISSION authComponent
+    class AP_INV,AP_PAY,AP_WHT,AR_INV,AR_RCPT,GL_JV,GL_ACCOUNT,ASSET_REG,INC_INV,INC_REV moduleComponent
+    class BASE_CTRL,TENANT_CTX baseComponent
+    class EXCEL,FILE,REPORT,LOG,USER,ROLE,TENANT,CONFIG utilComponent
+    class EF,CRYPTO,LOGGER external</div><h2>Component Architecture</h2>
+<h3>Authentication &amp; Security Components</h3>
+<p><strong>Login Controller</strong> (Order: 0)</p>
+<ul>
+<li>Highest priority in API</li>
+<li>Username/password authentication</li>
+<li>Token generation coordination</li>
+</ul>
+<p><strong>Token Controller</strong> (Order: 4)</p>
+<ul>
+<li>JWT token generation</li>
+<li>Token validation</li>
+<li>Token refresh (inferred)</li>
+</ul>
+<p><strong>Authorization Filter</strong></p>
+<ul>
+<li>Applied to all controllers via <code>[Authorize]</code> attribute</li>
+<li>Token validation on every request</li>
+<li>User/tenant context extraction</li>
+</ul>
+<p><strong>Permission Service</strong></p>
+<ul>
+<li>RBAC implementation</li>
+<li>Permission format: <code>{Module}.{Entity}</code></li>
+<li>Actions: View, Create, Update, Delete, Approve, Post, Close</li>
+</ul>
+<h3>Module Controllers</h3>
+<p><strong>AP Module</strong> (7 controllers, Orders: 200-299)</p>
+<ul>
+<li>Invoice management, payment processing</li>
+<li>Withholding tax, vendor management</li>
+<li>Purchase orders, requisitions, receiving</li>
+</ul>
+<p><strong>AR Module</strong> (9 controllers, Orders: 300-399)</p>
+<ul>
+<li>AR invoicing, receipt processing</li>
+<li>Contract and folio management</li>
+<li>Customer management, credit/debit notes</li>
+</ul>
+<p><strong>GL Module</strong> (5 controllers, Orders: 400-499)</p>
+<ul>
+<li>Chart of accounts, journal vouchers</li>
+<li>Period management, allocations</li>
+<li>Amortization</li>
+</ul>
+<p><strong>Asset Module</strong> (6 controllers, Orders: 500-599)</p>
+<ul>
+<li>Asset register and categories</li>
+<li>Disposal and history tracking</li>
+<li>Location and department assignment</li>
+</ul>
+<p><strong>Income Module</strong> (5 controllers, Orders: 600-699)</p>
+<ul>
+<li>Income invoicing and revenue recognition</li>
+<li>Product and category management</li>
+<li>Income source tracking</li>
+</ul>
+<h3>System Administration</h3>
+<p><strong>User &amp; Role Management</strong></p>
+<ul>
+<li>User CRUD operations</li>
+<li>Role and permission assignment</li>
+<li>Password management</li>
+</ul>
+<p><strong>Tenant Management</strong> (Order: 5)</p>
+<ul>
+<li>Multi-tenant configuration</li>
+<li>Tenant-user mapping</li>
+<li>Tenant-specific settings</li>
+</ul>
+<p><strong>Configuration</strong></p>
+<ul>
+<li>System-wide settings</li>
+<li>Module-specific configuration</li>
+<li>Workflow and dimension setup</li>
+</ul>
+<h3>Utility Controllers</h3>
+<p><strong>Excel Controller</strong> (Order: 1000)</p>
+<ul>
+<li>Excel file import/export</li>
+<li>Template generation</li>
+<li>Bulk data operations</li>
+</ul>
+<p><strong>File Controller</strong> (Order: 1010)</p>
+<ul>
+<li>File upload/download</li>
+<li>File storage management</li>
+<li>Document management</li>
+</ul>
+<p><strong>Report Controller</strong> (Order: 800+)</p>
+<ul>
+<li>Financial report generation</li>
+<li>Custom report creation</li>
+<li>Export to PDF/Excel</li>
+</ul>
+<p><strong>Process Log Controller</strong> (Order: 1020)</p>
+<ul>
+<li>Audit trail logging</li>
+<li>User activity tracking</li>
+<li>System event logging</li>
+</ul>
+<h3>Base Components</h3>
+<p><strong>Base API Controller</strong> (858 lines)</p>
+<ul>
+<li>Standardized JSON response methods</li>
+<li>Centralized error handling</li>
+<li>Request/response logging</li>
+<li>Common utilities</li>
+</ul>
+<p><strong>Tenant Context Service</strong></p>
+<ul>
+<li>Multi-tenant isolation enforcement</li>
+<li><code>FncBase.ApplyTenantIfUseTenant(useTenant)</code></li>
+<li>Applied to ALL database operations</li>
+<li>Prevents cross-tenant data leakage</li>
+</ul>
+<h3>External Dependencies</h3>
+<p><strong>Entity Framework</strong></p>
+<ul>
+<li>ORM for data access</li>
+<li>LINQ query support</li>
+<li>Change tracking and transactions</li>
+</ul>
+<p><strong>Carmen.Crypto</strong></p>
+<ul>
+<li>Encryption/decryption services</li>
+<li>Sensitive data protection</li>
+<li>Password hashing</li>
+</ul>
+<p><strong>Logging Service</strong></p>
+<ul>
+<li><code>LogHttpRequest.Info()</code> - Request logging</li>
+<li><code>LogHttpResult.Error()</code> - Error logging</li>
+<li>File-based logging (inferred)</li>
+</ul>
+<h2>Design Patterns</h2>
+<ul>
+<li><strong>Inheritance</strong>: All controllers inherit from BaseApiController</li>
+<li><strong>Dependency Injection</strong>: Services injected into controllers (inferred)</li>
+<li><strong>Filter Pattern</strong>: <code>[Authorize]</code> attribute on all controllers</li>
+<li><strong>Repository Pattern</strong>: Data access abstraction (inferred)</li>
+<li><strong>DTO Pattern</strong>: View* models for responses, Param* for requests</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

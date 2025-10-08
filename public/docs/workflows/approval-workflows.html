@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Workflows and Authorization Matrix - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Approval Workflows and Authorization Matrix</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Approval Workflows and Authorization Matrix</h1>
+<h2>Overview</h2>
+<p>This document defines the approval workflows, authorization hierarchies, and approval matrices used across all Carmen.NET modules.</p>
+<h2>Approval Workflow Architecture</h2>
+<h3>Core Approval States</h3>
+<div class="mermaid">stateDiagram-v2
+    [*] --> Draft
+    Draft --> PendingApproval: Submit
+
+    PendingApproval --> Level1Review: Auto-Route
+    Level1Review --> Approved: L1 Approve (if sufficient)
+    Level1Review --> Level2Review: Route to L2
+    Level1Review --> Rejected: L1 Reject
+    Level1Review --> Draft: Return for Revision
+
+    Level2Review --> Approved: L2 Approve (if sufficient)
+    Level2Review --> Level3Review: Route to L3
+    Level2Review --> Rejected: L2 Reject
+    Level2Review --> Draft: Return for Revision
+
+    Level3Review --> Approved: L3 Approve
+    Level3Review --> Rejected: L3 Reject
+    Level3Review --> Draft: Return for Revision
+
+    Rejected --> Draft: Revise
+    Rejected --> [*]: Cancel
+
+    Approved --> Posted: Post to GL
+    Posted --> [*]</div><h2>Approval Hierarchy Principles</h2>
+<h3>1. Amount-Based Approval</h3>
+<p>Approval levels determined by transaction amount thresholds:</p>
+<ul>
+<li><strong>Level 1</strong>: Supervisor/Manager approval for routine transactions</li>
+<li><strong>Level 2</strong>: Department Head/Controller approval for material transactions</li>
+<li><strong>Level 3</strong>: Executive (CFO/CEO) approval for significant transactions</li>
+</ul>
+<h3>2. Segregation of Duties (SoD)</h3>
+<ul>
+<li><strong>Creator ≠ Approver</strong>: Transaction creator cannot approve own transactions</li>
+<li><strong>Single Approver Rule</strong>: One person cannot approve at multiple levels</li>
+<li><strong>Dual Control</strong>: High-value transactions require multiple approvers</li>
+</ul>
+<h3>3. Delegation of Authority</h3>
+<ul>
+<li>Temporary delegation during absence</li>
+<li>Authority limits clearly defined</li>
+<li>Delegation audit trail maintained</li>
+<li>Automatic expiration of delegation</li>
+</ul>
+<h2>AP Module Approval Matrix</h2>
+<h3>AP Invoice Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $1,000</td>
+<td>Level 1</td>
+<td>AP Supervisor</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$1,001 - $10,000</td>
+<td>Level 1</td>
+<td>AP Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$10,001 - $50,000</td>
+<td>Level 2</td>
+<td>Controller</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$50,001 - $250,000</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$250,001+</td>
+<td>Level 3</td>
+<td>CFO + CEO</td>
+<td>No</td>
+<td>Required (Both)</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>Capital Expenditures &gt;$100K</strong>: Requires Budget Manager + CFO</li>
+<li><strong>New Vendor (First Invoice)</strong>: Requires Purchasing Manager</li>
+<li><strong>Vendor Master Changes</strong>: Requires AP Manager approval</li>
+<li><strong>Duplicate Invoice Warning</strong>: Requires override approval</li>
+</ul>
+<h3>AP Payment Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>Level 1</td>
+<td>AP Supervisor</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>Level 1</td>
+<td>AP Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Level 2</td>
+<td>Controller</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001 - $500,000</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$500,001+</td>
+<td>Level 3</td>
+<td>CFO + Treasury</td>
+<td>No</td>
+<td>Required (Both)</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>Wire Transfers &gt;$50K</strong>: Requires dual authorization (Controller + CFO)</li>
+<li><strong>International Payments</strong>: Requires Treasury Manager approval</li>
+<li><strong>Backdated Payments</strong>: Requires Controller approval</li>
+<li><strong>Payment Voids</strong>: Requires AP Manager approval</li>
+</ul>
+<h2>AR Module Approval Matrix</h2>
+<h3>AR Invoice Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>Level 1</td>
+<td>AR Clerk</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>Level 1</td>
+<td>AR Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Level 2</td>
+<td>Finance Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001 - $500,000</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$500,001+</td>
+<td>Level 3</td>
+<td>CFO + CEO</td>
+<td>No</td>
+<td>Required (Both)</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>Credit Memos &gt;$10K</strong>: Requires AR Manager + Sales Manager</li>
+<li><strong>Write-Offs</strong>: Requires CFO approval regardless of amount</li>
+<li><strong>Backdated Invoices</strong>: Requires Finance Manager approval</li>
+<li><strong>Manual Invoices (no contract)</strong>: Requires AR Manager approval</li>
+</ul>
+<h3>AR Receipt Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $10,000</td>
+<td>Level 1</td>
+<td>AR Clerk</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$10,001 - $50,000</td>
+<td>Level 1</td>
+<td>AR Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$50,001 - $200,000</td>
+<td>Level 2</td>
+<td>Finance Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$200,001+</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>Overpayments &gt;$5K</strong>: Requires AR Manager approval</li>
+<li><strong>Manual Receipt Application</strong>: Requires AR Supervisor approval</li>
+<li><strong>Bounced Check Write-Off</strong>: Requires CFO approval</li>
+<li><strong>Receipt Voids</strong>: Requires AR Manager approval</li>
+</ul>
+<h2>GL Module Approval Matrix</h2>
+<h3>GL Journal Voucher Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>Level 1</td>
+<td>Accounting Supervisor</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>Level 1</td>
+<td>Accounting Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Level 2</td>
+<td>Controller</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001+</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>Adjusting Entries</strong>: Requires Controller approval</li>
+<li><strong>Reclassification Entries</strong>: Requires Accounting Manager approval</li>
+<li><strong>Prior Period Adjustments</strong>: Requires CFO approval</li>
+<li><strong>Write-Offs/Reserves</strong>: Requires CFO approval</li>
+</ul>
+<h3>GL Period Close Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Approver</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Initiate Period Close</strong></td>
+<td>Controller</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Override Close Warnings</strong></td>
+<td>Controller</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Execute Period Close</strong></td>
+<td>Controller</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Reopen Same Month</strong></td>
+<td>Controller</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Reopen Prior Month</strong></td>
+<td>CFO</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Reopen Prior Quarter</strong></td>
+<td>CFO + Audit Committee</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Reopen Prior Year</strong></td>
+<td>Board of Directors</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h2>Asset Module Approval Matrix</h2>
+<h3>Asset Acquisition Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Amount Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>Level 1</td>
+<td>Department Manager</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>Level 1</td>
+<td>Asset Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Level 2</td>
+<td>Controller</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001 - $500,000</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$500,001+</td>
+<td>Level 3</td>
+<td>CFO + CEO + Board</td>
+<td>No</td>
+<td>Required (All)</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>Capital Budget Approval</strong>: Required for all CapEx &gt;$10K</li>
+<li><strong>Lease vs. Buy Decision</strong>: Requires CFO approval for leases &gt;$50K</li>
+<li><strong>Asset Category Change</strong>: Requires Asset Manager approval</li>
+</ul>
+<h3>Asset Disposal Approval</h3>
+<table>
+<thead>
+<tr>
+<th>NBV Range</th>
+<th>Approver Level</th>
+<th>Title</th>
+<th>Auto-Approve</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>Level 1</td>
+<td>Department Manager</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>Level 1</td>
+<td>Asset Manager</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Level 2</td>
+<td>Controller</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001+</td>
+<td>Level 3</td>
+<td>CFO</td>
+<td>No</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Rules</strong>:</p>
+<ul>
+<li><strong>All Write-Offs</strong>: Require management approval regardless of amount</li>
+<li><strong>All Donations</strong>: Require Tax/Legal review + CFO approval</li>
+<li><strong>Material Losses</strong>: Require CFO approval</li>
+<li><strong>Related Party Sales</strong>: Require Board approval</li>
+</ul>
+<h3>Asset Transfer Approval</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Approver</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Inter-Department Transfer</strong></td>
+<td>Asset Manager</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td><strong>Inter-Location Transfer</strong></td>
+<td>Asset Manager</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Inter-Company Transfer</strong></td>
+<td>Controller</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Custody Change</strong></td>
+<td>Department Manager</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<h2>Budget Approval Matrix</h2>
+<h3>Budget Preparation</h3>
+<table>
+<thead>
+<tr>
+<th>Budget Type</th>
+<th>Approver Level</th>
+<th>Approval Sequence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Department Budget</strong></td>
+<td>Level 1: Department Manager → Level 2: Division Head</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Capital Budget</strong></td>
+<td>Level 1: Asset Manager → Level 2: CFO → Level 3: Board</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Annual Operating Budget</strong></td>
+<td>Level 1: Department Heads → Level 2: CFO → Level 3: CEO → Board</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Budget Revisions</strong></td>
+<td>Level 2: CFO</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Budget Transfers</strong></td>
+<td>Level 1: Controller</td>
+<td>Required if &lt;$10K, Level 2: CFO if ≥$10K</td>
+</tr>
+</tbody></table>
+<h2>Approval Workflow Configuration</h2>
+<h3>Routing Rules</h3>
+<p><strong>Automatic Routing</strong>:</p>
+<div class="mermaid">flowchart LR
+    Submit[Submit for Approval] --> CheckAmount{Check Amount}
+    CheckAmount -->|< $1K| L1[Route to Level 1]
+    CheckAmount -->|$1K-$50K| L1
+    CheckAmount -->|$50K-$250K| L2[Route to Level 2]
+    CheckAmount -->|> $250K| L3[Route to Level 3]
+
+    L1 --> L1Approve{L1 Decision}
+    L1Approve -->|Approve| CheckL1Authority{L1 Authority<br/>Sufficient?}
+    CheckL1Authority -->|Yes| Approved[Approved]
+    CheckL1Authority -->|No| L2
+    L1Approve -->|Reject| Rejected[Rejected]
+    L1Approve -->|Return| Draft[Return to Draft]
+
+    L2 --> L2Approve{L2 Decision}
+    L2Approve -->|Approve| CheckL2Authority{L2 Authority<br/>Sufficient?}
+    CheckL2Authority -->|Yes| Approved
+    CheckL2Authority -->|No| L3
+    L2Approve -->|Reject| Rejected
+    L2Approve -->|Return| Draft
+
+    L3 --> L3Approve{L3 Decision}
+    L3Approve -->|Approve| Approved
+    L3Approve -->|Reject| Rejected
+    L3Approve -->|Return| Draft</div><h3>Escalation Rules</h3>
+<p><strong>Time-Based Escalation</strong>:</p>
+<ul>
+<li><strong>Level 1</strong>: 24 hours → Escalate to Level 2</li>
+<li><strong>Level 2</strong>: 48 hours → Escalate to Level 3</li>
+<li><strong>Level 3</strong>: 72 hours → Notify CFO/CEO</li>
+</ul>
+<p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Escalation only during business days</li>
+<li>Notifications sent to approver and escalation recipient</li>
+<li>Escalation audit trail maintained</li>
+<li>Manual escalation override allowed</li>
+</ul>
+<h3>Approval Notifications</h3>
+<p><strong>Email Notifications</strong>:</p>
+<ol>
+<li><strong>Submission</strong>: Notify assigned approver</li>
+<li><strong>Pending Reminder</strong>: Daily reminder for pending approvals</li>
+<li><strong>Escalation</strong>: Notify escalation recipient</li>
+<li><strong>Approval</strong>: Notify creator and next-level approver (if needed)</li>
+<li><strong>Rejection</strong>: Notify creator with rejection reason</li>
+<li><strong>Return</strong>: Notify creator for revision</li>
+</ol>
+<p><strong>Dashboard Notifications</strong>:</p>
+<ul>
+<li>Real-time approval queue</li>
+<li>Aging analysis of pending approvals</li>
+<li>SLA breach warnings</li>
+<li>Approval volume metrics</li>
+</ul>
+<h2>Approval Audit Trail</h2>
+<h3>Logged Information</h3>
+<p>For each approval action:</p>
+<pre><code class="language-json">{
+  &quot;transactionId&quot;: &quot;AP-INV-2024-12345&quot;,
+  &quot;transactionType&quot;: &quot;AP Invoice&quot;,
+  &quot;transactionAmount&quot;: 50000.00,
+  &quot;submittedBy&quot;: &quot;john.doe&quot;,
+  &quot;submittedDate&quot;: &quot;2025-10-01T10:30:00Z&quot;,
+  &quot;approvalLevel&quot;: 2,
+  &quot;approver&quot;: &quot;jane.controller&quot;,
+  &quot;approvalAction&quot;: &quot;Approved&quot;,
+  &quot;approvalDate&quot;: &quot;2025-10-01T14:45:00Z&quot;,
+  &quot;approvalComments&quot;: &quot;Verified with PO#12345&quot;,
+  &quot;ipAddress&quot;: &quot;192.168.1.100&quot;,
+  &quot;sessionId&quot;: &quot;sess_abc123&quot;
+}</code></pre><h3>Audit Reports</h3>
+<ol>
+<li><strong>Approval History Report</strong>: All approvals by transaction</li>
+<li><strong>Approver Activity Report</strong>: Activity by approver</li>
+<li><strong>Approval Aging Report</strong>: Time to approve by level</li>
+<li><strong>Exception Report</strong>: Rejected and returned transactions</li>
+<li><strong>Delegation Report</strong>: Delegated authority usage</li>
+<li><strong>SLA Compliance Report</strong>: Approval SLA metrics</li>
+</ol>
+<h2>Delegation of Authority</h2>
+<h3>Delegation Configuration</h3>
+<p><strong>Delegation Setup</strong>:</p>
+<ul>
+<li><strong>Delegator</strong>: Original approver delegating authority</li>
+<li><strong>Delegate</strong>: Person receiving approval authority</li>
+<li><strong>Effective Date</strong>: Start date of delegation</li>
+<li><strong>End Date</strong>: Expiration date of delegation</li>
+<li><strong>Scope</strong>: Specific modules or all modules</li>
+<li><strong>Amount Limit</strong>: Maximum approval authority delegated</li>
+</ul>
+<p><strong>Delegation Rules</strong>:</p>
+<ul>
+<li>Cannot delegate to subordinate who reports to delegator</li>
+<li>Cannot delegate higher than delegator&#39;s own authority</li>
+<li>Maximum delegation period: 30 days</li>
+<li>Delegation requires manager approval</li>
+<li>Automatic expiration and notification</li>
+</ul>
+<p><strong>Delegation Audit</strong>:</p>
+<pre><code class="language-json">{
+  &quot;delegationId&quot;: &quot;DEL-2024-001&quot;,
+  &quot;delegator&quot;: &quot;jane.controller&quot;,
+  &quot;delegate&quot;: &quot;bob.manager&quot;,
+  &quot;effectiveDate&quot;: &quot;2025-10-15&quot;,
+  &quot;endDate&quot;: &quot;2025-10-30&quot;,
+  &quot;scope&quot;: &quot;AP Module&quot;,
+  &quot;maxAmount&quot;: 100000.00,
+  &quot;approvedBy&quot;: &quot;cfo&quot;,
+  &quot;status&quot;: &quot;Active&quot;
+}</code></pre><h2>Best Practices</h2>
+<h3>For Transaction Creators</h3>
+<ol>
+<li><strong>Complete Documentation</strong>: Attach all supporting documents before submission</li>
+<li><strong>Accurate Descriptions</strong>: Provide clear transaction descriptions and justifications</li>
+<li><strong>Verify Amounts</strong>: Double-check amounts and calculations</li>
+<li><strong>Select Correct Approver</strong>: Route to appropriate approver based on amount and type</li>
+<li><strong>Timely Submission</strong>: Submit transactions with adequate time for approval</li>
+</ol>
+<h3>For Approvers</h3>
+<ol>
+<li><strong>Timely Review</strong>: Review and approve within SLA (24-48 hours)</li>
+<li><strong>Thorough Verification</strong>: Verify supporting documentation and business justification</li>
+<li><strong>Clear Communication</strong>: Provide clear rejection reasons or revision requests</li>
+<li><strong>Delegation Management</strong>: Set up delegation before planned absences</li>
+<li><strong>Escalation Awareness</strong>: Escalate unusual transactions or concerns promptly</li>
+</ol>
+<h3>For System Administrators</h3>
+<ol>
+<li><strong>Regular Review</strong>: Review and update approval matrices quarterly</li>
+<li><strong>User Training</strong>: Train users on approval workflows and requirements</li>
+<li><strong>Monitor SLAs</strong>: Track and report approval SLA compliance</li>
+<li><strong>Audit Compliance</strong>: Ensure approval audit trail is complete</li>
+<li><strong>System Optimization</strong>: Optimize routing rules and notifications based on usage</li>
+</ol>
+<h2>API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/approval/queue</code></td>
+<td>GET</td>
+<td>Get pending approvals for user</td>
+</tr>
+<tr>
+<td><code>/api/approval/{id}</code></td>
+<td>GET</td>
+<td>Get approval details</td>
+</tr>
+<tr>
+<td><code>/api/approval/approve/{id}</code></td>
+<td>POST</td>
+<td>Approve transaction</td>
+</tr>
+<tr>
+<td><code>/api/approval/reject/{id}</code></td>
+<td>POST</td>
+<td>Reject transaction</td>
+</tr>
+<tr>
+<td><code>/api/approval/return/{id}</code></td>
+<td>POST</td>
+<td>Return for revision</td>
+</tr>
+<tr>
+<td><code>/api/approval/delegate</code></td>
+<td>POST</td>
+<td>Set up delegation</td>
+</tr>
+<tr>
+<td><code>/api/approval/history/{transactionId}</code></td>
+<td>GET</td>
+<td>Get approval history</td>
+</tr>
+<tr>
+<td><code>/api/approval/matrix</code></td>
+<td>GET</td>
+<td>Get approval matrix configuration</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

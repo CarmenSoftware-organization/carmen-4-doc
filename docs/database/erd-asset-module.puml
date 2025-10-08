@@ -1,0 +1,87 @@
+@startuml
+title Asset Management Module - Entity Relationship Diagram
+
+entity "ASSET_REGISTER" as asset {
+  * AssetId : bigint <<PK>>
+  * CategoryId : bigint <<FK>>
+  * LocationId : bigint <<FK>>
+  * DeptId : bigint <<FK>>
+  --
+  AssetNo : varchar(50)
+  AssetName : varchar(200)
+  AssetDate : datetime
+  PurchaseAmt : decimal(18,2)
+  AccumDepre : decimal(18,2)
+  BookValue : decimal(18,2)
+  AssetStatus : int
+  DepreMethod : varchar(20)
+  UsefulLife : int
+}
+
+entity "ASSET_CATEGORY" as category {
+  * CategoryId : bigint <<PK>>
+  --
+  CategoryCode : varchar(20)
+  CategoryName : varchar(100)
+  DepreRate : decimal(5,2)
+  DepreMethod : varchar(20)
+  AccCode_Asset : varchar(50)
+  AccCode_Depre : varchar(50)
+  AccCode_Accum : varchar(50)
+}
+
+entity "ASSET_LOCATION" as location {
+  * LocationId : bigint <<PK>>
+  --
+  LocationCode : varchar(20)
+  LocationName : varchar(100)
+  LocationDesc : varchar(500)
+}
+
+entity "ASSET_DEPARTMENT" as department {
+  * DeptId : bigint <<PK>>
+  --
+  DeptCode : varchar(20)
+  DeptName : varchar(100)
+}
+
+entity "ASSET_HISTORY" as history {
+  * HistoryId : bigint <<PK>>
+  * AssetId : bigint <<FK>>
+  --
+  HistoryDate : datetime
+  HistoryType : varchar(20)
+  HistoryDesc : varchar(500)
+  HistoryAmt : decimal(18,2)
+  OldValue : decimal(18,2)
+  NewValue : decimal(18,2)
+}
+
+entity "ASSET_DISPOSAL" as disposal {
+  * DisposalId : bigint <<PK>>
+  * AssetId : bigint <<FK>>
+  --
+  DisposalNo : varchar(50)
+  DisposalDate : datetime
+  DisposalType : int
+  DisposalAmt : decimal(18,2)
+  BookValue : decimal(18,2)
+  GainLoss : decimal(18,2)
+}
+
+entity "PRE_ASSET" as pre_asset {
+  * PreAssetId : bigint <<PK>>
+  --
+  PreAssetNo : varchar(50)
+  PreAssetName : varchar(200)
+  PreAssetStatus : int
+  TotalAmt : decimal(18,2)
+}
+
+category ||--o{ asset : "classifies"
+location ||--o{ asset : "located at"
+department ||--o{ asset : "belongs to"
+asset ||--o{ history : "has history"
+asset ||--o| disposal : "disposed"
+
+@enduml

@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Documentation source (only deploy built HTML)
+docs/
+
+# Scripts (already executed during build)
+scripts/
+
+# Development files
+.DS_Store
+*.log
+npm-debug.log*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Temporary files
+*.tmp
+*.temp
+
+# Tests
+test/
+tests/
+*.test.js
+
+# README files (optional - keep if you want them accessible)
+# README.md

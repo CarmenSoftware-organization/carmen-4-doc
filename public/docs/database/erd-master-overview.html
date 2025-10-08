@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET - Master Data Model Overview - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET - Master Data Model Overview</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET - Master Data Model Overview</h1>
+<div class="mermaid">erDiagram
+    %% Accounts Payable Module
+    VENDOR ||--o{ AP_INVOICE : "generates"
+    AP_INVOICE ||--o{ GL_JV : "posts to"
+    AP_PAYMENT ||--o{ GL_JV : "posts to"
+
+    %% Accounts Receivable Module
+    CUSTOMER ||--o{ AR_INVOICE : "generates"
+    AR_INVOICE ||--o{ GL_JV : "posts to"
+    AR_RECEIPT ||--o{ GL_JV : "posts to"
+    AR_CONTRACT ||--o{ AR_INVOICE : "generates"
+
+    %% General Ledger Module
+    GL_JV ||--o{ GL_JV_DETAIL : "contains"
+    ACCOUNT_CODE ||--o{ GL_JV_DETAIL : "used in"
+    GL_PERIOD ||--o{ GL_JV : "period for"
+
+    %% Asset Management Module
+    ASSET_REGISTER ||--o{ GL_JV : "posts depreciation"
+    ASSET_DISPOSAL ||--o{ GL_JV : "posts disposal"
+    ASSET_CATEGORY ||--o{ ASSET_REGISTER : "classifies"
+
+    %% Income/Revenue Module
+    INCOME_INVOICE ||--o{ GL_JV : "posts revenue"
+    INCOME_SOURCE ||--o{ INCOME_INVOICE : "generates"
+
+    %% Master Data Relationships
+    TENANT ||--o{ COMPANY : "owns"
+    TENANT ||--o{ USER : "has users"
+    COMPANY ||--o{ DEPARTMENT : "has"
+    CURRENCY ||--o{ AP_INVOICE : "currency"
+    CURRENCY ||--o{ AR_INVOICE : "currency"
+
+    %% Dimension Allocation
+    DIMENSION ||--o{ GL_JV_DETAIL : "allocates"
+    DEPARTMENT ||--o{ DIMENSION : "references"
+
+    %% Workflow
+    WORKFLOW ||--o{ AP_INVOICE : "approves"
+    WORKFLOW ||--o{ AR_INVOICE : "approves"
+    WORKFLOW ||--o{ GL_JV : "approves"
+
+    %% Core Entities
+    VENDOR {
+        bigint VendorId PK
+        varchar VendorCode
+        varchar VendorName
+        varchar TaxId
+        varchar ContactInfo
+    }
+
+    CUSTOMER {
+        bigint CustomerId PK
+        varchar CustomerCode
+        varchar CustomerName
+        varchar TaxId
+        varchar ContactInfo
+    }
+
+    AP_INVOICE {
+        bigint InvoiceId PK
+        bigint VendorId FK
+        varchar InvoiceNo
+        datetime InvoiceDate
+        decimal TotalAmt
+        int Status
+    }
+
+    AR_INVOICE {
+        bigint InvoiceId PK
+        bigint CustomerId FK
+        varchar InvoiceNo
+        datetime InvoiceDate
+        decimal TotalAmt
+        int Status
+    }
+
+    AP_PAYMENT {
+        bigint PaymentId PK
+        bigint InvoiceId FK
+        varchar PaymentNo
+        datetime PaymentDate
+        decimal PaymentAmt
+    }
+
+    AR_RECEIPT {
+        bigint ReceiptId PK
+        bigint InvoiceId FK
+        varchar ReceiptNo
+        datetime ReceiptDate
+        decimal ReceiptAmt
+    }
+
+    AR_CONTRACT {
+        bigint ContractId PK
+        bigint CustomerId FK
+        varchar ContractNo
+        datetime StartDate
+        datetime EndDate
+    }
+
+    ACCOUNT_CODE {
+        varchar AccCode PK
+        varchar AccName
+        int AccType
+        int AccNature
+        int AccLevel
+    }
+
+    GL_JV {
+        bigint JvId PK
+        varchar JvNo
+        datetime JvDate
+        varchar JvDesc
+        int JvStatus
+        varchar JvSource
+    }
+
+    GL_JV_DETAIL {
+        bigint JvdId PK
+        bigint JvId FK
+        varchar AccCode FK
+        decimal DrAmt
+        decimal CrAmt
+    }
+
+    GL_PERIOD {
+        bigint PeriodId PK
+        int PeriodYear
+        int PeriodMonth
+        int Status
+    }
+
+    ASSET_REGISTER {
+        bigint AssetId PK
+        varchar AssetNo
+        varchar AssetName
+        decimal PurchaseAmt
+        decimal AccumDepre
+    }
+
+    ASSET_CATEGORY {
+        bigint CategoryId PK
+        varchar CategoryCode
+        varchar CategoryName
+        decimal DepreRate
+    }
+
+    ASSET_DISPOSAL {
+        bigint DisposalId PK
+        bigint AssetId FK
+        datetime DisposalDate
+        decimal DisposalAmt
+    }
+
+    INCOME_INVOICE {
+        bigint InvoiceId PK
+        bigint SourceId FK
+        varchar InvoiceNo
+        datetime InvoiceDate
+        decimal TotalAmt
+    }
+
+    INCOME_SOURCE {
+        bigint SourceId PK
+        varchar SourceCode
+        varchar SourceName
+        varchar SourceType
+    }
+
+    TENANT {
+        bigint TenantId PK
+        varchar TenantCode
+        varchar TenantName
+        bit IsActive
+    }
+
+    COMPANY {
+        bigint CompanyId PK
+        bigint TenantId FK
+        varchar CompanyCode
+        varchar CompanyName
+    }
+
+    USER {
+        bigint UserId PK
+        bigint TenantId FK
+        varchar Username
+        varchar Email
+        bit IsActive
+    }
+
+    DEPARTMENT {
+        bigint DeptId PK
+        varchar DeptCode
+        varchar DeptName
+    }
+
+    CURRENCY {
+        varchar CurrencyCode PK
+        varchar CurrencyName
+        decimal ExchangeRate
+    }
+
+    DIMENSION {
+        bigint DimensionId PK
+        varchar DimensionCode
+        varchar DimensionName
+    }
+
+    WORKFLOW {
+        bigint WorkflowId PK
+        varchar WorkflowCode
+        varchar ModuleName
+        int ApprovalLevel
+    }</div><h2>System Overview</h2>
+<p>Carmen.NET&#39;s data model centers around <strong>General Ledger</strong> as the hub, with all transaction modules posting to GL.</p>
+<h3>Core Principles</h3>
+<ol>
+<li><strong>Multi-Tenant Architecture</strong>: All data segregated by TenantId</li>
+<li><strong>GL-Centric</strong>: All financial transactions eventually post to GL</li>
+<li><strong>Header-Detail Pattern</strong>: Transactional entities split into header and detail tables</li>
+<li><strong>Workflow Support</strong>: Approval workflows for critical transactions</li>
+<li><strong>Audit Trail</strong>: Complete transaction history maintained</li>
+</ol>
+<h3>Module Integration</h3>
+<p><strong>Financial Flow</strong>:</p>
+<pre><code class="language-text">AP/AR/Asset/Income Transactions
+        ↓
+Generate GL Journal Voucher (GL_JV)
+        ↓
+Create Debit/Credit Entries (GL_JV_DETAIL)
+        ↓
+Update Account Balances (ACCOUNT_CODE)</code></pre><h3>Key Relationships</h3>
+<ul>
+<li><strong>One-to-Many</strong>: Vendor → AP Invoices, Customer → AR Invoices</li>
+<li><strong>Header-Detail</strong>: AP_INVOICE_H → AP_INVOICE_D (details), GL_JV_H → GL_JV_D</li>
+<li><strong>Multi-Tenant</strong>: Tenant → Users, Tenant → Companies</li>
+<li><strong>Lookup</strong>: ACCOUNT_CODE referenced by all GL postings</li>
+<li><strong>Workflow</strong>: Workflow definitions applied to transactions</li>
+</ul>
+<h3>Data Isolation</h3>
+<p>Every entity (except master lookup tables) includes:</p>
+<ul>
+<li><code>TenantId</code> column for multi-tenant isolation</li>
+<li>Applied automatically via <code>FncBase.ApplyTenantIfUseTenant()</code></li>
+<li>Enforced at application and database levels</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

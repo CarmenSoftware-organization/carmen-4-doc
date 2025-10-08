@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Disposal Workflow - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Asset Disposal Workflow</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Asset Disposal Workflow</h1>
+<h2>Overview</h2>
+<p>The Asset Disposal workflow manages the complete lifecycle of asset retirement, from disposal initiation through GL posting of gains/losses and asset register updates.</p>
+<h2>Workflow States</h2>
+<div class="mermaid">stateDiagram-v2
+    [*] --> Draft
+    Draft --> PendingApproval: Submit for Approval
+    Draft --> Draft: Save
+    Draft --> Cancelled: Cancel
+
+    PendingApproval --> Approved: Approve
+    PendingApproval --> Rejected: Reject
+    PendingApproval --> Draft: Return for Revision
+
+    Rejected --> Draft: Revise
+    Rejected --> Cancelled: Cancel
+
+    Approved --> Disposed: Execute Disposal
+    Disposed --> Posted: Post to GL
+
+    Posted --> [*]
+    Cancelled --> [*]</div><h2>Status Codes</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Value</th>
+<th>Description</th>
+<th>Allowed Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Draft</strong></td>
+<td>0</td>
+<td>Initial creation, disposal planning</td>
+<td>Edit, Submit, Delete, Cancel</td>
+</tr>
+<tr>
+<td><strong>Pending Approval</strong></td>
+<td>2</td>
+<td>Submitted for approval</td>
+<td>Approve, Reject, Return</td>
+</tr>
+<tr>
+<td><strong>Approved</strong></td>
+<td>3</td>
+<td>Approved by authorized user</td>
+<td>Execute disposal</td>
+</tr>
+<tr>
+<td><strong>Rejected</strong></td>
+<td>4</td>
+<td>Rejected during approval</td>
+<td>Revise, Cancel</td>
+</tr>
+<tr>
+<td><strong>Disposed</strong></td>
+<td>5</td>
+<td>Asset physically disposed</td>
+<td>Post to GL</td>
+</tr>
+<tr>
+<td><strong>Posted</strong></td>
+<td>1</td>
+<td>Posted to General Ledger</td>
+<td>View Only</td>
+</tr>
+<tr>
+<td><strong>Cancelled</strong></td>
+<td>9</td>
+<td>Cancelled before disposal</td>
+<td>View Only</td>
+</tr>
+</tbody></table>
+<h2>Workflow Diagram</h2>
+<div class="mermaid">flowchart TD
+    Start([Start: Initiate Asset Disposal]) --> SelectAsset[Select Asset to Dispose]
+    SelectAsset --> ValidateAsset{Asset<br/>Valid?}
+
+    ValidateAsset -->|No| ShowAssetError[Show Asset Errors]
+    ShowAssetError --> SelectAsset
+
+    ValidateAsset -->|Yes| EnterDetails[Enter Disposal Details]
+    EnterDetails --> SelectMethod{Disposal<br/>Method?}
+
+    SelectMethod -->|Sale| EnterSale[Enter Sale Details:<br/>Sale Price, Buyer, Payment Terms]
+    SelectMethod -->|Scrap| EnterScrap[Enter Scrap Details:<br/>Scrap Value, Disposal Cost]
+    SelectMethod -->|Trade-In| EnterTradeIn[Enter Trade-In Details:<br/>Trade Value, New Asset]
+    SelectMethod -->|Donation| EnterDonation[Enter Donation Details:<br/>Recipient, Fair Market Value]
+    SelectMethod -->|Write-Off| EnterWriteOff[Enter Write-Off Details:<br/>Reason, Authorization]
+
+    EnterSale --> CalculateGainLoss
+    EnterScrap --> CalculateGainLoss
+    EnterTradeIn --> CalculateGainLoss
+    EnterDonation --> CalculateGainLoss
+    EnterWriteOff --> CalculateGainLoss
+
+    CalculateGainLoss[Calculate Gain/Loss on Disposal:<br/>NBV, Proceeds, Disposal Costs] --> ValidateDisposal{Validation<br/>Passed?}
+
+    ValidateDisposal -->|No| ShowErrors[Show Validation Errors]
+    ShowErrors --> EnterDetails
+
+    ValidateDisposal -->|Yes| SaveDraft[Save as Draft<br/>Status = 0]
+    SaveDraft --> CheckSubmit{User Action?}
+
+    CheckSubmit -->|Save| SaveDraft
+    CheckSubmit -->|Submit| CheckPermission{Has Submit<br/>Permission?}
+    CheckSubmit -->|Cancel| CancelDisposal[Cancel Disposal<br/>Status = 9]
+
+    CheckPermission -->|No| Forbidden[Permission Denied]
+    CheckPermission -->|Yes| CheckValue{Disposal<br/>Value?}
+
+    CheckValue -->|< Threshold| AutoApprove[Auto-Approve<br/>Status = 3]
+    CheckValue -->|≥ Threshold| SubmitApproval[Submit for Approval<br/>Status = 2]
+
+    SubmitApproval --> NotifyApprover[Notify Approver]
+    NotifyApprover --> WaitApproval[Wait for Approval]
+
+    WaitApproval --> ApproverAction{Approver<br/>Decision?}
+
+    ApproverAction -->|Approve| CheckApprovePermission{Has Approve<br/>Permission?}
+    ApproverAction -->|Reject| RejectDisposal[Reject Disposal<br/>Status = 4]
+    ApproverAction -->|Return| ReturnDraft[Return to Draft<br/>Status = 0]
+
+    CheckApprovePermission -->|No| Forbidden
+    CheckApprovePermission -->|Yes| ApproveDisposal[Approve Disposal<br/>Status = 3]
+
+    AutoApprove --> ReadyDispose
+    ApproveDisposal --> ReadyDispose[Ready for Physical Disposal]
+
+    ReadyDispose --> ExecuteAction{Execute<br/>Disposal?}
+
+    ExecuteAction -->|Yes| PhysicalDisposal[Execute Physical Disposal]
+    PhysicalDisposal --> UpdateAssetLocation[Update Asset Location/Status]
+
+    UpdateAssetLocation --> ReceiveProceeds{Proceeds<br/>Received?}
+    ReceiveProceeds -->|Yes| RecordProceeds[Record Cash/AR Receipt]
+    ReceiveProceeds -->|No| NoProceedsNote[Note: No Proceeds]
+
+    RecordProceeds --> MarkDisposed
+    NoProceedsNote --> MarkDisposed[Mark as Disposed<br/>Status = 5]
+
+    MarkDisposed --> ReadyPost[Ready for GL Posting]
+    ReadyPost --> PostAction{Post to GL?}
+
+    PostAction -->|Yes| CheckPostPermission{Has Post<br/>Permission?}
+
+    CheckPostPermission -->|No| Forbidden
+    CheckPostPermission -->|Yes| ValidateAccounts{GL Accounts<br/>Valid?}
+
+    ValidateAccounts -->|No| ShowAccountError[Show Account Errors]
+    ValidateAccounts -->|Yes| CalculateFinal[Calculate Final Amounts:<br/>Accumulated Depreciation,<br/>Net Book Value,<br/>Proceeds,<br/>Gain/Loss]
+
+    CalculateFinal --> CreateGLJV[Create GL Journal Voucher]
+
+    CreateGLJV --> PostGLEntries[Post GL Entries:<br/>DR: Accumulated Depreciation<br/>DR: Loss on Disposal OR CR: Gain<br/>DR: Cash/AR if sale<br/>CR: Asset Cost]
+
+    PostGLEntries --> UpdateAssetRegister[Update Asset Register:<br/>Status = Disposed,<br/>Disposal Date,<br/>Final NBV = 0]
+
+    UpdateAssetRegister --> UpdateStatus[Update Disposal Status<br/>Status = 1 Posted]
+
+    UpdateStatus --> GenerateReport[Generate Disposal Report]
+    GenerateReport --> End([End])
+
+    CancelDisposal --> End
+    RejectDisposal --> End</div><h2>Business Rules</h2>
+<h3>Validation Rules</h3>
+<ol>
+<li><p><strong>Required Fields</strong>:</p>
+<ul>
+<li>Asset Code</li>
+<li>Disposal Date</li>
+<li>Disposal Method</li>
+<li>Disposal Reason</li>
+<li>Authorization (if required)</li>
+</ul>
+</li>
+<li><p><strong>Business Rules</strong>:</p>
+<ul>
+<li>Asset must be active (not already disposed)</li>
+<li>Disposal Date &gt;= Asset Acquisition Date</li>
+<li>Disposal Date &lt;= Current Date</li>
+<li>Asset must not have pending transactions</li>
+<li>GL Period must be open for disposal date</li>
+<li>Depreciation must be current up to disposal date</li>
+</ul>
+</li>
+<li><p><strong>Disposal Calculation Rules</strong>:</p>
+<ul>
+<li><strong>Asset Cost</strong>: Original acquisition cost</li>
+<li><strong>Accumulated Depreciation</strong>: Total depreciation up to disposal date</li>
+<li><strong>Net Book Value (NBV)</strong>: Asset Cost - Accumulated Depreciation</li>
+<li><strong>Proceeds</strong>: Sale price or trade-in value (net of disposal costs)</li>
+<li><strong>Gain on Disposal</strong>: Proceeds &gt; NBV</li>
+<li><strong>Loss on Disposal</strong>: Proceeds &lt; NBV</li>
+</ul>
+</li>
+</ol>
+<h3>Permission Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Permission</th>
+<th>Permission Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>View</strong></td>
+<td>View permission</td>
+<td><code>Asset.Disposal.View</code></td>
+</tr>
+<tr>
+<td><strong>Create</strong></td>
+<td>Create permission</td>
+<td><code>Asset.Disposal.Create</code></td>
+</tr>
+<tr>
+<td><strong>Update</strong></td>
+<td>Update permission</td>
+<td><code>Asset.Disposal.Update</code></td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td>Delete permission</td>
+<td><code>Asset.Disposal.Delete</code></td>
+</tr>
+<tr>
+<td><strong>Submit</strong></td>
+<td>Create permission</td>
+<td><code>Asset.Disposal.Create</code></td>
+</tr>
+<tr>
+<td><strong>Approve</strong></td>
+<td>Approve permission</td>
+<td><code>Asset.Disposal.Approve</code></td>
+</tr>
+<tr>
+<td><strong>Reject</strong></td>
+<td>Approve permission</td>
+<td><code>Asset.Disposal.Approve</code></td>
+</tr>
+<tr>
+<td><strong>Execute Disposal</strong></td>
+<td>Execute permission</td>
+<td><code>Asset.Disposal.Execute</code></td>
+</tr>
+<tr>
+<td><strong>Post</strong></td>
+<td>Post permission</td>
+<td><code>Asset.Disposal.Post</code></td>
+</tr>
+</tbody></table>
+<h3>Disposal Methods</h3>
+<h4>Sale</h4>
+<ul>
+<li>Sale to third party</li>
+<li>Competitive bidding</li>
+<li>Private treaty sale</li>
+<li>Auction</li>
+</ul>
+<p><strong>Required Details</strong>:</p>
+<ul>
+<li>Buyer information</li>
+<li>Sale price</li>
+<li>Payment terms</li>
+<li>Sale documentation</li>
+</ul>
+<h4>Scrap</h4>
+<ul>
+<li>Asset no longer usable</li>
+<li>Salvage value recovery</li>
+<li>Disposal costs</li>
+</ul>
+<p><strong>Required Details</strong>:</p>
+<ul>
+<li>Scrap value (if any)</li>
+<li>Disposal/removal costs</li>
+<li>Scrap dealer details</li>
+</ul>
+<h4>Trade-In</h4>
+<ul>
+<li>Exchange for new asset</li>
+<li>Trade-in allowance</li>
+<li>Net payment calculation</li>
+</ul>
+<p><strong>Required Details</strong>:</p>
+<ul>
+<li>New asset details</li>
+<li>Trade-in value</li>
+<li>Net payment amount</li>
+<li>Dealer information</li>
+</ul>
+<h4>Donation</h4>
+<ul>
+<li>Charitable donation</li>
+<li>Tax deduction eligible</li>
+<li>Fair market value determination</li>
+</ul>
+<p><strong>Required Details</strong>:</p>
+<ul>
+<li>Recipient organization</li>
+<li>Fair market value</li>
+<li>Tax receipt requirements</li>
+<li>Donation approval</li>
+</ul>
+<h4>Write-Off</h4>
+<ul>
+<li>Asset lost, stolen, or destroyed</li>
+<li>No proceeds expected</li>
+<li>Insurance claim handling</li>
+</ul>
+<p><strong>Required Details</strong>:</p>
+<ul>
+<li>Write-off reason</li>
+<li>Police/insurance reports</li>
+<li>Management authorization</li>
+<li>Insurance claim details</li>
+</ul>
+<h2>Multi-Tenant Isolation</h2>
+<p>All disposal operations enforce tenant isolation:</p>
+<ul>
+<li><code>FncBase.ApplyTenantIfUseTenant(useTenant)</code> applied to all queries</li>
+<li>Users can only see disposals for their assigned tenant(s)</li>
+<li>Cross-tenant data leakage prevented at database level</li>
+</ul>
+<h2>Approval Workflow</h2>
+<h3>Approval Hierarchy</h3>
+<p>Configurable approval rules based on:</p>
+<ul>
+<li>Asset original cost</li>
+<li>Net book value</li>
+<li>Disposal method</li>
+<li>Gain/loss amount</li>
+</ul>
+<p><strong>Example Approval Matrix</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>NBV Range</th>
+<th>Approver Level</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0 - $5,000</td>
+<td>Department Manager</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>$5,001 - $25,000</td>
+<td>Asset Manager</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$25,001 - $100,000</td>
+<td>Controller</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>$100,001+</td>
+<td>CFO</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<p><strong>Special Approval Cases</strong>:</p>
+<ul>
+<li>All write-offs require management approval</li>
+<li>Donations require tax/legal review</li>
+<li>Material losses require CFO approval</li>
+<li>Related party sales require board approval</li>
+</ul>
+<h2>GL Posting</h2>
+<h3>Sale with Gain</h3>
+<pre><code class="language-text">DR: Cash/AR (proceeds)                    12,000.00
+DR: Accumulated Depreciation              48,000.00
+CR: Asset Cost                            60,000.00
+CR: Gain on Disposal                          0.00</code></pre><h3>Sale with Loss</h3>
+<pre><code class="language-text">DR: Cash/AR (proceeds)                     8,000.00
+DR: Accumulated Depreciation              48,000.00
+DR: Loss on Disposal                       4,000.00
+CR: Asset Cost                            60,000.00</code></pre><h3>Scrap with Disposal Cost</h3>
+<pre><code class="language-text">DR: Cash (scrap value)                       500.00
+DR: Accumulated Depreciation              48,000.00
+DR: Loss on Disposal                       6,500.00
+DR: Disposal Expense                       5,000.00
+CR: Asset Cost                            60,000.00</code></pre><h3>Write-Off (Total Loss)</h3>
+<pre><code class="language-text">DR: Accumulated Depreciation              48,000.00
+DR: Loss on Disposal                      12,000.00
+CR: Asset Cost                            60,000.00</code></pre><h3>Trade-In</h3>
+<pre><code class="language-text">DR: New Asset (fair value)                75,000.00
+DR: Accumulated Depreciation (old)        48,000.00
+DR: Loss on Trade-In                       2,000.00
+CR: Asset Cost (old)                      60,000.00
+CR: Cash (net payment)                    65,000.00</code></pre><h2>Depreciation Handling</h2>
+<h3>Depreciation to Disposal Date</h3>
+<ol>
+<li><strong>Calculate Final Depreciation</strong>: Pro-rate depreciation to disposal date</li>
+<li><strong>Post Final Depreciation</strong>: Record last depreciation entry</li>
+<li><strong>Update Accumulated Depreciation</strong>: Reflect total depreciation</li>
+<li><strong>Calculate Final NBV</strong>: Asset Cost - Total Accumulated Depreciation</li>
+</ol>
+<h3>Disposal in Mid-Period</h3>
+<p><strong>Option 1: Full Month Depreciation</strong></p>
+<ul>
+<li>Take full month depreciation if disposed after 15th</li>
+<li>No depreciation if disposed before 15th</li>
+</ul>
+<p><strong>Option 2: Pro-Rata Depreciation</strong></p>
+<ul>
+<li>Calculate exact days used in disposal month</li>
+<li>Depreciation = (Daily Rate × Days Used)</li>
+</ul>
+<p><strong>Option 3: No Depreciation in Disposal Month</strong></p>
+<ul>
+<li>Use previous month-end NBV</li>
+<li>Simpler but less accurate</li>
+</ul>
+<h2>Integration Points</h2>
+<h3>Upstream</h3>
+<ul>
+<li><strong>Asset Register</strong>: Asset master data and history</li>
+<li><strong>Asset Category</strong>: Depreciation method and GL accounts</li>
+<li><strong>Asset Location</strong>: Physical location tracking</li>
+<li><strong>Depreciation Schedule</strong>: Current depreciation status</li>
+</ul>
+<h3>Downstream</h3>
+<ul>
+<li><strong>GL</strong>: Journal vouchers for disposal gains/losses</li>
+<li><strong>AR (if sale)</strong>: Accounts receivable for outstanding proceeds</li>
+<li><strong>Cash Management</strong>: Cash receipt from sale/scrap</li>
+<li><strong>Tax Reporting</strong>: Capital gains/losses for tax filing</li>
+<li><strong>Asset Reporting</strong>: Disposal register and analytics</li>
+</ul>
+<h2>Error Handling</h2>
+<h3>Common Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Asset Not Found</strong></td>
+<td>Invalid asset code</td>
+<td>Verify asset code</td>
+</tr>
+<tr>
+<td><strong>Asset Already Disposed</strong></td>
+<td>Asset status = Disposed</td>
+<td>Cannot dispose twice</td>
+</tr>
+<tr>
+<td><strong>Period Closed</strong></td>
+<td>GL period is closed</td>
+<td>Change disposal date or reopen period</td>
+</tr>
+<tr>
+<td><strong>Depreciation Not Current</strong></td>
+<td>Missing depreciation entries</td>
+<td>Run depreciation up to disposal date</td>
+</tr>
+<tr>
+<td><strong>Invalid Disposal Date</strong></td>
+<td>Date before acquisition</td>
+<td>Use valid date &gt;= acquisition date</td>
+</tr>
+<tr>
+<td><strong>Permission Denied</strong></td>
+<td>User lacks permission</td>
+<td>Request permission from administrator</td>
+</tr>
+<tr>
+<td><strong>Pending Transactions</strong></td>
+<td>Unposted asset transactions</td>
+<td>Post or delete pending transactions</td>
+</tr>
+<tr>
+<td><strong>Invalid GL Account</strong></td>
+<td>GL account not set</td>
+<td>Configure asset category GL accounts</td>
+</tr>
+</tbody></table>
+<h2>API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+<th>Permission</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/asset/disposal/list</code></td>
+<td>GET</td>
+<td>List disposals</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/{id}</code></td>
+<td>GET</td>
+<td>Get disposal details</td>
+<td>View</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/create</code></td>
+<td>POST</td>
+<td>Create new disposal</td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/update</code></td>
+<td>PUT</td>
+<td>Update disposal</td>
+<td>Update</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/delete/{id}</code></td>
+<td>DELETE</td>
+<td>Delete disposal</td>
+<td>Delete</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/submit/{id}</code></td>
+<td>POST</td>
+<td>Submit for approval</td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/approve/{id}</code></td>
+<td>POST</td>
+<td>Approve disposal</td>
+<td>Approve</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/reject/{id}</code></td>
+<td>POST</td>
+<td>Reject disposal</td>
+<td>Approve</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/execute/{id}</code></td>
+<td>POST</td>
+<td>Execute physical disposal</td>
+<td>Execute</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/post/{id}</code></td>
+<td>POST</td>
+<td>Post to GL</td>
+<td>Post</td>
+</tr>
+<tr>
+<td><code>/api/asset/disposal/calculate/{assetId}</code></td>
+<td>GET</td>
+<td>Calculate gain/loss estimate</td>
+<td>View</td>
+</tr>
+</tbody></table>
+<h2>Reporting</h2>
+<h3>Available Reports</h3>
+<ol>
+<li><strong>Disposal Register</strong>: All asset disposals with details</li>
+<li><strong>Gain/Loss Summary</strong>: Gains and losses by period</li>
+<li><strong>Disposal by Method</strong>: Analysis by disposal type</li>
+<li><strong>Disposal by Department</strong>: Departmental disposal activity</li>
+<li><strong>Disposal by Category</strong>: Asset category disposal trends</li>
+<li><strong>Pending Disposals</strong>: Approved but not yet executed</li>
+<li><strong>Tax Capital Gains Report</strong>: For tax filing purposes</li>
+</ol>
+<h2>Best Practices</h2>
+<ol>
+<li><p><strong>Disposal Planning</strong>:</p>
+<ul>
+<li>Establish disposal policy and procedures</li>
+<li>Define approval thresholds clearly</li>
+<li>Maintain disposal authorization matrix</li>
+<li>Document disposal reasons and decisions</li>
+</ul>
+</li>
+<li><p><strong>Depreciation Management</strong>:</p>
+<ul>
+<li>Ensure depreciation is current before disposal</li>
+<li>Use consistent depreciation method for disposal month</li>
+<li>Verify accumulated depreciation accuracy</li>
+<li>Recalculate if asset revalued</li>
+</ul>
+</li>
+<li><p><strong>Approval Process</strong>:</p>
+<ul>
+<li>Review disposal requests within SLA (e.g., 3 business days)</li>
+<li>Verify asset condition and disposal reason</li>
+<li>Check for alternative uses before approval</li>
+<li>Obtain competitive bids for high-value sales</li>
+</ul>
+</li>
+<li><p><strong>Physical Disposal</strong>:</p>
+<ul>
+<li>Verify asset location before disposal</li>
+<li>Document asset condition with photos</li>
+<li>Obtain disposal receipts and documentation</li>
+<li>Update asset location tracking immediately</li>
+</ul>
+</li>
+<li><p><strong>GL Posting</strong>:</p>
+<ul>
+<li>Verify all GL accounts before posting</li>
+<li>Review gain/loss calculations for reasonableness</li>
+<li>Post disposals in correct accounting period</li>
+<li>Retain supporting documentation for audit</li>
+</ul>
+</li>
+<li><p><strong>Compliance</strong>:</p>
+<ul>
+<li>Follow environmental disposal regulations</li>
+<li>Comply with data destruction requirements</li>
+<li>Maintain disposal audit trail</li>
+<li>Retain disposal documentation per policy (e.g., 7 years)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-06<br><strong>Status</strong>: Phase 3 - Business Logic &amp; Workflow Analysis</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

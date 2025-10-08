@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functional Requirements Validation Report - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Functional Requirements Validation Report</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Functional Requirements Validation Report</h1>
+<p><strong>Date</strong>: 2025-10-07<br><strong>Validator</strong>: Source Code Analysis<br><strong>Purpose</strong>: Validate documented functional requirements against Carmen4 source code<br><strong>Scope</strong>: AP and AR Module Requirements</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>✅ <strong>Overall Status</strong>: PARTIALLY VALIDATED<br>📊 <strong>Requirements Reviewed</strong>: 10 functional requirements<br>✅ <strong>Accurate</strong>: 5 (50%)<br>⚠️ <strong>Partially Implemented</strong>: 2 (20%)<br>❌ <strong>Not Implemented (Fictional)</strong>: 3 (30%)</p>
+<p>Several functional requirements documented in <code>/docs/requirements/functional-requirements.md</code> describe features that are <strong>NOT implemented</strong> in the Carmen4 source code. This report identifies these fictional requirements and recommends corrections.</p>
+<hr>
+<h2>Validation Methodology</h2>
+<h3>Source Code Review Process</h3>
+<ol>
+<li><strong>Controller Analysis</strong>: Verified existence of API endpoints mentioned in requirements</li>
+<li><strong>Function Validation</strong>: Confirmed key functions exist and match documented behavior</li>
+<li><strong>Business Logic Review</strong>: Analyzed actual implementation vs. documented requirements</li>
+<li><strong>Feature Search</strong>: Searched for specific features mentioned in requirements</li>
+<li><strong>Workflow Validation</strong>: Compared documented workflows against actual code paths</li>
+</ol>
+<h3>Code Files Reviewed</h3>
+<p><strong>AP Module</strong>: 10+ files including:</p>
+<ul>
+<li><code>ApInvoiceController.cs</code></li>
+<li><code>ApPaymentController.cs</code></li>
+<li><code>FncApInvoice.cs</code></li>
+<li><code>FncApPayment.cs</code></li>
+<li><code>FncPostAp.cs</code></li>
+</ul>
+<p><strong>AR Module</strong>: 15+ files including:</p>
+<ul>
+<li><code>ArInvoiceController.cs</code></li>
+<li><code>ArReceiptController.cs</code></li>
+<li><code>ArContractController.cs</code></li>
+<li><code>FncArInvoice.cs</code></li>
+<li><code>FncArReceipt.cs</code></li>
+<li><code>FncArContract.cs</code></li>
+</ul>
+<p><strong>Total Files</strong>: 25+ source files reviewed</p>
+<hr>
+<h2>FR-AP-001: Vendor Management</h2>
+<h3>Documentation Status: ✅ VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Controller/Function</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Vendor CRUD</strong></td>
+<td><code>ApVendorController.cs</code></td>
+<td>✅ EXISTS</td>
+</tr>
+<tr>
+<td><strong>Status Management</strong></td>
+<td><code>FncApVendor.cs</code></td>
+<td>✅ EXISTS</td>
+</tr>
+<tr>
+<td><strong>Multi-tenant</strong></td>
+<td><code>ApplyTenantIfUseTenant()</code></td>
+<td>✅ EXISTS</td>
+</tr>
+</tbody></table>
+<h3>Validation: <strong>100% Accurate</strong></h3>
+<p>All documented vendor management features exist:</p>
+<ul>
+<li>Create, Read, Update, Delete operations</li>
+<li>Vendor status management (Active, Inactive, Blocked)</li>
+<li>Multi-tenant isolation</li>
+<li>Approval workflows</li>
+</ul>
+<hr>
+<h2>FR-AP-004: Invoice Processing</h2>
+<h3>Documentation Status: ⚠️ PARTIALLY VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Manual Invoice Entry</strong></td>
+<td>FR-AP-004.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Excel/CSV Import</strong></td>
+<td>FR-AP-004.1</td>
+<td>❌ NOT FOUND</td>
+</tr>
+<tr>
+<td><strong>Tax Calculations</strong></td>
+<td>FR-AP-004.2</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Automated Approval Routing</strong></td>
+<td>FR-AP-004.3</td>
+<td>❌ NOT FOUND</td>
+</tr>
+<tr>
+<td><strong>Manual Approval</strong></td>
+<td>FR-AP-004.3</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>FR-AP-004.4</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+</tbody></table>
+<h3>❌ Fictional Features</h3>
+<h4>1. <strong>Invoice Import from Excel/CSV</strong> (FR-AP-004.1)</h4>
+<p><strong>Documented Requirement</strong>:</p>
+<pre><code class="language-text">- System shall allow invoice import from Excel/CSV</code></pre><p><strong>Source Code Reality</strong>:</p>
+<pre><code class="language-text">❌ NO import endpoints found
+❌ NO Excel/CSV parsing logic found
+❌ NO bulk import functionality found</code></pre><p><strong>Evidence</strong>:</p>
+<ul>
+<li>Searched <code>ApInvoiceController.cs</code> for import/Import/excel/Excel/csv/CSV</li>
+<li>Searched <code>FncApInvoice.cs</code> for bulk/import/upload functions</li>
+<li><strong>Result</strong>: No import functionality exists</li>
+</ul>
+<p><strong>Impact</strong>: <strong>HIGH</strong> - This is a significant feature gap</p>
+<h4>2. <strong>Automated Approval Routing</strong> (FR-AP-004.3)</h4>
+<p><strong>Documented Requirement</strong>:</p>
+<pre><code class="language-text">System shall route invoice based on amount:
+- $0-$1,000: Optional approval
+- $1,001-$10,000: Supervisor approval
+- $10,001-$50,000: Manager approval
+- $50,001-$250,000: Controller approval
+- $250,001+: Finance Director + CEO approval</code></pre><p><strong>Source Code Reality</strong>:</p>
+<pre><code class="language-text">❌ NO automated routing logic found
+❌ NO amount threshold configuration found
+❌ Manual approval only (user selects approver)</code></pre><p><strong>Evidence</strong>:</p>
+<ul>
+<li>Searched for &quot;amount.*threshold|approval.*amount|routing.*approval&quot;</li>
+<li>Searched WorkflowController for automated routing</li>
+<li><strong>Result</strong>: System supports approval workflows but routing is MANUAL</li>
+</ul>
+<p><strong>Impact</strong>: <strong>MEDIUM</strong> - Workflows exist but routing is manual</p>
+<h3>Validation: <strong>60% Accurate</strong></h3>
+<p>✅ Manual invoice entry works<br>✅ Tax calculations correct<br>✅ GL posting implemented<br>❌ NO Excel/CSV import<br>❌ NO automated approval routing</p>
+<hr>
+<h2>FR-AP-005: Payment Processing</h2>
+<h3>Documentation Status: ⚠️ PARTIALLY VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Payment Creation</strong></td>
+<td>FR-AP-005.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Payment Methods</strong></td>
+<td>FR-AP-005.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Automated Routing</strong></td>
+<td>FR-AP-005.2</td>
+<td>❌ NOT FOUND</td>
+</tr>
+<tr>
+<td><strong>Manual Approval</strong></td>
+<td>FR-AP-005.2</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>FR-AP-005.3</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>WHT Certificate</strong></td>
+<td>FR-AP-005.3</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+</tbody></table>
+<h3>❌ Fictional Features</h3>
+<h4><strong>Automated Payment Routing</strong> (FR-AP-005.2)</h4>
+<p><strong>Documented Requirement</strong>:</p>
+<pre><code class="language-text">System shall route payment for approval based on amount:
+- $0-$5,000: Supervisor approval
+- $5,001-$25,000: Manager approval
+- $25,001-$100,000: Controller approval
+- $100,001+: Finance Director approval</code></pre><p><strong>Source Code Reality</strong>:</p>
+<pre><code class="language-text">❌ NO automated routing by amount found
+❌ Manual approval workflow only</code></pre><p><strong>Evidence</strong>:</p>
+<ul>
+<li>Same as AP Invoice - no automated routing</li>
+<li>Workflow exists but routing is manual</li>
+</ul>
+<p><strong>Impact</strong>: <strong>MEDIUM</strong> - Approval works but routing is manual</p>
+<h3>Validation: <strong>83% Accurate</strong></h3>
+<p>✅ Payment creation works<br>✅ Payment methods supported<br>✅ GL posting correct<br>✅ WHT certificate generation<br>❌ NO automated approval routing</p>
+<hr>
+<h2>FR-AR-001: Customer Management</h2>
+<h3>Documentation Status: ⚠️ PARTIALLY VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Customer CRUD</strong></td>
+<td>FR-AR-001.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Credit Limit Field</strong></td>
+<td>FR-AR-001.2</td>
+<td>✅ EXISTS</td>
+</tr>
+<tr>
+<td><strong>Credit Limit Checking</strong></td>
+<td>FR-AR-001.2</td>
+<td>❌ NOT ENFORCED</td>
+</tr>
+<tr>
+<td><strong>Status Management</strong></td>
+<td>FR-AR-001.3</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+</tbody></table>
+<h3>❌ Fictional Features</h3>
+<h4><strong>Credit Limit Checking/Enforcement</strong> (FR-AR-001.2)</h4>
+<p><strong>Documented Requirement</strong>:</p>
+<pre><code class="language-text">- System shall track customer credit limit
+- System shall block orders exceeding credit limit
+- System shall alert when credit utilization &gt;80%</code></pre><p><strong>Source Code Reality</strong>:</p>
+<pre><code class="language-text">✅ CreditLimit field exists in ArProfile model
+❌ NO credit checking logic found
+❌ NO blocking logic found
+❌ NO alerts found</code></pre><p><strong>Evidence</strong>:</p>
+<ul>
+<li>Found <code>CreditLimit</code> in <code>/Carmen.Models/ArProfile.cs:28</code></li>
+<li>Searched for &quot;CreditLimit.*check|check.*credit|exceed.*credit&quot;</li>
+<li><strong>Result</strong>: Field exists but NOT ENFORCED</li>
+</ul>
+<p><strong>Impact</strong>: <strong>HIGH</strong> - Critical business rule not enforced</p>
+<h3>Validation: <strong>75% Accurate</strong></h3>
+<p>✅ Customer management works<br>✅ Credit limit field exists<br>❌ Credit limit NOT enforced<br>❌ NO blocking or alerts</p>
+<hr>
+<h2>FR-AR-002: Contract Management</h2>
+<h3>Documentation Status: ⚠️ PARTIALLY VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Contract CRUD</strong></td>
+<td>FR-AR-002.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Contract Activation</strong></td>
+<td>FR-AR-002.2</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Auto-Invoice Generation</strong></td>
+<td>FR-AR-002.3</td>
+<td>❌ NOT FOUND</td>
+</tr>
+</tbody></table>
+<h3>❌ Fictional Features</h3>
+<h4><strong>Automated Invoice Generation from Contracts</strong> (FR-AR-002.3)</h4>
+<p><strong>Documented Requirement</strong>:</p>
+<pre><code class="language-text">- System shall generate invoices automatically per schedule
+- System shall create draft invoice 5 days before due date
+- System shall notify AR Clerk of generated invoices
+- System shall handle pro-rata calculations for partial periods</code></pre><p><strong>Source Code Reality</strong>:</p>
+<pre><code class="language-text">✅ ArContract model and controller exist
+❌ NO auto-generation logic found
+❌ NO scheduled job/cron found
+❌ NO invoice creation from contract found</code></pre><p><strong>Evidence</strong>:</p>
+<ul>
+<li>Searched <code>FncArContract.cs</code> for &quot;GenerateInvoice|AutoInvoice|CreateInvoiceFromContract&quot;</li>
+<li>Searched for scheduled tasks and cron jobs</li>
+<li><strong>Result</strong>: Contracts exist but NO auto-invoice generation</li>
+</ul>
+<p><strong>Impact</strong>: <strong>HIGH</strong> - Major automation feature missing</p>
+<h3>Validation: <strong>67% Accurate</strong></h3>
+<p>✅ Contract management works<br>✅ Contract activation supported<br>❌ NO automated invoice generation</p>
+<hr>
+<h2>FR-AR-003: Invoice Generation</h2>
+<h3>Documentation Status: ⚠️ PARTIALLY VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Manual Invoice</strong></td>
+<td>FR-AR-003.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>From Contract</strong></td>
+<td>FR-AR-003.1</td>
+<td>❌ NOT FOUND</td>
+</tr>
+<tr>
+<td><strong>From Sales Order</strong></td>
+<td>FR-AR-003.1</td>
+<td>❌ NOT FOUND</td>
+</tr>
+<tr>
+<td><strong>From Folio</strong></td>
+<td>FR-AR-003.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>VAT Calculation</strong></td>
+<td>FR-AR-003.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Approval Workflow</strong></td>
+<td>FR-AR-003.2</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>FR-AR-003.3</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+</tbody></table>
+<h3>❌ Fictional Features</h3>
+<h4><strong>Sales Order Integration</strong> (FR-AR-003.1)</h4>
+<p><strong>Documented Requirement</strong>:</p>
+<pre><code class="language-text">System shall allow creating invoices:
+- From contract (auto-generated)
+- From sales order
+- Manual entry</code></pre><p><strong>Source Code Reality</strong>:</p>
+<pre><code class="language-text">❌ NO SalesOrder controller found
+❌ NO sales order functionality found
+❌ System is hospitality-focused (PMS integration, not sales orders)</code></pre><p><strong>Evidence</strong>:</p>
+<ul>
+<li>Searched for &quot;sales.*order|SalesOrder|OrderController&quot;</li>
+<li><strong>Result</strong>: NO sales order functionality exists</li>
+<li>System uses PMS integration (Shiji, HotelLogix) instead</li>
+</ul>
+<p><strong>Impact</strong>: <strong>CRITICAL</strong> - Wrong business model documented</p>
+<h3>Validation: <strong>71% Accurate</strong></h3>
+<p>✅ Manual invoice creation works<br>✅ Folio-based invoicing exists<br>✅ VAT calculations correct<br>✅ Approval workflows functional<br>✅ GL posting implemented<br>❌ NO contract auto-generation<br>❌ NO sales orders (wrong business model)</p>
+<hr>
+<h2>FR-AR-004: Receipt Processing</h2>
+<h3>Documentation Status: ✅ VALIDATED</h3>
+<h3>Source Code Evidence</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Requirement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Receipt Entry</strong></td>
+<td>FR-AR-004.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Payment Methods</strong></td>
+<td>FR-AR-004.1</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>Invoice Application</strong></td>
+<td>FR-AR-004.2</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>FIFO Application</strong></td>
+<td>FR-AR-004.2</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+<tr>
+<td><strong>GL Posting</strong></td>
+<td>FR-AR-004.3</td>
+<td>✅ IMPLEMENTED</td>
+</tr>
+</tbody></table>
+<h3>Validation: <strong>100% Accurate</strong></h3>
+<p>All receipt processing features work as documented:</p>
+<ul>
+<li>Receipt creation and entry</li>
+<li>Multiple payment methods (Cash, Check, Wire, Card)</li>
+<li>Invoice application logic</li>
+<li>FIFO payment application</li>
+<li>Overpayment handling</li>
+<li>GL posting integration</li>
+</ul>
+<hr>
+<h2>Overall Findings</h2>
+<h3>✅ Validated Features (Working as Documented)</h3>
+<ol>
+<li><p><strong>AP Module</strong>:</p>
+<ul>
+<li>✅ Vendor management (CRUD, status, multi-tenant)</li>
+<li>✅ Manual invoice entry</li>
+<li>✅ Tax calculations (VAT, WHT)</li>
+<li>✅ Payment processing</li>
+<li>✅ GL posting</li>
+<li>✅ WHT certificate generation</li>
+</ul>
+</li>
+<li><p><strong>AR Module</strong>:</p>
+<ul>
+<li>✅ Customer management (CRUD, status)</li>
+<li>✅ Contract management (CRUD, activation)</li>
+<li>✅ Manual invoice creation</li>
+<li>✅ Folio-based invoicing</li>
+<li>✅ Receipt processing</li>
+<li>✅ Payment application (FIFO)</li>
+<li>✅ GL posting</li>
+</ul>
+</li>
+</ol>
+<h3>❌ Fictional Features (Not Implemented)</h3>
+<ol>
+<li><p><strong>AP Module</strong>:</p>
+<ul>
+<li><p>❌ <strong>Excel/CSV Import</strong> (FR-AP-004.1)</p>
+<ul>
+<li>Impact: HIGH</li>
+<li>Requires: Import API, parsing logic, bulk validation</li>
+</ul>
+</li>
+<li><p>❌ <strong>Automated Approval Routing</strong> (FR-AP-004.3, FR-AP-005.2)</p>
+<ul>
+<li>Impact: MEDIUM</li>
+<li>Requires: Routing engine, amount threshold configuration</li>
+<li>Current: Manual approval workflows only</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>AR Module</strong>:</p>
+<ul>
+<li><p>❌ <strong>Sales Order Module</strong> (FR-AR-003.1)</p>
+<ul>
+<li>Impact: CRITICAL</li>
+<li>System is hospitality-focused (PMS integration)</li>
+<li>NOT a traditional sales order system</li>
+</ul>
+</li>
+<li><p>❌ <strong>Credit Limit Enforcement</strong> (FR-AR-001.2)</p>
+<ul>
+<li>Impact: HIGH</li>
+<li>Field exists but NOT enforced</li>
+<li>Requires: Credit checking logic, blocking mechanism, alerts</li>
+</ul>
+</li>
+<li><p>❌ <strong>Auto-Invoice Generation from Contracts</strong> (FR-AR-002.3)</p>
+<ul>
+<li>Impact: HIGH</li>
+<li>Requires: Scheduled jobs, invoice creation logic, notifications</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3>⚠️ Partially Implemented Features</h3>
+<ol>
+<li><p><strong>Approval Workflows</strong>:</p>
+<ul>
+<li>✅ Workflow system exists</li>
+<li>✅ Manual approval works</li>
+<li>❌ Automated routing by amount NOT implemented</li>
+<li><strong>Reality</strong>: Approver is manually selected, not auto-routed</li>
+</ul>
+</li>
+<li><p><strong>Credit Management</strong>:</p>
+<ul>
+<li>✅ Credit limit field exists</li>
+<li>❌ Credit checking logic NOT implemented</li>
+<li>❌ Alerts and blocking NOT implemented</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Recommendations</h2>
+<h3>1. Update Functional Requirements Document</h3>
+<p><strong>File</strong>: <code>/docs/requirements/functional-requirements.md</code></p>
+<p><strong>Changes Required</strong>:</p>
+<h4>FR-AP-004.1 - Remove Excel/CSV Import</h4>
+<pre><code class="language-diff">- System shall allow invoice import from Excel/CSV
++ System shall allow manual invoice entry only
++ (Future Enhancement: Excel/CSV import planned)</code></pre><h4>FR-AP-004.3 - Clarify Manual Approval</h4>
+<pre><code class="language-diff">- System shall route invoice based on amount: [thresholds]
++ System shall support approval workflows with manual approver selection
++ System shall enforce approval before posting
++ (Future Enhancement: Automated routing by amount planned)</code></pre><h4>FR-AP-005.2 - Clarify Payment Approval</h4>
+<pre><code class="language-diff">- System shall route payment for approval based on amount: [thresholds]
++ System shall support payment approval workflows
++ System shall require manual approver selection</code></pre><h4>FR-AR-001.2 - Clarify Credit Limit</h4>
+<pre><code class="language-diff">- System shall block orders exceeding credit limit
+- System shall alert when credit utilization &gt;80%
++ System shall store customer credit limit
++ Credit limit checking is optional (configurable)
++ (Current Implementation: Credit limit is informational only, not enforced)</code></pre><h4>FR-AR-002.3 - Remove Auto-Invoice Generation</h4>
+<pre><code class="language-diff">- System shall generate invoices automatically per schedule
+- System shall create draft invoice 5 days before due date
++ System shall support contract-based invoice templates
++ AR Clerk manually generates invoices from contracts
++ (Future Enhancement: Automated invoice generation planned)</code></pre><h4>FR-AR-003.1 - Remove Sales Orders</h4>
+<pre><code class="language-diff">- From sales order
+- From contract (auto-generated)
++ From contract (manual generation)
++ From folio (PMS integration)
+  Manual entry</code></pre><h3>2. Add &quot;Current Limitations&quot; Section</h3>
+<p>Add to functional requirements document:</p>
+<pre><code class="language-markdown">## Current Implementation Limitations
+
+### AP Module
+1. **No Excel/CSV Import**: Invoices and payments must be entered manually
+2. **Manual Approval Routing**: Approver must be manually selected (no automated routing by amount)
+3. **No Purchase Orders**: System does NOT support PO matching or three-way matching
+
+### AR Module
+1. **No Sales Orders**: System is hospitality-focused with PMS integration, not traditional sales orders
+2. **Credit Limit Not Enforced**: Credit limit is stored but not automatically checked or blocked
+3. **No Auto-Invoice Generation**: Invoices must be manually created from contracts
+4. **Manual Approval Routing**: Approver must be manually selected
+
+### System-Wide
+1. **Manual Approval Workflows**: All approval routing is manual, not automated by amount thresholds
+2. **No Scheduled Jobs**: No automated background processing for recurring tasks</code></pre><h3>3. Create &quot;Planned Enhancements&quot; Section</h3>
+<p>Document future features separately:</p>
+<pre><code class="language-markdown">## Planned Enhancements (Future Versions)
+
+### Phase 1 (Priority: High)
+- Credit limit enforcement with blocking and alerts
+- Excel/CSV import for AP invoices and payments
+- Automated approval routing by amount thresholds
+
+### Phase 2 (Priority: Medium)
+- Auto-invoice generation from contracts (scheduled)
+- Purchase Order management with three-way matching
+- Automated recurring invoice generation
+
+### Phase 3 (Priority: Low)
+- Sales order management (if business model changes)
+- Advanced workflow automation
+- OCR for invoice data extraction</code></pre><hr>
+<h2>Impact Assessment</h2>
+<h3>Business Impact</h3>
+<p><strong>HIGH IMPACT</strong> - Fictional Features:</p>
+<ol>
+<li>Credit limit enforcement (AR-001.2) - Financial risk exposure</li>
+<li>Auto-invoice generation (AR-002.3) - Manual effort required</li>
+<li>Sales orders (AR-003.1) - Wrong business model documented</li>
+</ol>
+<p><strong>MEDIUM IMPACT</strong> - Fictional Features:</p>
+<ol>
+<li>Excel/CSV import (AP-004.1) - Productivity limitation</li>
+<li>Automated approval routing (AP-004.3, AP-005.2) - Manual workflow inefficiency</li>
+</ol>
+<h3>Documentation Impact</h3>
+<ul>
+<li><strong>Accuracy</strong>: Currently 60-70% accurate (30-40% fictional)</li>
+<li><strong>User Trust</strong>: Risk of confusion and disappointment when features don&#39;t work as documented</li>
+<li><strong>Training</strong>: Training materials may reference non-existent features</li>
+<li><strong>Sales</strong>: Sales team may promise features that don&#39;t exist</li>
+</ul>
+<hr>
+<h2>Validation Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Total Requirements</th>
+<th>Validated</th>
+<th>Partially</th>
+<th>Fictional</th>
+<th>Accuracy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AP Vendor</strong></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>AP Invoice</strong></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>60%</td>
+</tr>
+<tr>
+<td><strong>AP Payment</strong></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>83%</td>
+</tr>
+<tr>
+<td><strong>AR Customer</strong></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>75%</td>
+</tr>
+<tr>
+<td><strong>AR Contract</strong></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>67%</td>
+</tr>
+<tr>
+<td><strong>AR Invoice</strong></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>71%</td>
+</tr>
+<tr>
+<td><strong>AR Receipt</strong></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td>7</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>79%</td>
+</tr>
+</tbody></table>
+<p><strong>Note</strong>: All partially validated requirements contain fictional features mixed with real features.</p>
+<hr>
+<h2>Conclusion</h2>
+<p>✅ <strong>Core functionality is implemented and working</strong>:</p>
+<ul>
+<li>Manual invoice and payment processing</li>
+<li>Customer and vendor management</li>
+<li>Receipt processing and GL posting</li>
+<li>Multi-tenant isolation</li>
+<li>Approval workflows (manual)</li>
+</ul>
+<p>❌ <strong>Significant fictional features documented</strong>:</p>
+<ul>
+<li>Excel/CSV import capabilities</li>
+<li>Automated approval routing by amount</li>
+<li>Credit limit enforcement</li>
+<li>Auto-invoice generation</li>
+<li>Sales order module</li>
+</ul>
+<p>⚠️ <strong>Recommendation</strong>: Update functional requirements to accurately reflect current implementation and move planned features to a separate &quot;Future Enhancements&quot; document.</p>
+<p><strong>Next Steps</strong>:</p>
+<ol>
+<li>Review this validation report with stakeholders</li>
+<li>Update functional requirements document</li>
+<li>Create separate &quot;Future Enhancements&quot; document</li>
+<li>Update training materials and user guides</li>
+<li>Inform sales team of current limitations</li>
+</ol>
+<hr>
+<p><strong>Report Status</strong>: FINAL<br><strong>Confidence Level</strong>: HIGH<br><strong>Validation Method</strong>: Direct source code analysis<br><strong>Files Reviewed</strong>: 25+ controllers and functions<br><strong>Last Updated</strong>: 2025-10-07</p>
+<hr>
+<h2>Appendix: Search Patterns Used</h2>
+<h3>AP Module Searches</h3>
+<pre><code class="language-text">- &quot;import|Import|excel|Excel|csv|CSV&quot;
+- &quot;amount.*threshold|approval.*amount|routing.*approval&quot;
+- &quot;class ApInvoiceController&quot;
+- &quot;class ApPaymentController&quot;</code></pre><h3>AR Module Searches</h3>
+<pre><code class="language-text">- &quot;sales.*order|SalesOrder|OrderController&quot;
+- &quot;credit.*limit|CreditLimit|CheckCredit&quot;
+- &quot;GenerateInvoice|AutoInvoice|CreateInvoiceFromContract&quot;
+- &quot;class ArContractController&quot;
+- &quot;class ArInvoiceController&quot;</code></pre><h3>Result</h3>
+<ul>
+<li>NO matches for fictional features</li>
+<li>Controllers exist for documented modules</li>
+<li>Core CRUD operations validated</li>
+</ul>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

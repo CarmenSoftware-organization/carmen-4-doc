@@ -1,0 +1,781 @@
+{
+  "info": {
+    "name": "Carmen.NET API",
+    "description": "Complete Carmen.NET ERP API collection with all modules (AP, AR, GL, Asset, Income)",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.carmen.com",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refresh_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tenant_code",
+      "value": "TENANT001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('access_token', jsonData.token);",
+                  "    pm.environment.set('refresh_token', jsonData.refreshToken);",
+                  "    pm.collectionVariables.set('access_token', jsonData.token);",
+                  "    pm.collectionVariables.set('refresh_token', jsonData.refreshToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"user@company.com\",\n  \"password\": \"password\",\n  \"useTenant\": \"{{tenant_code}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/account/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "account", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('access_token', jsonData.token);",
+                  "    pm.collectionVariables.set('access_token', jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/account/refresh-token",
+              "host": ["{{base_url}}"],
+              "path": ["api", "account", "refresh-token"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/account/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "account", "logout"]
+            }
+          }
+        },
+        {
+          "name": "Get Available Tenants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/account/tenants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "account", "tenants"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AP - Invoice",
+      "item": [
+        {
+          "name": "List Invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/list?page=1&pageSize=50&status=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "list"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "pageSize", "value": "50"},
+                {"key": "status", "value": "1"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Invoice by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/{{invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "{{invoice_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Invoice",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('invoice_id', jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiceNumber\": \"INV-2025-001\",\n  \"invoiceDate\": \"2025-10-06\",\n  \"dueDate\": \"2025-11-05\",\n  \"vendorCode\": \"V001\",\n  \"description\": \"Professional Services - October 2025\",\n  \"amount\": 100000.00,\n  \"taxAmount\": 7000.00,\n  \"whtAmount\": 5000.00,\n  \"lines\": [\n    {\n      \"lineNo\": 1,\n      \"accountCode\": \"5100\",\n      \"description\": \"Consulting Services\",\n      \"amount\": 100000.00,\n      \"departmentCode\": \"IT\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "create"]
+            }
+          }
+        },
+        {
+          "name": "Update Invoice",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"{{invoice_id}}\",\n  \"invoiceNumber\": \"INV-2025-001\",\n  \"invoiceDate\": \"2025-10-06\",\n  \"dueDate\": \"2025-11-05\",\n  \"vendorCode\": \"V001\",\n  \"description\": \"Professional Services - Updated\",\n  \"amount\": 100000.00,\n  \"taxAmount\": 7000.00,\n  \"whtAmount\": 5000.00,\n  \"lines\": [\n    {\n      \"lineNo\": 1,\n      \"accountCode\": \"5100\",\n      \"description\": \"Consulting Services\",\n      \"amount\": 100000.00\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/update",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "update"]
+            }
+          }
+        },
+        {
+          "name": "Submit for Approval",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/submit/{{invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "submit", "{{invoice_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Approve Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comments\": \"Approved as per PO#12345\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/approve/{{invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "approve", "{{invoice_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Reject Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Missing purchase order reference\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/reject/{{invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "reject", "{{invoice_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Post to GL",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/post/{{invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "post", "{{invoice_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Invoice",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/invoice/{{invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "invoice", "{{invoice_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AP - Payment",
+      "item": [
+        {
+          "name": "List Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/payment/list?page=1&pageSize=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "payment", "list"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "pageSize", "value": "50"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Payment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/payment/{{payment_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "payment", "{{payment_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Payment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('payment_id', jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentDate\": \"2025-10-06\",\n  \"bankAccountCode\": \"BANK001\",\n  \"paymentMethod\": \"Check\",\n  \"checkNumber\": \"CHK-2025-100\",\n  \"description\": \"Payment to vendor\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"{{invoice_id}}\",\n      \"paymentAmount\": 102000.00\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ap/payment/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "payment", "create"]
+            }
+          }
+        },
+        {
+          "name": "Post Payment to GL",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/payment/post/{{payment_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "payment", "post", "{{payment_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Void Payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ap/payment/void/{{payment_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ap", "payment", "void", "{{payment_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AR - Invoice",
+      "item": [
+        {
+          "name": "List Invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ar/invoice/list?page=1&pageSize=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "invoice", "list"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "pageSize", "value": "50"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiceNumber\": \"AR-2025-001\",\n  \"invoiceDate\": \"2025-10-06\",\n  \"dueDate\": \"2025-11-05\",\n  \"customerCode\": \"C001\",\n  \"description\": \"Services rendered\",\n  \"amount\": 50000.00,\n  \"taxAmount\": 3500.00,\n  \"lines\": [\n    {\n      \"lineNo\": 1,\n      \"revenueAccountCode\": \"4100\",\n      \"description\": \"Consulting Services\",\n      \"amount\": 50000.00\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ar/invoice/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "invoice", "create"]
+            }
+          }
+        },
+        {
+          "name": "Generate from Contract",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractId\": \"{{contract_id}}\",\n  \"invoiceDate\": \"2025-10-06\",\n  \"description\": \"Monthly billing\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ar/invoice/generate-from-contract",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "invoice", "generate-from-contract"]
+            }
+          }
+        },
+        {
+          "name": "Send Invoice to Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method\": \"Email\",\n  \"recipientEmail\": \"customer@company.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ar/invoice/send/{{ar_invoice_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "invoice", "send", "{{ar_invoice_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AR - Receipt",
+      "item": [
+        {
+          "name": "List Receipts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ar/receipt/list?page=1&pageSize=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "receipt", "list"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "pageSize", "value": "50"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Receipt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiptDate\": \"2025-10-06\",\n  \"receiptNumber\": \"RCP-2025-001\",\n  \"customerCode\": \"C001\",\n  \"paymentMethod\": \"Check\",\n  \"amount\": 50000.00,\n  \"checkNumber\": \"123456\",\n  \"bankAccountCode\": \"BANK001\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"{{ar_invoice_id}}\",\n      \"appliedAmount\": 50000.00\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ar/receipt/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "receipt", "create"]
+            }
+          }
+        },
+        {
+          "name": "Mark as Deposited",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"depositDate\": \"2025-10-06\",\n  \"depositSlipNumber\": \"DEP-2025-001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ar/receipt/deposit/{{receipt_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ar", "receipt", "deposit", "{{receipt_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GL - Period",
+      "item": [
+        {
+          "name": "List Periods",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gl/period/list",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "period", "list"]
+            }
+          }
+        },
+        {
+          "name": "Get Current Period",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gl/period/current",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "period", "current"]
+            }
+          }
+        },
+        {
+          "name": "Validate Period Close",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gl/period/validate/{{period_code}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "period", "validate", "{{period_code}}"]
+            }
+          }
+        },
+        {
+          "name": "Execute Period Close",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gl/period/execute-close/{{period_code}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "period", "execute-close", "{{period_code}}"]
+            }
+          }
+        },
+        {
+          "name": "Reopen Period",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Need to post adjusting entries\",\n  \"approvalReference\": \"CFO-APPROVAL-001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/gl/period/reopen/{{period_code}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "period", "reopen", "{{period_code}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GL - Journal Voucher",
+      "item": [
+        {
+          "name": "List JVs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gl/jv/list?page=1&pageSize=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "jv", "list"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "pageSize", "value": "50"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create JV",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jvDate\": \"2025-10-06\",\n  \"jvNumber\": \"JV-2025-001\",\n  \"description\": \"Accrual entry\",\n  \"lines\": [\n    {\n      \"lineNo\": 1,\n      \"accountCode\": \"1100\",\n      \"debit\": 10000.00,\n      \"credit\": 0,\n      \"description\": \"Cash\"\n    },\n    {\n      \"lineNo\": 2,\n      \"accountCode\": \"4100\",\n      \"debit\": 0,\n      \"credit\": 10000.00,\n      \"description\": \"Revenue\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/gl/jv/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "jv", "create"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Asset - Register",
+      "item": [
+        {
+          "name": "List Assets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/asset/register/list?page=1&pageSize=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "asset", "register", "list"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "pageSize", "value": "50"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assetCode\": \"AST-2025-001\",\n  \"assetName\": \"Dell Laptop\",\n  \"categoryCode\": \"IT-EQUIP\",\n  \"acquisitionDate\": \"2025-10-06\",\n  \"acquisitionCost\": 50000.00,\n  \"depreciationMethod\": \"StraightLine\",\n  \"usefulLife\": 5,\n  \"salvageValue\": 5000.00,\n  \"locationCode\": \"HQ-IT\",\n  \"custodianCode\": \"EMP-001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/asset/register/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "asset", "register", "create"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Master Data",
+      "item": [
+        {
+          "name": "List Vendors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/master/vendor/list",
+              "host": ["{{base_url}}"],
+              "path": ["api", "master", "vendor", "list"]
+            }
+          }
+        },
+        {
+          "name": "Get Vendor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/master/vendor/{{vendor_code}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "master", "vendor", "{{vendor_code}}"]
+            }
+          }
+        },
+        {
+          "name": "List Customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/master/customer/list",
+              "host": ["{{base_url}}"],
+              "path": ["api", "master", "customer", "list"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/master/customer/{{customer_code}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "master", "customer", "{{customer_code}}"]
+            }
+          }
+        },
+        {
+          "name": "List GL Accounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gl/account/list",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gl", "account", "list"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
