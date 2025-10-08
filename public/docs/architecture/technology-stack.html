@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen.NET Technology Stack - Carmen.NET Documentation</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .doc-header {
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .doc-header h1 {
+            margin: 0;
+            color: #1976D2;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1976D2;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doc-content h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h2 {
+            font-size: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.3em;
+        }
+        .doc-content h3 {
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            color: #374151;
+        }
+        .doc-content h4 {
+            font-size: 1.25em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #4b5563;
+        }
+        .doc-content p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+            color: #374151;
+        }
+        .doc-content ul, .doc-content ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .doc-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+        .doc-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+        .doc-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .doc-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+        .doc-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .doc-content th, .doc-content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        .doc-content th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+        .doc-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-left: 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .doc-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .doc-content a:hover {
+            text-decoration: underline;
+        }
+        .doc-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .mermaid {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .doc-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a href="/public/index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        <div class="doc-header">
+            <h1>Carmen.NET Technology Stack</h1>
+        </div>
+        <div class="doc-content">
+            <h1>Carmen.NET Technology Stack</h1>
+<p><strong>Document Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-10-08<br><strong>Status</strong>: Production Ready</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>Carmen.NET is built on enterprise-grade Microsoft technologies, leveraging the .NET Framework ecosystem for financial ERP operations. The stack emphasizes reliability, security, and performance with proven enterprise technologies suitable for multi-tenant financial systems.</p>
+<p><strong>Stack Highlights</strong>:</p>
+<ul>
+<li><strong>.NET Framework 4.x</strong> with ASP.NET Web API 2.x</li>
+<li><strong>SQL Server 2014+</strong> with Entity Framework 6.x</li>
+<li><strong>JWT Authentication</strong> with role-based access control</li>
+<li><strong>RESTful API</strong> architecture with 351+ endpoints</li>
+<li><strong>Multi-tenant SaaS</strong> design with data isolation</li>
+</ul>
+<hr>
+<h2>1. Backend Technologies</h2>
+<h3>1.1 Framework &amp; Runtime</h3>
+<p><strong>Core Framework</strong>:</p>
+<ul>
+<li><strong>.NET Framework 4.x</strong><ul>
+<li>Mature, enterprise-proven framework</li>
+<li>Windows Server integration</li>
+<li>Extensive library ecosystem</li>
+<li>Full support for financial calculations and decimal precision</li>
+</ul>
+</li>
+</ul>
+<p><strong>Web Framework</strong>:</p>
+<ul>
+<li><strong>ASP.NET Web API 2.x</strong><ul>
+<li>RESTful API architecture</li>
+<li>Built-in routing and model binding</li>
+<li>Content negotiation (JSON/XML)</li>
+<li>OWIN middleware support</li>
+</ul>
+</li>
+</ul>
+<p><strong>Language</strong>:</p>
+<ul>
+<li><strong>C# 7.0+</strong><ul>
+<li>Type-safe, object-oriented</li>
+<li>LINQ query support</li>
+<li>Async/await patterns</li>
+<li>Pattern matching and tuples</li>
+</ul>
+</li>
+</ul>
+<h3>1.2 Data Access Layer</h3>
+<p><strong>ORM &amp; Database</strong>:</p>
+<ul>
+<li><p><strong>Entity Framework 6.x</strong></p>
+<ul>
+<li>Code-first and database-first approaches</li>
+<li>LINQ to Entities queries</li>
+<li>Change tracking and lazy loading</li>
+<li>Migration framework</li>
+<li>Transaction management</li>
+</ul>
+</li>
+<li><p><strong>SQL Server 2014+</strong></p>
+<ul>
+<li>Enterprise-grade RDBMS</li>
+<li>ACID compliance</li>
+<li>Full-text search</li>
+<li>Stored procedures and views</li>
+<li>Table partitioning support</li>
+</ul>
+</li>
+</ul>
+<p><strong>Data Access Patterns</strong>:</p>
+<ul>
+<li>Repository pattern for data abstraction</li>
+<li>Unit of Work pattern for transaction management</li>
+<li>Multi-tenant query filtering</li>
+<li>Optimistic concurrency control</li>
+</ul>
+<h3>1.3 Security Technologies</h3>
+<p><strong>Authentication &amp; Authorization</strong>:</p>
+<ul>
+<li><strong>JWT (JSON Web Tokens)</strong><ul>
+<li>Stateless authentication</li>
+<li>Token-based sessions</li>
+<li>Claims-based identity</li>
+<li>Configurable expiration</li>
+</ul>
+</li>
+</ul>
+<p><strong>Security Features</strong>:</p>
+<ul>
+<li><strong>Carmen.Crypto Library</strong><ul>
+<li>AES encryption for sensitive data</li>
+<li>Password hashing (likely BCrypt/PBKDF2)</li>
+<li>Encryption key management</li>
+<li>Data masking for PII</li>
+</ul>
+</li>
+</ul>
+<p><strong>Security Protocols</strong>:</p>
+<ul>
+<li>HTTPS/TLS for transport security</li>
+<li>Role-Based Access Control (RBAC)</li>
+<li>Permission matrix (114 permissions)</li>
+<li>Tenant data isolation</li>
+</ul>
+<h3>1.4 API &amp; Integration</h3>
+<p><strong>API Standards</strong>:</p>
+<ul>
+<li>RESTful API design</li>
+<li>JSON as primary data format</li>
+<li>HTTP status codes (200, 201, 400, 401, 403, 404, 500)</li>
+<li>Swagger/OpenAPI documentation</li>
+</ul>
+<p><strong>API Features</strong>:</p>
+<ul>
+<li>60 API controllers</li>
+<li>351+ endpoints across 11 modules</li>
+<li>Request/response DTOs (View*, Param* models)</li>
+<li>Versioning support</li>
+<li>Rate limiting capability</li>
+</ul>
+<h3>1.5 Logging &amp; Monitoring</h3>
+<p><strong>Logging Framework</strong>:</p>
+<ul>
+<li>Custom logging framework<ul>
+<li><code>LogHttpRequest</code> - Request logging</li>
+<li><code>LogHttpResult</code> - Response logging</li>
+<li>File-based log storage</li>
+<li>Structured logging format</li>
+</ul>
+</li>
+</ul>
+<p><strong>Monitoring Capabilities</strong>:</p>
+<ul>
+<li>API performance metrics</li>
+<li>Error tracking and stack traces</li>
+<li>Audit trail logging</li>
+<li>Business event logging</li>
+</ul>
+<hr>
+<h2>2. Frontend Technologies</h2>
+<h3>2.1 Web Client Technologies</h3>
+<p><strong>Core Technologies</strong> (Inferred from API structure):</p>
+<ul>
+<li><p><strong>HTML5/CSS3</strong></p>
+<ul>
+<li>Semantic markup</li>
+<li>Responsive design</li>
+<li>Modern CSS features</li>
+</ul>
+</li>
+<li><p><strong>JavaScript Framework</strong></p>
+<ul>
+<li>Likely: React, Vue.js, or Angular</li>
+<li>Alternative: jQuery with modern patterns</li>
+<li>AJAX for API communication</li>
+<li>Client-side state management</li>
+</ul>
+</li>
+</ul>
+<p><strong>UI Framework</strong>:</p>
+<ul>
+<li><strong>Bootstrap</strong> or similar CSS framework<ul>
+<li>Responsive grid system</li>
+<li>Pre-built components</li>
+<li>Mobile-first design</li>
+<li>Theming support</li>
+</ul>
+</li>
+</ul>
+<h3>2.2 Desktop &amp; Mobile Clients</h3>
+<p><strong>Desktop Integration</strong>:</p>
+<ul>
+<li><strong>Excel Add-ins</strong><ul>
+<li>VSTO (Visual Studio Tools for Office)</li>
+<li>COM interop</li>
+<li>Data import/export</li>
+<li>Report generation</li>
+</ul>
+</li>
+</ul>
+<p><strong>Mobile Support</strong>:</p>
+<ul>
+<li>Mobile-responsive web interface</li>
+<li>Potential native apps (iOS/Android)</li>
+<li>RESTful API consumption</li>
+</ul>
+<hr>
+<h2>3. Third-Party Libraries &amp; Dependencies</h2>
+<h3>3.1 Core Dependencies</h3>
+<p><strong>JSON Processing</strong>:</p>
+<ul>
+<li><strong>Newtonsoft.Json (Json.NET)</strong><ul>
+<li>JSON serialization/deserialization</li>
+<li>LINQ to JSON</li>
+<li>Schema validation</li>
+<li>High performance</li>
+</ul>
+</li>
+</ul>
+<p><strong>API Documentation</strong>:</p>
+<ul>
+<li><strong>Swagger/NSwag</strong><ul>
+<li>Interactive API documentation</li>
+<li>API client generation</li>
+<li>Schema validation</li>
+<li>Try-it-out functionality</li>
+</ul>
+</li>
+</ul>
+<p><strong>Additional Libraries</strong> (Common in .NET Web API):</p>
+<ul>
+<li>AutoMapper (object-to-object mapping)</li>
+<li>FluentValidation (model validation)</li>
+<li>Dapper (lightweight ORM for performance-critical queries)</li>
+<li>Serilog or NLog (structured logging)</li>
+</ul>
+<h3>3.2 Development Tools</h3>
+<p><strong>Development Environment</strong>:</p>
+<ul>
+<li>Visual Studio 2015/2017/2019</li>
+<li>ReSharper (code analysis)</li>
+<li>SQL Server Management Studio (SSMS)</li>
+<li>Postman (API testing)</li>
+</ul>
+<p><strong>Version Control</strong>:</p>
+<ul>
+<li>Git</li>
+<li>GitHub/GitLab/Azure DevOps</li>
+</ul>
+<p><strong>Build &amp; Deployment</strong>:</p>
+<ul>
+<li>MSBuild</li>
+<li>NuGet package management</li>
+<li>Web Deploy or Azure DevOps pipelines</li>
+</ul>
+<hr>
+<h2>4. Infrastructure &amp; Hosting</h2>
+<h3>4.1 Web Server</h3>
+<p><strong>Options</strong>:</p>
+<ul>
+<li><p><strong>IIS (Internet Information Services) 8.0+</strong></p>
+<ul>
+<li>Windows Server integration</li>
+<li>Application pool isolation</li>
+<li>URL rewriting</li>
+<li>Load balancing (ARR)</li>
+</ul>
+</li>
+<li><p><strong>Kestrel</strong> (Alternative)</p>
+<ul>
+<li>Cross-platform web server</li>
+<li>High performance</li>
+<li>Reverse proxy support</li>
+</ul>
+</li>
+</ul>
+<p><strong>Server Requirements</strong>:</p>
+<ul>
+<li>Windows Server 2012+ (recommended)</li>
+<li>Linux (with .NET Core migration)</li>
+<li>.NET Framework 4.x runtime</li>
+<li>IIS with ASP.NET modules</li>
+</ul>
+<h3>4.2 Application Server</h3>
+<p><strong>Configuration</strong>:</p>
+<ul>
+<li>ASP.NET Web API hosting</li>
+<li>Entity Framework runtime</li>
+<li>Carmen.NET application assemblies</li>
+<li>Multi-instance deployment support</li>
+</ul>
+<p><strong>Resource Requirements</strong>:</p>
+<ul>
+<li>CPU: 4+ cores recommended</li>
+<li>RAM: 8 GB minimum, 16 GB recommended</li>
+<li>Disk: 100 GB+ for application and logs</li>
+<li>Network: 1 Gbps+</li>
+</ul>
+<h3>4.3 Database Server</h3>
+<p><strong>SQL Server Configuration</strong>:</p>
+<ul>
+<li><strong>Edition</strong>: Standard or Enterprise</li>
+<li><strong>Version</strong>: SQL Server 2014+</li>
+<li><strong>Features</strong>:<ul>
+<li>Full-text search</li>
+<li>Transparent Data Encryption (TDE)</li>
+<li>Always On Availability Groups</li>
+<li>Database mirroring/replication</li>
+</ul>
+</li>
+</ul>
+<p><strong>Storage Requirements</strong>:</p>
+<ul>
+<li>Minimum: 50 GB per tenant</li>
+<li>Average: 100-500 GB per tenant</li>
+<li>Growth: Plan for 10+ years data retention</li>
+<li>Backups: Daily full, hourly incremental</li>
+</ul>
+<h3>4.4 Deployment Architecture</h3>
+<div class="mermaid">graph TB
+    subgraph Internet
+        Users[End Users]
+    end
+
+    subgraph DMZ
+        LB[Load Balancer<br/>HTTPS/SSL]
+        FW[Firewall]
+    end
+
+    subgraph AppTier[Application Tier]
+        WS1[Web Server 1<br/>IIS + Carmen.WebApi]
+        WS2[Web Server 2<br/>IIS + Carmen.WebApi]
+    end
+
+    subgraph DataTier[Data Tier]
+        DB1[(Primary DB<br/>SQL Server)]
+        DB2[(Replica DB<br/>Read-only)]
+    end
+
+    Users -->|HTTPS| LB
+    LB --> FW
+    FW --> WS1
+    FW --> WS2
+    WS1 --> DB1
+    WS2 --> DB1
+    DB1 -.->|Replication| DB2
+    WS1 -.->|Read| DB2
+    WS2 -.->|Read| DB2
+
+    style Users fill:#e3f2fd,stroke:#1976d2
+    style LB fill:#fff3e0,stroke:#f57c00
+    style WS1 fill:#e8f5e9,stroke:#388e3c
+    style WS2 fill:#e8f5e9,stroke:#388e3c
+    style DB1 fill:#fce4ec,stroke:#c2185b
+    style DB2 fill:#f3e5f5,stroke:#7b1fa2</div><hr>
+<h2>5. Development Stack</h2>
+<h3>5.1 Development Tools</h3>
+<p><strong>IDE</strong>:</p>
+<ul>
+<li>Visual Studio 2015/2017/2019<ul>
+<li>IntelliSense</li>
+<li>Debugging tools</li>
+<li>Database tools</li>
+<li>Git integration</li>
+</ul>
+</li>
+</ul>
+<p><strong>Database Tools</strong>:</p>
+<ul>
+<li>SQL Server Management Studio (SSMS)</li>
+<li>Entity Framework Power Tools</li>
+<li>SQL Profiler for query optimization</li>
+</ul>
+<p><strong>API Testing</strong>:</p>
+<ul>
+<li>Postman or Insomnia</li>
+<li>Swagger UI</li>
+<li>Fiddler for HTTP debugging</li>
+</ul>
+<h3>5.2 Testing Frameworks</h3>
+<p><strong>Unit Testing</strong>:</p>
+<ul>
+<li>MSTest or NUnit</li>
+<li>xUnit (modern alternative)</li>
+<li>Moq for mocking</li>
+<li>FluentAssertions</li>
+</ul>
+<p><strong>Integration Testing</strong>:</p>
+<ul>
+<li>Database integration tests</li>
+<li>API endpoint testing</li>
+<li>Transaction rollback tests</li>
+</ul>
+<p><strong>Performance Testing</strong>:</p>
+<ul>
+<li>Apache JMeter</li>
+<li>Visual Studio Load Testing</li>
+<li>SQL Server Query Store</li>
+</ul>
+<hr>
+<h2>6. Technology Decisions &amp; Rationale</h2>
+<h3>6.1 .NET Framework vs .NET Core</h3>
+<p><strong>Current Decision</strong>: .NET Framework 4.x</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Mature, battle-tested for enterprise applications</li>
+<li>✅ Extensive ecosystem and third-party support</li>
+<li>✅ Windows Server integration</li>
+<li>✅ Full feature parity with financial requirements</li>
+<li>✅ Entity Framework 6.x maturity</li>
+</ul>
+<p><strong>Future Consideration</strong>: Migration to .NET 6/8</p>
+<ul>
+<li>Modern runtime with performance improvements</li>
+<li>Cross-platform deployment (Linux containers)</li>
+<li>Long-term support and active development</li>
+<li>Microservices architecture enablement</li>
+</ul>
+<h3>6.2 SQL Server vs Other RDBMS</h3>
+<p><strong>Decision</strong>: Microsoft SQL Server</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Enterprise-grade reliability (99.99% uptime)</li>
+<li>✅ ACID compliance for financial transactions</li>
+<li>✅ Advanced security features (TDE, RLS)</li>
+<li>✅ Excellent .NET integration via Entity Framework</li>
+<li>✅ Stored procedures for complex business logic</li>
+<li>✅ Full-text search for document management</li>
+</ul>
+<p><strong>Alternatives Considered</strong>:</p>
+<ul>
+<li>PostgreSQL: Excellent but less integrated with .NET ecosystem</li>
+<li>MySQL: Good but limited enterprise features</li>
+<li>Oracle: Over-engineered and costly for use case</li>
+</ul>
+<h3>6.3 Entity Framework vs Alternatives</h3>
+<p><strong>Decision</strong>: Entity Framework 6.x</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Developer productivity (LINQ queries)</li>
+<li>✅ Change tracking for audit trails</li>
+<li>✅ Migration framework for schema evolution</li>
+<li>✅ Multi-tenant query filtering</li>
+<li>✅ Transaction management</li>
+</ul>
+<p><strong>Trade-offs</strong>:</p>
+<ul>
+<li>❌ Performance overhead vs raw SQL (5-10%)</li>
+<li>❌ Learning curve for complex queries</li>
+<li>✅ Mitigated with Dapper for performance-critical queries</li>
+</ul>
+<h3>6.4 JWT vs Session-Based Auth</h3>
+<p><strong>Decision</strong>: JWT (JSON Web Tokens)</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Stateless authentication (scalable)</li>
+<li>✅ Works across distributed servers</li>
+<li>✅ No server-side session storage</li>
+<li>✅ Supports multi-tenant claims</li>
+<li>✅ Industry standard</li>
+</ul>
+<hr>
+<h2>7. Performance Characteristics</h2>
+<h3>7.1 Performance Targets</h3>
+<p><strong>API Response Times</strong>:</p>
+<ul>
+<li>Average: &lt;200ms</li>
+<li>95th percentile: &lt;500ms</li>
+<li>Complex reports: &lt;5 seconds</li>
+</ul>
+<p><strong>Database Performance</strong>:</p>
+<ul>
+<li>Simple queries: &lt;100ms</li>
+<li>Complex queries: &lt;500ms</li>
+<li>Batch processing: 1000+ records/minute</li>
+</ul>
+<p><strong>Scalability</strong>:</p>
+<ul>
+<li>Concurrent users: 100+ per server</li>
+<li>Request throughput: 500+ req/sec per server</li>
+<li>Database connections: 100 connections per pool</li>
+</ul>
+<h3>7.2 Resource Utilization</h3>
+<p><strong>Application Server</strong>:</p>
+<ul>
+<li>CPU: &lt;70% average utilization</li>
+<li>Memory: &lt;4 GB per instance</li>
+<li>Network: &lt;100 Mbps per server</li>
+</ul>
+<p><strong>Database Server</strong>:</p>
+<ul>
+<li>Storage: &lt;50 GB per tenant (average)</li>
+<li>Memory: 16 GB+ recommended</li>
+<li>CPU: 8+ cores for production</li>
+</ul>
+<hr>
+<h2>8. Security Standards</h2>
+<h3>8.1 Security Technologies</h3>
+<p><strong>Transport Security</strong>:</p>
+<ul>
+<li>TLS 1.2+ (HTTPS)</li>
+<li>Certificate-based authentication</li>
+<li>Perfect Forward Secrecy (PFS)</li>
+</ul>
+<p><strong>Data Security</strong>:</p>
+<ul>
+<li>AES-256 encryption at rest</li>
+<li>Encrypted database connections</li>
+<li>Sensitive field encryption (Carmen.Crypto)</li>
+<li>Password hashing (likely BCrypt or PBKDF2)</li>
+</ul>
+<p><strong>Application Security</strong>:</p>
+<ul>
+<li>OWASP Top 10 compliance</li>
+<li>SQL injection prevention (parameterized queries)</li>
+<li>XSS prevention (input validation)</li>
+<li>CSRF protection</li>
+<li>Rate limiting and throttling</li>
+</ul>
+<h3>8.2 Compliance</h3>
+<p><strong>Standards</strong>:</p>
+<ul>
+<li>PCI DSS (if handling payment cards)</li>
+<li>SOC 2 Type II readiness</li>
+<li>GDPR data protection</li>
+<li>Thai financial reporting standards</li>
+</ul>
+<hr>
+<h2>9. Technology Roadmap</h2>
+<h3>9.1 Short-Term (6-12 months)</h3>
+<p><strong>Optimization</strong>:</p>
+<ul>
+<li>Performance monitoring and optimization</li>
+<li>Database query tuning</li>
+<li>Caching layer implementation (Redis/Memcached)</li>
+<li>API response optimization</li>
+</ul>
+<p><strong>Security Enhancements</strong>:</p>
+<ul>
+<li>Two-factor authentication (2FA)</li>
+<li>Enhanced audit logging</li>
+<li>Security penetration testing</li>
+<li>Vulnerability scanning</li>
+</ul>
+<h3>9.2 Medium-Term (1-2 years)</h3>
+<p><strong>Platform Modernization</strong>:</p>
+<ul>
+<li>Migration to .NET 6/8</li>
+<li>Containerization with Docker</li>
+<li>Kubernetes orchestration</li>
+<li>Cross-platform deployment (Linux)</li>
+</ul>
+<p><strong>Architecture Evolution</strong>:</p>
+<ul>
+<li>Microservices consideration for specific modules</li>
+<li>Event-driven architecture (message queues)</li>
+<li>CQRS pattern for complex reporting</li>
+<li>GraphQL API layer (optional)</li>
+</ul>
+<h3>9.3 Long-Term (2-3 years)</h3>
+<p><strong>Cloud-Native</strong>:</p>
+<ul>
+<li>Cloud deployment (Azure/AWS)</li>
+<li>Serverless functions for batch jobs</li>
+<li>Managed database services</li>
+<li>Auto-scaling infrastructure</li>
+</ul>
+<p><strong>Advanced Features</strong>:</p>
+<ul>
+<li>Machine learning for fraud detection</li>
+<li>Real-time analytics and BI</li>
+<li>Mobile-first progressive web apps</li>
+<li>AI-powered automation</li>
+</ul>
+<hr>
+<h2>10. Dependencies &amp; Versioning</h2>
+<h3>10.1 Critical Dependencies</h3>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.NET Framework</td>
+<td>4.6.1+</td>
+<td>Runtime framework</td>
+</tr>
+<tr>
+<td>ASP.NET Web API</td>
+<td>2.2</td>
+<td>Web framework</td>
+</tr>
+<tr>
+<td>Entity Framework</td>
+<td>6.4.4</td>
+<td>ORM</td>
+</tr>
+<tr>
+<td>Newtonsoft.Json</td>
+<td>13.0+</td>
+<td>JSON serialization</td>
+</tr>
+<tr>
+<td>SQL Server</td>
+<td>2014+</td>
+<td>Database</td>
+</tr>
+</tbody></table>
+<h3>10.2 Version Support Policy</h3>
+<p><strong>Framework Support</strong>:</p>
+<ul>
+<li>.NET Framework 4.x: Mainstream support until 2027+</li>
+<li>SQL Server 2014: Extended support until 2024</li>
+<li>Entity Framework 6.x: Long-term support</li>
+</ul>
+<p><strong>Upgrade Path</strong>:</p>
+<ul>
+<li>Quarterly security patches</li>
+<li>Annual minor version updates</li>
+<li>Major version updates every 2-3 years</li>
+</ul>
+<hr>
+<h2>11. Technology Constraints</h2>
+<h3>11.1 Technical Constraints</h3>
+<p><strong>Must Use</strong>:</p>
+<ul>
+<li>.NET Framework 4.x (Windows compatibility)</li>
+<li>SQL Server 2014+ (enterprise standard)</li>
+<li>REST API architecture (integration requirement)</li>
+<li>Multi-tenant design (business requirement)</li>
+<li>Data encryption (compliance requirement)</li>
+</ul>
+<p><strong>Cannot Use</strong>:</p>
+<ul>
+<li>NoSQL databases (financial data integrity)</li>
+<li>Microservices (current architecture constraint)</li>
+<li>Client-side only authentication (security requirement)</li>
+</ul>
+<h3>11.2 Platform Constraints</h3>
+<p><strong>Operating System</strong>:</p>
+<ul>
+<li>Primary: Windows Server 2012+</li>
+<li>Future: Linux support with .NET Core migration</li>
+</ul>
+<p><strong>Browser Support</strong>:</p>
+<ul>
+<li>Modern browsers (Chrome, Firefox, Edge, Safari)</li>
+<li>IE11+ (legacy support)</li>
+<li>Mobile browsers (iOS Safari, Chrome Mobile)</li>
+</ul>
+<hr>
+<h2>12. Documentation &amp; Resources</h2>
+<h3>12.1 Official Documentation</h3>
+<p><strong>Microsoft Documentation</strong>:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/aspnet/web-api/">ASP.NET Web API</a></li>
+<li><a href="https://docs.microsoft.com/en-us/ef/ef6/">Entity Framework 6</a></li>
+<li><a href="https://docs.microsoft.com/en-us/sql/">SQL Server</a></li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/framework/">.NET Framework</a></li>
+</ul>
+<h3>12.2 Internal Documentation</h3>
+<p><strong>Carmen.NET Documentation</strong>:</p>
+<ul>
+<li><a href="system-architecture.md">System Architecture</a></li>
+<li><a href="../api/api-reference.md">API Reference</a></li>
+<li><a href="../development/database-schema-guide.md">Database Schema</a></li>
+<li><a href="../development/developer-onboarding-guide.md">Developer Onboarding</a></li>
+</ul>
+<hr>
+<h2>13. Contact &amp; Support</h2>
+<p><strong>Technical Architecture</strong>:</p>
+<ul>
+<li>Architecture team for technology decisions</li>
+<li>DevOps team for infrastructure</li>
+</ul>
+<p><strong>Development Support</strong>:</p>
+<ul>
+<li>Developer onboarding guide</li>
+<li>Code review process</li>
+<li>Technical documentation</li>
+</ul>
+<hr>
+<p><strong>Document Status</strong>: ✅ Production Ready<br><strong>Last Review</strong>: 2025-10-08<br><strong>Next Review</strong>: 2026-01-08<br><strong>Owner</strong>: Architecture Team</p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        });
+
+        // Render all mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            console.log('Found ' + mermaidElements.length + ' mermaid diagrams');
+
+            mermaidElements.forEach((element, index) => {
+                element.id = 'mermaid-' + index;
+            });
+
+            if (mermaidElements.length > 0) {
+                mermaid.run();
+            }
+        });
+    </script>
+</body>
+</html>

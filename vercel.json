@@ -1,22 +1,7 @@
 {
-  "version": 2,
-  "name": "carmen-net-docs",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "public"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    }
-  ],
-  "public": true,
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "installCommand": "npm install",
   "github": {
     "silent": true
   },

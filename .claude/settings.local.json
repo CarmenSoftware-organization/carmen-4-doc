@@ -15,7 +15,9 @@
       "Bash(do)",
       "Bash(echo \"=== $file ===\")",
       "Bash(grep:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(vercel:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
